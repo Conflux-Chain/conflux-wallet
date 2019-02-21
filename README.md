@@ -1,0 +1,1 @@
+# Simple Wallet for Conflux
