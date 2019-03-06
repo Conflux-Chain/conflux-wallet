@@ -7,7 +7,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { website } from 'utils/constants';
-import walletLogo from './hot-wallet.svg';
+import walletLogo from './conflux_logo.svg';
 
 const Div = styled.div`
   height: 80px;
@@ -16,10 +16,10 @@ const Div = styled.div`
 `;
 
 const Img = styled.img`
-  height: 40px;
+  height: 70px;
+  width: 70px;
   line-height: 80px;
-  width: 40px;
-  margin-right: 10px;
+  margin-right: 5px;
 `;
 
 function Logo() {

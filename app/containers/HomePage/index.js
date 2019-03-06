@@ -254,7 +254,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           <SendToken {...sendTokenProps} />
           <TokenChooser {...tokenChooserProps} />
         </Content>
-        <PageFooter />
+        {/* <PageFooter /> */}
       </div>
     );
   }
