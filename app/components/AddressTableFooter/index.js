@@ -68,13 +68,13 @@ function AddressTableFooter(props) {
         popconfirmMsg="Refresh exchange rates?"
       />
       <br />
-      <IconButton
+      {/* <IconButton
         text="Select Tokens"
         icon="bars"
         onClick={onShowTokenChooser}
         type="primary"
         // onClick, loading, error, disabled, popconfirmMsg
-      />
+      /> */}
       <br /><br />
     </Div>
   );
