@@ -1,7 +1,7 @@
 /**
  * Wallet operations
  */
-import lightwallet from 'eth-lightwallet';
+import lightwallet from 'vendor/eth-lightwallet';
 import localStore from 'store/dist/store.modern';
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';

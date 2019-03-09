@@ -152,7 +152,7 @@ export function* loadNetwork(action) {
 
       // actions after succesfull network load :
       yield put(checkBalances());
-      yield put(getExchangeRates());
+      // yield put(getExchangeRates());
 
       // clear token list if changed network
 
@@ -239,7 +239,10 @@ export function* SendTransaction() {
       const sendParams = { from: fromAddress, to: toAddress, value: sendAmount, gasPrice, gas: maxGasForEthSend };
       function sendTransactionPromise(params) { // eslint-disable-line no-inner-declarations
         return new Promise((resolve, reject) => {
-          web3.cfx.sendTransaction(params);
+          web3.cfx.sendTransaction(params,function(err,data){
+            if(err!=null) return reject(err);
+            return resolve(data);
+          });
         });
       }
       tx = yield call(sendTransactionPromise, sendParams);
