@@ -1,7 +1,9 @@
-import Web3 from 'web3';
+// import Web3 from 'web3';
+import Web3 from 'vendor/web3.js';
 import SignerProvider from 'vendor/ethjs-provider-signer/ethjs-provider-signer';
 import BigNumber from 'bignumber.js';
 import { take, call, put, select, takeLatest, race, fork } from 'redux-saga/effects';
+import Tx from 'vendor/ethereumjs-tx';
 
 import {
   makeSelectKeystore,
@@ -87,7 +89,7 @@ import {
 
 import Network from './network';
 const web3 = new Web3(); // eslint-disable-line
-const erc20Contract = web3.eth.contract(erc20Abi);
+// const erc20Contract = web3.eth.contract(erc20Abi);
 
 /* For development only, if online = false then most api calls will be replaced by constant values
 * affected functions:
@@ -121,19 +123,25 @@ export function* loadNetwork(action) {
     const keystore = yield select(makeSelectKeystore());
 
     if (keystore) {
-      const provider = new SignerProvider(rpcAddress, {
+      const provider = new SignerProvider("http://localhost:8091", {
         signTransaction: keystore.signTransaction.bind(keystore),
         accounts: (cb) => cb(null, keystore.getAddresses()),
       });
-
+      // const provider=new Web3.providers.HttpProvider("http://localhost:8091");
       web3.setProvider(provider);
-
       function getBlockNumberPromise() { // eslint-disable-line no-inner-declarations
         return new Promise((resolve, reject) => {
-          web3.eth.getBlockNumber((err, data) => {
-            if (err !== null) return reject(err);
-            return resolve(data);
-          });
+          // web3.eth.getBlockNumber((err, data) => {
+          //   if (err !== null) return reject(err);
+          //   return resolve(data);
+          // });
+          // try{
+          //   let epochNumber=web3.cfx.epochNumber;
+          //   resolve(epochNumber);
+          // }catch(err){
+          //   reject(err);
+          // }
+          resolve(10020);
         });
       }
       const blockNumber = yield call(getBlockNumberPromise);
@@ -169,6 +177,7 @@ export function* loadNetwork(action) {
 
 
 export function* confirmSendTransaction() {
+  let _this=this;
   try {
     const fromAddress = yield select(makeSelectFrom());
     const amount = yield select(makeSelectAmount());
@@ -179,17 +188,17 @@ export function* confirmSendTransaction() {
       throw new Error('Source address invalid');
     }
 
-    if (amount <= 0) {
-      throw new Error('Amount must be possitive');
-    }
+    // if (amount <= 0) {
+    //   throw new Error('Amount must be possitive');
+    // }
 
     if (!web3.isAddress(toAddress)) {
       throw new Error('Destenation address invalid');
     }
 
-    if (!(gasPrice > 0.1)) {
-      throw new Error('Gas price must be at least 0.1 Gwei');
-    }
+    // if (!(gasPrice > 0.1)) {
+    //   throw new Error('Gas price must be at least 0.1 Gwei');
+    // }
 
     const msg = `Transaction created successfully. 
     Sending ${amount} from ...${fromAddress.slice(-5)} to ...${toAddress.slice(-5)}`;
@@ -230,10 +239,7 @@ export function* SendTransaction() {
       const sendParams = { from: fromAddress, to: toAddress, value: sendAmount, gasPrice, gas: maxGasForEthSend };
       function sendTransactionPromise(params) { // eslint-disable-line no-inner-declarations
         return new Promise((resolve, reject) => {
-          web3.eth.sendTransaction(params, (err, data) => {
-            if (err !== null) return reject(err);
-            return resolve(data);
-          });
+          web3.cfx.sendTransaction(params);
         });
       }
       tx = yield call(sendTransactionPromise, sendParams);
@@ -248,11 +254,13 @@ export function* SendTransaction() {
 
       function sendTokenPromise(tokenContractAddress, sendToAddress, sendAmount, params) { // eslint-disable-line no-inner-declarations
         return new Promise((resolve, reject) => {
-          const tokenContract = erc20Contract.at(tokenContractAddress);
-          tokenContract.transfer.sendTransaction(sendToAddress, sendAmount, params, (err, sendTx) => {
-            if (err) return reject(err);
-            return resolve(sendTx);
-          });
+          // const tokenContract = erc20Contract.at(tokenContractAddress);
+          // tokenContract.transfer.sendTransaction(sendToAddress, sendAmount, params, (err, sendTx) => {
+          //   if (err) return reject(err);
+          //   return resolve(sendTx);
+          // });
+
+          resolve('tx');
         });
       }
       tx = yield call(sendTokenPromise, contractAddress, toAddress, tokenAmount, sendParams);
@@ -272,20 +280,21 @@ export function* SendTransaction() {
 /* *************  Polling saga and polling flow for check balances ***************** */
 export function getEthBalancePromise(address) {
   return new Promise((resolve, reject) => {
-    web3.eth.getBalance(address, (err, data) => {
+    web3.cfx.getBalance(address, (err, data) => {
       if (err !== null) return reject(err);
-      return resolve(data);
+      return resolve(data.toNumber() / Math.pow(10, 8));
     });
   });
 }
 
 export function getTokenBalancePromise(address, tokenContractAddress) {
   return new Promise((resolve, reject) => {
-    const tokenContract = erc20Contract.at(tokenContractAddress);
-    tokenContract.balanceOf.call(address, (err, balance) => {
-      if (err) return reject(err);
-      return resolve(balance);
-    });
+    // const tokenContract = erc20Contract.at(tokenContractAddress);
+    // tokenContract.balanceOf.call(address, (err, balance) => {
+    //   if (err) return reject(err);
+    //   return resolve(balance);
+    // });
+    resolve(100);
   });
 }
 

@@ -118,7 +118,7 @@ function SignerProvider(path, options) {
 SignerProvider.prototype.sendAsync = function (payload, callback) {
   // eslint-disable-line
   var self = this;
-  if (payload.method === 'eth_accounts' && self.options.accounts) {
+  if (payload.method === 'cfx_accounts' && self.options.accounts) {
     self.options.accounts(function (accountsError, accounts) {
       // create new output payload
       var inputPayload = Object.assign({}, {
@@ -129,16 +129,16 @@ SignerProvider.prototype.sendAsync = function (payload, callback) {
 
       callback(accountsError, inputPayload);
     });
-  } else if (payload.method === 'eth_sendTransaction') {
+  } else if (payload.method === 'cfx_sendTransaction') {
     // get the nonce, if any
-    self.rpc.sendAsync({ method: 'eth_getTransactionCount', params: [payload.params[0].from, 'latest'] }, function (nonceError, nonce) {
+    self.rpc.sendAsync({ method: 'cfx_getTransactionCount', params: [payload.params[0].from, 'latest'] }, function (nonceError, nonce) {
       // eslint-disable-line
       if (nonceError) {
         return callback(new Error('[ethjs-provider-signer] while getting nonce: ' + nonceError), null);
       }
 
       // get the gas price, if any
-      self.rpc.sendAsync({ method: 'eth_gasPrice' }, function (gasPriceError, gasPrice) {
+      self.rpc.sendAsync({ method: 'cfx_gasPrice' }, function (gasPriceError, gasPrice) {
         // eslint-disable-line
         if (gasPriceError) {
           return callback(new Error('[ethjs-provider-signer] while getting gasPrice: ' + gasPriceError), null);
@@ -158,7 +158,7 @@ SignerProvider.prototype.sendAsync = function (payload, callback) {
             var outputPayload = Object.assign({}, {
               id: payload.id,
               jsonrpc: payload.jsonrpc,
-              method: 'eth_sendRawTransaction',
+              method: 'cfx_sendRawTransaction',
               params: [signedHexPayload]
             });
 

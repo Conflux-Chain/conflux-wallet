@@ -1,14 +1,14 @@
 /**
-*
-* NetworkMenu
-*
-*/
+ *
+ * NetworkMenu
+ *
+ */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-import { Menu, Button, Dropdown, Icon } from 'antd';
+import { Menu, Button, Dropdown, Icon } from "antd";
 // const SubMenu = Menu.SubMenu;
 // const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
@@ -27,9 +27,13 @@ function NetworkMenu(props) {
 
   let options;
   if (availableNetworks) {
-    options = availableNetworks.map((network) =>
-      <StyledMenuItem key={network}><a tabIndex="0" role="button" onClick={() => onLoadNetwork(network)}>{network}</a></StyledMenuItem>
-    );
+    options = availableNetworks.map(network => (
+      <StyledMenuItem key={network}>
+        <a tabIndex="0" role="button" onClick={() => onLoadNetwork(network)}>
+          {network}
+        </a>
+      </StyledMenuItem>
+    ));
   }
 
   const menu = (
@@ -38,7 +42,9 @@ function NetworkMenu(props) {
       defaultSelectedKeys={[networkName]}
       selectedKeys={[networkName]}
     >
-      <StyledMenuItem disabled key="title">Select Conflux network</StyledMenuItem>
+      <StyledMenuItem disabled key="title">
+        Select Conflux network
+      </StyledMenuItem>
       {options}
     </Menu>
   );
@@ -46,7 +52,8 @@ function NetworkMenu(props) {
   return (
     <Dropdown overlay={menu}>
       <StyledButton size="large" icon="wifi">
-        {networkName}<Icon type="down" />
+        {networkName}
+        <Icon type="down" />
       </StyledButton>
     </Dropdown>
   );
@@ -55,7 +62,7 @@ function NetworkMenu(props) {
 NetworkMenu.propTypes = {
   onLoadNetwork: PropTypes.func.isRequired,
   networkName: PropTypes.string,
-  availableNetworks: PropTypes.object,
+  availableNetworks: PropTypes.object
 };
 
 export default NetworkMenu;
