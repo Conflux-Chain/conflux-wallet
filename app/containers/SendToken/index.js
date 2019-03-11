@@ -4,27 +4,30 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Modal, Button } from 'antd';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { Modal, Button } from "antd";
+import { connect } from "react-redux";
 // import { FormattedMessage } from 'react-intl';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
+import { createStructuredSelector } from "reselect";
+import { compose } from "redux";
 
 // import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
+import injectReducer from "utils/injectReducer";
 
-import SendFrom from 'components/SendFrom';
-import SendTo from 'components/SendTo';
-import SendAmount from 'components/SendAmount';
-import SendTokenSymbol from 'components/SendTokenSymbol';
-import SendGasPrice from 'components/SendGasPrice';
-import SendConfirmationView from 'components/SendConfirmationView';
-import SendProgress from 'components/SendProgress';
+import SendFrom from "components/SendFrom";
+import SendTo from "components/SendTo";
+import SendAmount from "components/SendAmount";
+import SendTokenSymbol from "components/SendTokenSymbol";
+import SendGasPrice from "components/SendGasPrice";
+import SendConfirmationView from "components/SendConfirmationView";
+import SendProgress from "components/SendProgress";
 
-import { makeSelectAddressList, makeSelectTokenInfoList } from 'containers/HomePage/selectors';
-import { makeSelectTxExplorer } from 'containers/Header/selectors';
+import {
+  makeSelectAddressList,
+  makeSelectTokenInfoList
+} from "containers/HomePage/selectors";
+import { makeSelectTxExplorer } from "containers/Header/selectors";
 
 import {
   changeFrom,
@@ -33,8 +36,8 @@ import {
   changeGasPrice,
   confirmSendTransaction,
   sendTransaction,
-  abortTransaction,
-} from './actions';
+  abortTransaction
+} from "./actions";
 
 import {
   makeSelectFrom,
@@ -49,9 +52,9 @@ import {
   makeSelectSendInProgress,
   makeSelectSendError,
   makeSelectSendTx,
-  makeSelectSendTokenSymbol,
-} from './selectors';
-import reducer from './reducer';
+  makeSelectSendTokenSymbol
+} from "./selectors";
+import reducer from "./reducer";
 // import saga from './saga';
 // import messages from './messages';
 
@@ -85,9 +88,8 @@ function SendToken(props) {
     sendError,
     sendTx,
 
-    txExplorer,
-    } = props;
-
+    txExplorer
+  } = props;
 
   const SendFromProps = { from, addressList, onChangeFrom, locked };
   const SendAmountProps = { amount, onChangeAmount, locked };
@@ -102,23 +104,33 @@ function SendToken(props) {
     onAbortTransaction,
     sendInProgress,
     isSendComfirmationLocked,
-    sendError,
+    sendError
   };
   const SendProgressProps = { sendInProgress, sendError, sendTx, txExplorer };
 
-  const SendTokenSymbolProps = { sendTokenSymbol, tokenInfoList, onChangeFrom, locked };
+  const SendTokenSymbolProps = {
+    sendTokenSymbol,
+    tokenInfoList,
+    onChangeFrom,
+    locked
+  };
 
   const modalFooter = [
-    <Button key="reset" type="default" size="large" onClick={onAbortTransaction}>
+    <Button
+      key="reset"
+      type="default"
+      size="large"
+      onClick={onAbortTransaction}
+    >
       Reset
     </Button>,
     <Button key="close" type="default" size="large" onClick={onHideSendToken}>
       Close
-    </Button>,
+    </Button>
   ];
 
   return (
-    <div style={{ maxWidth: '600px', margin: 'auto' }}>
+    <div style={{ maxWidth: "600px", margin: "auto" }}>
       <Modal
         visible={isShowSendToken}
         title="Send Token"
@@ -128,10 +140,11 @@ function SendToken(props) {
       >
         <SendFrom {...SendFromProps} /> <br />
         <SendAmount {...SendAmountProps} />
-        <SendTokenSymbol {...SendTokenSymbolProps} /><br /> <br />
+        <SendTokenSymbol {...SendTokenSymbolProps} />
+        <br /> <br />
         <SendTo {...SendToProps} /> <br />
         <SendGasPrice {...SendGasPriceProps} /> <br />
-        <Button onClick={onConfirmSendTransaction} disabled={locked} >
+        <Button onClick={onConfirmSendTransaction} disabled={locked}>
           Create transaction
         </Button>
         <SendConfirmationView {...SendConfirmationViewProps} />
@@ -176,9 +189,9 @@ SendToken.propTypes = {
   addressList: PropTypes.oneOfType([
     // PropTypes.array,
     PropTypes.bool,
-    PropTypes.object,
+    PropTypes.object
   ]),
-  txExplorer: PropTypes.string,
+  txExplorer: PropTypes.string
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -203,8 +216,7 @@ const mapStateToProps = createStructuredSelector({
   sendError: makeSelectSendError(),
   sendTx: makeSelectSendTx(),
 
-  txExplorer: makeSelectTxExplorer(),
-
+  txExplorer: makeSelectTxExplorer()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -212,37 +224,40 @@ function mapDispatchToProps(dispatch) {
     onChangeFrom: (address, sendTokenSymbol) => {
       dispatch(changeFrom(address, sendTokenSymbol));
     },
-    onChangeAmount: (amount) => {
+    onChangeAmount: amount => {
       dispatch(changeAmount(amount));
     },
-    onChangeTo: (evt) => {
+    onChangeTo: evt => {
       dispatch(changeTo(evt.target.value));
     },
-    onChangeGasPrice: (value) => {
+    onChangeGasPrice: value => {
       dispatch(changeGasPrice(value));
     },
-    onConfirmSendTransaction: (evt) => {
+    onConfirmSendTransaction: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(confirmSendTransaction());
     },
-    onAbortTransaction: (evt) => {
+    onAbortTransaction: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(abortTransaction());
     },
-    onSendTransaction: (evt) => {
+    onSendTransaction: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(sendTransaction());
-    },
+    }
   };
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
-const withReducer = injectReducer({ key: 'sendtoken', reducer });
+const withReducer = injectReducer({ key: "sendtoken", reducer });
 // const withSaga = injectSaga({ key: 'sendtoken', saga });
 
 export default compose(
   withReducer,
   // withSaga,
-  withConnect,
+  withConnect
 )(SendToken);

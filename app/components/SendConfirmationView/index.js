@@ -1,13 +1,13 @@
 /**
-*
-* SendConfirmationView
-*
-*/
+ *
+ * SendConfirmationView
+ *
+ */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Alert, Button, Spin } from 'antd';
-import styled from 'styled-components';
+import React from "react";
+import PropTypes from "prop-types";
+import { Alert, Button, Spin } from "antd";
+import styled from "styled-components";
 
 const Div = styled.div`
   margin-top: 22px;
@@ -24,14 +24,14 @@ function SendConfirmationView(props) {
     onSendTransaction,
     onAbortTransaction,
     isSendComfirmationLocked,
-    sendError,
-       } = props;
+    sendError
+  } = props;
   if (comfirmationLoading) {
     return (
       <Div>
         <Spin
           spinning
-          style={{ position: 'static' }}
+          style={{ position: "static" }}
           size="large"
           tip="checking transaction...."
         >
@@ -63,20 +63,25 @@ function SendConfirmationView(props) {
           type="info"
         />
         <br />
-        <Button icon="to-top" onClick={onSendTransaction} disabled={isSendComfirmationLocked} >
-          {sendError ? 'Try again' : 'Send ETH'}
-        </Button>
-        {' '}
-        <Button icon="close" onClick={onAbortTransaction} disabled={isSendComfirmationLocked} >
+        <Button
+          icon="to-top"
+          onClick={onSendTransaction}
+          disabled={isSendComfirmationLocked}
+        >
+          {sendError ? "Try again" : "Send ETH"}
+        </Button>{" "}
+        <Button
+          icon="close"
+          onClick={onAbortTransaction}
+          disabled={isSendComfirmationLocked}
+        >
           Back
         </Button>
       </Div>
     );
   }
 
-  return (
-    null
-  );
+  return null;
 }
 
 SendConfirmationView.propTypes = {
@@ -88,7 +93,7 @@ SendConfirmationView.propTypes = {
   onSendTransaction: PropTypes.func.isRequired,
   onAbortTransaction: PropTypes.func.isRequired,
 
-  sendError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  sendError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
 };
 
 export default SendConfirmationView;

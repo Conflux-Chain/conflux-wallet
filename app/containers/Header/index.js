@@ -3,21 +3,20 @@
  * Header
  *
  */
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { connect } from "react-redux";
 // import { FormattedMessage } from 'react-intl';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import { Row, Col } from 'antd';
+import { createStructuredSelector } from "reselect";
+import { compose } from "redux";
+import injectSaga from "utils/injectSaga";
+import injectReducer from "utils/injectReducer";
+import { Row, Col } from "antd";
 
-
-import NetworkIndicator from 'components/NetworkIndicator';
-import Logo from 'components/Logo';
-import NetworkMenu from 'components/NetworkMenu';
+import NetworkIndicator from "components/NetworkIndicator";
+import Logo from "components/Logo";
+import NetworkMenu from "components/NetworkMenu";
 
 // import { changeBalance } from 'containers/HomePage/actions';
 
@@ -35,12 +34,12 @@ import {
   makeSelectCheckFaucetSuccess,
   makeSelectAskFaucetLoading,
   makeSelectAskFaucetSuccess,
-  makeSelectAskFaucetError,
-} from './selectors';
-import reducer from './reducer';
-import saga from './saga';
+  makeSelectAskFaucetError
+} from "./selectors";
+import reducer from "./reducer";
+import saga from "./saga";
 // import messages from './messages';
-import { loadNetwork } from './actions';
+import { loadNetwork } from "./actions";
 
 const HeaderWrapped = styled.header`
   transition: opacity 0.5s;
@@ -57,24 +56,29 @@ function Header(props) {
     networkName,
     blockNumber,
     availableNetworks,
-    onLoadNetwork,
-   } = props;
+    onLoadNetwork
+  } = props;
 
   const networkIndicatorProps = {
     loading,
     error,
-    blockNumber,
+    blockNumber
   };
 
   const networkMenuProps = {
     availableNetworks,
     networkName,
-    onLoadNetwork,
+    onLoadNetwork
   };
 
   return (
     <HeaderWrapped className="clearfix">
-      <Row type="flex" align="middle" justify="space-between" style={{ backgroundColor: '#fff' }}>
+      <Row
+        type="flex"
+        align="middle"
+        justify="space-between"
+        style={{ backgroundColor: "#fff" }}
+      >
         <Col sm={{ span: 6, offset: 1 }} xs={24}>
           <Logo />
         </Col>
@@ -84,8 +88,8 @@ function Header(props) {
             <NetworkMenu {...networkMenuProps} />
           </Row>
         </Col>
-      </Row >
-    </HeaderWrapped >
+      </Row>
+    </HeaderWrapped>
   );
 }
 
@@ -97,11 +101,11 @@ Header.propTypes = {
   error: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
-    PropTypes.bool,
+    PropTypes.bool
   ]),
   networkName: PropTypes.string,
   availableNetworks: PropTypes.object,
-  blockNumber: PropTypes.number,
+  blockNumber: PropTypes.number
 
   /* checkingBalanceDoneTime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   checkingBalances: PropTypes.bool,
@@ -122,25 +126,28 @@ const mapStateToProps = createStructuredSelector({
   checkFaucetSuccess: makeSelectCheckFaucetSuccess(),
   askFaucetLoading: makeSelectAskFaucetLoading(),
   askFaucetSuccess: makeSelectAskFaucetSuccess(),
-  askFaucetError: makeSelectAskFaucetError(),
+  askFaucetError: makeSelectAskFaucetError()
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onLoadNetwork: (name) => {
+    onLoadNetwork: name => {
       // if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadNetwork(name));
-    },
+    }
   };
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
-const withReducer = injectReducer({ key: 'header', reducer });
-const withSaga = injectSaga({ key: 'header', saga });
+const withReducer = injectReducer({ key: "header", reducer });
+const withSaga = injectSaga({ key: "header", saga });
 
 export default compose(
   withReducer,
   withSaga,
-  withConnect,
+  withConnect
 )(Header);
