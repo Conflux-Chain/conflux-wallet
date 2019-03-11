@@ -1,16 +1,16 @@
 /**
-*
-* AddressTable
-*
-*/
+ *
+ * AddressTable
+ *
+ */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Table } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { Table } from "antd";
 
-import CurrencyDropdown from 'components/CurrencyDropdown';
-import TokenIcon from 'components/TokenIcon';
+import CurrencyDropdown from "components/CurrencyDropdown";
+import TokenIcon from "components/TokenIcon";
 
 const { Column } = Table;
 // import { LocaleProvider } from 'antd';
@@ -21,18 +21,17 @@ const AddrTable = styled(Table)`
   max-width: 860px;
   margin-left: auto;
   margin-right: auto;
-  tbody{
+  tbody {
     background: white;
   }
-  .ant-table{
+  .ant-table {
     font-size: 13px !important;
   }
   th.columnCenter,
-  td.columnCenter{
+  td.columnCenter {
     text-align: center;
   }
 `;
-
 
 /**
  * Create list of rows, one row per token for given address
@@ -57,7 +56,7 @@ const splitAddrToRows = (tokenDecimalsMap, tokenMapIN, address, startKey) => {
   const index = tokenMap.index;
   delete tokenMap.index;
 
-  return Object.keys(tokenMap).map((token) => {
+  return Object.keys(tokenMap).map(token => {
     const sameAddressRow = {};
     sameAddressRow.index = index;
     sameAddressRow.key = key;
@@ -66,7 +65,9 @@ const splitAddrToRows = (tokenDecimalsMap, tokenMapIN, address, startKey) => {
     sameAddressRow.address = address;
     const balance = tokenMap[token].balance;
     const decimals = tokenDecimalsMap[token];
-    sameAddressRow.balance = balance ? balance.div((10 ** decimals).toString()).toString(10) : 'n/a';
+    sameAddressRow.balance = balance
+      ? balance.div((10 ** decimals).toString()).toString(10)
+      : "n/a";
     // sameAddressRow.convert = '';
     return sameAddressRow;
   });
@@ -101,12 +102,18 @@ const splitAddrToRows = (tokenDecimalsMap, tokenMapIN, address, startKey) => {
     convert: '13 USD',
   },
 ] */
-const transformList = (addressMap, tokenDecimalsMap, showTokens) => { //eslint-disable-line
+const transformList = (addressMap, tokenDecimalsMap, showTokens) => {
+  //eslint-disable-line
   // const showTokens = true;
   let iKey = 1;
-  const list = Object.keys(addressMap).map((address) => {
+  const list = Object.keys(addressMap).map(address => {
     const tokenMap = addressMap[address];
-    const sameAddressList = splitAddrToRows(tokenDecimalsMap, tokenMap, address, iKey);
+    const sameAddressList = splitAddrToRows(
+      tokenDecimalsMap,
+      tokenMap,
+      address,
+      iKey
+    );
 
     iKey += sameAddressList.length;
     return sameAddressList;
@@ -140,14 +147,17 @@ const getConvertRate = (exchangeRates, from, to) => {
  * @return {Array} array as data for table, see example above
  */
 const addConvertRates = (rowList, exchangeRates, convertTo) =>
-  rowList.map((row) => {
+  rowList.map(row => {
     try {
       // const convertToSymbol = convertTo.slice(4).toUpperCase();
       if (`eth_${row.token}` === convertTo) {
         row.convert = row.balance; // eslint-disable-line
       } else {
         const convertRate = getConvertRate(exchangeRates, row.token, convertTo);
-        row.convert = convertRate.times(row.balance).round(5).toString(10); // eslint-disable-line
+        row.convert = convertRate
+          .times(row.balance)
+          .round(5)
+          .toString(10); // eslint-disable-line
       }
       return row;
     } catch (err) {
@@ -163,7 +173,7 @@ function AddressTable(props) {
     onShowSendToken,
     exchangeRates,
     onSelectCurrency,
-    convertTo,
+    convertTo
   } = props;
 
   const currencyDropdownProps = { exchangeRates, onSelectCurrency, convertTo };
@@ -179,11 +189,10 @@ function AddressTable(props) {
       pagination={false}
       locale={{
         filterTitle: null,
-        filterConfirm: 'Ok',
-        filterReset: 'Reset',
-        emptyText: 'No Data',
+        filterConfirm: "Ok",
+        filterReset: "Reset",
+        emptyText: "No Data"
       }}
-
     >
       <Column
         title="Address"
@@ -196,9 +205,9 @@ function AddressTable(props) {
         render={(text, record) => {
           const obj = {
             children: text,
-            props: {},
+            props: {}
           };
-          if (record.token !== 'eth') {
+          if (record.token !== "eth") {
             // obj.props.rowSpan = 0;
             obj.props.rowSpan = 0;
             // obj.children = '~';
@@ -221,9 +230,7 @@ function AddressTable(props) {
         title="Icon"
         key="Icon"
         width="12px"
-        render={(text, record) => (
-          <TokenIcon tokenSymbol={record.token} />
-        )}
+        render={(text, record) => <TokenIcon tokenSymbol={record.token} />}
         className="columnCenter"
       />
 
@@ -233,27 +240,27 @@ function AddressTable(props) {
         key="token"
         width="65px"
         className="columnCenter"
-        render={(text, record) => (
-          record.token.toUpperCase()
-        )}
+        render={(text, record) => record.token.toUpperCase()}
       />
       <Column
         title="Balance"
         dataIndex="balance"
         key="balance"
         width="80px"
-        filters={[{
-          text: 'Remove empty',
-          value: '0 ETH',
-        }]}
+        filters={[
+          {
+            text: "Remove empty",
+            value: "0 ETH"
+          }
+        ]}
         onFilter={(value, record) => record.balance !== value}
       />
-      <Column
+      {/* <Column
         title={<CurrencyDropdown {...currencyDropdownProps} />}
         dataIndex="convert"
         key="convert"
         width="80px"
-      />
+      /> */}
       <Column
         width="65px"
         title="Action"
@@ -263,12 +270,14 @@ function AddressTable(props) {
             {/* <a href="#" >Show QR</a>
             <span className="ant-divider" /> */}
             {/* eslint-disable */}
-            <a onClick={() => onShowSendToken(record.address, record.token)}>Send</a>
+            <a onClick={() => onShowSendToken(record.address, record.token)}>
+              Send
+            </a>
             {/* eslint-enable */}
           </span>
         )}
       />
-    </AddrTable >
+    </AddrTable>
   );
 }
 
@@ -278,7 +287,7 @@ AddressTable.propTypes = {
   onShowSendToken: PropTypes.func,
   exchangeRates: PropTypes.object,
   onSelectCurrency: PropTypes.func,
-  convertTo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  convertTo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
 export default AddressTable;
