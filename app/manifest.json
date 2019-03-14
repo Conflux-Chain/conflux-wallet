@@ -1,12 +1,11 @@
 {
-  "name": "ETH Hot Wallet",
+  "name": "Conflux Wallet",
   "theme_color": "#ff3333",
   "background_color": "#fafafa",
   "display": "standalone",
   "Scope": "/",
   "start_url": "/",
-  "icons": [
-    {
+  "icons": [{
       "src": "/android-chrome-36x36.png",
       "sizes": "36x36",
       "type": "image/png"

@@ -1,32 +1,29 @@
 /**
-*
-* LoadingIndicator
-*
-*/
+ *
+ * LoadingIndicator
+ *
+ */
 
-import React from 'react';
-import { Spin } from 'antd';
-import styled from 'styled-components';
+import React from "react";
+import { Spin } from "antd";
+import styled from "styled-components";
 
 const Div = styled.div`
-position: fixed;
-top: 50%;
-left: 50%;
-/* bring your own prefixes */
-transform: translate(-50%, -50%);
-
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 `;
 
 function LoadingIndicator() {
   return (
     <Div>
-      <Spin size="large" tip="ETH Hot Wallet" />
+      <Spin size="large" tip="Conflux Wallet" />
     </Div>
   );
 }
 
-LoadingIndicator.propTypes = {
-
-};
+LoadingIndicator.propTypes = {};
 
 export default LoadingIndicator;
