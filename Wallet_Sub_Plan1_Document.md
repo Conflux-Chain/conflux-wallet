@@ -274,3 +274,48 @@ var signTx = function (keystore, pwDerivedKey, rawTx, signingAddress) {
 - ethereumjs-tx 源码对 sig.v 会 -27。 但这里需要注意一个问题，比如 eth-lightwallet 也会调用 ethereumjs-tx 库，这时应该修改 eth-lightwallet 这个工程 node-modules 下的 ethereumjs-tx。本地开发可以先这样改。 但正确的方式应该是： 以 ethereumjs-tx 为例，应该从 ethereumjs-tx 源仓库 fork 一份出来，然后 package.json 中 dependencies 添加依赖的时候，添加自己仓库下的 ethereumjs-tx 库即可。这样以后多端引用 ethereumjs-tx 时，就会统一，确保 ethereumjs-tx 只有一个入口。
 
 * 针对 Conflux 自己的 web3.js，正确的做法也如上所说，dependencies 添加依赖时，要使用 github 上的自己的开源仓库。本地开发可以先导入到 lib 中使用。
+
+* 关于跨域。2 种解决方式。1 种是，采用最新版本的 Fullnode, 已经支持跨域。但 web3.js 里需要修改一处代码，路径在 web3/httpprovider.js 里的，注释掉 第 66 行代码
+
+```
+  // request.withCredentials = true;
+```
+
+另一种是：web3.js -> server -> fullnode，中间架一层 server。 server 做 2 件事情，一个是 同意 前端 web3.js 来的所有请求跨域，另一个是，将所有请求 proxy 代理到 fullnode server 上。
+
+nginx 的配置如下：
+
+```
+     server {
+        listen       8091;
+        server_name  somename  alias  another.alias;
+
+        location / {
+            add_header 'Access-Control-Allow-Credentials' 'true';
+            add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
+            add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,PUT,DELETE,PATCH';
+
+            if ($request_method = 'OPTIONS') {
+                add_header 'Access-Control-Allow-Origin' 'http://localhost:3001';
+                add_header 'Access-Control-Allow-Credentials' 'true';
+                add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
+                add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,PUT,DELETE,PATCH';
+                add_header 'Access-Control-Max-Age' 1728000;
+                add_header 'Content-Type' 'text/plain charset=UTF-8';
+                add_header 'Content-Length' 0;
+                return 204;
+        }
+
+        proxy_redirect off;
+        proxy_set_header host $host;
+        proxy_set_header X-real-ip $remote_addr;
+        proxy_set_header X-forward-for $proxy_add_x_forwarded_for;
+        proxy_pass http://127.0.0.1:8545;
+        }
+
+        error_page  405     =200 $uri;
+
+    }
+```
+
+注释： http://localhost:3001即为前端工程的origin, http://127.0.0.1:8545为fullnode server.

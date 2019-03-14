@@ -2,8 +2,6 @@
 
 ### Technical review article: [How to build an Ethereum Wallet web app (Medium)](https://medium.freecodecamp.org/how-to-build-an-ethereum-wallet-web-app-ac77dcaac573)
 
-### [Sub Plan 1 Document](./Wallet_Sub_Plan1_Document.md)
-
 ### Core components
 
 - [ ] [LightWallet V3](https://github.com/ConsenSys/eth-lightwallet)
