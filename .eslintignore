@@ -1,0 +1,8 @@
+/functions/mock/**
+/scripts
+/config
+/internals
+/monitor
+/server
+/docs
+/app/vendor

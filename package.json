@@ -38,17 +38,27 @@
     "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
+    "lint:fix": "eslint --fix --ext .js app",
     "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "dev":"node ./internals/scripts/dependencies.js && cross-env NODE_ENV=development node server"
+    "dev": "node ./internals/scripts/dependencies.js && cross-env NODE_ENV=development node server",
+    "prettier": "node ./internals/scripts/prettier.js"
   },
   "lint-staged": {
-    "*.js": "lint:eslint"
+    "**/*.{js,json,jsx}": [
+      "node ./internals/scripts/lint-prettier.js",
+      "git add"
+    ],
+    "**/*.js": "lint:eslint"
   },
-  "pre-commit": "lint:staged",
+  "husky": {
+    "hooks": {
+      "pre-commit": ""
+    }
+  },
   "babel": {
     "plugins": [
       "styled-components"
@@ -222,7 +232,7 @@
     "chalk": "1.1.3",
     "compression": "1.7.3",
     "cross-env": "5.2.0",
-    "eth-lightwallet": "3.0.1",
+    "eth-lightwallet": "https://github.com/jnoodle/eth-lightwallet.git",
     "express": "4.16.3",
     "fontfaceobserver": "2.0.9",
     "history": "4.7.2",
@@ -277,6 +287,7 @@
     "eslint": "3.19.0",
     "eslint-config-airbnb": "15.0.1",
     "eslint-config-airbnb-base": "11.2.0",
+    "eslint-config-prettier": "^4.1.0",
     "eslint-import-resolver-webpack": "0.8.3",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "5.0.3",
@@ -287,6 +298,7 @@
     "file-loader": "0.11.1",
     "html-loader": "0.4.5",
     "html-webpack-plugin": "2.29.0",
+    "husky": "^1.3.1",
     "image-webpack-loader": "2.0.0",
     "imports-loader": "0.7.1",
     "jest-cli": "20.0.4",
@@ -296,6 +308,7 @@
     "null-loader": "0.1.1",
     "offline-plugin": "4.8.1",
     "plop": "1.8.0",
+    "prettier": "^1.16.4",
     "react-test-renderer": "15.5.4",
     "rimraf": "2.6.2",
     "shelljs": "0.7.7",
