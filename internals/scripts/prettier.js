@@ -15,7 +15,7 @@ let didError = false;
 
 let files = [];
 const jsFiles = glob.sync('app/**/*.js*', {
-  ignore: ['**/node_modules/**', 'build/**', 'dist/**'],
+  ignore: ['**/node_modules/**', '**/build/**', '**/dist/**', '**/vendor/**'],
 });
 files = files.concat(jsFiles);
 console.log(jsFiles);
@@ -23,7 +23,7 @@ if (!files.length) {
   return;
 }
 
-files.forEach((file) => {
+files.forEach(file => {
   const options = prettier.resolveConfig.sync(file, {
     config: prettierConfigPath,
   });
