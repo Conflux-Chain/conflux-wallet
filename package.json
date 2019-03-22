@@ -142,13 +142,7 @@
       "import/no-unresolved": 2,
       "import/no-webpack-loader-syntax": 0,
       "import/prefer-default-export": 0,
-      "indent": [
-        2,
-        2,
-        {
-          "SwitchCase": 1
-        }
-      ],
+      "indent": 1,
       "jsx-a11y/aria-props": 2,
       "jsx-a11y/heading-has-content": 0,
       "jsx-a11y/href-no-hash": 2,
@@ -177,7 +171,6 @@
       "require-yield": 0,
       "no-unused-vars": 1,
       "no-param-reassign": 1,
-      "indent": 1,
       "no-underscore-dangle": 1
     },
     "settings": {
@@ -312,7 +305,6 @@
     "imports-loader": "0.7.1",
     "jest-cli": "20.0.4",
     "lint-staged": "3.5.1",
-    "ngrok": "2.2.9",
     "node-plop": "0.7.0",
     "null-loader": "0.1.1",
     "offline-plugin": "4.8.1",
