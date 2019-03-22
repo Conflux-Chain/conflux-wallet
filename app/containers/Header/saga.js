@@ -127,7 +127,7 @@ export function* loadNetwork(action) {
     const keystore = yield select(makeSelectKeystore());
 
     if (keystore) {
-      const provider = new SignerProvider("http://localhost:8091", {
+      const provider = new SignerProvider(rpcAddress, {
         signTransaction: keystore.signTransaction.bind(keystore),
         accounts: cb => cb(null, keystore.getAddresses())
       });
