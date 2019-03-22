@@ -1,16 +1,16 @@
 {
-  "name": "eth-hot-wallet",
-  "version": "0.6.0",
-  "description": "Ethereum and ERC20 Hot Wallet",
+  "name": "conflux-wallet",
+  "version": "1.0.0",
+  "description": "Conflux Web Wallet",
   "repository": {
     "type": "git",
-    "url": "git://github.com/PaulLaux/eth-hot-wallet.git"
+    "url": "git://github.com/-"
   },
   "engines": {
     "npm": ">=3",
     "node": ">=7"
   },
-  "author": "Paul Laux",
+  "author": "Conflux Team",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
