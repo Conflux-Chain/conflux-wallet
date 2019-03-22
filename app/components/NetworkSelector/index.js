@@ -21,7 +21,11 @@ function NetworkSelector({ networkName, availableNetworks, onLoadNetwork }) {
   return (
     <div>
       <label htmlFor="networkSelectorDropdown">
-        <select value={networkName} onChange={(evt) => onLoadNetwork(evt.target.value)} disabled={false}>
+        <select
+          value={networkName}
+          onChange={(evt) => onLoadNetwork(evt.target.value)}
+          disabled={false}
+        >
           {options}
         </select>
       </label>

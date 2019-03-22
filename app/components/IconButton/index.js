@@ -18,7 +18,17 @@ const ErrorSpan = styled.span`
   }
 `;
 
-const Btn = ({ error, popconfirm, text, loading, disabled, popconfirmMsg, onClick, icon, ...btnProps }) => (
+const Btn = ({
+  error,
+  popconfirm,
+  text,
+  loading,
+  disabled,
+  popconfirmMsg,
+  onClick,
+  icon,
+  ...btnProps
+}) => (
   <Button
     icon={icon}
     type="default"
@@ -46,7 +56,13 @@ Btn.propTypes = {
 const handlePopconfirm = (popConfirmText, onClick, component) => {
   if (popConfirmText) {
     return (
-      <Popconfirm placement="top" title={popConfirmText} onConfirm={onClick} okText="Confirm" cancelText="Abort">
+      <Popconfirm
+        placement="top"
+        title={popConfirmText}
+        onConfirm={onClick}
+        okText="Confirm"
+        cancelText="Abort"
+      >
         {component}
         <span />
       </Popconfirm>

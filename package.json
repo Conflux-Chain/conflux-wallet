@@ -174,7 +174,11 @@
       "react/self-closing-comp": 0,
       "redux-saga/no-yield-in-race": 2,
       "redux-saga/yield-effects": 2,
-      "require-yield": 0
+      "require-yield": 0,
+      "no-unused-vars": 1,
+      "no-param-reassign": 1,
+      "indent": 1,
+      "no-underscore-dangle": 1
     },
     "settings": {
       "import/resolver": {
@@ -250,6 +254,7 @@
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
     "react-helmet": "5.1.3",
+    "react-intl": "^2.8.0",
     "react-loadable": "4.0.5",
     "react-redux": "5.0.7",
     "react-router-dom": "4.1.1",

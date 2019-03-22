@@ -54,7 +54,9 @@ function headerReducer(state = initialState, action) {
           // dont change prevNetworkName when going online
           .set(
             'prevNetworkName',
-            state.get('networkName') === 'Offline' ? state.get('prevNetworkName') : state.get('networkName')
+            state.get('networkName') === 'Offline'
+              ? state.get('prevNetworkName')
+              : state.get('networkName')
           )
           .set('networkName', action.networkName)
       );

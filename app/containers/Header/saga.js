@@ -116,8 +116,8 @@ export function* loadNetwork(action) {
       });
       // const provider=new Web3.providers.HttpProvider("http://localhost:8091");
       web3.setProvider(provider);
+      // eslint-disable-next-line no-inner-declarations
       function getBlockNumberPromise() {
-        // eslint-disable-line no-inner-declarations
         return new Promise((resolve, reject) => {
           // web3.eth.getBlockNumber((err, data) => {
           //   if (err !== null) return reject(err);
@@ -230,8 +230,8 @@ export function* SendTransaction() {
         gasPrice,
         gas: maxGasForEthSend,
       };
+      // eslint-disable-next-line no-inner-declarations
       function sendTransactionPromise(params) {
-        // eslint-disable-line no-inner-declarations
         return new Promise((resolve, reject) => {
           web3.cfx.sendTransaction(params, function(err, data) {
             if (err != null) return reject(err);
@@ -255,8 +255,8 @@ export function* SendTransaction() {
       };
       const tokenAmount = amount * 10 ** tokenInfo.decimals; // Big Number??
 
+      // eslint-disable-next-line no-inner-declarations
       function sendTokenPromise(tokenContractAddress, sendToAddress, sendAmount, params) {
-        // eslint-disable-line no-inner-declarations
         return new Promise((resolve, reject) => {
           // const tokenContract = erc20Contract.at(tokenContractAddress);
           // tokenContract.transfer.sendTransaction(sendToAddress, sendAmount, params, (err, sendTx) => {
@@ -285,7 +285,7 @@ export function getEthBalancePromise(address) {
   return new Promise((resolve, reject) => {
     web3.cfx.getBalance(address, (err, data) => {
       if (err !== null) return reject(err);
-      return resolve(data.toNumber() / Math.pow(10, 8));
+      return resolve(data.toNumber() / 10 ** 8);
     });
   });
 }
@@ -381,13 +381,9 @@ function* pollData() {
 // Cancel polling on STOP_POLL_BALANCES
 function* watchPollData() {
   while (true) {
-    // eslint-disable-line
     yield take([CHECK_BALANCES_SUCCESS, CHECK_BALANCES_ERROR]);
-    yield race([
-      // eslint-disable-line
-      call(pollData),
-      take(STOP_POLL_BALANCES),
-    ]);
+    // eslint-disable-next-line
+    yield race([call(pollData), take(STOP_POLL_BALANCES)]);
   }
 }
 /* ******************************************************************************** */
@@ -423,7 +419,7 @@ export function* getRates() {
     ];
 
     if (!online) {
-      dummyRates = require("./tests/dummyRates").dummyRates; // eslint-disable-line
+      dummyRates = require('./tests/dummyRates').dummyRates; // eslint-disable-line
     }
 
     // Call our request helper (see 'utils/request')
@@ -472,8 +468,8 @@ export function* askFaucetApi() {
       ? yield call(request, requestURL)
       : {
           message: {
-          tx: '0x0f71ca4a8af03e67f06910bf301308ecd701064bd2183b51e1e3ca18af9bc9f8',
-        },
+            tx: '0x0f71ca4a8af03e67f06910bf301308ecd701064bd2183b51e1e3ca18af9bc9f8',
+          },
         };
     if (result.message.tx) {
       yield put(askFaucetSuccess(result.message.tx));

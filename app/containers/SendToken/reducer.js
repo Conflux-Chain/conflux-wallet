@@ -41,7 +41,10 @@ function sendTokenReducer(state = initialState, action) {
       // update values only if provided:
       return state
         .update('from', (fromValue) => action.address || fromValue)
-        .update('sendTokenSymbol', (sendTokenSymbolValue) => action.sendTokenSymbol || sendTokenSymbolValue);
+        .update(
+          'sendTokenSymbol',
+          (sendTokenSymbolValue) => action.sendTokenSymbol || sendTokenSymbolValue
+        );
     case CHANGE_AMOUNT:
       return state.set('amount', action.amount);
 

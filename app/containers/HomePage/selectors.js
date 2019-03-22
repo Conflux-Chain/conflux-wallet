@@ -128,7 +128,9 @@ const makeSelectAddressMap = (address, options = {}) =>
     selectHome,
     (homeState) => {
       const { returnList, removeIndex, removeEth } = options;
-      let addressMap = address ? homeState.getIn(['addressList', address]) : homeState.get('addressList');
+      let addressMap = address
+        ? homeState.getIn(['addressList', address])
+        : homeState.get('addressList');
       if (!addressMap) {
         return null;
       }
@@ -190,7 +192,9 @@ const makeSelectTokenInfo = (symbol) =>
   createSelector(
     selectHome,
     (homeState) => {
-      const tokenInfo = symbol ? homeState.getIn(['tokenInfo', symbol]) : homeState.get('tokenInfo');
+      const tokenInfo = symbol
+        ? homeState.getIn(['tokenInfo', symbol])
+        : homeState.get('tokenInfo');
       if (tokenInfo) {
         return tokenInfo.toJS();
       }
@@ -222,7 +226,10 @@ const makeSelectTokenDecimalsMap = () =>
     selectHome,
     (homeState) => {
       const tokenInfo = homeState.get('tokenInfo') ? homeState.get('tokenInfo').toJS() : {};
-      return Object.assign({}, ...Object.keys(tokenInfo).map((k) => ({ [k]: tokenInfo[k].decimals })));
+      return Object.assign(
+        {},
+        ...Object.keys(tokenInfo).map((k) => ({ [k]: tokenInfo[k].decimals }))
+      );
     }
   );
 

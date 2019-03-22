@@ -29,8 +29,10 @@ function WelcomeText() {
         <br />
       </H1>
       <H2>
-        Conflux wallet is a zero client. Connection to Conflux network is made via testnet / local node. <br />
-        Keystore is encrypted using the password. When the wallet is locked, you can only view balances. <br />
+        Conflux wallet is a zero client. Connection to Conflux network is made via testnet / local
+        node. <br />
+        Keystore is encrypted using the password. When the wallet is locked, you can only view
+        balances. <br />
         All keys are saved inside the browser and never sent.
       </H2>
     </div>

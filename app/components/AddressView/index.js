@@ -80,7 +80,12 @@ function AddressView(props) {
   let addressViewContent = (
     <Div>
       {generateKeystoreError ? (
-        <Alert message="Generate Keystore Error" description={generateKeystoreError} type="error" showIcon />
+        <Alert
+          message="Generate Keystore Error"
+          description={generateKeystoreError}
+          type="error"
+          showIcon
+        />
       ) : (
         <WelcomeText />
       )}
@@ -97,7 +102,12 @@ function AddressView(props) {
   }
 
   return (
-    <Spin spinning={generateKeystoreLoading} style={{ position: 'static' }} size="large" tip="Loading...">
+    <Spin
+      spinning={generateKeystoreLoading}
+      style={{ position: 'static' }}
+      size="large"
+      tip="Loading..."
+    >
       {addressViewContent}
     </Spin>
   );

@@ -38,5 +38,6 @@ export const github = 'https://github.com/PaulLaux/eth-hot-wallet';
 // APIs:
 // export const checkFaucetAddress = 'http://localhost:3000/status';
 // export const askFaucetAddress = 'http://localhost:3000/ask';
-export const checkFaucetAddress = 'https://m6b19m0fxh.execute-api.eu-west-1.amazonaws.com/dev/status';
+export const checkFaucetAddress =
+  'https://m6b19m0fxh.execute-api.eu-west-1.amazonaws.com/dev/status';
 export const askFaucetAddress = 'https://m6b19m0fxh.execute-api.eu-west-1.amazonaws.com/dev/ask';

@@ -46,9 +46,17 @@ function TokenChooser(props) {
         onCancel={onHideTokenChooser}
         footer={null}
       >
-        <TokenChooserList tokenList={TokensForNetwork} chosenTokens={chosenTokens} onTokenToggle={onToggleToken} />
+        <TokenChooserList
+          tokenList={TokensForNetwork}
+          chosenTokens={chosenTokens}
+          onTokenToggle={onToggleToken}
+        />
         <br />
-        <Button type="primary" onClick={() => onConfirmNewTokenInfo(chosenTokens, networkName)} disabled={false}>
+        <Button
+          type="primary"
+          onClick={() => onConfirmNewTokenInfo(chosenTokens, networkName)}
+          disabled={false}
+        >
           Update
         </Button>{' '}
         <Button onClick={() => onConfirmNewTokenInfo()} disabled={false}>

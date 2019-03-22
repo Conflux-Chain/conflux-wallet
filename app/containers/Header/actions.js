@@ -201,9 +201,17 @@ export function checkFaucetSuccess() {
     store.dispatch(askFaucet());
   };
   const btn = [
-    React.createElement(Button, { key: 'b1', type: 'default', size: 'default', onClick: closeNotification }, 'No man'),
+    React.createElement(
+      Button,
+      { key: 'b1', type: 'default', size: 'default', onClick: closeNotification },
+      'No man'
+    ),
     '  ',
-    React.createElement(Button, { key: 'b2', type: 'primary', size: 'default', onClick: ask }, 'Sure'),
+    React.createElement(
+      Button,
+      { key: 'b2', type: 'primary', size: 'default', onClick: ask },
+      'Sure'
+    ),
   ];
   notification.config({
     placement: 'bottomRight',
@@ -266,8 +274,15 @@ export function askFaucetSuccess(tx) {
   const closeNotification = () => {
     notification.close(key);
   };
-  const btn = React.createElement(Button, { type: 'default', size: 'small', onClick: closeNotification }, 'Got it');
-  const description = React.createElement(FaucetDescription, { tx, text: 'Check balance in ~30 seconds. TX:' });
+  const btn = React.createElement(
+    Button,
+    { type: 'default', size: 'small', onClick: closeNotification },
+    'Got it'
+  );
+  const description = React.createElement(FaucetDescription, {
+    tx,
+    text: 'Check balance in ~30 seconds. TX:',
+  });
   notification.success({
     message: 'Faucet request sucessfull',
     description,
@@ -294,7 +309,11 @@ export function askFaucetError(error) {
   const closeNotification = () => {
     notification.close(key);
   };
-  const btn = React.createElement(Button, { type: 'default', size: 'small', onClick: closeNotification }, 'Got it');
+  const btn = React.createElement(
+    Button,
+    { type: 'default', size: 'small', onClick: closeNotification },
+    'Got it'
+  );
   notification.error({
     message: 'Faucet request failed',
     description: `${error}. Please try again later`,

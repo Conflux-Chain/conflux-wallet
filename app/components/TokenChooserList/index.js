@@ -33,7 +33,10 @@ function TokenChooserList(props) {
         renderItem={(item) => (
           <ListItem
             actions={[
-              <Switch checked={chosenTokens[item.symbol]} onChange={(toggle) => onTokenToggle(item.symbol, toggle)} />,
+              <Switch
+                checked={chosenTokens[item.symbol]}
+                onChange={(toggle) => onTokenToggle(item.symbol, toggle)}
+              />,
             ]}
           >
             <ListItemMeta

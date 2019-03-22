@@ -33,7 +33,11 @@ function CurrencySelector({ convertTo, exchangeRates, onSelectCurrency }) {
     <div>
       <FormattedMessage {...messages.header} />
       <label htmlFor="currencySelectorDropdown">
-        <select value={convertTo} onChange={(evt) => onSelectCurrency(evt.target.value)} disabled={false}>
+        <select
+          value={convertTo}
+          onChange={(evt) => onSelectCurrency(evt.target.value)}
+          disabled={false}
+        >
           <option value={false}>{'select'} </option>
           {options}
         </select>

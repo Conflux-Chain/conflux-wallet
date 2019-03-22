@@ -13,7 +13,9 @@ describe('languageProviderReducer', () => {
   });
 
   it('changes the locale', () => {
-    expect(languageProviderReducer(undefined, { type: CHANGE_LOCALE, locale: 'de' }).toJS()).toEqual({
+    expect(
+      languageProviderReducer(undefined, { type: CHANGE_LOCALE, locale: 'de' }).toJS()
+    ).toEqual({
       locale: 'de',
     });
   });

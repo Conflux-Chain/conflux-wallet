@@ -97,7 +97,8 @@ const history = createHistory();
 export const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
-const render = (messages) => { // eslint-disable-line
+const render = (messages) => {
+  // eslint-disable-line
   ReactDOM.render(
     <Provider store={store}>
       {/* <LanguageProvider messages={messages}> */}

@@ -18,9 +18,8 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 // import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
+// eslint-disable-next-line react/prefer-stateless-function
 export default class App extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
-
   render() {
     return (
       <div>

@@ -33,7 +33,8 @@ export const TokenSelection = {
       name: 'Basic Attention Token',
       contractAddress: '0xf3a1c162bc4a82ca5227d7c542c20dd087d2c37b',
       decimals: 18,
-      description: 'The Basic Attention Token is the new token for the digital advertising industry',
+      description:
+        'The Basic Attention Token is the new token for the digital advertising industry',
       url: 'https://basicattentiontoken.org/',
     },
     {
@@ -112,7 +113,8 @@ export const TokenSelection = {
       name: 'Binance',
       contractAddress: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52',
       decimals: 18,
-      description: 'Binance will build a world-class crypto exchange, powering the future of crypto finance',
+      description:
+        'Binance will build a world-class crypto exchange, powering the future of crypto finance',
       url: 'https://www.binance.com/',
     },
     {
@@ -164,7 +166,8 @@ export const TokenSelection = {
       name: 'Basic Attention Token',
       contractAddress: '0x0d8775f648430679a709e98d2b0cb6250d2887ef',
       decimals: 18,
-      description: 'The Basic Attention Token is the new token for the digital advertising industry',
+      description:
+        'The Basic Attention Token is the new token for the digital advertising industry',
       url: 'https://basicattentiontoken.org/',
     },
     {
@@ -189,7 +192,8 @@ export const TokenSelection = {
       name: 'GOLEM',
       contractAddress: '0xa74476443119A942dE498590Fe1f2454d7D4aC0d',
       decimals: 18,
-      description: 'Golem is going to create the first decentralized global market for computing power',
+      description:
+        'Golem is going to create the first decentralized global market for computing power',
       url: 'https://golem.network/',
     },
     {
@@ -197,7 +201,8 @@ export const TokenSelection = {
       name: 'Kyber Network Crystal',
       contractAddress: '0xdd974d5c2e2928dea5f71b9825b8b646686bd200',
       decimals: 18,
-      description: 'KyberNetwork is a new system which allows the exchange and conversion of digital assets',
+      description:
+        'KyberNetwork is a new system which allows the exchange and conversion of digital assets',
       url: 'https://kyber.network/',
     },
     {
@@ -222,7 +227,8 @@ export const TokenSelection = {
       name: 'Digix Global',
       contractAddress: '0xe0b7927c4af23765cb51314a0e0521a9645f0e2a',
       decimals: 9,
-      description: 'Every asset represents a unique bullion bar sitting in designated securitised custodial vaults',
+      description:
+        'Every asset represents a unique bullion bar sitting in designated securitised custodial vaults',
       url: 'https://digix.io/',
     },
     {
@@ -238,7 +244,8 @@ export const TokenSelection = {
       name: 'Bancor Network',
       contractAddress: '0x1f573d6fb3f13d689ff844b4ce37794d79a7ff1c',
       decimals: 18,
-      description: 'Bancor Protocol is a standard for a new generation of cryptocurrencies called Smart Tokens',
+      description:
+        'Bancor Protocol is a standard for a new generation of cryptocurrencies called Smart Tokens',
       url: 'https://bancor.network/',
     },
   ],

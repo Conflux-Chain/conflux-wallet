@@ -37,11 +37,13 @@ function GenerateWalletModal(props) {
       <Alert
         message={<b>The seed is imposible to recover if lost</b>}
         description={
+          /* eslint-disable react/no-unescaped-entities */
           <b>
             Copy the generated seed to safe location. HDPathString: m/44'/60'/0'/0.
             <br /> Recover lost password using the seed.
           </b>
-        } // eslint-disable-line
+          /* eslint-enable */
+        }
         type="warning"
         showIcon
         closable
@@ -49,7 +51,11 @@ function GenerateWalletModal(props) {
       <br />
       <Alert message="Seed:" description={<b>{seed}</b>} type="info" />
       <br />
-      <Alert message="Password for browser encryption:" description={<b>{password}</b>} type="info" />
+      <Alert
+        message="Password for browser encryption:"
+        description={<b>{password}</b>}
+        type="info"
+      />
       <br />
       <Button
         shape="circle"

@@ -39,7 +39,12 @@ function SendConfirmationView(props) {
   if (confirmationError !== false) {
     return (
       <Div>
-        <Alert message="Transaction not created" description={confirmationError} type="error" showIcon />
+        <Alert
+          message="Transaction not created"
+          description={confirmationError}
+          type="error"
+          showIcon
+        />
       </Div>
     );
   }

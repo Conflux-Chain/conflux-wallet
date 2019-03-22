@@ -65,7 +65,9 @@ const splitAddrToRows = (tokenDecimalsMap, tokenMapIN, address, startKey) => {
     sameAddressRow.address = address;
     const balance = tokenMap[token].balance;
     const decimals = tokenDecimalsMap[token];
-    sameAddressRow.balance = balance ? balance.div((10 ** decimals).toString()).toString(10) : 'n/a';
+    sameAddressRow.balance = balance
+      ? balance.div((10 ** decimals).toString()).toString(10)
+      : 'n/a';
     // sameAddressRow.convert = '';
     return sameAddressRow;
   });
@@ -160,7 +162,14 @@ const addConvertRates = (rowList, exchangeRates, convertTo) =>
   });
 
 function AddressTable(props) {
-  const { addressMap, tokenDecimalsMap, onShowSendToken, exchangeRates, onSelectCurrency, convertTo } = props;
+  const {
+    addressMap,
+    tokenDecimalsMap,
+    onShowSendToken,
+    exchangeRates,
+    onSelectCurrency,
+    convertTo,
+  } = props;
 
   const currencyDropdownProps = { exchangeRates, onSelectCurrency, convertTo };
 
@@ -256,9 +265,7 @@ function AddressTable(props) {
             {/* <a href="#" >Show QR</a>
             <span className="ant-divider" /> */}
             {/* eslint-disable */}
-            <a onClick={() => onShowSendToken(record.address, record.token)}>
-              Send
-            </a>
+            <a onClick={() => onShowSendToken(record.address, record.token)}>Send</a>
             {/* eslint-enable */}
           </span>
         )}

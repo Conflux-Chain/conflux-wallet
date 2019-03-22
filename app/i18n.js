@@ -16,7 +16,9 @@ export const appLocales = ['en'];
 
 export const formatTranslationMessages = (locale, messages) => {
   const defaultFormattedMessages =
-    locale !== DEFAULT_LOCALE ? formatTranslationMessages(DEFAULT_LOCALE, enTranslationMessages) : {};
+    locale !== DEFAULT_LOCALE
+      ? formatTranslationMessages(DEFAULT_LOCALE, enTranslationMessages)
+      : {};
   return Object.keys(messages).reduce((formattedMessages, key) => {
     let message = messages[key];
     if (!message && locale !== DEFAULT_LOCALE) {
