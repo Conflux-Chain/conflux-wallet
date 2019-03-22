@@ -1,8 +1,8 @@
 /**
-*
-* LockButton
-*
-*/
+ *
+ * LockButton
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -17,8 +17,15 @@ function LockButton(props) {
 
   if (password) {
     return (
-      <Popconfirm key="close_wallet" placement="bottom" title="Comfirm locking wallet" onConfirm={onLockWallet} okText="Confirm" cancelText="Abort">
-        <Button icon="lock" type="default" size="large" >
+      <Popconfirm
+        key="close_wallet"
+        placement="bottom"
+        title="Comfirm locking wallet"
+        onConfirm={onLockWallet}
+        okText="Confirm"
+        cancelText="Abort"
+      >
+        <Button icon="lock" type="default" size="large">
           Lock Wallet
         </Button>
       </Popconfirm>

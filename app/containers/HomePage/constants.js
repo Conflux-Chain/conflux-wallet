@@ -56,4 +56,3 @@ export const SAVE_WALLET_ERROR = 'eth-hot-wallet/HomePage/SAVE_WALLET_ERROR';
 export const LOAD_WALLET = 'eth-hot-wallet/HomePage/LOAD_WALLET';
 export const LOAD_WALLET_SUCCESS = 'eth-hot-wallet/HomePage/LOAD_WALLET_SUCCESS';
 export const LOAD_WALLET_ERROR = 'eth-hot-wallet/HomePage/LOAD_WALLET_ERROR';
-

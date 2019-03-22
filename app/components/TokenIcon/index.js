@@ -1,15 +1,15 @@
 /**
-*
-* TokenIcon
-*
-*/
+ *
+ * TokenIcon
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Img = styled.img`
-  {
+   {
     color: #dbd9ff;
     font: 20px Impact;
     text-transform: uppercase;

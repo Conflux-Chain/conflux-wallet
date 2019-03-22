@@ -4,11 +4,11 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import { Menu, Button, Dropdown, Icon } from "antd";
+import { Menu, Button, Dropdown, Icon } from 'antd';
 // const SubMenu = Menu.SubMenu;
 // const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
@@ -27,7 +27,7 @@ function NetworkMenu(props) {
 
   let options;
   if (availableNetworks) {
-    options = availableNetworks.map(network => (
+    options = availableNetworks.map((network) => (
       <StyledMenuItem key={network}>
         <a tabIndex="0" role="button" onClick={() => onLoadNetwork(network)}>
           {network}
@@ -37,11 +37,7 @@ function NetworkMenu(props) {
   }
 
   const menu = (
-    <Menu
-      forceSubMenuRender
-      defaultSelectedKeys={[networkName]}
-      selectedKeys={[networkName]}
-    >
+    <Menu forceSubMenuRender defaultSelectedKeys={[networkName]} selectedKeys={[networkName]}>
       <StyledMenuItem disabled key="title">
         Select Conflux network
       </StyledMenuItem>
@@ -62,7 +58,7 @@ function NetworkMenu(props) {
 NetworkMenu.propTypes = {
   onLoadNetwork: PropTypes.func.isRequired,
   networkName: PropTypes.string,
-  availableNetworks: PropTypes.object
+  availableNetworks: PropTypes.object,
 };
 
 export default NetworkMenu;

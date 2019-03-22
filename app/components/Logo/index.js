@@ -1,8 +1,8 @@
 /**
-*
-* Logo
-*
-*/
+ *
+ * Logo
+ *
+ */
 
 import React from 'react';
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ import walletLogo from './conflux_logo.svg';
 const Div = styled.div`
   height: 80px;
   font-size: 18px;
-  line-height: 80px; 
+  line-height: 80px;
 `;
 
 const Img = styled.img`
@@ -26,15 +26,11 @@ function Logo() {
   return (
     <Div>
       <Img alt="logo" src={walletLogo} />
-      <a href={website}>
-        Conflux Wallet
-      </a>
+      <a href={website}>Conflux Wallet</a>
     </Div>
   );
 }
 
-Logo.propTypes = {
-
-};
+Logo.propTypes = {};
 
 export default Logo;

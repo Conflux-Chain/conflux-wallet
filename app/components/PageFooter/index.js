@@ -4,12 +4,12 @@
  *
  */
 
-import React from "react";
-import { github } from "utils/constants";
-import { Row, Col } from "antd";
-import styled from "styled-components";
+import React from 'react';
+import { github } from 'utils/constants';
+import { Row, Col } from 'antd';
+import styled from 'styled-components';
 
-import { StickyFooter } from "./sticky";
+import { StickyFooter } from './sticky';
 
 const Footer = StickyFooter.extend`
   textalign: center;
@@ -29,7 +29,7 @@ function PageFooter() {
     <Footer>
       <Row>
         <Col sm={12} xs={24}>
-          {"Conflux Wallet - "}
+          {'Conflux Wallet - '}
           <a href={github} target="_blank" rel="noopener">
             Conflux Wallet
           </a>

@@ -1,8 +1,8 @@
 /**
-*
-* AddressTableFooterErrors
-*
-*/
+ *
+ * AddressTableFooterErrors
+ *
+ */
 
 import React from 'react';
 import styled from 'styled-components';
@@ -10,7 +10,7 @@ import { Alert } from 'antd';
 import PropTypes from 'prop-types';
 
 const Div = styled.div`
-  max-width: 490px;  
+  max-width: 490px;
   margin: auto;
   margin-top: 35px;
 `;
@@ -24,9 +24,19 @@ function AddressTableFooterErrors(props) {
   const { checkingBalancesError, addressListError, getExchangeRatesError } = props;
   return (
     <Div>
-      {checkingBalancesError ? <Alert type="error" message="Check Balances Error" description={checkingBalancesError} /> : null}
-      {addressListError ? <PaddedAlert type="error" message="Add Addresss Error" description={addressListError} /> : null}
-      {getExchangeRatesError ? <PaddedAlert type="error" message="Update Exchange Rates Error" description={getExchangeRatesError.toString()} /> : null}
+      {checkingBalancesError ? (
+        <Alert type="error" message="Check Balances Error" description={checkingBalancesError} />
+      ) : null}
+      {addressListError ? (
+        <PaddedAlert type="error" message="Add Addresss Error" description={addressListError} />
+      ) : null}
+      {getExchangeRatesError ? (
+        <PaddedAlert
+          type="error"
+          message="Update Exchange Rates Error"
+          description={getExchangeRatesError.toString()}
+        />
+      ) : null}
     </Div>
   );
 }

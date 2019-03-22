@@ -3,10 +3,7 @@
  * TokenChooser actions
  *
  */
-import {
-  TOGGLE_TOKEN,
-  CONFIRM_UPDATE_TOKEN_INFO,
-} from './constants';
+import { TOGGLE_TOKEN, CONFIRM_UPDATE_TOKEN_INFO } from './constants';
 import { TokenSelection } from './token-lists';
 
 /**
@@ -23,7 +20,6 @@ export function toggleToken(symbol, toggle) {
     toggle,
   };
 }
-
 
 /**
  * confirm new tokens

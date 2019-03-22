@@ -12,16 +12,13 @@ import {
   LOAD_NETWORK,
   LOAD_NETWORK_SUCCESS,
   LOAD_NETWORK_ERROR,
-
   CHECK_BALANCES,
   CHECK_BALANCES_SUCCESS,
   CHECK_BALANCES_ERROR,
   STOP_POLL_BALANCES,
-
   GET_EXCHANGE_RATES,
   GET_EXCHANGE_RATES_SUCCESS,
   GET_EXCHANGE_RATES_ERROR,
-
   CHECK_FAUCET,
   CHECK_FAUCET_SUCCESS,
   CHECK_FAUCET_ERROR,
@@ -68,8 +65,10 @@ export function loadNetworkSuccess(blockNumber) {
  */
 export function loadNetworkError(error) {
   if (error !== offlineModeString) {
-    const err = error.indexOf('Invalid JSON RPC response from host provider') >= 0 ?
-      `${error}, Check Internet connection and connectivity to RPC` : error;
+    const err =
+      error.indexOf('Invalid JSON RPC response from host provider') >= 0
+        ? `${error}, Check Internet connection and connectivity to RPC`
+        : error;
     message.error(err, 10);
   }
   return {
@@ -77,7 +76,6 @@ export function loadNetworkError(error) {
     error,
   };
 }
-
 
 /* *********************************** Check Balances Actions ******************* */
 /**
@@ -119,7 +117,6 @@ export function CheckBalancesError(error) {
     error,
   };
 }
-
 
 /**
  * Stop polling balances when going to offline mode
@@ -173,7 +170,6 @@ export function getExchangeRatesError(error) {
   };
 }
 
-
 /* *********************************** Faucet Actions ******************* */
 
 /**
@@ -205,24 +201,14 @@ export function checkFaucetSuccess() {
     store.dispatch(askFaucet());
   };
   const btn = [
-    React.createElement(
-      Button,
-      { key: 'b1', type: 'default', size: 'default', onClick: closeNotification },
-      'No man'
-    ),
+    React.createElement(Button, { key: 'b1', type: 'default', size: 'default', onClick: closeNotification }, 'No man'),
     '  ',
-    React.createElement(
-      Button,
-      { key: 'b2', type: 'primary', size: 'default', onClick: ask },
-      'Sure'
-    )];
+    React.createElement(Button, { key: 'b2', type: 'primary', size: 'default', onClick: ask }, 'Sure'),
+  ];
   notification.config({
     placement: 'bottomRight',
   });
-  const icon = React.createElement(
-    Icon,
-    { type: 'bulb', style: { color: '#108ee9' } }
-  );
+  const icon = React.createElement(Icon, { type: 'bulb', style: { color: '#108ee9' } });
   notification.open({
     message: 'Ropsten Testnet faucet',
     description: 'Need some coins for testing?',

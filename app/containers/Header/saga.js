@@ -1,17 +1,9 @@
 // import Web3 from 'web3';
-import Web3 from "vendor/web3.js";
-import SignerProvider from "vendor/ethjs-provider-signer/ethjs-provider-signer";
-import BigNumber from "bignumber.js";
-import {
-  take,
-  call,
-  put,
-  select,
-  takeLatest,
-  race,
-  fork
-} from "redux-saga/effects";
-import Tx from "vendor/ethereumjs-tx";
+import Web3 from 'vendor/web3';
+import SignerProvider from 'vendor/ethjs-provider-signer/ethjs-provider-signer';
+import BigNumber from 'bignumber.js';
+import { take, call, put, select, takeLatest, race, fork } from 'redux-saga/effects';
+import Tx from 'ethereumjs-tx';
 
 import {
   makeSelectKeystore,
@@ -19,32 +11,25 @@ import {
   makeSelectPassword,
   makeSelectAddressMap,
   makeSelectTokenInfoList,
-  makeSelectTokenInfo
-} from "containers/HomePage/selectors";
-import {
-  changeBalance,
-  setExchangeRates,
-  updateTokenInfo
-} from "containers/HomePage/actions";
-import request from "utils/request";
+  makeSelectTokenInfo,
+} from 'containers/HomePage/selectors';
+import { changeBalance, setExchangeRates, updateTokenInfo } from 'containers/HomePage/actions';
+import request from 'utils/request';
 
 import {
   confirmSendTransactionSuccess,
   confirmSendTransactionError,
   sendTransactionSuccess,
-  sendTransactionError
-} from "containers/SendToken/actions";
+  sendTransactionError,
+} from 'containers/SendToken/actions';
 import {
   makeSelectFrom,
   makeSelectTo,
   makeSelectAmount,
   makeSelectGasPrice,
-  makeSelectSendTokenSymbol
-} from "containers/SendToken/selectors";
-import {
-  COMFIRM_SEND_TRANSACTION,
-  SEND_TRANSACTION
-} from "containers/SendToken/constants";
+  makeSelectSendTokenSymbol,
+} from 'containers/SendToken/selectors';
+import { COMFIRM_SEND_TRANSACTION, SEND_TRANSACTION } from 'containers/SendToken/constants';
 
 import {
   timeBetweenCheckbalances,
@@ -54,13 +39,13 @@ import {
   maxGasForTokenSend,
   offlineModeString,
   checkFaucetAddress,
-  askFaucetAddress
-} from "utils/constants";
-import { timer } from "utils/common";
-import { erc20Abi } from "utils/contracts/abi";
-import { message } from "antd";
+  askFaucetAddress,
+} from 'utils/constants';
+import { timer } from 'utils/common';
+import { erc20Abi } from 'utils/contracts/abi';
+import { message } from 'antd';
 
-import { makeSelectUsedFaucet, makeSelectPrevNetworkName } from "./selectors";
+import { makeSelectUsedFaucet, makeSelectPrevNetworkName } from './selectors';
 import {
   loadNetworkSuccess,
   loadNetworkError,
@@ -75,8 +60,8 @@ import {
   checkFaucetSuccess,
   checkFaucetError,
   askFaucetSuccess,
-  askFaucetError
-} from "./actions";
+  askFaucetError,
+} from './actions';
 
 import {
   LOAD_NETWORK,
@@ -86,10 +71,10 @@ import {
   STOP_POLL_BALANCES,
   GET_EXCHANGE_RATES,
   CHECK_FAUCET,
-  ASK_FAUCET
-} from "./constants";
+  ASK_FAUCET,
+} from './constants';
 
-import Network from "./network";
+import Network from './network';
 const web3 = new Web3(); // eslint-disable-line
 // const erc20Contract = web3.eth.contract(erc20Abi);
 
@@ -101,18 +86,16 @@ const web3 = new Web3(); // eslint-disable-line
  * askFaucetApi() will get costant Tx as success
  */
 const online = true;
-if (!online) message.warn("Debug mode: online = false in Header/saga.js");
+if (!online) message.warn('Debug mode: online = false in Header/saga.js');
 /**
  * connect to rpc and attach keystore as siger provider
  */
 export function* loadNetwork(action) {
   if (!online) {
-    message.warn("debug mode: online = false in Header/saga.js");
+    message.warn('debug mode: online = false in Header/saga.js');
   }
   try {
-    const rpcAddress = online
-      ? Network[action.networkName].rpc
-      : Network["Local RPC"].rpc;
+    const rpcAddress = online ? Network[action.networkName].rpc : Network['Local RPC'].rpc;
     if (!rpcAddress) {
       throw new Error(`${action.networkName} network not found`);
     }
@@ -129,7 +112,7 @@ export function* loadNetwork(action) {
     if (keystore) {
       const provider = new SignerProvider(rpcAddress, {
         signTransaction: keystore.signTransaction.bind(keystore),
-        accounts: cb => cb(null, keystore.getAddresses())
+        accounts: (cb) => cb(null, keystore.getAddresses()),
       });
       // const provider=new Web3.providers.HttpProvider("http://localhost:8091");
       web3.setProvider(provider);
@@ -167,13 +150,11 @@ export function* loadNetwork(action) {
       }
 
       const usedFaucet = yield select(makeSelectUsedFaucet());
-      if (action.networkName === "Ropsten Testnet" && !usedFaucet) {
+      if (action.networkName === 'Ropsten Testnet' && !usedFaucet) {
         yield put(checkFaucet());
       }
     } else {
-      throw new Error(
-        "keystore not initiated - Create wallet before connecting"
-      );
+      throw new Error('keystore not initiated - Create wallet before connecting');
     }
   } catch (err) {
     // const errorString = `loadNetwork error - ${err.message}`;
@@ -183,7 +164,7 @@ export function* loadNetwork(action) {
 }
 
 export function* confirmSendTransaction() {
-  let _this = this;
+  const _this = this;
   try {
     const fromAddress = yield select(makeSelectFrom());
     const amount = yield select(makeSelectAmount());
@@ -191,7 +172,7 @@ export function* confirmSendTransaction() {
     const gasPrice = yield select(makeSelectGasPrice());
 
     if (!web3.isAddress(fromAddress)) {
-      throw new Error("Source address invalid");
+      throw new Error('Source address invalid');
     }
 
     // if (amount <= 0) {
@@ -199,7 +180,7 @@ export function* confirmSendTransaction() {
     // }
 
     if (!web3.isAddress(toAddress)) {
-      throw new Error("Destenation address invalid");
+      throw new Error('Destenation address invalid');
     }
 
     // if (!(gasPrice > 0.1)) {
@@ -207,9 +188,7 @@ export function* confirmSendTransaction() {
     // }
 
     const msg = `Transaction created successfully. 
-    Sending ${amount} from ...${fromAddress.slice(-5)} to ...${toAddress.slice(
-      -5
-    )}`;
+    Sending ${amount} from ...${fromAddress.slice(-5)} to ...${toAddress.slice(-5)}`;
     yield put(confirmSendTransactionSuccess(msg));
   } catch (err) {
     // const errorString = `confirmSendTransaction error - ${err.message}`;
@@ -224,34 +203,32 @@ export function* SendTransaction() {
     const fromAddress = yield select(makeSelectFrom());
     const amount = yield select(makeSelectAmount());
     const toAddress = yield select(makeSelectTo());
-    const gasPrice = new BigNumber(yield select(makeSelectGasPrice())).times(
-      Gwei
-    );
+    const gasPrice = new BigNumber(yield select(makeSelectGasPrice())).times(Gwei);
     const password = yield select(makeSelectPassword());
 
     const tokenToSend = yield select(makeSelectSendTokenSymbol());
 
     if (!password) {
-      throw new Error("No password found - please unlock wallet before send");
+      throw new Error('No password found - please unlock wallet before send');
     }
     if (!keystore) {
-      throw new Error("No keystore found - please create wallet");
+      throw new Error('No keystore found - please create wallet');
     }
-    keystore.passwordProvider = callback => {
+    keystore.passwordProvider = (callback) => {
       // we cannot use selector inside this callback so we use a const value
       const ksPassword = password;
       callback(null, ksPassword);
     };
 
     let tx;
-    if (tokenToSend === "eth") {
+    if (tokenToSend === 'eth') {
       const sendAmount = new BigNumber(amount).times(Ether);
       const sendParams = {
         from: fromAddress,
         to: toAddress,
         value: sendAmount,
         gasPrice,
-        gas: maxGasForEthSend
+        gas: maxGasForEthSend,
       };
       function sendTransactionPromise(params) {
         // eslint-disable-line no-inner-declarations
@@ -267,25 +244,18 @@ export function* SendTransaction() {
       // any other token
       const tokenInfo = yield select(makeSelectTokenInfo(tokenToSend));
       if (!tokenInfo) {
-        throw new Error(
-          `Contract address for token '${tokenToSend}' not found`
-        );
+        throw new Error(`Contract address for token '${tokenToSend}' not found`);
       }
       const contractAddress = tokenInfo.contractAddress;
       const sendParams = {
         from: fromAddress,
-        value: "0x0",
+        value: '0x0',
         gasPrice,
-        gas: maxGasForTokenSend
+        gas: maxGasForTokenSend,
       };
       const tokenAmount = amount * 10 ** tokenInfo.decimals; // Big Number??
 
-      function sendTokenPromise(
-        tokenContractAddress,
-        sendToAddress,
-        sendAmount,
-        params
-      ) {
+      function sendTokenPromise(tokenContractAddress, sendToAddress, sendAmount, params) {
         // eslint-disable-line no-inner-declarations
         return new Promise((resolve, reject) => {
           // const tokenContract = erc20Contract.at(tokenContractAddress);
@@ -294,21 +264,15 @@ export function* SendTransaction() {
           //   return resolve(sendTx);
           // });
 
-          resolve("tx");
+          resolve('tx');
         });
       }
-      tx = yield call(
-        sendTokenPromise,
-        contractAddress,
-        toAddress,
-        tokenAmount,
-        sendParams
-      );
+      tx = yield call(sendTokenPromise, contractAddress, toAddress, tokenAmount, sendParams);
     }
 
     yield put(sendTransactionSuccess(tx));
   } catch (err) {
-    const loc = err.message.indexOf("at runCall");
+    const loc = err.message.indexOf('at runCall');
     const errMsg = loc > -1 ? err.message.slice(0, loc) : err.message;
     yield put(sendTransactionError(errMsg));
   } finally {
@@ -355,7 +319,7 @@ function* checkTokensBalances(address) {
   const opt = {
     returnList: true,
     removeIndex: true,
-    removeEth: true
+    removeEth: true,
   };
   const tokenList = yield select(makeSelectAddressMap(address, opt));
 
@@ -370,16 +334,14 @@ function* checkTokensBalances(address) {
 export function* checkAllBalances() {
   try {
     let j = 0;
-    const addressList = yield select(
-      makeSelectAddressMap(false, { returnList: true })
-    );
+    const addressList = yield select(makeSelectAddressMap(false, { returnList: true }));
 
     do {
       // Iterate over all addresses and check for balance
       const address = addressList[j];
       // handle eth
       const balance = yield call(getEthBalancePromise, address);
-      yield put(changeBalance(address, "eth", balance));
+      yield put(changeBalance(address, 'eth', balance));
 
       // handle tokens
       yield checkTokensBalances(address);
@@ -395,7 +357,7 @@ export function* checkAllBalances() {
 
 // Utility function for delay effects
 function delay(millisec) {
-  const promise = new Promise(resolve => {
+  const promise = new Promise((resolve) => {
     setTimeout(() => resolve(true), millisec);
   });
   return promise;
@@ -424,7 +386,7 @@ function* watchPollData() {
     yield race([
       // eslint-disable-line
       call(pollData),
-      take(STOP_POLL_BALANCES)
+      take(STOP_POLL_BALANCES),
     ]);
   }
 }
@@ -435,29 +397,29 @@ function* watchPollData() {
  */
 export function* getRates() {
   // const requestURL = 'https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=EUR';
-  const requestURL = "https://api.coinmarketcap.com/v1/ticker/?convert=EUR";
+  const requestURL = 'https://api.coinmarketcap.com/v1/ticker/?convert=EUR';
   try {
     let dummyRates = [
       {
         // for testin in online = false mode
-        id: "ethereum",
-        name: "Ethereum",
-        symbol: "ETH",
-        rank: "2",
-        price_usd: "295.412",
-        price_btc: "0.0684231",
-        "24h_volume_usd": "308964000.0",
-        market_cap_usd: "28043053731.0",
-        available_supply: "94928621.0",
-        total_supply: "94928621.0",
-        percent_change_1h: "-1.46",
-        percent_change_24h: "-1.84",
-        percent_change_7d: "1.35",
-        last_updated: "1507010353",
-        price_eur: "252.342998284",
-        "24h_volume_eur": "263919211.548",
-        market_cap_eur: "23954572799.0"
-      }
+        id: 'ethereum',
+        name: 'Ethereum',
+        symbol: 'ETH',
+        rank: '2',
+        price_usd: '295.412',
+        price_btc: '0.0684231',
+        '24h_volume_usd': '308964000.0',
+        market_cap_usd: '28043053731.0',
+        available_supply: '94928621.0',
+        total_supply: '94928621.0',
+        percent_change_1h: '-1.46',
+        percent_change_24h: '-1.84',
+        percent_change_7d: '1.35',
+        last_updated: '1507010353',
+        price_eur: '252.342998284',
+        '24h_volume_eur': '263919211.548',
+        market_cap_eur: '23954572799.0',
+      },
     ];
 
     if (!online) {
@@ -485,14 +447,12 @@ export function* checkFaucetApi() {
   const requestURL = checkFaucetAddress;
   // console.log(`requestURL: ${requestURL}`);
   try {
-    const result = online
-      ? yield call(request, requestURL)
-      : { message: { serviceReady: true } };
+    const result = online ? yield call(request, requestURL) : { message: { serviceReady: true } };
 
     if (result.message.serviceReady) {
       yield put(checkFaucetSuccess());
     } else {
-      yield put(checkFaucetError("faucet not ready"));
+      yield put(checkFaucetError('faucet not ready'));
     }
   } catch (err) {
     yield put(checkFaucetError(err));
@@ -512,9 +472,8 @@ export function* askFaucetApi() {
       ? yield call(request, requestURL)
       : {
           message: {
-            tx:
-              "0x0f71ca4a8af03e67f06910bf301308ecd701064bd2183b51e1e3ca18af9bc9f8"
-          }
+          tx: '0x0f71ca4a8af03e67f06910bf301308ecd701064bd2183b51e1e3ca18af9bc9f8',
+        },
         };
     if (result.message.tx) {
       yield put(askFaucetSuccess(result.message.tx));

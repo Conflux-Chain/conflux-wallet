@@ -21,11 +21,9 @@ import {
   GENERATE_WALLET_SUCCESS,
   GENERATE_WALLET_ERROR,
   GENERATE_WALLET_CANCEL,
-
   GENERATE_KEYSTORE,
   GENERATE_KEYSTORE_SUCCESS,
   GENERATE_KEYSTORE_ERROR,
-
   SHOW_RESTORE_WALLET,
   RESTORE_WALLET_CANCEL,
   CHANGE_USER_SEED,
@@ -33,43 +31,32 @@ import {
   RESTORE_WALLET_FROM_SEED,
   RESTORE_WALLET_FROM_SEED_SUCCESS,
   RESTORE_WALLET_FROM_SEED_ERROR,
-
   CHANGE_BALANCE,
-
   SHOW_SEND_TOKEN,
   HIDE_SEND_TOKEN,
   SHOW_TOKEN_CHOOSER,
   HIDE_TOKEN_CHOOSER,
-
   UPDATE_TOKEN_INFO,
-
   GENERATE_ADDRESS,
   GENERATE_ADDRESS_SUCCESS,
   GENERATE_ADDRESS_ERROR,
-
   LOCK_WALLET,
   UNLOCK_WALLET,
   UNLOCK_WALLET_SUCCESS,
   UNLOCK_WALLET_ERROR,
-
   SET_EXCHANGE_RATES,
   SELECT_CURRENCY,
-
   CLOSE_WALLET,
-
   CHECK_LOCAL_STORAGE,
   LOCAL_STORAGE_EXIST,
   LOCAL_STORAGE_NOT_EXIST,
-
   SAVE_WALLET,
   SAVE_WALLET_SUCCESS,
   SAVE_WALLET_ERROR,
-
   LOAD_WALLET,
   LOAD_WALLET_SUCCESS,
   LOAD_WALLET_ERROR,
 } from './constants';
-
 
 /* ********************************Generate Wallet ******************************* */
 
@@ -169,7 +156,7 @@ export function changeUserSeed(userSeed) {
  * @return {object}    An action object with a type of CHANGE_USER_SEED
  */
 export function changeUserPassword(userPassword) {
-  const password = userPassword;// .replace(/^\s+|\s+$/g, '');
+  const password = userPassword; // .replace(/^\s+|\s+$/g, '');
   return {
     type: CHANGE_USER_PASSWORD,
     password,
@@ -319,7 +306,6 @@ export function generateKeystoreError(error) {
   };
 }
 
-
 /* **********************************Change balance ********************** */
 /**
  * Changes ballance for a given address and symbol
@@ -391,7 +377,6 @@ export function hideTokenChooser() {
   };
 }
 
-
 /* ******************* UPDATE_TOKEN_INFO ***************************** */
 
 /**
@@ -420,7 +405,6 @@ export function updateTokenInfo(addressList, newTokenInfo) {
   };
 }
 
-
 /* ******************* Generate new address from existing keystore********** */
 /**
  * Generate new address and attach it to store
@@ -445,7 +429,7 @@ export function generateAddress() {
  * newAddress and tokenMap for the new address
  */
 export function generateAddressSuccess(newAddress, index, tokenList) {
-  const tokenMap = createTokenMap(tokenList);// , index);
+  const tokenMap = createTokenMap(tokenList); // , index);
   console.log(tokenMap);
 
   tokenMap.index = index;
@@ -471,9 +455,7 @@ export function generateAddressError(error) {
   };
 }
 
-
 /* **********************LOCK AND UNLOCK WALLET ***************************** */
-
 
 /**
  * Lock wallet by removing encription password from state (syncronic)
@@ -530,7 +512,6 @@ export function unlockWalletError(error) {
 
 /* ************************* Exchange Rates ************************************ */
 
-
 /**
  * Recives api response and requestUrl used, transforms the api response into the proper format to
  * save in state
@@ -564,7 +545,6 @@ export function selectCurrency(convertTo) {
 }
 
 /* ********************* CLOSE WALLET **************************************** */
-
 
 /**
  * Removes keystore from memory and closes wallet
@@ -611,7 +591,6 @@ export function localStorageNotExist() {
     type: LOCAL_STORAGE_NOT_EXIST,
   };
 }
-
 
 /**
  * Saves Wallet to local storage
@@ -680,4 +659,3 @@ export function loadWalletError(error) {
     error,
   };
 }
-

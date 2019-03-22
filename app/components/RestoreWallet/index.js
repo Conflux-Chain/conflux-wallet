@@ -1,8 +1,8 @@
 /**
-*
-* RestoreWallet
-*
-*/
+ *
+ * RestoreWallet
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -21,7 +21,9 @@ function RestoreWallet({ isShowRestoreWallet, userSeed, onChangeUserSeed, onRest
     return (
       <div>
         <br />
-        <form > { /* todo: cancel default action */}
+        <form>
+          {' '}
+          {/* todo: cancel default action */}
           <label htmlFor="restoreWalletBox">
             <input
               id="restoreWalletBox"
@@ -36,9 +38,7 @@ function RestoreWallet({ isShowRestoreWallet, userSeed, onChangeUserSeed, onRest
             />
           </label>
           <br />
-          <button onClick={onRestoreWalletFromSeed}>
-            Restore from seed
-          </button>
+          <button onClick={onRestoreWalletFromSeed}>Restore from seed</button>
         </form>
       </div>
     );

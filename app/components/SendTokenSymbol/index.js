@@ -1,8 +1,8 @@
 /**
-*
-* SendTokenSymbol
-*
-*/
+ *
+ * SendTokenSymbol
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -10,13 +10,14 @@ import { Select } from 'antd';
 const Option = Select.Option;
 // import styled from 'styled-components';
 
-
 function SendTokenSymbol(props) {
   const { sendTokenSymbol, tokenInfoList, onChangeFrom, locked } = props;
 
-  const optionsList = tokenInfoList.map((token) =>
-    <Option key={token} value={token}>{token.toUpperCase()}</Option>
-  );
+  const optionsList = tokenInfoList.map((token) => (
+    <Option key={token} value={token}>
+      {token.toUpperCase()}
+    </Option>
+  ));
 
   return (
     <span>
@@ -28,7 +29,7 @@ function SendTokenSymbol(props) {
         disabled={tokenInfoList.length === 1 || locked}
       >
         {optionsList}
-      </Select >
+      </Select>
     </span>
   );
 }

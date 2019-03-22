@@ -1,8 +1,8 @@
 /**
-*
-* AddressListStatus
-*
-*/
+ *
+ * AddressListStatus
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -18,11 +18,7 @@ function AddressListStatus({ addressListLoading, addressListError, addressListMs
   }
 
   if (addressListMsg) {
-    return (
-      <div>
-        {addressListMsg}
-      </div>
-    );
+    return <div>{addressListMsg}</div>;
   }
   return null;
 }

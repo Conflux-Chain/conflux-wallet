@@ -3,7 +3,7 @@
  * SendToken reducer
  *
  */
-import { fromJS } from "immutable";
+import { fromJS } from 'immutable';
 import {
   CHANGE_FROM,
   CHANGE_AMOUNT,
@@ -15,16 +15,16 @@ import {
   ABORT_TRANSACTION,
   SEND_TRANSACTION,
   SEND_TRANSACTION_SUCCESS,
-  SEND_TRANSACTION_ERROR
-} from "./constants";
+  SEND_TRANSACTION_ERROR,
+} from './constants';
 
 const initialState = fromJS({
-  from: "",
-  to: "",
+  from: '',
+  to: '',
   amount: 0,
   gasPrice: 10, // gwei
   locked: false,
-  sendTokenSymbol: "eth",
+  sendTokenSymbol: 'eth',
 
   comfirmationLoading: false,
   confirmationError: false,
@@ -32,7 +32,7 @@ const initialState = fromJS({
 
   sendInProgress: false,
   sendError: false,
-  sendTx: false
+  sendTx: false,
 });
 
 function sendTokenReducer(state = initialState, action) {
@@ -40,56 +40,53 @@ function sendTokenReducer(state = initialState, action) {
     case CHANGE_FROM:
       // update values only if provided:
       return state
-        .update("from", fromValue => action.address || fromValue)
-        .update(
-          "sendTokenSymbol",
-          sendTokenSymbolValue => action.sendTokenSymbol || sendTokenSymbolValue
-        );
+        .update('from', (fromValue) => action.address || fromValue)
+        .update('sendTokenSymbol', (sendTokenSymbolValue) => action.sendTokenSymbol || sendTokenSymbolValue);
     case CHANGE_AMOUNT:
-      return state.set("amount", action.amount);
+      return state.set('amount', action.amount);
 
     case CHANGE_TO:
-      return state.set("to", action.address);
+      return state.set('to', action.address);
 
     case CHANGE_GAS_PRICE:
-      return state.set("gasPrice", action.gasPrice);
+      return state.set('gasPrice', action.gasPrice);
 
     case COMFIRM_SEND_TRANSACTION:
-      return state.set("comfirmationLoading", true).set("locked", true);
+      return state.set('comfirmationLoading', true).set('locked', true);
     case COMFIRM_SEND_TRANSACTION_SUCCESS:
       return state
-        .set("comfirmationLoading", false)
-        .set("confirmationMsg", action.msg)
-        .set("confirmationError", false);
+        .set('comfirmationLoading', false)
+        .set('confirmationMsg', action.msg)
+        .set('confirmationError', false);
     case COMFIRM_SEND_TRANSACTION_ERROR:
       return state
-        .set("comfirmationLoading", false)
-        .set("confirmationError", action.error)
-        .set("locked", false);
+        .set('comfirmationLoading', false)
+        .set('confirmationError', action.error)
+        .set('locked', false);
     case ABORT_TRANSACTION:
       return state
-        .set("comfirmationLoading", false)
-        .set("confirmationMsg", false)
-        .set("confirmationError", false)
-        .set("locked", false)
-        .set("sendError", false)
-        .set("sendTx", false);
+        .set('comfirmationLoading', false)
+        .set('confirmationMsg', false)
+        .set('confirmationError', false)
+        .set('locked', false)
+        .set('sendError', false)
+        .set('sendTx', false);
 
     case SEND_TRANSACTION:
       return state
-        .set("sendInProgress", true)
-        .set("sendError", false)
-        .set("sendTx", false);
+        .set('sendInProgress', true)
+        .set('sendError', false)
+        .set('sendTx', false);
     case SEND_TRANSACTION_SUCCESS:
       return state
-        .set("sendInProgress", false)
-        .set("sendError", false)
-        .set("sendTx", action.tx);
+        .set('sendInProgress', false)
+        .set('sendError', false)
+        .set('sendTx', action.tx);
     case SEND_TRANSACTION_ERROR:
       return state
-        .set("sendInProgress", false)
-        .set("sendError", action.error)
-        .set("sendTx", false);
+        .set('sendInProgress', false)
+        .set('sendError', action.error)
+        .set('sendTx', false);
 
     default:
       return state;

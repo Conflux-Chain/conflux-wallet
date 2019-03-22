@@ -1,4 +1,3 @@
-
 export const TokenSelection = {
   Offline: [],
   'Local RPC': [],
@@ -16,7 +15,8 @@ export const TokenSelection = {
       name: 'MonetaryCoin Ero',
       contractAddress: '0xb39fc5e11281012b4d83407a457d409ba344744f',
       decimals: 18,
-      description: 'The MonetaryCoin protocol integrates Nobel Prize winning economic theory with blockchain technology.',
+      description:
+        'The MonetaryCoin protocol integrates Nobel Prize winning economic theory with blockchain technology.',
       url: 'https://MonetaryCoin.org',
     },
     {
@@ -24,7 +24,8 @@ export const TokenSelection = {
       name: 'OmiseGo',
       contractAddress: '0xbcad569fe454e78ca90e4120d89b6b69f8db402f',
       decimals: 18,
-      description: 'OmiseGO (OMG) is a public Ethereum-based financial technology for use in mainstream digital wallets',
+      description:
+        'OmiseGO (OMG) is a public Ethereum-based financial technology for use in mainstream digital wallets',
       url: 'https://omisego.network/',
     },
     {
@@ -40,7 +41,8 @@ export const TokenSelection = {
       name: 'Maker',
       contractAddress: '0xece9fa304cc965b00afc186f5d0281a00d3dbbfd',
       decimals: 18,
-      description: 'Maker is a Decentralized Autonomous Organization that creates and insures the dai stablecoin on the Ethereum blockchain',
+      description:
+        'Maker is a Decentralized Autonomous Organization that creates and insures the dai stablecoin on the Ethereum blockchain',
       url: 'https://makerdao.com/',
     },
   ],
@@ -50,7 +52,8 @@ export const TokenSelection = {
       name: 'MonetaryCoin Ero',
       contractAddress: '0x227412a7d92bca453b5e2f790fc8282ca2e1a686',
       decimals: 18,
-      description: 'The MonetaryCoin protocol integrates Nobel Prize winning economic theory with blockchain technology.',
+      description:
+        'The MonetaryCoin protocol integrates Nobel Prize winning economic theory with blockchain technology.',
       url: 'https://MonetaryCoin.org',
     },
     {
@@ -66,7 +69,8 @@ export const TokenSelection = {
       name: 'Tron',
       contractAddress: '0xf230b790e05390fc8295f4d3f60332c93bed42e2',
       decimals: 6,
-      description: 'TRON is a blockchain-based decentralized protocol that aims to construct a worldwide free content entertainment system',
+      description:
+        'TRON is a blockchain-based decentralized protocol that aims to construct a worldwide free content entertainment system',
       url: 'https://tronlab.com/',
     },
     {
@@ -82,7 +86,8 @@ export const TokenSelection = {
       name: 'Qtum',
       contractAddress: '0x9a642d6b3368ddc662CA244bAdf32cDA716005BC',
       decimals: 18,
-      description: 'Build Decentralized Applications that Simply Work Executable on mobile devices, compatible with major existing blockchain ecosystem',
+      description:
+        'Build Decentralized Applications that Simply Work Executable on mobile devices, compatible with major existing blockchain ecosystem',
       url: 'https://qtum.org/',
     },
     {
@@ -90,7 +95,8 @@ export const TokenSelection = {
       name: 'OmiseGo',
       contractAddress: '0xd26114cd6EE289AccF82350c8d8487fedB8A0C07',
       decimals: 18,
-      description: 'OmiseGO (OMG) is a public Ethereum-based financial technology for use in mainstream digital wallets',
+      description:
+        'OmiseGO (OMG) is a public Ethereum-based financial technology for use in mainstream digital wallets',
       url: 'https://omisego.network/',
     },
     {
@@ -114,7 +120,8 @@ export const TokenSelection = {
       name: 'Status Network',
       contractAddress: '0x744d70fdbe2ba4cf95131626614a1763df805b9e',
       decimals: 18,
-      description: 'Status is an open source messaging platform and mobile browser to interact with decentralized applications that run on the Ethereum Network',
+      description:
+        'Status is an open source messaging platform and mobile browser to interact with decentralized applications that run on the Ethereum Network',
       url: 'https://status.im/',
     },
     {
@@ -122,7 +129,8 @@ export const TokenSelection = {
       name: 'Maker',
       contractAddress: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2',
       decimals: 18,
-      description: 'Maker is a Decentralized Autonomous Organization that creates and insures the dai stablecoin on the Ethereum blockchain',
+      description:
+        'Maker is a Decentralized Autonomous Organization that creates and insures the dai stablecoin on the Ethereum blockchain',
       url: 'https://makerdao.com/',
     },
     {
@@ -138,7 +146,8 @@ export const TokenSelection = {
       name: 'Augur',
       contractAddress: '0xe94327d07fc17907b4db788e5adf2ed424addff6',
       decimals: 18,
-      description: 'Augur combines the magic of prediction markets with the power of a decentralized network to create a stunningly accurate forecasting tool',
+      description:
+        'Augur combines the magic of prediction markets with the power of a decentralized network to create a stunningly accurate forecasting tool',
       url: 'https://www.augur.net/',
     },
     {
@@ -146,7 +155,8 @@ export const TokenSelection = {
       name: 'Salt',
       contractAddress: '0x4156D3342D5c385a87D264F90653733592000581',
       decimals: 8,
-      description: 'SALT lets you leverage your blockchain assets to secure cash loans. We make it easy to get money without having to sell your favorite investment',
+      description:
+        'SALT lets you leverage your blockchain assets to secure cash loans. We make it easy to get money without having to sell your favorite investment',
       url: 'https://saltlending.com/',
     },
     {
@@ -170,7 +180,8 @@ export const TokenSelection = {
       name: 'Qash',
       contractAddress: '0x618e75ac90b12c6049ba3b27f5d5f8651b0037f6',
       decimals: 6,
-      description: 'We envision QASH to be the preferred payment token for financial services, like the Bitcoin for financial services',
+      description:
+        'We envision QASH to be the preferred payment token for financial services, like the Bitcoin for financial services',
       url: 'https://liquid.plus/',
     },
     {
@@ -202,7 +213,8 @@ export const TokenSelection = {
       name: 'Request',
       contractAddress: '0x8f8221afbb33998d8584a2b05749ba73c37a938a',
       decimals: 18,
-      description: 'A decentralized network built on top of Ethereum, which allows anyone, anywhere to request a payment',
+      description:
+        'A decentralized network built on top of Ethereum, which allows anyone, anywhere to request a payment',
       url: 'https://request.network/',
     },
     {

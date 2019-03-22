@@ -5,14 +5,10 @@
  */
 
 import { fromJS } from 'immutable';
-import {
-  TOGGLE_TOKEN,
-} from './constants';
+import { TOGGLE_TOKEN } from './constants';
 
 const initialState = fromJS({
-
   chosenTokens: { mero: true },
-
 });
 
 function tokenChooserReducer(state = initialState, action) {

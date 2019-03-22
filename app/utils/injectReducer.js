@@ -17,7 +17,7 @@ export default ({ key, reducer }) => (WrappedComponent) => {
     static contextTypes = {
       store: PropTypes.object.isRequired,
     };
-    static displayName = `withReducer(${(WrappedComponent.displayName || WrappedComponent.name || 'Component')})`;
+    static displayName = `withReducer(${WrappedComponent.displayName || WrappedComponent.name || 'Component'})`;
 
     componentWillMount() {
       const { injectReducer } = this.injectors;

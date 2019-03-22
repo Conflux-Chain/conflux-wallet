@@ -1,8 +1,8 @@
 /**
-*
-* IconButton
-*
-*/
+ *
+ * IconButton
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -13,10 +13,10 @@ const ErrorSpan = styled.span`
   .anticon {
     color: red;
   }
-  .ant-btn{
+  .ant-btn {
     color: red;
   }
-  `;
+`;
 
 const Btn = ({ error, popconfirm, text, loading, disabled, popconfirmMsg, onClick, icon, ...btnProps }) => (
   <Button
@@ -52,7 +52,7 @@ const handlePopconfirm = (popConfirmText, onClick, component) => {
       </Popconfirm>
     );
   }
-  return (component);
+  return component;
 };
 
 function IconButton(props) {
@@ -62,26 +62,15 @@ function IconButton(props) {
     if (err) {
       return (
         <Tooltip placement="bottom" title={`${err} - Click to retry`}>
-          <ErrorSpan>
-            {component}
-          </ErrorSpan>
+          <ErrorSpan>{component}</ErrorSpan>
         </Tooltip>
       );
     }
-    return (component);
+    return component;
   };
 
   const BtnProps = { text, icon, onClick, loading, error, disabled, popconfirmMsg, ...btnProps };
-  return (
-    handleError(error,
-      handlePopconfirm(popconfirmMsg, onClick,
-        <Btn
-          {...BtnProps}
-
-        />
-      )
-    )
-  );
+  return handleError(error, handlePopconfirm(popconfirmMsg, onClick, <Btn {...BtnProps} />));
 }
 
 IconButton.propTypes = {
@@ -93,8 +82,6 @@ IconButton.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   disabled: PropTypes.bool,
   popconfirmMsg: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
-
 };
-
 
 export default IconButton;

@@ -4,13 +4,13 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { Table } from "antd";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Table } from 'antd';
 
-import CurrencyDropdown from "components/CurrencyDropdown";
-import TokenIcon from "components/TokenIcon";
+import CurrencyDropdown from 'components/CurrencyDropdown';
+import TokenIcon from 'components/TokenIcon';
 
 const { Column } = Table;
 // import { LocaleProvider } from 'antd';
@@ -56,7 +56,7 @@ const splitAddrToRows = (tokenDecimalsMap, tokenMapIN, address, startKey) => {
   const index = tokenMap.index;
   delete tokenMap.index;
 
-  return Object.keys(tokenMap).map(token => {
+  return Object.keys(tokenMap).map((token) => {
     const sameAddressRow = {};
     sameAddressRow.index = index;
     sameAddressRow.key = key;
@@ -65,9 +65,7 @@ const splitAddrToRows = (tokenDecimalsMap, tokenMapIN, address, startKey) => {
     sameAddressRow.address = address;
     const balance = tokenMap[token].balance;
     const decimals = tokenDecimalsMap[token];
-    sameAddressRow.balance = balance
-      ? balance.div((10 ** decimals).toString()).toString(10)
-      : "n/a";
+    sameAddressRow.balance = balance ? balance.div((10 ** decimals).toString()).toString(10) : 'n/a';
     // sameAddressRow.convert = '';
     return sameAddressRow;
   });
@@ -106,14 +104,9 @@ const transformList = (addressMap, tokenDecimalsMap, showTokens) => {
   //eslint-disable-line
   // const showTokens = true;
   let iKey = 1;
-  const list = Object.keys(addressMap).map(address => {
+  const list = Object.keys(addressMap).map((address) => {
     const tokenMap = addressMap[address];
-    const sameAddressList = splitAddrToRows(
-      tokenDecimalsMap,
-      tokenMap,
-      address,
-      iKey
-    );
+    const sameAddressList = splitAddrToRows(tokenDecimalsMap, tokenMap, address, iKey);
 
     iKey += sameAddressList.length;
     return sameAddressList;
@@ -147,7 +140,7 @@ const getConvertRate = (exchangeRates, from, to) => {
  * @return {Array} array as data for table, see example above
  */
 const addConvertRates = (rowList, exchangeRates, convertTo) =>
-  rowList.map(row => {
+  rowList.map((row) => {
     try {
       // const convertToSymbol = convertTo.slice(4).toUpperCase();
       if (`eth_${row.token}` === convertTo) {
@@ -167,14 +160,7 @@ const addConvertRates = (rowList, exchangeRates, convertTo) =>
   });
 
 function AddressTable(props) {
-  const {
-    addressMap,
-    tokenDecimalsMap,
-    onShowSendToken,
-    exchangeRates,
-    onSelectCurrency,
-    convertTo
-  } = props;
+  const { addressMap, tokenDecimalsMap, onShowSendToken, exchangeRates, onSelectCurrency, convertTo } = props;
 
   const currencyDropdownProps = { exchangeRates, onSelectCurrency, convertTo };
 
@@ -189,9 +175,9 @@ function AddressTable(props) {
       pagination={false}
       locale={{
         filterTitle: null,
-        filterConfirm: "Ok",
-        filterReset: "Reset",
-        emptyText: "No Data"
+        filterConfirm: 'Ok',
+        filterReset: 'Reset',
+        emptyText: 'No Data',
       }}
     >
       <Column
@@ -205,9 +191,9 @@ function AddressTable(props) {
         render={(text, record) => {
           const obj = {
             children: text,
-            props: {}
+            props: {},
           };
-          if (record.token !== "eth") {
+          if (record.token !== 'eth') {
             // obj.props.rowSpan = 0;
             obj.props.rowSpan = 0;
             // obj.children = '~';
@@ -249,9 +235,9 @@ function AddressTable(props) {
         width="80px"
         filters={[
           {
-            text: "Remove empty",
-            value: "0 ETH"
-          }
+            text: 'Remove empty',
+            value: '0 ETH',
+          },
         ]}
         onFilter={(value, record) => record.balance !== value}
       />
@@ -287,7 +273,7 @@ AddressTable.propTypes = {
   onShowSendToken: PropTypes.func,
   exchangeRates: PropTypes.object,
   onSelectCurrency: PropTypes.func,
-  convertTo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+  convertTo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default AddressTable;

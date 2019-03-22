@@ -1,11 +1,5 @@
 const tokensOnly = (element) =>
-  element.symbol &&
-  [
-    'eth',
-    'eos',
-    'symb',
-    'trx',
-  ].indexOf(element.symbol.toLowerCase() >= 0);
+  element.symbol && ['eth', 'eos', 'symb', 'trx'].indexOf(element.symbol.toLowerCase() >= 0);
 /* eslint-disable */
 const rates =
   [

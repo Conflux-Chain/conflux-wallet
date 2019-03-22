@@ -1,8 +1,8 @@
 /**
-*
-* WelcomeText
-*
-*/
+ *
+ * WelcomeText
+ *
+ */
 
 import React from 'react';
 import styled from 'styled-components';
@@ -14,18 +14,22 @@ const H1 = styled.h1`
 `;
 
 const H2 = styled.h2`
-font-size: 16px;
-margin-top:30px;
-color: #b9b9b9;
-font-weight: 400;
+  font-size: 16px;
+  margin-top: 30px;
+  color: #b9b9b9;
+  font-weight: 400;
 `;
 
 function WelcomeText() {
   return (
     <div>
-      <H1>Welcome to Conflux Wallet <br />To begin, create or restore Conflux wallet<br /></H1>
+      <H1>
+        Welcome to Conflux Wallet <br />
+        To begin, create or restore Conflux wallet
+        <br />
+      </H1>
       <H2>
-        Conflux  wallet is a zero client. Connection to Conflux network is made via testnet / local node. <br />
+        Conflux wallet is a zero client. Connection to Conflux network is made via testnet / local node. <br />
         Keystore is encrypted using the password. When the wallet is locked, you can only view balances. <br />
         All keys are saved inside the browser and never sent.
       </H2>
@@ -33,8 +37,6 @@ function WelcomeText() {
   );
 }
 
-WelcomeText.propTypes = {
-
-};
+WelcomeText.propTypes = {};
 
 export default WelcomeText;

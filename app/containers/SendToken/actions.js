@@ -14,8 +14,8 @@ import {
   ABORT_TRANSACTION,
   SEND_TRANSACTION,
   SEND_TRANSACTION_SUCCESS,
-  SEND_TRANSACTION_ERROR
-} from "./constants";
+  SEND_TRANSACTION_ERROR,
+} from './constants';
 
 /**
  * Update from address and token, both parameters are optional
@@ -28,37 +28,37 @@ export function changeFrom(address, sendTokenSymbol) {
   return {
     type: CHANGE_FROM,
     address,
-    sendTokenSymbol
+    sendTokenSymbol,
   };
 }
 
 export function changeAmount(amount) {
   return {
     type: CHANGE_AMOUNT,
-    amount
+    amount,
   };
 }
 
 export function changeTo(inputAddress) {
   // remove unnessesery spaces
-  const address = inputAddress.replace(/^\s+|\s+$/g, "");
+  const address = inputAddress.replace(/^\s+|\s+$/g, '');
   return {
     type: CHANGE_TO,
-    address
+    address,
   };
 }
 
 export function changeGasPrice(gasPrice) {
-  if (gasPrice === "") {
+  if (gasPrice === '') {
     return {
       type: CHANGE_GAS_PRICE,
-      gasPrice: 0
+      gasPrice: 0,
     };
   }
 
   return {
     type: CHANGE_GAS_PRICE,
-    gasPrice
+    gasPrice,
   };
 }
 
@@ -69,7 +69,7 @@ export function changeGasPrice(gasPrice) {
  */
 export function confirmSendTransaction() {
   return {
-    type: COMFIRM_SEND_TRANSACTION
+    type: COMFIRM_SEND_TRANSACTION,
   };
 }
 
@@ -82,13 +82,13 @@ export function confirmSendTransactionSuccess(msg) {
   if (msg) {
     return {
       type: COMFIRM_SEND_TRANSACTION_SUCCESS,
-      msg
+      msg,
     };
   }
 
   return {
     type: COMFIRM_SEND_TRANSACTION_SUCCESS,
-    msg: "Transaction confirmed successfully, Send to transmit"
+    msg: 'Transaction confirmed successfully, Send to transmit',
   };
 }
 
@@ -100,7 +100,7 @@ export function confirmSendTransactionSuccess(msg) {
 export function confirmSendTransactionError(error) {
   return {
     type: COMFIRM_SEND_TRANSACTION_ERROR,
-    error
+    error,
   };
 }
 
@@ -111,7 +111,7 @@ export function confirmSendTransactionError(error) {
  */
 export function abortTransaction() {
   return {
-    type: ABORT_TRANSACTION
+    type: ABORT_TRANSACTION,
   };
 }
 
@@ -122,7 +122,7 @@ export function abortTransaction() {
  */
 export function sendTransaction() {
   return {
-    type: SEND_TRANSACTION
+    type: SEND_TRANSACTION,
   };
 }
 
@@ -134,7 +134,7 @@ export function sendTransaction() {
 export function sendTransactionSuccess(tx) {
   return {
     type: SEND_TRANSACTION_SUCCESS,
-    tx
+    tx,
   };
 }
 
@@ -146,6 +146,6 @@ export function sendTransactionSuccess(tx) {
 export function sendTransactionError(error) {
   return {
     type: SEND_TRANSACTION_ERROR,
-    error
+    error,
   };
 }

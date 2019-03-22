@@ -9,30 +9,26 @@
  * the linting exception.
  */
 
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { createStructuredSelector } from "reselect";
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 
 /* Components:  */
-import AddressView from "components/AddressView";
-import SendToken from "containers/SendToken";
-import TokenChooser from "containers/TokenChooser";
-import GenerateWalletModal from "components/GenerateWalletModal";
-import RestoreWalletModal from "components/RestoreWalletModal";
-import SubHeader from "components/SubHeader";
-import PageFooter from "components/PageFooter";
-import { Content } from "components/PageFooter/sticky";
+import AddressView from 'components/AddressView';
+import SendToken from 'containers/SendToken';
+import TokenChooser from 'containers/TokenChooser';
+import GenerateWalletModal from 'components/GenerateWalletModal';
+import RestoreWalletModal from 'components/RestoreWalletModal';
+import SubHeader from 'components/SubHeader';
+import PageFooter from 'components/PageFooter';
+import { Content } from 'components/PageFooter/sticky';
 
 /* Header: */
-import Header from "containers/Header";
-import {
-  loadNetwork,
-  checkBalances,
-  getExchangeRates
-} from "containers/Header/actions";
+import Header from 'containers/Header';
+import { loadNetwork, checkBalances, getExchangeRates } from 'containers/Header/actions';
 import {
   makeSelectNetworkReady,
   makeSelectCheckingBalanceDoneTime,
@@ -40,14 +36,14 @@ import {
   makeSelectCheckingBalancesError,
   makeSelectGetExchangeRatesDoneTime,
   makeSelectGetExchangeRatesLoading,
-  makeSelectGetExchangeRatesError
-} from "containers/Header/selectors";
+  makeSelectGetExchangeRatesError,
+} from 'containers/Header/selectors';
 
 /* General */
-import injectReducer from "utils/injectReducer";
-import injectSaga from "utils/injectSaga";
-import reducer from "./reducer";
-import saga from "./saga";
+import injectReducer from 'utils/injectReducer';
+import injectSaga from 'utils/injectSaga';
+import reducer from './reducer';
+import saga from './saga';
 
 /* HomePage */
 import {
@@ -69,8 +65,8 @@ import {
   selectCurrency,
   closeWallet,
   saveWallet,
-  loadWallet
-} from "./actions";
+  loadWallet,
+} from './actions';
 
 import {
   makeSelectIsShowGenerateWallet,
@@ -97,8 +93,8 @@ import {
   makeSelectSaveWalletError,
   makeSelectLoadWalletLoading,
   makeSelectLoadwalletError,
-  makeSelectTokenDecimalsMap
-} from "./selectors";
+  makeSelectTokenDecimalsMap,
+} from './selectors';
 
 export class HomePage extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
@@ -171,7 +167,7 @@ export class HomePage extends React.PureComponent {
       saveWalletError,
       onLoadWallet,
       loadWalletLoading,
-      loadWalletError
+      loadWalletError,
     } = this.props;
 
     const subHeaderProps = {
@@ -188,7 +184,7 @@ export class HomePage extends React.PureComponent {
       saveWalletError,
       onLoadWallet,
       loadWalletLoading,
-      loadWalletError
+      loadWalletError,
     };
 
     const generateWalletProps = {
@@ -201,7 +197,7 @@ export class HomePage extends React.PureComponent {
 
       onGenerateWallet,
       onGenerateWalletCancel,
-      onGenerateKeystore
+      onGenerateKeystore,
     };
     const restoreWalletModalProps = {
       isShowRestoreWallet,
@@ -211,7 +207,7 @@ export class HomePage extends React.PureComponent {
       onChangeUserSeed,
       onChangeUserPassword,
       onRestoreWalletCancel,
-      onRestoreWalletFromSeed
+      onRestoreWalletFromSeed,
     };
 
     const addressViewProps = {
@@ -240,7 +236,7 @@ export class HomePage extends React.PureComponent {
       onGetExchangeRates,
       getExchangeRatesDoneTime,
       getExchangeRatesLoading,
-      getExchangeRatesError
+      getExchangeRatesError,
     };
 
     const sendTokenProps = { isShowSendToken, onHideSendToken };
@@ -268,20 +264,12 @@ HomePage.propTypes = {
   onGenerateWalletCancel: PropTypes.func,
   isShowGenerateWallet: PropTypes.bool,
   generateWalletLoading: PropTypes.bool,
-  generateWalletError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  generateWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   seed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
   generateKeystoreLoading: PropTypes.bool,
-  generateKeystoreError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  generateKeystoreError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
 
   // onInitSeed: PropTypes.func,
   onGenerateKeystore: PropTypes.func,
@@ -293,11 +281,7 @@ HomePage.propTypes = {
   userPassword: PropTypes.string,
   onChangeUserSeed: PropTypes.func,
   onChangeUserPassword: PropTypes.func,
-  restoreWalletError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  restoreWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   onRestoreWalletFromSeed: PropTypes.func,
   onRestoreWalletCancel: PropTypes.func,
 
@@ -310,7 +294,7 @@ HomePage.propTypes = {
   addressMap: PropTypes.oneOfType([
     // PropTypes.array,
     PropTypes.bool,
-    PropTypes.object
+    PropTypes.object,
   ]),
   tokenDecimalsMap: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
 
@@ -323,102 +307,76 @@ HomePage.propTypes = {
   onHideTokenChooser: PropTypes.func,
 
   addressListLoading: PropTypes.bool,
-  addressListError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  addressListError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   addressListMsg: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
   networkReady: PropTypes.bool,
-  checkingBalanceDoneTime: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  checkingBalanceDoneTime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   checkingBalances: PropTypes.bool,
-  checkingBalancesError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  checkingBalancesError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
 
   exchangeRates: PropTypes.object,
   onSelectCurrency: PropTypes.func,
   convertTo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onGetExchangeRates: PropTypes.func,
-  getExchangeRatesDoneTime: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  getExchangeRatesDoneTime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   getExchangeRatesLoading: PropTypes.bool,
-  getExchangeRatesError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  getExchangeRatesError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   onCloseWallet: PropTypes.func,
 
   onSaveWallet: PropTypes.func,
   saveWalletLoading: PropTypes.bool,
-  saveWalletError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool
-  ]),
+  saveWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   onLoadWallet: PropTypes.func,
   loadWalletLoading: PropTypes.bool,
-  loadWalletError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool
-  ])
+  loadWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onGenerateWallet: evt => {
+    onGenerateWallet: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(generateWallet());
     },
-    onGenerateWalletCancel: evt => {
+    onGenerateWalletCancel: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(generateWalletCancel());
     },
-    onGenerateKeystore: evt => {
+    onGenerateKeystore: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(generateKeystore());
     },
-    onGenerateAddress: evt => {
+    onGenerateAddress: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(generateAddress());
     },
-    onLoadNetwork: evt => {
+    onLoadNetwork: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadNetwork("local"));
+      dispatch(loadNetwork('local'));
     },
-    onShowRestoreWallet: evt => {
+    onShowRestoreWallet: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(showRestoreWallet());
     },
-    onRestoreWalletCancel: evt => {
+    onRestoreWalletCancel: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(restoreWalletCancel());
     },
-    onChangeUserSeed: evt => {
+    onChangeUserSeed: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       // console.log(evt.target);
       dispatch(changeUserSeed(evt.target.value));
     },
-    onChangeUserPassword: evt => {
+    onChangeUserPassword: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       // console.log(evt.target);
       dispatch(changeUserPassword(evt.target.value));
     },
-    onRestoreWalletFromSeed: evt => {
+    onRestoreWalletFromSeed: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(restoreWalletFromSeed());
     },
-    onCheckBalances: evt => {
+    onCheckBalances: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(checkBalances());
     },
@@ -434,15 +392,15 @@ export function mapDispatchToProps(dispatch) {
     onHideTokenChooser: () => {
       dispatch(hideTokenChooser());
     },
-    onLockWallet: evt => {
+    onLockWallet: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(lockWallet());
     },
-    onUnlockWallet: evt => {
+    onUnlockWallet: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(unlockWallet());
     },
-    onSelectCurrency: convertTo => {
+    onSelectCurrency: (convertTo) => {
       // if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(selectCurrency(convertTo));
     },
@@ -458,7 +416,7 @@ export function mapDispatchToProps(dispatch) {
     },
     onLoadWallet: () => {
       dispatch(loadWallet());
-    }
+    },
   };
 }
 
@@ -504,7 +462,7 @@ const mapStateToProps = createStructuredSelector({
   saveWalletLoading: makeSelectSaveWalletLoading(),
   saveWalletError: makeSelectSaveWalletError(),
   loadWalletLoading: makeSelectLoadWalletLoading(),
-  loadWalletError: makeSelectLoadwalletError()
+  loadWalletError: makeSelectLoadwalletError(),
 });
 
 const withConnect = connect(
@@ -512,8 +470,8 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const withReducer = injectReducer({ key: "home", reducer });
-const withSaga = injectSaga({ key: "home", saga });
+const withReducer = injectReducer({ key: 'home', reducer });
+const withSaga = injectSaga({ key: 'home', saga });
 
 export default compose(
   withReducer,

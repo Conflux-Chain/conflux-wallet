@@ -26,30 +26,29 @@ const Output = {
   }; */
 
 /* map to generate convertion rate for each currency
-*  path represent the place inside object
-*/
-const ratesMaps =
-  {
-    'https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=EUR': {
-      eth_eth: { path: { const: 1 }, isInverse: false, name: 'ETH' },
-      eth_usd: { path: { symbol: 'eth', key: 'price_usd' }, name: 'USD' },
-      eth_btc: { path: { symbol: 'eth', key: 'price_btc' }, name: 'BTC' },
-      eth_eur: { path: { symbol: 'eth', key: 'price_eur' }, name: 'EURO' },
-    },
+ *  path represent the place inside object
+ */
+const ratesMaps = {
+  'https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=EUR': {
+    eth_eth: { path: { const: 1 }, isInverse: false, name: 'ETH' },
+    eth_usd: { path: { symbol: 'eth', key: 'price_usd' }, name: 'USD' },
+    eth_btc: { path: { symbol: 'eth', key: 'price_btc' }, name: 'BTC' },
+    eth_eur: { path: { symbol: 'eth', key: 'price_eur' }, name: 'EURO' },
+  },
 
-    'https://api.coinmarketcap.com/v1/ticker/?convert=EUR': {
-      eth_eth: { path: { const: 1 }, name: 'ETH' },
-      eth_usd: { path: { symbol: 'eth', key: 'price_usd' }, name: 'USD' },
-      eth_btc: { path: { symbol: 'eth', key: 'price_btc' }, name: 'BTC' },
-      eth_eur: { path: { symbol: 'eth', key: 'price_eur' }, name: 'EURO' },
-      eth_eos: { // to get eth_eos: eth_usd * usd_eos
-        name: 'EOS',
-        path: { symbol: 'eth', key: 'price_usd', isInverse: false },
-        path2: { symbol: 'eos', key: 'price_usd', isInverse: true },
-      },
+  'https://api.coinmarketcap.com/v1/ticker/?convert=EUR': {
+    eth_eth: { path: { const: 1 }, name: 'ETH' },
+    eth_usd: { path: { symbol: 'eth', key: 'price_usd' }, name: 'USD' },
+    eth_btc: { path: { symbol: 'eth', key: 'price_btc' }, name: 'BTC' },
+    eth_eur: { path: { symbol: 'eth', key: 'price_eur' }, name: 'EURO' },
+    eth_eos: {
+      // to get eth_eos: eth_usd * usd_eos
+      name: 'EOS',
+      path: { symbol: 'eth', key: 'price_usd', isInverse: false },
+      path2: { symbol: 'eos', key: 'price_usd', isInverse: true },
     },
-  };
-
+  },
+};
 
 /**
  * Adds path for every token in tokenList,
@@ -131,8 +130,7 @@ const getRate = (tokenList, path) => {
   if (path.const) {
     return new BigNumber(path.const);
   }
-  const isSymbol = (element) =>
-    element.symbol && element.symbol.toLowerCase() === path.symbol;
+  const isSymbol = (element) => element.symbol && element.symbol.toLowerCase() === path.symbol;
 
   // search for symbol inside array
   const target = tokenList.find(isSymbol);
@@ -145,7 +143,7 @@ const getRate = (tokenList, path) => {
   // return target && value;
 };
 
-  /* then search by keys nested inside object
+/* then search by keys nested inside object
   for (let i = 0, pathArr = path.key.split('.'), len = pathArr.length; i < len; i += 1) {
     target = target[pathArr[i]];
   } */

@@ -1,8 +1,8 @@
 /**
-*
-* GenerateWalletModal
-*
-*/
+ *
+ * GenerateWalletModal
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ function GenerateWalletModal(props) {
     onGenerateWallet,
     onGenerateWalletCancel,
     onGenerateKeystore,
-    } = props;
+  } = props;
 
   return (
     <Modal
@@ -36,26 +36,29 @@ function GenerateWalletModal(props) {
     >
       <Alert
         message={<b>The seed is imposible to recover if lost</b>}
-        description={<b>Copy the generated seed to safe location.<br />
-                        HDPathString: m/44'/60'/0'/0.<br /> Recover lost password using the seed.</b>} // eslint-disable-line
+        description={
+          <b>
+            Copy the generated seed to safe location. HDPathString: m/44'/60'/0'/0.
+            <br /> Recover lost password using the seed.
+          </b>
+        } // eslint-disable-line
         type="warning"
         showIcon
         closable
       />
       <br />
-      <Alert
-        message="Seed:"
-        description={<b>{seed}</b>}
-        type="info"
-      />
+      <Alert message="Seed:" description={<b>{seed}</b>} type="info" />
       <br />
-      <Alert
-        message="Password for browser encryption:"
-        description={<b>{password}</b>}
-        type="info"
-      />
+      <Alert message="Password for browser encryption:" description={<b>{password}</b>} type="info" />
       <br />
-      <Button shape="circle" icon="reload" loading={generateWalletLoading} key="back" size="large" onClick={onGenerateWallet} />
+      <Button
+        shape="circle"
+        icon="reload"
+        loading={generateWalletLoading}
+        key="back"
+        size="large"
+        onClick={onGenerateWallet}
+      />
     </Modal>
   );
 }
@@ -68,14 +71,8 @@ GenerateWalletModal.propTypes = {
     PropTypes.string,
     PropTypes.bool,
   ]), */
-  seed: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  password: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  seed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onGenerateWallet: PropTypes.func,
   onGenerateWalletCancel: PropTypes.func,
   onGenerateKeystore: PropTypes.func,

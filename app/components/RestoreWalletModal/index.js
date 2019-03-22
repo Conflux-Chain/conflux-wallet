@@ -1,8 +1,8 @@
 /**
-*
-* RestoreWalletModal
-*
-*/
+ *
+ * RestoreWalletModal
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -25,14 +25,24 @@ const Description = styled.div`
 `;
 
 function RestoreWalletModal(props) {
-  const { isShowRestoreWallet, userSeed, userPassword, restoreWalletError, onChangeUserSeed, onChangeUserPassword, onRestoreWalletCancel, onRestoreWalletFromSeed } = props;
+  const {
+    isShowRestoreWallet,
+    userSeed,
+    userPassword,
+    restoreWalletError,
+    onChangeUserSeed,
+    onChangeUserPassword,
+    onRestoreWalletCancel,
+    onRestoreWalletFromSeed,
+  } = props;
   // const suffix = userSeed ? <Icon type="close-circle" onClick={this.emitEmpty} /> : null;
-  const errorComponent =
-    (<Span key="error">
+  const errorComponent = (
+    <Span key="error">
       <Tooltip placement="bottom" title={restoreWalletError}>
         <Icon type="close-circle-o" style={{ color: 'red' }} />
       </Tooltip>
-    </Span>);
+    </Span>
+  );
 
   return (
     <Modal
@@ -42,9 +52,9 @@ function RestoreWalletModal(props) {
       onCancel={onRestoreWalletCancel}
       footer={[
         restoreWalletError ? errorComponent : null,
-        <Button key="submit" type="primary" size="large" onClick={onRestoreWalletFromSeed} >
+        <Button key="submit" type="primary" size="large" onClick={onRestoreWalletFromSeed}>
           Restore
-        </Button >,
+        </Button>,
       ]}
     >
       <Description> {"HDPathString m/44'/60'/0'/0 is used for address generation"}</Description>
@@ -80,11 +90,7 @@ RestoreWalletModal.propTypes = {
   userPassword: PropTypes.string,
   onChangeUserSeed: PropTypes.func,
   onChangeUserPassword: PropTypes.func,
-  restoreWalletError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  restoreWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   onRestoreWalletCancel: PropTypes.func,
   onRestoreWalletFromSeed: PropTypes.func,
 };

@@ -1,8 +1,8 @@
 /**
-*
-* SendFrom
-*
-*/
+ *
+ * SendFrom
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -20,26 +20,29 @@ function SendFrom({ addressList, from, onChangeFrom, locked }) {
     /* options = addressList.keySeq().toArray().map((address) =>
       <option value={address} key={address}>{address}</option>
     ); */
-    selectOptions = addressList.keySeq().toArray().map((address) =>
-      <Option value={address} key={address}>{address}</Option>
-    );
+    selectOptions = addressList
+      .keySeq()
+      .toArray()
+      .map((address) => (
+        <Option value={address} key={address}>
+          {address}
+        </Option>
+      ));
   }
 
   return (
     <div>
-      Source:<br />
+      Source:
+      <br />
       <Select value={from} style={{ width: 300 }} onChange={onChangeFrom} disabled={locked}>
         {selectOptions}
       </Select>
-    </div >
+    </div>
   );
 }
 
 SendFrom.propTypes = {
-  from: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  from: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onChangeFrom: PropTypes.func,
   addressList: PropTypes.oneOfType([
     PropTypes.object,

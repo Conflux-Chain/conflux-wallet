@@ -1,8 +1,8 @@
 /**
-*
-* SendAmount
-*
-*/
+ *
+ * SendAmount
+ *
+ */
 
 import React from 'react';
 // import styled from 'styled-components';
@@ -13,13 +13,7 @@ function SendAmount({ amount, onChangeAmount, locked }) {
   return (
     <span>
       {'Amount: '}
-      <InputNumber
-        value={amount}
-        min={0}
-        step={0.1}
-        onChange={(value) => onChangeAmount((value))}
-        disabled={locked}
-      />
+      <InputNumber value={amount} min={0} step={0.1} onChange={(value) => onChangeAmount(value)} disabled={locked} />
     </span>
   );
 }

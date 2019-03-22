@@ -1,8 +1,8 @@
 /**
-*
-* AddressView
-*
-*/
+ *
+ * AddressView
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -22,18 +22,30 @@ const Div = styled.div`
 
 function AddressView(props) {
   const {
-    generateKeystoreLoading, generateKeystoreError,
+    generateKeystoreLoading,
+    generateKeystoreError,
     isComfirmed,
-    addressMap, tokenDecimalsMap,
-    onShowSendToken, onCheckBalances,
+    addressMap,
+    tokenDecimalsMap,
+    onShowSendToken,
+    onCheckBalances,
     onGenerateAddress,
-    networkReady, checkingBalanceDoneTime, checkingBalances, checkingBalancesError,
-    addressListLoading, addressListError, addressListMsg,
-    exchangeRates, onSelectCurrency, convertTo,
+    networkReady,
+    checkingBalanceDoneTime,
+    checkingBalances,
+    checkingBalancesError,
+    addressListLoading,
+    addressListError,
+    addressListMsg,
+    exchangeRates,
+    onSelectCurrency,
+    convertTo,
     onGetExchangeRates,
-    getExchangeRatesDoneTime, getExchangeRatesLoading, getExchangeRatesError,
+    getExchangeRatesDoneTime,
+    getExchangeRatesLoading,
+    getExchangeRatesError,
     onShowTokenChooser,
-   } = props;
+  } = props;
 
   const addressTableProps = {
     addressMap,
@@ -67,15 +79,11 @@ function AddressView(props) {
 
   let addressViewContent = (
     <Div>
-      {generateKeystoreError ?
-        <Alert
-          message="Generate Keystore Error"
-          description={generateKeystoreError}
-          type="error"
-          showIcon
-        />
-        :
-        <WelcomeText />}
+      {generateKeystoreError ? (
+        <Alert message="Generate Keystore Error" description={generateKeystoreError} type="error" showIcon />
+      ) : (
+        <WelcomeText />
+      )}
     </Div>
   );
 
@@ -89,12 +97,7 @@ function AddressView(props) {
   }
 
   return (
-    <Spin
-      spinning={generateKeystoreLoading}
-      style={{ position: 'static' }}
-      size="large"
-      tip="Loading..."
-    >
+    <Spin spinning={generateKeystoreLoading} style={{ position: 'static' }} size="large" tip="Loading...">
       {addressViewContent}
     </Spin>
   );
@@ -102,17 +105,9 @@ function AddressView(props) {
 
 AddressView.propTypes = {
   generateKeystoreLoading: PropTypes.bool,
-  generateKeystoreError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  generateKeystoreError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   isComfirmed: PropTypes.bool,
-  addressMap: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool,
-    PropTypes.array,
-  ]),
+  addressMap: PropTypes.oneOfType([PropTypes.object, PropTypes.bool, PropTypes.array]),
   tokenDecimalsMap: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   onShowSendToken: PropTypes.func,
   onShowTokenChooser: PropTypes.func,

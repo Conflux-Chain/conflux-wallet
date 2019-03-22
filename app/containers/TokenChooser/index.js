@@ -33,8 +33,7 @@ function TokenChooser(props) {
     onToggleToken,
     onConfirmNewTokenInfo,
     networkName,
-
-   } = props;
+  } = props;
 
   const TokensForNetwork = TokenSelection[networkName];
 
@@ -47,16 +46,12 @@ function TokenChooser(props) {
         onCancel={onHideTokenChooser}
         footer={null}
       >
-        <TokenChooserList
-          tokenList={TokensForNetwork}
-          chosenTokens={chosenTokens}
-          onTokenToggle={onToggleToken}
-        />
+        <TokenChooserList tokenList={TokensForNetwork} chosenTokens={chosenTokens} onTokenToggle={onToggleToken} />
         <br />
-        <Button type="primary" onClick={() => onConfirmNewTokenInfo(chosenTokens, networkName)} disabled={false} >
+        <Button type="primary" onClick={() => onConfirmNewTokenInfo(chosenTokens, networkName)} disabled={false}>
           Update
         </Button>{' '}
-        <Button onClick={() => onConfirmNewTokenInfo()} disabled={false} >
+        <Button onClick={() => onConfirmNewTokenInfo()} disabled={false}>
           Remove Tokens
         </Button>
       </Modal>
@@ -80,7 +75,6 @@ const mapStateToProps = createStructuredSelector({
   chosenTokens: makeSelectChosenTokens(),
 
   networkName: makeSelectNetworkName(),
-
 });
 
 function mapDispatchToProps(dispatch) {
@@ -94,7 +88,10 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
 
 const withReducer = injectReducer({ key: 'tokenchooser', reducer });
 // const withSaga = injectSaga({ key: 'tokenchooser', saga });
@@ -102,5 +99,5 @@ const withReducer = injectReducer({ key: 'tokenchooser', reducer });
 export default compose(
   withReducer,
   // withSaga,
-  withConnect,
+  withConnect
 )(TokenChooser);

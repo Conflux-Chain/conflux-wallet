@@ -1,8 +1,8 @@
 /**
-*
-* AddressTableFooter
-*
-*/
+ *
+ * AddressTableFooter
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -17,7 +17,6 @@ const Div = styled.div`
     margin-top: 15px;
   }
 `;
-
 
 function AddressTableFooter(props) {
   const {
@@ -75,7 +74,8 @@ function AddressTableFooter(props) {
         type="primary"
         // onClick, loading, error, disabled, popconfirmMsg
       /> */}
-      <br /><br />
+      <br />
+      <br />
     </Div>
   );
 }

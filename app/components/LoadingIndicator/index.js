@@ -4,9 +4,9 @@
  *
  */
 
-import React from "react";
-import { Spin } from "antd";
-import styled from "styled-components";
+import React from 'react';
+import { Spin } from 'antd';
+import styled from 'styled-components';
 
 const Div = styled.div`
   position: fixed;

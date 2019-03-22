@@ -1,15 +1,15 @@
 /**
-*
-* TxLink
-*
-*/
+ *
+ * TxLink
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Span = styled.span`
-overflow-wrap: break-word;
+  overflow-wrap: break-word;
 `;
 
 function TxLink(props) {
@@ -21,7 +21,7 @@ function TxLink(props) {
       </a>
     );
   }
-  return (<Span>{tx}</Span>);
+  return <Span>{tx}</Span>;
 }
 
 TxLink.propTypes = {

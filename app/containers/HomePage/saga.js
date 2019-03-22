@@ -1,10 +1,10 @@
 /**
  * Wallet operations
  */
-import lightwallet from "vendor/eth-lightwallet";
-import localStore from "store/dist/store.modern";
+import lightwallet from 'eth-lightwallet';
+import localStore from 'store/dist/store.modern';
 
-import { call, put, select, takeLatest } from "redux-saga/effects";
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 
 import {
   GENERATE_WALLET,
@@ -15,10 +15,10 @@ import {
   CLOSE_WALLET,
   SHOW_SEND_TOKEN,
   SAVE_WALLET,
-  LOAD_WALLET
-} from "containers/HomePage/constants";
+  LOAD_WALLET,
+} from 'containers/HomePage/constants';
 
-import { CONFIRM_UPDATE_TOKEN_INFO } from "containers/TokenChooser/constants";
+import { CONFIRM_UPDATE_TOKEN_INFO } from 'containers/TokenChooser/constants';
 
 import {
   makeSelectPassword,
@@ -26,26 +26,26 @@ import {
   makeSelectUserSeed,
   makeSelectUserPassword,
   makeSelectKeystore,
-  makeSelectTokenInfoList
-} from "containers/HomePage/selectors";
+  makeSelectTokenInfoList,
+} from 'containers/HomePage/selectors';
 
-import { loadNetwork } from "containers/Header/actions";
+import { loadNetwork } from 'containers/Header/actions';
 
-import { changeFrom } from "containers/SendToken/actions";
+import { changeFrom } from 'containers/SendToken/actions';
 
-import generateString from "utils/crypto";
+import generateString from 'utils/crypto';
 
 import {
   generatedPasswordLength,
   hdPathString,
   offlineModeString,
   defaultNetwork,
-  localStorageKey
-} from "utils/constants";
+  localStorageKey,
+} from 'utils/constants';
 
-import { timer } from "utils/common";
+import { timer } from 'utils/common';
 
-import { getEthBalancePromise } from "containers/Header/saga";
+import { getEthBalancePromise } from 'containers/Header/saga';
 
 import {
   generateWalletSucces,
@@ -66,8 +66,8 @@ import {
   saveWalletError,
   loadWalletSuccess,
   loadWalletError,
-  updateTokenInfo
-} from "./actions";
+  updateTokenInfo,
+} from './actions';
 
 /**
  * Create new seed and password
@@ -95,20 +95,16 @@ export function* restoreFromSeed() {
     let userSeed = yield select(makeSelectUserSeed());
 
     // remove trailing spaces if needed
-    yield put(changeUserSeed(userSeed.replace(/^\s+|\s+$/g, "")));
+    yield put(changeUserSeed(userSeed.replace(/^\s+|\s+$/g, '')));
     userSeed = yield select(makeSelectUserSeed());
 
     if (!lightwallet.keystore.isSeedValid(userSeed)) {
-      yield put(restoreWalletFromSeedError("Invalid seed"));
+      yield put(restoreWalletFromSeedError('Invalid seed'));
       return;
     }
 
     if (userPassword.length < 8) {
-      yield put(
-        restoreWalletFromSeedError(
-          "Password length must be 8 characters at least"
-        )
-      );
+      yield put(restoreWalletFromSeedError('Password length must be 8 characters at least'));
       return;
     }
 
@@ -140,7 +136,7 @@ export function* genKeystore() {
     const opt = {
       password,
       seedPhrase,
-      hdPathString
+      hdPathString,
     };
     // allow time to render components before cpu intensive tasks:
     yield call(timer, 300);
@@ -157,7 +153,7 @@ export function* genKeystore() {
 
     const ks = yield call(createVaultPromise, opt);
 
-    ks.passwordProvider = callback => {
+    ks.passwordProvider = (callback) => {
       // const password = yield select(makeSelectPassword());
       const pw = prompt("Please enter keystore password", "Password"); // eslint-disable-line
       callback(null, pw);
@@ -185,13 +181,13 @@ export function* generateAddress() {
   try {
     const ks = yield select(makeSelectKeystore());
     if (!ks) {
-      throw new Error("No keystore found");
+      throw new Error('No keystore found');
     }
 
     const password = yield select(makeSelectPassword());
     if (!password) {
       // TODO: Handle password
-      throw new Error("Wallet Locked");
+      throw new Error('Wallet Locked');
     }
 
     function keyFromPasswordPromise(param) {
@@ -217,7 +213,7 @@ export function* generateAddress() {
     // balance checking for new address (will be aborted in offline mode)
     try {
       const balance = yield call(getEthBalancePromise, newAddress);
-      yield put(changeBalance(newAddress, "eth", balance));
+      yield put(changeBalance(newAddress, 'eth', balance));
     } catch (err) {} // eslint-disable-line
   } catch (err) {
     yield call(timer, 1000); // eye candy
@@ -232,12 +228,12 @@ export function* unlockWallet() {
   try {
     const currentPassword = yield select(makeSelectPassword());
     if (currentPassword) {
-      throw Error("Wallet Already unlocked");
+      throw Error('Wallet Already unlocked');
     }
 
     const ks = yield select(makeSelectKeystore());
     if (!ks) {
-      throw new Error("No keystore to unlock");
+      throw new Error('No keystore to unlock');
     }
 
     const passwordProvider = ks.passwordProvider;
@@ -265,7 +261,7 @@ export function* unlockWallet() {
     const userPassword = yield call(passwordProviderPromise);
 
     if (!userPassword) {
-      throw Error("No password entered");
+      throw Error('No password entered');
     }
 
     const pwDerivedKey = yield call(keyFromPasswordPromise, userPassword);
@@ -273,7 +269,7 @@ export function* unlockWallet() {
     const isPasswordCorrect = ks.isDerivedKeyCorrect(pwDerivedKey);
 
     if (!isPasswordCorrect) {
-      throw Error("Invalid Password");
+      throw Error('Invalid Password');
     }
 
     yield put(unlockWalletSuccess(userPassword));
@@ -308,13 +304,13 @@ export function* saveWalletS() {
   try {
     const ks = yield select(makeSelectKeystore());
     if (!ks) {
-      throw new Error("No keystore defined");
+      throw new Error('No keystore defined');
     }
 
     const dump = {
-      ver: "1",
+      ver: '1',
       saved: new Date().toISOString(),
-      ks: ks.serialize()
+      ks: ks.serialize(),
     };
     // console.log(`Saving len: ${JSON.stringify(dump).length}`);
 
@@ -335,14 +331,12 @@ export function* loadWalletS() {
     yield call(timer, 1000);
     const existingKs = yield select(makeSelectKeystore());
     if (existingKs) {
-      throw new Error(
-        "Existing keystore present  - aborting load form localStorage"
-      );
+      throw new Error('Existing keystore present  - aborting load form localStorage');
     }
 
     const dump = localStore.get(localStorageKey);
     if (!dump) {
-      throw new Error("No keystore found in localStorage");
+      throw new Error('No keystore found in localStorage');
     }
     // console.log(`Load len: ${JSON.stringify(dump).length}`);
 

@@ -1,8 +1,8 @@
 /**
-*
-* SubHeader
-*
-*/
+ *
+ * SubHeader
+ *
+ */
 
 import React from 'react';
 import { Button, Popconfirm } from 'antd';
@@ -13,8 +13,8 @@ import IconButton from 'components/IconButton';
 const Div = styled.div`
   margin-top: 45px;
   .ant-btn {
-  margin-right: 8px;
-  margin-bottom: 12px;
+    margin-right: 8px;
+    margin-bottom: 12px;
   }
 
   .anticon-lock {
@@ -27,8 +27,13 @@ const Div = styled.div`
 
 function SubHeader(props) {
   const {
-    onGenerateWallet, onShowRestoreWallet, isComfirmed, onCloseWallet,
-    onLockWallet, password, onUnlockWallet,
+    onGenerateWallet,
+    onShowRestoreWallet,
+    isComfirmed,
+    onCloseWallet,
+    onLockWallet,
+    password,
+    onUnlockWallet,
     /* optional laod / save buttons
      onSaveWallet, saveWalletLoading, saveWalletError,
      onLoadWallet, loadWalletLoading, loadWalletError, */
@@ -56,7 +61,14 @@ function SubHeader(props) {
 
   const existingWalletSubHeader = [
     <LockButton key="lock_button" {...lockButtonProps} />,
-    <Popconfirm key="close_wallet" placement="bottom" title="Wallet will be deleted from memory and LocalStorage" onConfirm={onCloseWallet} okText="Confirm" cancelText="Abort">
+    <Popconfirm
+      key="close_wallet"
+      placement="bottom"
+      title="Wallet will be deleted from memory and LocalStorage"
+      onConfirm={onCloseWallet}
+      okText="Confirm"
+      cancelText="Abort"
+    >
       <Button key="close_wallet" type="default" icon="close-square-o" size="large">
         Close wallet
       </Button>
@@ -73,14 +85,9 @@ function SubHeader(props) {
     />, */
   ];
 
-
   const subHeader = isComfirmed ? existingWalletSubHeader : noWalletSubHeader;
 
-  return (
-    <Div>
-      {subHeader}
-    </Div>
-  );
+  return <Div>{subHeader}</Div>;
 }
 
 SubHeader.propTypes = {

@@ -1,4 +1,3 @@
-
 const Network = {
   Offline: { rpc: 'offline', tx_explorer: null },
   'Local RPC': { rpc: 'http://localhost:8091', tx_explorer: null },
