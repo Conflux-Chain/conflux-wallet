@@ -1,11 +1,16 @@
 {
   "singleQuote": true,
-  "trailingComma": "es5",
+  "jsxSingleQuote": false,
   "printWidth": 100,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "arrowParens": "always",
   "overrides": [
     {
       "files": ".prettierrc",
-      "options": { "parser": "json" }
+      "options": {
+        "parser": "json"
+      }
     }
   ]
 }

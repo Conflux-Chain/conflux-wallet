@@ -48,15 +48,15 @@
     "prettier": "node ./internals/scripts/prettier.js"
   },
   "lint-staged": {
-    "**/*.{js,json,jsx}": [
-      "node ./internals/scripts/lint-prettier.js",
+    "**/*.{js,json,jsx,css,less}": [
+      "prettier --write",
       "git add"
     ],
     "**/*.js": "lint:eslint"
   },
   "husky": {
     "hooks": {
-      "pre-commit": ""
+      "pre-commit": "npm run lint:staged"
     }
   },
   "babel": {
@@ -98,7 +98,10 @@
   ],
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": "airbnb",
+    "extends": [
+      "airbnb",
+      "plugin:prettier/recommended"
+    ],
     "env": {
       "browser": true,
       "node": true,
@@ -291,6 +294,7 @@
     "eslint-import-resolver-webpack": "0.8.3",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "5.0.3",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "7.11.1",
     "eslint-plugin-redux-saga": "0.3.0",
     "eventsource-polyfill": "0.9.6",
