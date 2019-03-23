@@ -319,3 +319,8 @@ nginx 的配置如下：
 ```
 
 注释： http://localhost:3001即为前端工程的origin, http://127.0.0.1:8545为fullnode server.
+
+# 补充注意
+
+1、原项目 build 有问题，eth-lightwallet 依赖的 ethereumjs-tx 本身为 es6，现有 build 脚本会报错，已经转成 es5 编译，使用 1.3.3 版本，ethereumjs-tx@https://github.com/jnoodle/ethereumjs-tx.git
+2、precommit 加了代码格式化和 lint，如果提交不了，请先看下是否lint出错，过了才能提交。

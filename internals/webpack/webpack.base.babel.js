@@ -13,24 +13,32 @@ process.noDeprecation = true;
 
 module.exports = (options) => ({
   entry: options.entry,
-  output: Object.assign({ // Compile into js/build.js
-    path: path.resolve(process.cwd(), 'build'),
-    publicPath: (process.env.NODE_ENV === 'development' ? '/' : './'),
-  }, options.output), // Merge with env dependent settings
+  output: Object.assign(
+    {
+      // Compile into js/build.js
+      path: path.resolve(process.cwd(), 'build'),
+      publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
+    },
+    options.output
+  ), // Merge with env dependent settings
   module: {
     noParse: /moment\.js/,
     rules: [
       {
         test: /\.js$/, // Transform all .js files required somewhere with Babel
         exclude: /node_modules/,
+        // exclude: /node_modules\/(?!(eth-lightwallet))/,
         use: {
           loader: 'babel-loader',
           options: {
             plugins: [
-              ['import', {
-                libraryName: 'antd',
-                style: 'css',
-              }],
+              [
+                'import',
+                {
+                  libraryName: 'antd',
+                  style: 'css',
+                },
+              ],
             ],
           },
         },
@@ -111,16 +119,8 @@ module.exports = (options) => ({
     alias: {
       moment$: 'moment/moment.js',
     },
-    extensions: [
-      '.js',
-      '.jsx',
-      '.react.js',
-    ],
-    mainFields: [
-      'browser',
-      'jsnext:main',
-      'main',
-    ],
+    extensions: ['.js', '.jsx', '.react.js'],
+    mainFields: ['browser', 'jsnext:main', 'main'],
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window
