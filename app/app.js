@@ -20,7 +20,7 @@ import 'sanitize.css/sanitize.css';
 import App from 'containers/App';
 
 // Import Language Provider
-// import LanguageProvider from 'containers/LanguageProvider';
+import LanguageProvider from 'containers/LanguageProvider';
 
 // Load the favicon, the manifest.json file and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
@@ -86,7 +86,7 @@ import configureStore from './store';
 
 // Will be added in the future
 // Import i18n messages
-// import { translationMessages } from './i18n';
+import { translationMessages } from './i18n';
 
 // Import CSS reset and Global Styles
 import './global-styles';
@@ -101,11 +101,11 @@ const render = (messages) => {
   // eslint-disable-line
   ReactDOM.render(
     <Provider store={store}>
-      {/* <LanguageProvider messages={messages}> */}
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
-      {/* </LanguageProvider> */}
+      <LanguageProvider messages={messages}>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </LanguageProvider>
     </Provider>,
     MOUNT_NODE
   );
@@ -115,10 +115,10 @@ if (module.hot) {
   // Hot reloadable React components and translation json files
   // modules.hot.accept does not accept dynamic dependencies,
   // have to be constants at compile-time
-  /* module.hot.accept(['./i18n', 'containers/App'], () => {
+  module.hot.accept(['./i18n', 'containers/App'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
     render(translationMessages);
-  }); */
+  });
   module.hot.accept(['containers/App'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
     render();
@@ -126,22 +126,20 @@ if (module.hot) {
 }
 
 // Chunked polyfill for browsers without Intl support
-/*
 if (!window.Intl) {
-  (new Promise((resolve) => {
+  new Promise((resolve) => {
     resolve(import('intl'));
-  }))
-    .then(() => Promise.all([
-      import('intl/locale-data/jsonp/en.js'),
-    ]))
+  })
+    .then(() =>
+      Promise.all([import('intl/locale-data/jsonp/en.js'), import('intl/locale-data/jsonp/zh.js')])
+    )
     .then(() => render(translationMessages))
     .catch((err) => {
       throw err;
     });
 } else {
   render(translationMessages);
-} */
-render();
+}
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,

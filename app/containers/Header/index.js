@@ -17,6 +17,7 @@ import { Row, Col } from 'antd';
 import NetworkIndicator from 'components/NetworkIndicator';
 import Logo from 'components/Logo';
 import NetworkMenu from 'components/NetworkMenu';
+import LocaleToggle from 'containers/LocaleToggle';
 
 // import { changeBalance } from 'containers/HomePage/actions';
 
@@ -74,6 +75,7 @@ function Header(props) {
           <Row type="flex" align="middle" justify="center">
             <NetworkIndicator {...networkIndicatorProps} />
             <NetworkMenu {...networkMenuProps} />
+            <LocaleToggle />
           </Row>
         </Col>
       </Row>

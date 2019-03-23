@@ -1,0 +1,10 @@
+[
+  {
+    "id": "boilerplate.containers.LocaleToggle.en",
+    "defaultMessage": "English"
+  },
+  {
+    "id": "boilerplate.containers.LocaleToggle.zh",
+    "defaultMessage": "Zhongwen"
+  }
+]
