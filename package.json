@@ -270,6 +270,7 @@
     "babel-loader": "7.1.2",
     "babel-plugin-dynamic-import-node": "1.0.2",
     "babel-plugin-import": "^1.8.0",
+    "babel-plugin-react-intl": "2",
     "babel-plugin-react-transform": "2.0.2",
     "babel-plugin-styled-components": "1.6.3",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",

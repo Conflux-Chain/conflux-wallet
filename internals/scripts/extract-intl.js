@@ -20,7 +20,7 @@ import { DEFAULT_LOCALE } from '../../app/containers/App/constants';
 require('shelljs/global');
 
 // Glob to match all js files except test files
-const FILES_TO_PARSE = 'app/**/!(*.test).js';
+const FILES_TO_PARSE = 'app/!(vendor)/**/!(*.test).js';
 const locales = i18n.appLocales;
 
 const newLine = () => process.stdout.write('\n');
@@ -37,21 +37,24 @@ const task = (message) => {
     }
     clearTimeout(progress);
     return addCheckmark(() => newLine());
-  }
-}
+  };
+};
 
 // Wrap async functions below into a promise
-const glob = (pattern) => new Promise((resolve, reject) => {
-  nodeGlob(pattern, (error, value) => (error ? reject(error) : resolve(value)));
-});
+const glob = (pattern) =>
+  new Promise((resolve, reject) => {
+    nodeGlob(pattern, (error, value) => (error ? reject(error) : resolve(value)));
+  });
 
-const readFile = (fileName) => new Promise((resolve, reject) => {
-  fs.readFile(fileName, (error, value) => (error ? reject(error) : resolve(value)));
-});
+const readFile = (fileName) =>
+  new Promise((resolve, reject) => {
+    fs.readFile(fileName, (error, value) => (error ? reject(error) : resolve(value)));
+  });
 
-const writeFile = (fileName, data) => new Promise((resolve, reject) => {
-  fs.writeFile(fileName, data, (error, value) => (error ? reject(error) : resolve(value)));
-});
+const writeFile = (fileName, data) =>
+  new Promise((resolve, reject) => {
+    fs.writeFile(fileName, data, (error, value) => (error ? reject(error) : resolve(value)));
+  });
 
 // Store existing translations into memory
 const oldLocaleMappings = [];
@@ -93,7 +96,7 @@ for (const locale of locales) {
   }
   ```
 */
-plugins.push(['react-intl'])
+plugins.push(['react-intl']);
 
 const extractFromFile = async (fileName) => {
   try {
@@ -104,10 +107,8 @@ const extractFromFile = async (fileName) => {
       for (const locale of locales) {
         const oldLocaleMapping = oldLocaleMappings[locale][message.id];
         // Merge old translations into the babel extracted instances where react-intl is used
-        const newMsg = ( locale === DEFAULT_LOCALE) ? message.defaultMessage : '';
-        localeMappings[locale][message.id] = (oldLocaleMapping)
-          ? oldLocaleMapping
-          : newMsg;
+        const newMsg = locale === DEFAULT_LOCALE ? message.defaultMessage : '';
+        localeMappings[locale][message.id] = oldLocaleMapping ? oldLocaleMapping : newMsg;
       }
     }
   } catch (error) {
@@ -118,12 +119,12 @@ const extractFromFile = async (fileName) => {
 (async function main() {
   const memoryTaskDone = task('Storing language files in memory');
   const files = await glob(FILES_TO_PARSE);
-  memoryTaskDone()
+  memoryTaskDone();
 
   const extractTaskDone = task('Run extraction on all files');
   // Run extraction on all files that match the glob on line 16
   await Promise.all(files.map((fileName) => extractFromFile(fileName)));
-  extractTaskDone()
+  extractTaskDone();
 
   // Make the directory if it doesn't exist, especially for first run
   mkdir('-p', 'app/translations');
@@ -138,9 +139,11 @@ const extractFromFile = async (fileName) => {
       // Sort the translation JSON file so that git diffing is easier
       // Otherwise the translation messages will jump around every time we extract
       let messages = {};
-      Object.keys(localeMappings[locale]).sort().forEach(function(key) {
-        messages[key] = localeMappings[locale][key];
-      });
+      Object.keys(localeMappings[locale])
+        .sort()
+        .forEach(function(key) {
+          messages[key] = localeMappings[locale][key];
+        });
 
       // Write to file the JSON representation of the translation messages
       const prettified = `${JSON.stringify(messages, null, 2)}\n`;
@@ -156,5 +159,5 @@ const extractFromFile = async (fileName) => {
     }
   }
 
-  process.exit()
-}());
+  process.exit();
+})();
