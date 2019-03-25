@@ -6,6 +6,12 @@ import { createSelector } from 'reselect';
 
 const selectHome = (state) => state.get('home');
 
+const makeSelectIsWaringShow = () =>
+  createSelector(
+    selectHome,
+    (homeState) => homeState.get('isWaringShow')
+  );
+
 const makeSelectIsShowGenerateWallet = () =>
   createSelector(
     selectHome,
@@ -256,6 +262,7 @@ const makeSelectLoadwalletError = () =>
 
 export {
   selectHome,
+  makeSelectIsWaringShow,
   makeSelectIsShowGenerateWallet,
   makeSelectGenerateWalletLoading,
   makeSelectGenerateWalletError,

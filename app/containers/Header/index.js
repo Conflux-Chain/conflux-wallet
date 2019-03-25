@@ -48,6 +48,7 @@ const HeaderWrapped = styled.header`
   padding: 0;
   width: 100%;
   font-size: 16px;
+  border-bottom: 1px solid #f5f5f5;
 `;
 
 function Header(props) {
@@ -68,10 +69,10 @@ function Header(props) {
   return (
     <HeaderWrapped className="clearfix">
       <Row type="flex" align="middle" justify="space-between" style={{ backgroundColor: '#fff' }}>
-        <Col sm={{ span: 6, offset: 1 }} xs={24}>
+        <Col sm={{ span: 6, offset: 1 }} xs={10}>
           <Logo />
         </Col>
-        <Col sm={{ span: 8, offset: 2 }} xs={24}>
+        <Col sm={{ span: 8, offset: 2 }} xs={12}>
           <Row type="flex" align="middle" justify="center">
             <NetworkIndicator {...networkIndicatorProps} />
             <NetworkMenu {...networkMenuProps} />

@@ -17,12 +17,11 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 /* Components:  */
+import GenerateWalletModal from 'components/GenerateWalletModal';
+import RestoreWalletModal from 'components/RestoreWalletModal';
 import AddressView from 'components/AddressView';
 import SendToken from 'containers/SendToken';
 import TokenChooser from 'containers/TokenChooser';
-import GenerateWalletModal from 'components/GenerateWalletModal';
-import RestoreWalletModal from 'components/RestoreWalletModal';
-import SubHeader from 'components/SubHeader';
 import PageFooter from 'components/PageFooter';
 import { Content } from 'components/PageFooter/sticky';
 
@@ -48,6 +47,7 @@ import saga from './saga';
 /* HomePage */
 import {
   generateWallet,
+  closeWarning,
   generateWalletCancel,
   showRestoreWallet,
   restoreWalletCancel,
@@ -69,6 +69,7 @@ import {
 } from './actions';
 
 import {
+  makeSelectIsWaringShow,
   makeSelectIsShowGenerateWallet,
   makeSelectGenerateWalletLoading,
   makeSelectGenerateWalletError,
@@ -106,6 +107,7 @@ export class HomePage extends React.PureComponent {
     const {
       onGenerateWallet,
       onGenerateWalletCancel,
+      isWaringShow,
       isShowGenerateWallet,
       generateWalletLoading,
       generateWalletError,
@@ -123,6 +125,7 @@ export class HomePage extends React.PureComponent {
       addressMap,
       tokenDecimalsMap,
 
+      onCloseWarning,
       onShowRestoreWallet,
       isShowRestoreWallet,
       userSeed,
@@ -188,6 +191,7 @@ export class HomePage extends React.PureComponent {
     };
 
     const generateWalletProps = {
+      isWaringShow,
       isShowGenerateWallet,
       generateWalletLoading,
       generateWalletError,
@@ -198,6 +202,7 @@ export class HomePage extends React.PureComponent {
       onGenerateWallet,
       onGenerateWalletCancel,
       onGenerateKeystore,
+      onCloseWarning,
     };
     const restoreWalletModalProps = {
       isShowRestoreWallet,
@@ -246,22 +251,25 @@ export class HomePage extends React.PureComponent {
       <div>
         <Content>
           <Header />
-          <SubHeader {...subHeaderProps} />
-          <GenerateWalletModal {...generateWalletProps} />
-          <RestoreWalletModal {...restoreWalletModalProps} />
-          <AddressView {...addressViewProps} />
+          <AddressView {...addressViewProps} subHeaderProps={subHeaderProps} />
           <SendToken {...sendTokenProps} />
           <TokenChooser {...tokenChooserProps} />
+          {/* <HomeContent subHeaderProps={subHeaderProps}/> */}
+          {/* <SubHeader {...subHeaderProps} /> */}
+          <GenerateWalletModal {...generateWalletProps} />
+          <RestoreWalletModal {...restoreWalletModalProps} />
         </Content>
-        {/* <PageFooter /> */}
+        <PageFooter />
       </div>
     );
   }
 }
 
 HomePage.propTypes = {
+  onCloseWarning: PropTypes.func,
   onGenerateWallet: PropTypes.func,
   onGenerateWalletCancel: PropTypes.func,
+  isWaringShow: PropTypes.bool,
   isShowGenerateWallet: PropTypes.bool,
   generateWalletLoading: PropTypes.bool,
   generateWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
@@ -337,6 +345,10 @@ export function mapDispatchToProps(dispatch) {
     onGenerateWallet: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(generateWallet());
+    },
+    onCloseWarning: (evt) => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(closeWarning());
     },
     onGenerateWalletCancel: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
@@ -421,6 +433,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
+  isWaringShow: makeSelectIsWaringShow(),
   isShowGenerateWallet: makeSelectIsShowGenerateWallet(),
   generateWalletLoading: makeSelectGenerateWalletLoading(),
   generateWalletError: makeSelectGenerateWalletError(),

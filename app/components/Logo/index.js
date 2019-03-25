@@ -7,26 +7,24 @@
 import React from 'react';
 import styled from 'styled-components';
 import { website } from 'utils/constants';
-import walletLogo from './conflux_logo.svg';
+// import walletLogo from './conflux_logo.svg';
 
 const Div = styled.div`
-  height: 80px;
+  height: 56px;
   font-size: 18px;
-  line-height: 80px;
+  line-height: 56px;
 `;
 
-const Img = styled.img`
-  height: 70px;
-  width: 70px;
-  line-height: 80px;
-  margin-right: 5px;
+const A = styled.a`
+  font-size: 32px;
+  font-weight: bold;
+  color: #049cdb;
 `;
 
 function Logo() {
   return (
     <Div>
-      <Img alt="logo" src={walletLogo} />
-      <a href={website}>Conflux Wallet</a>
+      <A href={website}>Conflux</A>
     </Div>
   );
 }

@@ -17,6 +17,7 @@
 import extractRates from 'utils/unitConverter';
 import { message } from 'antd';
 import {
+  CLOSE_WARNING,
   GENERATE_WALLET,
   GENERATE_WALLET_SUCCESS,
   GENERATE_WALLET_ERROR,
@@ -60,6 +61,16 @@ import {
 
 /* ********************************Generate Wallet ******************************* */
 
+/**
+ * Open generate wallet modal and generate new random seed and password
+ *
+ * @return {object}    An action object with a type of GENERATE_WALLET
+ */
+export function closeWarning() {
+  return {
+    type: CLOSE_WARNING,
+  };
+}
 /**
  * Open generate wallet modal and generate new random seed and password
  *
