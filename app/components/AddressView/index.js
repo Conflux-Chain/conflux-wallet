@@ -13,7 +13,8 @@ import AddressTable from 'components/AddressTable';
 // import AddressListStatus from 'components/AddressListStatus';
 // import CheckBalancesStatus from 'components/CheckBalancesStatus';
 import AddressTableFooter from 'components/AddressTableFooter';
-import WelcomeText from 'components/WelcomeText';
+// import WelcomeText from 'components/WelcomeText';
+import HomeContent from 'containers/HomeContent';
 
 const Div = styled.div`
   padding: 30px 5px 20px 10px;
@@ -22,6 +23,7 @@ const Div = styled.div`
 
 function AddressView(props) {
   const {
+    subHeaderProps,
     generateKeystoreLoading,
     generateKeystoreError,
     isComfirmed,
@@ -87,7 +89,7 @@ function AddressView(props) {
           showIcon
         />
       ) : (
-        <WelcomeText />
+        <HomeContent subHeaderProps={subHeaderProps} />
       )}
     </Div>
   );
@@ -114,6 +116,7 @@ function AddressView(props) {
 }
 
 AddressView.propTypes = {
+  subHeaderProps: PropTypes.object,
   generateKeystoreLoading: PropTypes.bool,
   generateKeystoreError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   isComfirmed: PropTypes.bool,

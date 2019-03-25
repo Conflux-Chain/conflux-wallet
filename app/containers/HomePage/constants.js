@@ -3,6 +3,7 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
+export const CLOSE_WARNING = 'eth-hot-wallet/HomePage/CLOSE_WARNING';
 export const GENERATE_WALLET = 'eth-hot-wallet/HomePage/GENERATE_WALLET';
 export const GENERATE_WALLET_SUCCESS = 'eth-hot-wallet/HomePage/GENERATE_WALLET_SUCCESS';
 export const GENERATE_WALLET_ERROR = 'eth-hot-wallet/HomePage/GENERATE_WALLET_ERROR';

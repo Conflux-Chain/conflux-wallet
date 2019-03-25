@@ -14,8 +14,23 @@ import { Menu, Button, Dropdown, Icon } from 'antd';
 const MenuItem = Menu.Item;
 // const MenuDivider = Menu.Divider;
 
+const PCMenu = styled(Menu)`
+  .ant-dropdown-menu-item {
+    color: #666;
+  }
+  .ant-dropdown-menu-item-disabled {
+    color: rgba(0, 0, 0, 0.25);
+  }
+  .ant-dropdown-menu-item-selected,
+  .ant-dropdown-menu-item-selected > a {
+    background-color: #5acfff;
+    color: #fff;
+  }
+`;
 const StyledButton = styled(Button)`
-  margin: 15px;
+  border: none;
+  font-size: 14px;
+  color: #049cdb;
 `;
 
 const StyledMenuItem = styled(MenuItem)`
@@ -37,19 +52,19 @@ function NetworkMenu(props) {
   }
 
   const menu = (
-    <Menu forceSubMenuRender defaultSelectedKeys={[networkName]} selectedKeys={[networkName]}>
+    <PCMenu forceSubMenuRender defaultSelectedKeys={[networkName]} selectedKeys={[networkName]}>
       <StyledMenuItem disabled key="title">
         Select Conflux network
       </StyledMenuItem>
       {options}
-    </Menu>
+    </PCMenu>
   );
 
   return (
     <Dropdown overlay={menu}>
-      <StyledButton size="large" icon="wifi">
+      <StyledButton size="large">
         {networkName}
-        <Icon type="down" />
+        <Icon type="caret-down" />
       </StyledButton>
     </Dropdown>
   );

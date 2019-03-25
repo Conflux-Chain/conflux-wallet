@@ -19,8 +19,23 @@ import { makeSelectLocale } from '../LanguageProvider/selectors';
 
 const MenuItem = Menu.Item;
 
+const PCMenu = styled(Menu)`
+  .ant-dropdown-menu-item {
+    color: #666;
+  }
+  .ant-dropdown-menu-item-disabled {
+    color: rgba(0, 0, 0, 0.25);
+  }
+  .ant-dropdown-menu-item-selected,
+  .ant-dropdown-menu-item-selected > a {
+    background-color: #5acfff;
+    color: #fff;
+  }
+`;
 const StyledButton = styled(Button)`
-  margin: 15px;
+  border: none;
+  font-size: 14px;
+  color: #049cdb;
 `;
 
 const StyledMenuItem = styled(MenuItem)`
@@ -40,19 +55,19 @@ export class LocaleToggle extends React.PureComponent {
     ));
 
     const menu = (
-      <Menu>
+      <PCMenu>
         <StyledMenuItem disabled key="title">
           Select Language
         </StyledMenuItem>
         {options}
-      </Menu>
+      </PCMenu>
     );
 
     return (
       <Dropdown overlay={menu}>
-        <StyledButton size="large" icon="wifi">
+        <StyledButton size="large">
           {<FormattedMessage {...messages[this.props.locale]} />}
-          <Icon type="down" />
+          <Icon type="caret-down" />
         </StyledButton>
       </Dropdown>
     );
