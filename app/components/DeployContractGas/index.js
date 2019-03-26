@@ -1,6 +1,6 @@
 /**
  *
- * DeploayContractGas
+ * DeployContractGas
  *
  */
 
@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { InputNumber } from 'antd';
 
-function DeploayContractGas({ gas, onChangeGas, locked }) {
+function DeployContractGas({ gas, onChangeGas, locked }) {
   return (
     <span>
       {'Gas: '}
@@ -24,10 +24,10 @@ function DeploayContractGas({ gas, onChangeGas, locked }) {
   );
 }
 
-DeploayContractGas.propTypes = {
+DeployContractGas.propTypes = {
   gas: PropTypes.number,
   onChangeGas: PropTypes.func,
   locked: PropTypes.bool,
 };
 
-export default DeploayContractGas;
+export default DeployContractGas;

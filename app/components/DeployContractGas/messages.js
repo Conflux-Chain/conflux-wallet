@@ -7,7 +7,7 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.components.DeploayContractGas.header',
-    defaultMessage: 'Gas to Deploay: ',
+    id: 'app.components.DeployContractGas.header',
+    defaultMessage: 'Gas to Deploy: ',
   },
 });

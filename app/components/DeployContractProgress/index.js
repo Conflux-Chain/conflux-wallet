@@ -1,6 +1,6 @@
 /**
  *
- * DeploayContractProgress
+ * DeployContractProgress
  *
  */
 
@@ -16,8 +16,8 @@ const Span = styled.span`
 
 // TODO:部署成功后的回调数据如何展示或者交互？
 
-function DeploayContractProgress({ deploayInProgress, deploayError, sendTx, txExplorer }) {
-  if (deploayInProgress) {
+function DeployContractProgress({ deployInProgress, deployError, sendTx, txExplorer }) {
+  if (deployInProgress) {
     return (
       <Spin spinning style={{ position: 'static' }} size="large" tip="Sending...">
         <br />
@@ -25,8 +25,8 @@ function DeploayContractProgress({ deploayInProgress, deploayError, sendTx, txEx
       </Spin>
     );
   }
-  if (deploayError) {
-    return <Alert message="Send Error" description={deploayError} type="error" />;
+  if (deployError) {
+    return <Alert message="Send Error" description={deployError} type="error" />;
   }
 
   if (sendTx) {
@@ -47,11 +47,11 @@ function DeploayContractProgress({ deploayInProgress, deploayError, sendTx, txEx
   return null;
 }
 
-DeploayContractProgress.propTypes = {
-  deploayInProgress: PropTypes.oneOfType([PropTypes.bool]),
-  deploayError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+DeployContractProgress.propTypes = {
+  deployInProgress: PropTypes.oneOfType([PropTypes.bool]),
+  deployError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   sendTx: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   txExplorer: PropTypes.string,
 };
 
-export default DeploayContractProgress;
+export default DeployContractProgress;

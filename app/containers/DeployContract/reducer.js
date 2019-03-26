@@ -9,13 +9,13 @@ import {
   CHANGE_FROM,
   CHANGE_GAS,
   CHANGE_GAS_PRICE,
-  COMFIRM_DEPLOAY_CONTRACT,
-  COMFIRM_DEPLOAY_CONTRACT_SUCCESS,
-  COMFIRM_DEPLOAY_CONTRACT_ERROR,
-  ABORT_DEPLOAY,
-  DEPLOAY_CONTRACT,
-  DEPLOAY_CONTRACT_SUCCESS,
-  DEPLOAY_CONTRACT_ERROR,
+  COMFIRM_DEPLOY_CONTRACT,
+  COMFIRM_DEPLOY_CONTRACT_SUCCESS,
+  COMFIRM_DEPLOY_CONTRACT_ERROR,
+  ABORT_DEPLOY,
+  DEPLOY_CONTRACT,
+  DEPLOY_CONTRACT_SUCCESS,
+  DEPLOY_CONTRACT_ERROR,
 } from './constants';
 
 const initialState = fromJS({
@@ -29,12 +29,12 @@ const initialState = fromJS({
   confirmationError: false,
   confirmationMsg: false,
 
-  deploayInProgress: false,
-  deploayError: false,
-  deploaySuccess: false,
+  deployInProgress: false,
+  deployError: false,
+  deploySuccess: false,
 });
 
-function deploayContarctReducer(state = initialState, action) {
+function deployContarctReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_CODE:
       return state.set('code', action.code);
@@ -47,48 +47,48 @@ function deploayContarctReducer(state = initialState, action) {
     case CHANGE_GAS_PRICE:
       return state.set('gasPrice', action.gasPrice);
 
-    case COMFIRM_DEPLOAY_CONTRACT:
+    case COMFIRM_DEPLOY_CONTRACT:
       return state.set('comfirmationLoading', true).set('locked', true);
 
-    case COMFIRM_DEPLOAY_CONTRACT_SUCCESS:
+    case COMFIRM_DEPLOY_CONTRACT_SUCCESS:
       return state
         .set('comfirmationLoading', false)
         .set('confirmationMsg', action.msg)
         .set('confirmationError', false);
 
-    case COMFIRM_DEPLOAY_CONTRACT_ERROR:
+    case COMFIRM_DEPLOY_CONTRACT_ERROR:
       return state
         .set('comfirmationLoading', false)
         .set('confirmationError', action.error)
         .set('locked', false);
 
-    case ABORT_DEPLOAY:
+    case ABORT_DEPLOY:
       return state
         .set('comfirmationLoading', false)
         .set('confirmationMsg', false)
         .set('confirmationError', false)
         .set('locked', false)
-        .set('deploayError', false);
+        .set('deployError', false);
 
-    case DEPLOAY_CONTRACT:
+    case DEPLOY_CONTRACT:
       return state
-        .set('deploayInProgress', true)
-        .set('deploayError', false)
-        .set('deploaySuccess', false);
-    case DEPLOAY_CONTRACT_SUCCESS:
+        .set('deployInProgress', true)
+        .set('deployError', false)
+        .set('deploySuccess', false);
+    case DEPLOY_CONTRACT_SUCCESS:
       return state
-        .set('deploayInProgress', false)
-        .set('deploayError', false)
-        .set('deploaySuccess', action.tx);
-    case DEPLOAY_CONTRACT_ERROR:
+        .set('deployInProgress', false)
+        .set('deployError', false)
+        .set('deploySuccess', action.tx);
+    case DEPLOY_CONTRACT_ERROR:
       return state
-        .set('deploayInProgress', false)
-        .set('deploayError', action.error)
-        .set('deploaySuccess', false);
+        .set('deployInProgress', false)
+        .set('deployError', action.error)
+        .set('deploySuccess', false);
 
     default:
       return state;
   }
 }
 
-export default deploayContarctReducer;
+export default deployContarctReducer;

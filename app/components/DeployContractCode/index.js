@@ -1,6 +1,6 @@
 /**
  *
- * DeploayContracCode
+ * DeployContracCode
  *
  */
 
@@ -8,7 +8,7 @@ import React from 'react';
 // import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Input } from 'antd';
-function DeploayContracCode({ code, onChangeCode, locked }) {
+function DeployContracCode({ code, onChangeCode, locked }) {
   return (
     <span>
       {'Gas: '}
@@ -26,10 +26,10 @@ function DeploayContracCode({ code, onChangeCode, locked }) {
   );
 }
 
-DeploayContracCode.propTypes = {
+DeployContracCode.propTypes = {
   code: PropTypes.string,
   onChangeCode: PropTypes.func,
   locked: PropTypes.bool,
 };
 
-export default DeploayContracCode;
+export default DeployContracCode;

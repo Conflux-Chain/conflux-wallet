@@ -3,75 +3,75 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the sendToken state domain
  */
-const selectDeploayContractDomain = (state) => state.get('deploaycontract');
+const selectDeployContractDomain = (state) => state.get('deploycontract');
 const makeSelectCode = () =>
   createSelector(
-    selectDeploayContractDomain,
+    selectDeployContractDomain,
     (substate) => substate.get('code')
   );
 
 const makeSelectFrom = () =>
   createSelector(
-    selectDeploayContractDomain,
+    selectDeployContractDomain,
     (substate) => substate.get('from')
   );
 
 const makeSelectGas = () =>
   createSelector(
-    selectDeploayContractDomain,
+    selectDeployContractDomain,
     (substate) => substate.get('gas')
   );
 
 const makeSelectGasPrice = () =>
   createSelector(
-    selectDeploayContractDomain,
+    selectDeployContractDomain,
     (substate) => substate.get('gasPrice')
   );
 
 const makeSelectComfirmationLoading = () =>
   createSelector(
-    selectDeploayContractDomain,
+    selectDeployContractDomain,
     (substate) => substate.get('comfirmationLoading')
   );
 
 const makeSelectConfirmationError = () =>
   createSelector(
-    selectDeploayContractDomain,
+    selectDeployContractDomain,
     (substate) => substate.get('confirmationError')
   );
 
 const makeSelectConfirmationMsg = () =>
   createSelector(
-    selectDeploayContractDomain,
+    selectDeployContractDomain,
     (substate) => substate.get('confirmationMsg')
   );
 
-const makeSelectDeploayInProgress = () =>
+const makeSelectDeployInProgress = () =>
   createSelector(
-    selectDeploayContractDomain,
-    (substate) => substate.get('deploayInProgress')
+    selectDeployContractDomain,
+    (substate) => substate.get('deployInProgress')
   );
 
-const makeSelectDeploayError = () =>
+const makeSelectDeployError = () =>
   createSelector(
-    selectDeploayContractDomain,
-    (substate) => substate.get('deploayError')
+    selectDeployContractDomain,
+    (substate) => substate.get('deployError')
   );
 
 const makeSelectLocked = () =>
   createSelector(
-    selectDeploayContractDomain,
+    selectDeployContractDomain,
     (substate) => substate.get('locked')
   );
 
-const makeSelectIsDeploayComfirmationLocked = () =>
+const makeSelectIsDeployComfirmationLocked = () =>
   createSelector(
-    selectDeploayContractDomain,
-    (substate) => substate.get('deploayInProgress') !== false || substate.get('sendTx') !== false
+    selectDeployContractDomain,
+    (substate) => substate.get('deployInProgress') !== false || substate.get('sendTx') !== false
   );
 
 export {
-  selectDeploayContractDomain,
+  selectDeployContractDomain,
   makeSelectCode,
   makeSelectFrom,
   makeSelectGas,
@@ -80,7 +80,7 @@ export {
   makeSelectComfirmationLoading,
   makeSelectConfirmationError,
   makeSelectConfirmationMsg,
-  makeSelectIsDeploayComfirmationLocked,
-  makeSelectDeploayInProgress,
-  makeSelectDeploayError,
+  makeSelectIsDeployComfirmationLocked,
+  makeSelectDeployInProgress,
+  makeSelectDeployError,
 };

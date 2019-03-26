@@ -21,10 +21,10 @@ function SendConfirmationView(props) {
     comfirmationLoading,
     confirmationError,
     confirmationMsg,
-    onDeploayContract,
-    onAbortDeploay,
-    isDeploayComfirmationLocked,
-    deploayError,
+    onDeployContract,
+    onAbortDeploy,
+    isDeployComfirmationLocked,
+    deployError,
   } = props;
   if (comfirmationLoading) {
     return (
@@ -54,10 +54,10 @@ function SendConfirmationView(props) {
       <Div>
         <Alert message="Transaction is valid" description={confirmationMsg} type="info" />
         <br />
-        <Button icon="to-top" onClick={onDeploayContract} disabled={isDeploayComfirmationLocked}>
-          {deploayError ? 'Try again' : 'Send ETH'}
+        <Button icon="to-top" onClick={onDeployContract} disabled={isDeployComfirmationLocked}>
+          {deployError ? 'Try again' : 'Send ETH'}
         </Button>{' '}
-        <Button icon="close" onClick={onAbortDeploay} disabled={isDeploayComfirmationLocked}>
+        <Button icon="close" onClick={onAbortDeploy} disabled={isDeployComfirmationLocked}>
           Back
         </Button>
       </Div>
@@ -71,12 +71,12 @@ SendConfirmationView.propTypes = {
   comfirmationLoading: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   confirmationError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   confirmationMsg: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  isDeploayComfirmationLocked: PropTypes.bool,
+  isDeployComfirmationLocked: PropTypes.bool,
 
-  onDeploayContract: PropTypes.func.isRequired,
-  onAbortDeploay: PropTypes.func.isRequired,
+  onDeployContract: PropTypes.func.isRequired,
+  onAbortDeploy: PropTypes.func.isRequired,
 
-  deploayError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  deployError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default SendConfirmationView;

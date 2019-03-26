@@ -8,13 +8,13 @@ import {
   CHANGE_FROM,
   CHANGE_GAS,
   CHANGE_GAS_PRICE,
-  COMFIRM_DEPLOAY_CONTRACT,
-  COMFIRM_DEPLOAY_CONTRACT_SUCCESS,
-  COMFIRM_DEPLOAY_CONTRACT_ERROR,
-  ABORT_DEPLOAY,
-  DEPLOAY_CONTRACT,
-  DEPLOAY_CONTRACT_SUCCESS,
-  DEPLOAY_CONTRACT_ERROR,
+  COMFIRM_DEPLOY_CONTRACT,
+  COMFIRM_DEPLOY_CONTRACT_SUCCESS,
+  COMFIRM_DEPLOY_CONTRACT_ERROR,
+  ABORT_DEPLOY,
+  DEPLOY_CONTRACT,
+  DEPLOY_CONTRACT_SUCCESS,
+  DEPLOY_CONTRACT_ERROR,
 } from './constants';
 
 export function changeCode(code) {
@@ -56,55 +56,55 @@ export function changeGasPrice(gasPrice) {
   };
 }
 
-export function confirmDeploayContract() {
+export function confirmDeployContract() {
   return {
-    type: COMFIRM_DEPLOAY_CONTRACT,
+    type: COMFIRM_DEPLOY_CONTRACT,
   };
 }
 
-export function confirmDeploayContractSuccess(msg) {
+export function confirmDeployContractSuccess(msg) {
   if (msg) {
     return {
-      type: COMFIRM_DEPLOAY_CONTRACT_SUCCESS,
+      type: COMFIRM_DEPLOY_CONTRACT_SUCCESS,
       msg,
     };
   }
 
   return {
-    type: COMFIRM_DEPLOAY_CONTRACT_SUCCESS,
-    msg: 'Deploay confirmed successfully, Send to transmit',
+    type: COMFIRM_DEPLOY_CONTRACT_SUCCESS,
+    msg: 'Deploy confirmed successfully, Send to transmit',
   };
 }
 
-export function confirmDeploayContractError(error) {
+export function confirmDeployContractError(error) {
   return {
-    type: COMFIRM_DEPLOAY_CONTRACT_ERROR,
+    type: COMFIRM_DEPLOY_CONTRACT_ERROR,
     error,
   };
 }
 
-export function abortDeploay() {
+export function abortDeploy() {
   return {
-    type: ABORT_DEPLOAY,
+    type: ABORT_DEPLOY,
   };
 }
 
-export function deploayContract() {
+export function deployContract() {
   return {
-    type: DEPLOAY_CONTRACT,
+    type: DEPLOY_CONTRACT,
   };
 }
 
-export function deploaySuccess(tx) {
+export function deploySuccess(tx) {
   return {
-    type: DEPLOAY_CONTRACT_SUCCESS,
+    type: DEPLOY_CONTRACT_SUCCESS,
     tx,
   };
 }
 
-export function deploayError(error) {
+export function deployError(error) {
   return {
-    type: DEPLOAY_CONTRACT_ERROR,
+    type: DEPLOY_CONTRACT_ERROR,
     error,
   };
 }

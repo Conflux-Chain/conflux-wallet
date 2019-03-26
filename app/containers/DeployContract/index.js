@@ -1,6 +1,6 @@
 /**
  *
- * DeploayContract
+ * DeployContract
  *
  */
 
@@ -16,12 +16,12 @@ import styled from 'styled-components';
 import injectReducer from 'utils/injectReducer';
 
 // eslint-disable-next-line import/no-unresolved
-import DeploayContractCode from 'components/DeploayContractCode';
-import DeploayContractFrom from 'components/DeploayContractFrom';
-import DeploayContractGas from 'components/DeploayContractGas';
-import DeploayContractGasPrice from 'components/DeploayContractGasPrice';
-import DeploayContractConfirmationView from 'components/DeploayContractConfirmationView';
-import DeploayContractProgress from 'components/DeploayContractProgress';
+import DeployContractCode from 'components/DeployContractCode';
+import DeployContractFrom from 'components/DeployContractFrom';
+import DeployContractGas from 'components/DeployContractGas';
+import DeployContractGasPrice from 'components/DeployContractGasPrice';
+import DeployContractConfirmationView from 'components/DeployContractConfirmationView';
+import DeployContractProgress from 'components/DeployContractProgress';
 
 import { makeSelectAddressList } from 'containers/HomePage/selectors';
 
@@ -30,9 +30,9 @@ import {
   changeFrom,
   changeGas,
   changeGasPrice,
-  confirmDeploayContract,
-  deploayContract,
-  abortDeploay,
+  confirmDeployContract,
+  deployContract,
+  abortDeploy,
 } from './actions';
 
 import {
@@ -44,9 +44,9 @@ import {
   makeSelectComfirmationLoading,
   makeSelectConfirmationError,
   makeSelectConfirmationMsg,
-  makeSelectIsDeploayComfirmationLocked,
-  makeSelectDeploayInProgress,
-  makeSelectDeploayError,
+  makeSelectIsDeployComfirmationLocked,
+  makeSelectDeployInProgress,
+  makeSelectDeployError,
 } from './selectors';
 import reducer from './reducer';
 // saga from './saga';
@@ -63,10 +63,10 @@ const DivRightWrapper = styled.div`
   flex: 1;
 `;
 
-function DeploayContract(props) {
+function DeployContract(props) {
   const {
-    isShowDeploayContract,
-    onHideDeploayContract,
+    isShowDeployContract,
+    onHideDeployContract,
 
     addressList,
     locked,
@@ -86,37 +86,37 @@ function DeploayContract(props) {
     comfirmationLoading,
     confirmationError,
     confirmationMsg,
-    isDeploayComfirmationLocked,
-    onConfirmDeploayContract,
-    onDeploayContract,
-    onAbortDeploay,
+    isDeployComfirmationLocked,
+    onConfirmDeployContract,
+    onDeployContract,
+    onAbortDeploy,
 
     sendInProgress,
-    deploayError,
+    deployError,
   } = props;
 
-  const DeploayCodeProps = { code, onChangeCode, locked };
-  const DeploayFromProps = { from, addressList, onChangeFrom, locked };
-  const DeploayGasProps = { gas, onChangeGas, locked };
-  const DeploayGasPriceProps = { gasPrice, onChangeGasPrice, locked };
+  const DeployCodeProps = { code, onChangeCode, locked };
+  const DeployFromProps = { from, addressList, onChangeFrom, locked };
+  const DeployGasProps = { gas, onChangeGas, locked };
+  const DeployGasPriceProps = { gasPrice, onChangeGasPrice, locked };
 
-  const DeploayConfirmationViewProps = {
+  const DeployConfirmationViewProps = {
     comfirmationLoading,
     confirmationError,
     confirmationMsg,
-    onDeploayContract,
-    onAbortDeploay,
+    onDeployContract,
+    onAbortDeploy,
     sendInProgress,
-    isDeploayComfirmationLocked,
-    deploayError,
+    isDeployComfirmationLocked,
+    deployError,
   };
-  const DeploayProgressProps = { sendInProgress, deploayError };
+  const DeployProgressProps = { sendInProgress, deployError };
 
   const modalFooter = [
-    <Button key="reset" type="default" size="large" onClick={onAbortDeploay}>
+    <Button key="reset" type="default" size="large" onClick={onAbortDeploy}>
       Reset
     </Button>,
-    <Button key="close" type="default" size="large" onClick={onHideDeploayContract}>
+    <Button key="close" type="default" size="large" onClick={onHideDeployContract}>
       Close
     </Button>,
   ];
@@ -124,43 +124,43 @@ function DeploayContract(props) {
   return (
     <div style={{ maxWidth: '1000px', margin: 'auto' }}>
       <Modal
-        visible={isShowDeploayContract}
-        title="Deploay Contract"
-        onOk={onHideDeploayContract}
-        onCancel={onHideDeploayContract}
+        visible={isShowDeployContract}
+        title="Deploy Contract"
+        onOk={onHideDeployContract}
+        onCancel={onHideDeployContract}
         footer={modalFooter}
       >
         <DivWrapper>
           <DivLeftWrapper>
-            <DeploayContractCode {...DeploayCodeProps} /> <br />
+            <DeployContractCode {...DeployCodeProps} /> <br />
           </DivLeftWrapper>
           <DivRightWrapper>
-            <DeploayContractFrom {...DeploayFromProps} /> <br />
-            <DeploayContractGas {...DeploayGasProps} />
+            <DeployContractFrom {...DeployFromProps} /> <br />
+            <DeployContractGas {...DeployGasProps} />
             <br /> <br />
-            <DeploayContractGasPrice {...DeploayGasPriceProps} /> <br />
-            <DeploayContractConfirmationView {...DeploayConfirmationViewProps} />
+            <DeployContractGasPrice {...DeployGasPriceProps} /> <br />
+            <DeployContractConfirmationView {...DeployConfirmationViewProps} />
             <br />
-            <DeploayContractProgress {...DeploayProgressProps} />
+            <DeployContractProgress {...DeployProgressProps} />
           </DivRightWrapper>
         </DivWrapper>
         <br />
-        <Button onClick={onConfirmDeploayContract} disabled={locked}>
-          Deploay Contract
+        <Button onClick={onConfirmDeployContract} disabled={locked}>
+          Deploy Contract
         </Button>
       </Modal>
     </div>
   );
 }
 
-DeploayContract.propTypes = {
+DeployContract.propTypes = {
   onChangeCode: PropTypes.func.isRequired,
   onChangeFrom: PropTypes.func.isRequired,
   onChangeGas: PropTypes.func.isRequired,
   onChangeGasPrice: PropTypes.func.isRequired,
-  onConfirmDeploayContract: PropTypes.func.isRequired,
-  onDeploayContract: PropTypes.func.isRequired,
-  onAbortDeploay: PropTypes.func.isRequired,
+  onConfirmDeployContract: PropTypes.func.isRequired,
+  onDeployContract: PropTypes.func.isRequired,
+  onAbortDeploy: PropTypes.func.isRequired,
 
   code: PropTypes.string,
   from: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
@@ -174,13 +174,13 @@ DeploayContract.propTypes = {
   confirmationError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   confirmationMsg: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
-  isDeploayComfirmationLocked: PropTypes.bool,
+  isDeployComfirmationLocked: PropTypes.bool,
 
   sendInProgress: PropTypes.oneOfType([PropTypes.bool]),
-  deploayError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  deployError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
-  isShowDeploayContract: PropTypes.bool,
-  onHideDeploayContract: PropTypes.func,
+  isShowDeployContract: PropTypes.bool,
+  onHideDeployContract: PropTypes.func,
   addressList: PropTypes.oneOfType([
     // PropTypes.array,
     PropTypes.bool,
@@ -201,10 +201,10 @@ const mapStateToProps = createStructuredSelector({
   confirmationError: makeSelectConfirmationError(),
   confirmationMsg: makeSelectConfirmationMsg(),
 
-  isDeploayComfirmationLocked: makeSelectIsDeploayComfirmationLocked(),
+  isDeployComfirmationLocked: makeSelectIsDeployComfirmationLocked(),
 
-  sendInProgress: makeSelectDeploayInProgress(),
-  deploayError: makeSelectDeploayError(),
+  sendInProgress: makeSelectDeployInProgress(),
+  deployError: makeSelectDeployError(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -221,17 +221,17 @@ function mapDispatchToProps(dispatch) {
     onChangeGasPrice: (value) => {
       dispatch(changeGasPrice(value));
     },
-    onConfirmDeploayContract: (evt) => {
+    onConfirmDeployContract: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(confirmDeploayContract());
+      dispatch(confirmDeployContract());
     },
-    onAbortDeploay: (evt) => {
+    onAbortDeploy: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(abortDeploay());
+      dispatch(abortDeploy());
     },
-    onDeploayContract: (evt) => {
+    onDeployContract: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(deploayContract());
+      dispatch(deployContract());
     },
   };
 }
@@ -241,11 +241,11 @@ const withConnect = connect(
   mapDispatchToProps
 );
 
-const withReducer = injectReducer({ key: 'deploaycontract', reducer });
-// const withSaga = injectSaga({ key: 'deploaycontract', saga });
+const withReducer = injectReducer({ key: 'deploycontract', reducer });
+// const withSaga = injectSaga({ key: 'deploycontract', saga });
 
 export default compose(
   withReducer,
   // withSaga,
   withConnect
-)(DeploayContract);
+)(DeployContract);

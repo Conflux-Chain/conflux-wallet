@@ -1,6 +1,6 @@
 /**
  *
- * DeploayContractGasPrice
+ * DeployContractGasPrice
  *
  */
 
@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Slider, InputNumber, Row, Col } from 'antd';
 
-function DeploayContractGasPrice({ gasPrice, onChangeGasPrice, locked }) {
+function DeployContractGasPrice({ gasPrice, onChangeGasPrice, locked }) {
   return (
     <div>
       {'Gas price (Gwei):'}
@@ -39,10 +39,10 @@ function DeploayContractGasPrice({ gasPrice, onChangeGasPrice, locked }) {
   );
 }
 
-DeploayContractGasPrice.propTypes = {
+DeployContractGasPrice.propTypes = {
   onChangeGasPrice: PropTypes.func.isRequired,
   locked: PropTypes.bool,
   gasPrice: PropTypes.number,
 };
 
-export default DeploayContractGasPrice;
+export default DeployContractGasPrice;

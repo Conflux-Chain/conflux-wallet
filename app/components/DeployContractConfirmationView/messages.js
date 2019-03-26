@@ -7,7 +7,7 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.components.DeploayContractConfirmationView.header',
+    id: 'app.components.DeployContractConfirmationView.header',
     defaultMessage: 'This is the SendConfirmationView component !',
   },
 });

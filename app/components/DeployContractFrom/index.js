@@ -11,7 +11,7 @@ const Option = Select.Option;
 
 // import styled from 'styled-components';
 
-function DeploayContractFrom({ addressList, from, onChangeFrom, locked }) {
+function DeployContractFrom({ addressList, from, onChangeFrom, locked }) {
   // let options;
   let selectOptions;
   if (addressList && addressList.keySeq().toArray()) {
@@ -41,7 +41,7 @@ function DeploayContractFrom({ addressList, from, onChangeFrom, locked }) {
   );
 }
 
-DeploayContractFrom.propTypes = {
+DeployContractFrom.propTypes = {
   from: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onChangeFrom: PropTypes.func,
   addressList: PropTypes.oneOfType([
@@ -52,4 +52,4 @@ DeploayContractFrom.propTypes = {
   locked: PropTypes.bool,
 };
 
-export default DeploayContractFrom;
+export default DeployContractFrom;
