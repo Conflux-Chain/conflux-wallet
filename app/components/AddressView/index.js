@@ -15,15 +15,27 @@ import AddressTable from 'components/AddressTable';
 import AddressTableFooter from 'components/AddressTableFooter';
 // import WelcomeText from 'components/WelcomeText';
 import HomeContent from 'containers/HomeContent';
+import { injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
-const Div = styled.div`
-  padding: 30px 5px 20px 10px;
-  min-height: 100px;
-`;
+const Div = global.isMobile
+  ? styled.div`
+      padding: 0 0 20px;
+      min-height: 100px;
+      background: #f2f2f2;
+    `
+  : styled.div`
+      padding: 0 0 20px;
+      min-height: 100px;
+    `;
 
 function AddressView(props) {
   const {
     subHeaderProps,
+    restoreWalletModalProps,
+    onLockWallet,
+    password,
+    onUnlockWallet,
     generateKeystoreLoading,
     generateKeystoreError,
     isComfirmed,
@@ -47,6 +59,7 @@ function AddressView(props) {
     getExchangeRatesLoading,
     getExchangeRatesError,
     onShowTokenChooser,
+    intl,
   } = props;
 
   const addressTableProps = {
@@ -59,6 +72,10 @@ function AddressView(props) {
   };
 
   const addressTableFooterProps = {
+    onLockWallet,
+    password,
+    onUnlockWallet,
+
     checkingBalanceDoneTime,
     checkingBalances,
     checkingBalancesError,
@@ -83,13 +100,16 @@ function AddressView(props) {
     <Div>
       {generateKeystoreError ? (
         <Alert
-          message="Generate Keystore Error"
+          message={intl.formatMessage({ ...messages.generateKeystoreError })}
           description={generateKeystoreError}
           type="error"
           showIcon
         />
       ) : (
-        <HomeContent subHeaderProps={subHeaderProps} />
+        <HomeContent
+          subHeaderProps={subHeaderProps}
+          restoreWalletModalProps={restoreWalletModalProps}
+        />
       )}
     </Div>
   );
@@ -102,13 +122,12 @@ function AddressView(props) {
       </Div>
     );
   }
-
   return (
     <Spin
       spinning={generateKeystoreLoading}
       style={{ position: 'static' }}
       size="large"
-      tip="Loading..."
+      tip={intl.formatMessage({ ...messages.loading })}
     >
       {addressViewContent}
     </Spin>
@@ -117,6 +136,10 @@ function AddressView(props) {
 
 AddressView.propTypes = {
   subHeaderProps: PropTypes.object,
+  restoreWalletModalProps: PropTypes.object,
+  onLockWallet: PropTypes.func,
+  password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  onUnlockWallet: PropTypes.func,
   generateKeystoreLoading: PropTypes.bool,
   generateKeystoreError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   isComfirmed: PropTypes.bool,
@@ -144,6 +167,7 @@ AddressView.propTypes = {
   getExchangeRatesDoneTime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   getExchangeRatesLoading: PropTypes.bool,
   getExchangeRatesError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
+  intl: intlShape.isRequired,
 };
 
-export default AddressView;
+export default injectIntl(AddressView);

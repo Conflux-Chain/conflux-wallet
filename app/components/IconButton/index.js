@@ -6,8 +6,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Popconfirm, Tooltip } from 'antd';
+import { Button, Popconfirm, Tooltip, Icon } from 'antd';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const ErrorSpan = styled.span`
   .anticon {
@@ -30,8 +32,8 @@ const Btn = ({
   ...btnProps
 }) => (
   <Button
-    icon={icon}
-    type="default"
+    // icon={icon}
+    type="primary"
     size="large"
     onClick={popconfirmMsg ? null : onClick}
     disabled={disabled}
@@ -39,12 +41,13 @@ const Btn = ({
     {...btnProps}
   >
     {text}
+    {icon ? <Icon type={icon} /> : null}
   </Button>
 );
 Btn.propTypes = {
   popconfirm: PropTypes.bool,
   text: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
 
   onClick: PropTypes.func,
   loading: PropTypes.bool,
@@ -56,13 +59,7 @@ Btn.propTypes = {
 const handlePopconfirm = (popConfirmText, onClick, component) => {
   if (popConfirmText) {
     return (
-      <Popconfirm
-        placement="top"
-        title={popConfirmText}
-        onConfirm={onClick}
-        okText="Confirm"
-        cancelText="Abort"
-      >
+      <Popconfirm placement="top" title={popConfirmText} onConfirm={onClick}>
         {component}
         <span />
       </Popconfirm>
@@ -72,12 +69,12 @@ const handlePopconfirm = (popConfirmText, onClick, component) => {
 };
 
 function IconButton(props) {
-  const { text, icon, onClick, loading, error, disabled, popconfirmMsg, ...btnProps } = props;
+  const { text, icon, onClick, loading, error, disabled, popconfirmMsg, intl, ...btnProps } = props;
 
   const handleError = (err, component) => {
     if (err) {
       return (
-        <Tooltip placement="bottom" title={`${err} - Click to retry`}>
+        <Tooltip placement="bottom" title={intl.formatMessage({ ...messages.title }, { err })}>
           <ErrorSpan>{component}</ErrorSpan>
         </Tooltip>
       );
@@ -91,13 +88,14 @@ function IconButton(props) {
 
 IconButton.propTypes = {
   text: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
 
   onClick: PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   disabled: PropTypes.bool,
   popconfirmMsg: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
+  intl: intlShape.isRequired,
 };
 
-export default IconButton;
+export default injectIntl(IconButton);

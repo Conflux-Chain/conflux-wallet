@@ -8,9 +8,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
-// import { FormattedMessage } from 'react-intl';
-import { Ether } from 'utils/constants';
-// import messages from './messages';
+import { FormattedMessage } from 'react-intl';
+import { Ether, tokenName } from 'utils/constants';
+import messages from './messages';
 
 function AddressItem(props) {
   const { address, data, onChangeFrom, exchangeRates, convertTo } = props;
@@ -21,7 +21,7 @@ function AddressItem(props) {
       ? `${ethData
           .get('balance')
           .div(Ether)
-          .toString(10)} ETH `
+          .toString(10)} ${tokenName} `
       : 'n/a';
 
   const rate = exchangeRates.getIn([convertTo, 'rate']);
@@ -38,9 +38,11 @@ function AddressItem(props) {
 
   return (
     <div>
-      {address} | Balance: {balance}
+      {address} | <FormattedMessage {...messages.balance} />: {balance}
       {convertedBalance} {convertToName}
-      <button onClick={() => onChangeFrom(address)}>Send</button>
+      <button onClick={() => onChangeFrom(address)}>
+        <FormattedMessage {...messages.send} />
+      </button>
     </div>
   );
 }

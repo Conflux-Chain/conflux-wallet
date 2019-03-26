@@ -5,9 +5,6 @@
  */
 import { defineMessages } from 'react-intl';
 
-export default defineMessages({
-  header: {
-    id: 'app.components.NetworkIndicator.header',
-    defaultMessage: 'This is the NetworkIndicator component !',
-  },
-});
+export const scope = 'app.components.NetworkIndicator';
+
+export default defineMessages({});

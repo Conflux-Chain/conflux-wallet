@@ -5,9 +5,19 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.AddressView';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.AddressView.header',
-    defaultMessage: 'Address list: ',
+  generateKeystoreError: {
+    id: `${scope}.generateKeystoreError`,
+    defaultMessage: 'Generate Keystore Error',
+  },
+  loading: {
+    id: `${scope}.loading`,
+    defaultMessage: 'loading...',
+  },
+  getExchangeRatesError: {
+    id: `${scope}.getExchangeRatesError`,
+    defaultMessage: 'Update Exchange Rates Error',
   },
 });

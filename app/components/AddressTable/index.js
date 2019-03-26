@@ -7,18 +7,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 
-import CurrencyDropdown from 'components/CurrencyDropdown';
+// import CurrencyDropdown from 'components/CurrencyDropdown';
+// import TokenIcon from 'components/TokenIcon';
+import MobileAddressTable from 'components/MobileAddressTable';
+// import { tokenName } from 'utils/constants';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+
+// import CurrencyDropdown from 'components/CurrencyDropdown';
 import TokenIcon from 'components/TokenIcon';
+import messages from './messages';
 
 const { Column } = Table;
-// import { LocaleProvider } from 'antd';
-// import { FormattedMessage } from 'react-intl';
-// import messages from './messages';
 
 const AddrTable = styled(Table)`
-  max-width: 860px;
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   tbody {
@@ -27,9 +31,20 @@ const AddrTable = styled(Table)`
   .ant-table {
     font-size: 13px !important;
   }
-  th.columnCenter,
-  td.columnCenter {
-    text-align: center;
+  .ant-table-thead > tr > th {
+    border: none;
+    background: #f0f0f0;
+    font-size: 18px;
+    color: #333;
+  }
+  .ant-table-tbody > tr > td {
+    font-size: 14px;
+    color: #666;
+  }
+  .ant-table-thead > tr > th[colspan] {
+    text-align: left;
+    font-size: 18px;
+    color: #333;
   }
 `;
 
@@ -102,7 +117,7 @@ const splitAddrToRows = (tokenDecimalsMap, tokenMapIN, address, startKey) => {
     convert: '13 USD',
   },
 ] */
-const transformList = (addressMap, tokenDecimalsMap, showTokens) => {
+const transformList = (addressMap, tokenDecimalsMap) => {
   //eslint-disable-line
   // const showTokens = true;
   let iKey = 1;
@@ -167,110 +182,111 @@ function AddressTable(props) {
     tokenDecimalsMap,
     onShowSendToken,
     exchangeRates,
-    onSelectCurrency,
+    // onSelectCurrency,
     convertTo,
+    intl,
   } = props;
 
-  const currencyDropdownProps = { exchangeRates, onSelectCurrency, convertTo };
+  // const currencyDropdownProps = { exchangeRates, onSelectCurrency, convertTo };
 
   const rowList = transformList(addressMap, tokenDecimalsMap, true);
   const completeRowList = addConvertRates(rowList, exchangeRates, convertTo);
 
   return (
-    <AddrTable
-      dataSource={completeRowList}
-      bordered
-      scroll={{ x: 860 }}
-      pagination={false}
-      locale={{
-        filterTitle: null,
-        filterConfirm: 'Ok',
-        filterReset: 'Reset',
-        emptyText: 'No Data',
-      }}
-    >
-      <Column
-        title="Address"
-        dataIndex="address"
-        key="address"
-        width="267px"
-        className="columnCenter"
-        colSpan="1"
-        rowSpan="3"
-        render={(text, record) => {
-          const obj = {
-            children: text,
-            props: {},
-          };
-          if (record.token !== 'eth') {
-            // obj.props.rowSpan = 0;
-            obj.props.rowSpan = 0;
-            // obj.children = '~';
-          } else {
-            obj.props.rowSpan = Object.keys(tokenDecimalsMap).length || 2;
-          }
-          return obj;
-        }}
-      />
-      {/* <Column
-        title="#"
-        dataIndex="key"
-        key="key"
-        width="10px"
-        sorter={(a, b) => parseInt(a.key, 10) - parseInt(b.key, 10)}
-        sortOrder="ascend"
-        className="columnCenter"
-      /> */}
-      <Column
-        title="Icon"
-        key="Icon"
-        width="12px"
-        render={(text, record) => <TokenIcon tokenSymbol={record.token} />}
-        className="columnCenter"
-      />
+    <div>
+      {global.isMobile ? (
+        <AddrTable
+          dataSource={completeRowList}
+          // bordered
+          scroll={{ x: 1200 }}
+          pagination={false}
+          locale={{
+            filterTitle: null,
+            filterConfirm: 'Ok',
+            filterReset: 'Reset',
+            emptyText: 'No Data',
+          }}
+        >
+          <Column
+            title={intl.formatMessage({ ...messages.address })}
+            dataIndex="address"
+            key="address"
+            // width="267px"
+            // className="columnCenter"
+            colSpan="1"
+            rowSpan="3"
+            render={(text, record) => {
+              const obj = {
+                children: text,
+                props: {},
+              };
+              if (record.token !== 'eth') {
+                // obj.props.rowSpan = 0;
+                obj.props.rowSpan = 0;
+                // obj.children = '~';
+              } else {
+                obj.props.rowSpan = Object.keys(tokenDecimalsMap).length || 2;
+              }
+              return obj;
+            }}
+          />
+          {/* <Column
+            title="#"
+            dataIndex="key"
+            key="key"
+            width="10px"
+            sorter={(a, b) => parseInt(a.key, 10) - parseInt(b.key, 10)}
+            sortOrder="ascend"
+            className="columnCenter"
+          /> */}
+          {/* <Column
+            title="Icon"
+            key="Icon"
+            width="12px"
+            render={(text, record) => <TokenIcon tokenSymbol={record.token} />}
+            className="columnCenter"
+          /> */}
 
-      <Column
-        title="Token"
-        dataIndex="token"
-        key="token"
-        width="65px"
-        className="columnCenter"
-        render={(text, record) => record.token.toUpperCase()}
-      />
-      <Column
-        title="Balance"
-        dataIndex="balance"
-        key="balance"
-        width="80px"
-        filters={[
-          {
-            text: 'Remove empty',
-            value: '0 ETH',
-          },
-        ]}
-        onFilter={(value, record) => record.balance !== value}
-      />
-      {/* <Column
-        title={<CurrencyDropdown {...currencyDropdownProps} />}
-        dataIndex="convert"
-        key="convert"
-        width="80px"
-      /> */}
-      <Column
-        width="65px"
-        title="Action"
-        key="action"
-        render={(text, record) => (
-          <span>
-            {/* <a href="#" >Show QR</a>
-            <span className="ant-divider" /> */}
-            {/* eslint-disable */}
-            <a onClick={() => onShowSendToken(record.address, record.token)}>Send</a>
-            {/* eslint-enable */}
-          </span>
-        )}
-      />
-    </AddrTable>
+          {/* <Column
+            title="Token"
+            dataIndex="token"
+            key="token"
+            width="65px"
+            className="columnCenter"
+            render={(text, record) => record.token.toUpperCase()}
+          /> */}
+          <Column
+            title={intl.formatMessage({ ...messages.balance })}
+            dataIndex="balance"
+            key="balance"
+            // width="80px"
+            // filters={[
+            //   {
+            //     text: 'Remove empty',
+            //     value: '0 ETH',
+            //   },
+            // ]}
+            // onFilter={(value, record) => record.balance !== value}
+          />
+          <Column
+            // width="65px"
+            title={intl.formatMessage({ ...messages.action })}
+            key="action"
+            render={(text, record) => (
+              <Button
+                type="primary"
+                ghost
+                onClick={() => onShowSendToken(record.address, record.token)}
+              >
+                <FormattedMessage {...messages.send} />
+              </Button>
+            )}
+          />
+        </AddrTable>
+      ) : (
+        <MobileAddressTable data={completeRowList} onShowSendToken={onShowSendToken} />
+      )}
+    </div>
   );
 }
 
@@ -279,8 +295,9 @@ AddressTable.propTypes = {
   tokenDecimalsMap: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   onShowSendToken: PropTypes.func,
   exchangeRates: PropTypes.object,
-  onSelectCurrency: PropTypes.func,
+  // onSelectCurrency: PropTypes.func,
   convertTo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  intl: intlShape.isRequired,
 };
 
-export default AddressTable;
+export default injectIntl(AddressTable);

@@ -7,15 +7,15 @@ const height = 60;
 export const Content = styled.div`
   background-color: #fff;
   min-height: ${`calc(100vh - ${height}px)`};
-  @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+  /* @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
     min-height: ${`calc(100vh - ${80 + height}px)`};
-  }
+  } */
 `;
 
 export const StickyFooter = styled.div`
   background-color: #fff;
   height: ${`${height}px`};
-  @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+  /* @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
     height: ${`${80 + height}px`};
-  }
+  } */
 `;

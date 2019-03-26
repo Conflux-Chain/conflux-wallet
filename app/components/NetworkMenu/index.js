@@ -9,6 +9,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Menu, Button, Dropdown, Icon } from 'antd';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
+
 // const SubMenu = Menu.SubMenu;
 // const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
@@ -54,7 +57,7 @@ function NetworkMenu(props) {
   const menu = (
     <PCMenu forceSubMenuRender defaultSelectedKeys={[networkName]} selectedKeys={[networkName]}>
       <StyledMenuItem disabled key="title">
-        Select Conflux network
+        <FormattedMessage {...messages.menu} />
       </StyledMenuItem>
       {options}
     </PCMenu>
