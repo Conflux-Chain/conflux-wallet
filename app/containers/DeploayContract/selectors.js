@@ -4,6 +4,11 @@ import { createSelector } from 'reselect';
  * Direct selector to the sendToken state domain
  */
 const selectDeploayContractDomain = (state) => state.get('deploaycontract');
+const makeSelectCode = () =>
+  createSelector(
+    selectDeploayContractDomain,
+    (substate) => substate.get('code')
+  );
 
 const makeSelectFrom = () =>
   createSelector(
@@ -67,6 +72,7 @@ const makeSelectIsDeploayComfirmationLocked = () =>
 
 export {
   selectDeploayContractDomain,
+  makeSelectCode,
   makeSelectFrom,
   makeSelectGas,
   makeSelectGasPrice,

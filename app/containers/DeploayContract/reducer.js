@@ -5,6 +5,7 @@
  */
 import { fromJS } from 'immutable';
 import {
+  CHANGE_CODE,
   CHANGE_FROM,
   CHANGE_GAS,
   CHANGE_GAS_PRICE,
@@ -18,6 +19,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
+  code: '',
   from: '',
   gas: 0,
   gasPrice: 10, // gwei
@@ -34,11 +36,13 @@ const initialState = fromJS({
 
 function deploayContarctReducer(state = initialState, action) {
   switch (action.type) {
+    case CHANGE_CODE:
+      return state.set('code', action.code);
     case CHANGE_FROM:
       return state.update('from', (fromValue) => action.address || fromValue);
 
     case CHANGE_GAS:
-      return state.set('gas', action.amount);
+      return state.set('gas', action.gas);
 
     case CHANGE_GAS_PRICE:
       return state.set('gasPrice', action.gasPrice);

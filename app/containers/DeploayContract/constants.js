@@ -4,6 +4,7 @@
  *
  */
 
+export const CHANGE_CODE = 'app/DeploayContract/CHANGE_CODE';
 export const CHANGE_FROM = 'app/DeploayContract/CHANGE_FROM';
 export const CHANGE_GAS = 'app/DeploayContract/CHANGE_GAS';
 export const CHANGE_GAS_PRICE = 'app/DeploayContract/CHANGE_GAS_PRICE';

@@ -4,6 +4,7 @@
  *
  */
 import {
+  CHANGE_CODE,
   CHANGE_FROM,
   CHANGE_GAS,
   CHANGE_GAS_PRICE,
@@ -16,6 +17,12 @@ import {
   DEPLOAY_CONTRACT_ERROR,
 } from './constants';
 
+export function changeCode(code) {
+  return {
+    type: CHANGE_CODE,
+    code,
+  };
+}
 export function changeFrom(address) {
   return {
     type: CHANGE_FROM,

@@ -25,8 +25,7 @@ function DeploayContractProgress({ deploayInProgress, deploayError, sendTx, txEx
       </Spin>
     );
   }
-
-  if (deploayError !== false) {
+  if (deploayError) {
     return <Alert message="Send Error" description={deploayError} type="error" />;
   }
 

@@ -9,12 +9,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { InputNumber } from 'antd';
 
-function DeploayContractGas({ amount, onChangeGas, locked }) {
+function DeploayContractGas({ gas, onChangeGas, locked }) {
   return (
     <span>
       {'Gas: '}
       <InputNumber
-        value={amount}
+        value={gas}
         min={0}
         step={0.1}
         onChange={(value) => onChangeGas(value)}
@@ -25,7 +25,7 @@ function DeploayContractGas({ amount, onChangeGas, locked }) {
 }
 
 DeploayContractGas.propTypes = {
-  amount: PropTypes.number,
+  gas: PropTypes.number,
   onChangeGas: PropTypes.func,
   locked: PropTypes.bool,
 };
