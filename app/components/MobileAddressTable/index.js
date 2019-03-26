@@ -37,7 +37,7 @@ function MobileAddressTable(props) {
   mobileTable = data.map((item, index) => (
     <ItemCon key={item.key}>
       <Row type="flex" justify="start">
-        <TitleSpan>Adress</TitleSpan>
+        <TitleSpan>Address</TitleSpan>
         <ContentSpan>{item.address}</ContentSpan>
       </Row>
       <Row type="flex" justify="start" style={{ marginTop: '20px' }}>

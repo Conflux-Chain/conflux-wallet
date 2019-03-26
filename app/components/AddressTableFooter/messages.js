@@ -16,6 +16,10 @@ export default defineMessages({
     id: `${scope}.checkBalance`,
     defaultMessage: 'Check balances',
   },
+  deployContract: {
+    id: `${scope}.deployContract`,
+    defaultMessage: 'Deploy Contract',
+  },
   popconfirmMsg: {
     id: `${scope}.popconfirmMsg`,
     defaultMessage: 'Refresh balance?',

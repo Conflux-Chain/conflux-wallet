@@ -11,8 +11,8 @@ import styled from 'styled-components';
 import IconButton from 'components/IconButton';
 import LockButton from 'components/LockButton';
 import { Row } from 'antd';
-import { injectIntl, intlShape } from 'react-intl';
-// import messages from './messages';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Div = styled.div`
   .ant-btn {
@@ -52,6 +52,7 @@ function AddressTableFooter(props) {
     onGenerateAddress,
     addressListLoading,
     addressListError,
+    intl,
 
     // onGetExchangeRates,
     // getExchangeRatesLoading,
@@ -67,7 +68,7 @@ function AddressTableFooter(props) {
           <Row type="flex" justify="center">
             <LockButton key="lock_button" {...lockButtonProps} />
             <IconButton
-              text="Add address"
+              text={intl.formatMessage({ ...messages.addAddress })}
               icon="plus"
               onClick={onGenerateAddress}
               loading={addressListLoading}
@@ -85,7 +86,7 @@ function AddressTableFooter(props) {
           </Row>
           <Row type="flex" justify="center">
             <IconButton
-              text="Add address"
+              text={intl.formatMessage({ ...messages.addAddress })}
               icon="plus"
               onClick={onGenerateAddress}
               loading={addressListLoading}
@@ -97,7 +98,7 @@ function AddressTableFooter(props) {
           <Row type="flex" justify="center">
             <IconButton
               style={{ marginRight: 0 }}
-              text="Deploy Contract"
+              text={intl.formatMessage({ ...messages.deployContract })}
               onClick={onGenerateAddress}
               loading={addressListLoading}
               error={addressListError}

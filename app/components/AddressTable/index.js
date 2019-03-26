@@ -13,11 +13,11 @@ import { Table, Button } from 'antd';
 // import TokenIcon from 'components/TokenIcon';
 import MobileAddressTable from 'components/MobileAddressTable';
 // import { tokenName } from 'utils/constants';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 // import CurrencyDropdown from 'components/CurrencyDropdown';
-// import TokenIcon from 'components/TokenIcon';
-// import messages from './messages';
+import TokenIcon from 'components/TokenIcon';
+import messages from './messages';
 
 const { Column } = Table;
 
@@ -184,7 +184,7 @@ function AddressTable(props) {
     exchangeRates,
     // onSelectCurrency,
     convertTo,
-    // intl,
+    intl,
   } = props;
 
   // const currencyDropdownProps = { exchangeRates, onSelectCurrency, convertTo };
@@ -208,7 +208,7 @@ function AddressTable(props) {
           }}
         >
           <Column
-            title="Address"
+            title={intl.formatMessage({ ...messages.address })}
             dataIndex="address"
             key="address"
             // width="267px"
@@ -256,7 +256,7 @@ function AddressTable(props) {
             render={(text, record) => record.token.toUpperCase()}
           /> */}
           <Column
-            title="Balance"
+            title={intl.formatMessage({ ...messages.balance })}
             dataIndex="balance"
             key="balance"
             // width="80px"
@@ -270,7 +270,7 @@ function AddressTable(props) {
           />
           <Column
             // width="65px"
-            title="Action"
+            title={intl.formatMessage({ ...messages.action })}
             key="action"
             render={(text, record) => (
               <Button
@@ -278,7 +278,7 @@ function AddressTable(props) {
                 ghost
                 onClick={() => onShowSendToken(record.address, record.token)}
               >
-                Send
+                <FormattedMessage {...messages.send} />
               </Button>
             )}
           />
@@ -297,7 +297,7 @@ AddressTable.propTypes = {
   exchangeRates: PropTypes.object,
   // onSelectCurrency: PropTypes.func,
   convertTo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-  // intl: intlShape.isRequired,
+  intl: intlShape.isRequired,
 };
 
 export default injectIntl(AddressTable);
