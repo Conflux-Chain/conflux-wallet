@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { Alert } from 'antd';
 import PropTypes from 'prop-types';
 
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import messages from './messages';
 
 const Div = styled.div`

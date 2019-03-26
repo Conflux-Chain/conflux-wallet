@@ -6,23 +6,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Row, Col } from 'antd';
 
+import RestoreWalletModal from 'components/RestoreWalletModal';
 import SubHeader from 'components/SubHeader';
 import WelcomeText from 'components/WelcomeText';
+import * as bgImg from '../../images/imgs/home_bg.png';
 
 const Div = styled.div`
+  @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+    min-height: 596px;
+  }
+  @media screen and (min-width: 768px) {
+    height: 596px;
+  }
+  width: 100%;
+  background: url(${bgImg}) no-repeat center top;
+  background-size: cover;
+`;
+const RestoreCon = styled.div`
   display: flex;
-  justify-content: space-around;
-  height: 596px;
-  background: url('../../images/home_bg.png') no-repeat center top;
+  flex-direction: column;
+  justify-content: center;
+  width: 426px;
+  @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+    width: 90%;
+    margin: 20px auto;
+  }
+  height: 360px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 0 36px;
 `;
 
 function HomeContent(props) {
-  const { subHeaderProps } = props;
+  const { subHeaderProps, restoreWalletModalProps } = props;
   return (
     <Div>
-      <WelcomeText />
-      <SubHeader {...subHeaderProps} />
+      <Row type="flex" align="middle" style={{ height: '100%' }}>
+        <Col md={{ span: 14 }} sm={24} xs={24}>
+          <Row type="flex" justify="center">
+            <WelcomeText />
+          </Row>
+        </Col>
+        <Col md={{ span: 10 }} sm={24} xs={24}>
+          <Row type="flex" align="middle" justify="start">
+            <RestoreCon>
+              <RestoreWalletModal {...restoreWalletModalProps} />
+              <SubHeader {...subHeaderProps} />
+            </RestoreCon>
+          </Row>
+        </Col>
+      </Row>
     </Div>
   );
 }

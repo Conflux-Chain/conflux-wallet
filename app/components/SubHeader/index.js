@@ -9,12 +9,16 @@ import { Button, Popconfirm } from 'antd';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LockButton from 'components/LockButton';
-import IconButton from 'components/IconButton';
+// import IconButton from 'components/IconButton';
 const Div = styled.div`
   margin-top: 45px;
+  display: flex;
+  justify-content: space-between;
   .ant-btn {
-    margin-right: 8px;
-    margin-bottom: 12px;
+    width: 42%;
+    height: 48px;
+    border-radius: 10px;
+    padding: 0;
   }
 
   .anticon-lock {

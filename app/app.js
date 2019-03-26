@@ -147,3 +147,7 @@ if (!window.Intl) {
 if (process.env.NODE_ENV === 'production') {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }
+
+// check devices type
+const info = navigator.userAgent;
+global.isMobile = !!info.match(/AppleWebKit.*Mobile.*/) && !(info.indexOf('iPad') > -1);

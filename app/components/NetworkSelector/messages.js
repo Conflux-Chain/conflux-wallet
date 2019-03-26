@@ -9,7 +9,7 @@ export const scope = 'app.components.NetworkSelector';
 
 export default defineMessages({
   // menu: {
-  //   id: `${scope}.menu1`,
+  //   id: `${scope}.menu`,
   //   defaultMessage: 'Select Conflux network',
   // },
 });

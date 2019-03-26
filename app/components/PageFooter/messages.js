@@ -9,7 +9,7 @@ export const scope = 'app.components.PageFooter';
 
 export default defineMessages({
   menu: {
-    id: `${scope}.menu1`,
+    id: `${scope}.menu`,
     defaultMessage: 'Select Conflux network',
   },
 });

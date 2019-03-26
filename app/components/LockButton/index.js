@@ -6,7 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, Icon } from 'antd';
+// import styled from 'styled-components';
 // import styled from 'styled-components';
 
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
@@ -23,16 +24,18 @@ function LockButton(props) {
         title={intl.formatMessage({ ...messages.popTitle })}
         onConfirm={onLockWallet}
       >
-        <Button icon="lock" type="default" size="large">
+        <Button type="primary" size="large">
           <FormattedMessage {...messages.btnLock} />
+          <Icon type="lock" />
         </Button>
       </Popconfirm>
     );
   }
 
   return (
-    <Button icon="unlock" type="default" size="large" onClick={onUnlockWallet}>
+    <Button type="primary" size="large" onClick={onUnlockWallet}>
       <FormattedMessage {...messages.btnUnlock} />
+      <Icon type="unlock" />
     </Button>
   );
 }
