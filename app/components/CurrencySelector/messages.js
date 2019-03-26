@@ -5,9 +5,11 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.containers.CurrencySelector';
+
 export default defineMessages({
   header: {
-    id: 'app.components.CurrencySelector.header',
+    id: `${scope}.header`,
     defaultMessage: 'Convert to: ',
   },
 });

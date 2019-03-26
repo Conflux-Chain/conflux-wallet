@@ -5,9 +5,11 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.containers.AddressListStatus';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.AddressListStatus.header',
-    defaultMessage: 'This is the AddressListStatus component !',
+  addressListLoading: {
+    id: `${scope}.addressListLoading`,
+    defaultMessage: 'AddressListLoading ....',
   },
 });

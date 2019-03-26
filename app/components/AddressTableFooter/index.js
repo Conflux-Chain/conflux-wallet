@@ -9,9 +9,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import IconButton from 'components/IconButton';
-
 import LockButton from 'components/LockButton';
 import { Row } from 'antd';
+import { injectIntl, intlShape } from 'react-intl';
+// import messages from './messages';
 
 const Div = styled.div`
   .ant-btn {
@@ -128,6 +129,7 @@ AddressTableFooter.propTypes = {
   getExchangeRatesLoading: PropTypes.bool,
   getExchangeRatesError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   onShowTokenChooser: PropTypes.func,
+  intl: intlShape.isRequired,
 };
 
-export default AddressTableFooter;
+export default injectIntl(AddressTableFooter);

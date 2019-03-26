@@ -12,11 +12,14 @@ import { Table, Button } from 'antd';
 // import CurrencyDropdown from 'components/CurrencyDropdown';
 // import TokenIcon from 'components/TokenIcon';
 import MobileAddressTable from 'components/MobileAddressTable';
+// import { tokenName } from 'utils/constants';
+import { injectIntl, intlShape } from 'react-intl';
+
+// import CurrencyDropdown from 'components/CurrencyDropdown';
+// import TokenIcon from 'components/TokenIcon';
+// import messages from './messages';
 
 const { Column } = Table;
-// import { LocaleProvider } from 'antd';
-// import { FormattedMessage } from 'react-intl';
-// import messages from './messages';
 
 const AddrTable = styled(Table)`
   max-width: 1200px;
@@ -181,6 +184,7 @@ function AddressTable(props) {
     exchangeRates,
     // onSelectCurrency,
     convertTo,
+    // intl,
   } = props;
 
   // const currencyDropdownProps = { exchangeRates, onSelectCurrency, convertTo };
@@ -293,6 +297,7 @@ AddressTable.propTypes = {
   exchangeRates: PropTypes.object,
   // onSelectCurrency: PropTypes.func,
   convertTo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  // intl: intlShape.isRequired,
 };
 
-export default AddressTable;
+export default injectIntl(AddressTable);
