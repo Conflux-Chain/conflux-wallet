@@ -18,7 +18,6 @@ import { createStructuredSelector } from 'reselect';
 
 /* Components:  */
 import GenerateWalletModal from 'components/GenerateWalletModal';
-import RestoreWalletModal from 'components/RestoreWalletModal';
 import AddressView from 'components/AddressView';
 import SendToken from 'containers/SendToken';
 import TokenChooser from 'containers/TokenChooser';
@@ -251,13 +250,16 @@ export class HomePage extends React.PureComponent {
       <div>
         <Content>
           <Header />
-          <AddressView {...addressViewProps} subHeaderProps={subHeaderProps} />
+          <AddressView
+            {...addressViewProps}
+            subHeaderProps={subHeaderProps}
+            restoreWalletModalProps={restoreWalletModalProps}
+          />
           <SendToken {...sendTokenProps} />
           <TokenChooser {...tokenChooserProps} />
           {/* <HomeContent subHeaderProps={subHeaderProps}/> */}
           {/* <SubHeader {...subHeaderProps} /> */}
           <GenerateWalletModal {...generateWalletProps} />
-          <RestoreWalletModal {...restoreWalletModalProps} />
         </Content>
         <PageFooter />
       </div>

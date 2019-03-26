@@ -17,7 +17,7 @@ const NewModal = styled(Modal)`
   }
   .ant-alert-with-description .ant-alert-icon {
     top: 17px;
-    left: 57px;
+    left: 37px;
     font-size: 17px;
     font-weight: bold;
   }
@@ -62,7 +62,12 @@ const NewModal = styled(Modal)`
     padding: 0 0 40px;
   }
   .ant-btn-primary {
-    width: 355px;
+    @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+      width: 90%;
+    }
+    @media screen and (min-width: 768px) {
+      width: 355px;
+    }
     height: 46px;
     font-size: 14px;
   }

@@ -17,13 +17,14 @@ import AddressTableFooter from 'components/AddressTableFooter';
 import HomeContent from 'containers/HomeContent';
 
 const Div = styled.div`
-  padding: 30px 5px 20px 10px;
+  padding: 0 0 20px;
   min-height: 100px;
 `;
 
 function AddressView(props) {
   const {
     subHeaderProps,
+    restoreWalletModalProps,
     generateKeystoreLoading,
     generateKeystoreError,
     isComfirmed,
@@ -89,7 +90,10 @@ function AddressView(props) {
           showIcon
         />
       ) : (
-        <HomeContent subHeaderProps={subHeaderProps} />
+        <HomeContent
+          subHeaderProps={subHeaderProps}
+          restoreWalletModalProps={restoreWalletModalProps}
+        />
       )}
     </Div>
   );

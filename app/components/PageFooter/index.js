@@ -5,19 +5,21 @@
  */
 
 import React from 'react';
-import { github } from 'utils/constants';
+// import { github } from 'utils/constants';
 import styled from 'styled-components';
 
 import { StickyFooter } from './sticky';
 
 const Footer = StickyFooter.extend`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #333;
   font-size: 14px;
 `;
-const Text1 = styled.text`
-  margin-right: 30px;
-`;
+// const Text1 = styled.text`
+//   margin-right: 30px;
+// `;
 const A = styled.a`
   color: #0075b9;
 `;
