@@ -215,6 +215,10 @@ export class HomePage extends React.PureComponent {
     };
 
     const addressViewProps = {
+      onLockWallet,
+      password,
+      onUnlockWallet,
+
       generateKeystoreLoading,
       generateKeystoreError,
       isComfirmed,

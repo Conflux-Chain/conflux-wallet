@@ -49,9 +49,6 @@ const HeaderWrapped = styled.header`
   width: 100%;
   font-size: 16px;
   border-bottom: 1px solid #f5f5f5;
-  /* .ant-btn-lg {
-    padding: 0 5px;
-  } */
 `;
 
 function Header(props) {

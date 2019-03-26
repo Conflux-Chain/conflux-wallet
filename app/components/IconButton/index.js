@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Popconfirm, Tooltip } from 'antd';
+import { Button, Popconfirm, Tooltip, Icon } from 'antd';
 import styled from 'styled-components';
 
 const ErrorSpan = styled.span`
@@ -30,8 +30,8 @@ const Btn = ({
   ...btnProps
 }) => (
   <Button
-    icon={icon}
-    type="default"
+    // icon={icon}
+    type="primary"
     size="large"
     onClick={popconfirmMsg ? null : onClick}
     disabled={disabled}
@@ -39,12 +39,13 @@ const Btn = ({
     {...btnProps}
   >
     {text}
+    {icon ? <Icon type={icon} /> : null}
   </Button>
 );
 Btn.propTypes = {
   popconfirm: PropTypes.bool,
   text: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
 
   onClick: PropTypes.func,
   loading: PropTypes.bool,
@@ -91,7 +92,7 @@ function IconButton(props) {
 
 IconButton.propTypes = {
   text: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.string,
 
   onClick: PropTypes.func,
   loading: PropTypes.bool,
