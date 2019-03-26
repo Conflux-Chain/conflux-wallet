@@ -5,9 +5,39 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.containers.AddressTableFooter';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.AddressTableFooter.header',
-    defaultMessage: 'This is the AddressTableFooter component !',
+  addAddress: {
+    id: `${scope}.addAddress`,
+    defaultMessage: 'Add address',
+  },
+  checkBalance: {
+    id: `${scope}.checkBalance`,
+    defaultMessage: 'Check balances',
+  },
+  popconfirmMsg: {
+    id: `${scope}.popconfirmMsg`,
+    defaultMessage: 'Refresh balance?',
+  },
+  token: {
+    id: `${scope}.token`,
+    defaultMessage: 'Token',
+  },
+  balance: {
+    id: `${scope}.balance`,
+    defaultMessage: 'Balance',
+  },
+  action: {
+    id: `${scope}.action`,
+    defaultMessage: 'Action',
+  },
+  send: {
+    id: `${scope}.send`,
+    defaultMessage: 'Send',
+  },
+  removeEmpty: {
+    id: `${scope}.removeEmpty`,
+    defaultMessage: 'Remove empty',
   },
 });

@@ -16,6 +16,9 @@ import AddressTableFooter from 'components/AddressTableFooter';
 // import WelcomeText from 'components/WelcomeText';
 import HomeContent from 'containers/HomeContent';
 
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
+
 const Div = styled.div`
   padding: 30px 5px 20px 10px;
   min-height: 100px;
@@ -47,6 +50,7 @@ function AddressView(props) {
     getExchangeRatesLoading,
     getExchangeRatesError,
     onShowTokenChooser,
+    intl,
   } = props;
 
   const addressTableProps = {
@@ -83,7 +87,7 @@ function AddressView(props) {
     <Div>
       {generateKeystoreError ? (
         <Alert
-          message="Generate Keystore Error"
+          message={intl.formatMessage({ ...messages.generateKeystoreError })}
           description={generateKeystoreError}
           type="error"
           showIcon
@@ -108,7 +112,7 @@ function AddressView(props) {
       spinning={generateKeystoreLoading}
       style={{ position: 'static' }}
       size="large"
-      tip="Loading..."
+      tip={intl.formatMessage({ ...messages.loading })}
     >
       {addressViewContent}
     </Spin>
@@ -144,6 +148,7 @@ AddressView.propTypes = {
   getExchangeRatesDoneTime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   getExchangeRatesLoading: PropTypes.bool,
   getExchangeRatesError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
+  intl: intlShape.isRequired,
 };
 
-export default AddressView;
+export default injectIntl(AddressView);

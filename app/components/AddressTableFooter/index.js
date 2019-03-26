@@ -10,6 +10,9 @@ import styled from 'styled-components';
 
 import IconButton from 'components/IconButton';
 
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
+
 const Div = styled.div`
   margin-top: 14px;
   .ant-btn {
@@ -35,12 +38,13 @@ function AddressTableFooter(props) {
     getExchangeRatesError,
 
     onShowTokenChooser,
+    intl,
   } = props;
 
   return (
     <Div>
       <IconButton
-        text="Add address"
+        text={intl.formatMessage({ ...messages.addAddress })}
         icon="plus"
         onClick={onGenerateAddress}
         loading={addressListLoading}
@@ -49,13 +53,13 @@ function AddressTableFooter(props) {
         popconfirmMsg={false}
       />
       <IconButton
-        text="Check balances"
+        text={intl.formatMessage({ ...messages.checkBalance })}
         icon="reload"
         onClick={onCheckBalances}
         loading={checkingBalances}
         error={checkingBalancesError}
         disabled={!networkReady}
-        popconfirmMsg="Refresh balance?"
+        popconfirmMsg={intl.formatMessage({ ...messages.popconfirmMsg })}
       />
       {/* <IconButton
         text="Update rates"
@@ -95,6 +99,7 @@ AddressTableFooter.propTypes = {
   getExchangeRatesLoading: PropTypes.bool,
   getExchangeRatesError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   onShowTokenChooser: PropTypes.func,
+  intl: intlShape.isRequired,
 };
 
-export default AddressTableFooter;
+export default injectIntl(AddressTableFooter);

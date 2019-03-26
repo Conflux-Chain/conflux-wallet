@@ -5,9 +5,15 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.AddressItem';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.AddressItem.header',
-    defaultMessage: 'This is the AddressItem component !',
+  balance: {
+    id: `${scope}.balance`,
+    defaultMessage: 'Balance',
+  },
+  send: {
+    id: `${scope}.send`,
+    defaultMessage: 'Send',
   },
 });
