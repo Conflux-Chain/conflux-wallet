@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.AddressTableFooterErrors';
+export const scope = 'app.components.AddressTableFooterErrors';
 
 export default defineMessages({
   checkingBalancesError: {

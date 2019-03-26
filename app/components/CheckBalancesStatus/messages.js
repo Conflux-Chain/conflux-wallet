@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.CheckBalancesStatus';
+export const scope = 'app.components.CheckBalancesStatus';
 
 export default defineMessages({
   checkingBalances: {

@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.AddressListStatus';
+export const scope = 'app.components.AddressListStatus';
 
 export default defineMessages({
   addressListLoading: {

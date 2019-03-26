@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.AddressView';
+export const scope = 'app.components.AddressView';
 
 export default defineMessages({
   generateKeystoreError: {

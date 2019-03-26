@@ -5,9 +5,11 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.Logo';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.Logo.header',
-    defaultMessage: 'Conflux Wallet',
+  title: {
+    id: `${scope}.title`,
+    defaultMessage: 'Conflux',
   },
 });

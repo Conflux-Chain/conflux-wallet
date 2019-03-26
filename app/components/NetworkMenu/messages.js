@@ -5,9 +5,11 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.NetworkMenu';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.NetworkMenu.header',
-    defaultMessage: 'This is the NetworkMenu component !',
+  menu: {
+    id: `${scope}.menu1`,
+    defaultMessage: 'Select Conflux network',
   },
 });

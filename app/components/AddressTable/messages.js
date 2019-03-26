@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.AddressTable';
+export const scope = 'app.components.AddressTable';
 
 export default defineMessages({
   address: {

@@ -5,9 +5,11 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.PageFooter';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.PageFooter.header',
-    defaultMessage: 'This is the PageFooter component !',
+  menu: {
+    id: `${scope}.menu1`,
+    defaultMessage: 'Select Conflux network',
   },
 });

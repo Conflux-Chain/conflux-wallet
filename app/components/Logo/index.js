@@ -8,6 +8,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { website } from 'utils/constants';
 // import walletLogo from './conflux_logo.svg';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Div = styled.div`
   height: 56px;
@@ -24,7 +26,9 @@ const A = styled.a`
 function Logo() {
   return (
     <Div>
-      <A href={website}>Conflux</A>
+      <A href={website}>
+        <FormattedMessage {...messages.title} />
+      </A>
     </Div>
   );
 }

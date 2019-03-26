@@ -8,6 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Modal, Button, Alert } from 'antd';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const NewModal = styled(Modal)`
   .ant-alert-with-description {
@@ -95,41 +97,43 @@ function GenerateWalletModal(props) {
     onGenerateWallet,
     onGenerateWalletCancel,
     onGenerateKeystore,
+    intl,
   } = props;
 
   return (
     <NewModal
       visible={isShowGenerateWallet}
-      title="New Wallet"
+      title={intl.formatMessage({ ...messages.title })}
       onOk={onGenerateKeystore}
       onCancel={onGenerateWalletCancel}
       footer={[
         <Button key="submit" type="primary" size="large" onClick={onGenerateKeystore}>
-          Create Now
+          <FormattedMessage {...messages.create} />
         </Button>,
       ]}
     >
-      {isWaringShow ? <Title1>Waring:</Title1> : null}
+      {isWaringShow ? (
+        <Title1>
+          <FormattedMessage {...messages.title1} />
+        </Title1>
+      ) : null}
       <Alert
         // message={<b>The seed is imposible to recover if lost</b>}
-        description={
-          /* eslint-disable react/no-unescaped-entities */
-          <b>
-            WTF is wallet security?
-            <br /> Do not save password in screenshot!
-          </b>
-          /* eslint-enable */
-        }
+        description={intl.formatHTMLMessage({ ...messages.description })}
         type="warning"
         showIcon
         closable
         onClose={onCloseWarning}
       />
       <br />
-      <Title2>Seed:</Title2>
+      <Title2>
+        <FormattedMessage {...messages.title2} />
+      </Title2>
       <Alert description={<b>{seed}</b>} type="info" />
       <br />
-      <Title2>Password for browser encryption:</Title2>
+      <Title2>
+        <FormattedMessage {...messages.title3} />
+      </Title2>
       <Alert description={<b>{password}</b>} type="info" />
       <br />
       <Button
@@ -159,6 +163,7 @@ GenerateWalletModal.propTypes = {
   onGenerateWalletCancel: PropTypes.func,
   onGenerateKeystore: PropTypes.func,
   onCloseWarning: PropTypes.func,
+  intl: intlShape.isRequired,
 };
 
-export default GenerateWalletModal;
+export default injectIntl(GenerateWalletModal);

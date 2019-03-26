@@ -9,24 +9,22 @@ import PropTypes from 'prop-types';
 import { Button, Popconfirm } from 'antd';
 // import styled from 'styled-components';
 
-// import { FormattedMessage } from 'react-intl';
-// import messages from './messages';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 function LockButton(props) {
-  const { onLockWallet, password, onUnlockWallet } = props;
+  const { onLockWallet, password, onUnlockWallet, intl } = props;
 
   if (password) {
     return (
       <Popconfirm
         key="close_wallet"
         placement="bottom"
-        title="Comfirm locking wallet"
+        title={intl.formatMessage({ ...messages.popTitle })}
         onConfirm={onLockWallet}
-        okText="Confirm"
-        cancelText="Abort"
       >
         <Button icon="lock" type="default" size="large">
-          Lock Wallet
+          <FormattedMessage {...messages.btnLock} />
         </Button>
       </Popconfirm>
     );
@@ -34,7 +32,7 @@ function LockButton(props) {
 
   return (
     <Button icon="unlock" type="default" size="large" onClick={onUnlockWallet}>
-      Unlock Wallet
+      <FormattedMessage {...messages.btnUnlock} />
     </Button>
   );
 }
@@ -43,6 +41,7 @@ LockButton.propTypes = {
   onLockWallet: PropTypes.func,
   password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onUnlockWallet: PropTypes.func,
+  intl: intlShape.isRequired,
 };
 
-export default LockButton;
+export default injectIntl(LockButton);

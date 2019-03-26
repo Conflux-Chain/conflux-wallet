@@ -8,6 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Popconfirm, Tooltip } from 'antd';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const ErrorSpan = styled.span`
   .anticon {
@@ -56,13 +58,7 @@ Btn.propTypes = {
 const handlePopconfirm = (popConfirmText, onClick, component) => {
   if (popConfirmText) {
     return (
-      <Popconfirm
-        placement="top"
-        title={popConfirmText}
-        onConfirm={onClick}
-        okText="Confirm"
-        cancelText="Abort"
-      >
+      <Popconfirm placement="top" title={popConfirmText} onConfirm={onClick}>
         {component}
         <span />
       </Popconfirm>
@@ -72,12 +68,12 @@ const handlePopconfirm = (popConfirmText, onClick, component) => {
 };
 
 function IconButton(props) {
-  const { text, icon, onClick, loading, error, disabled, popconfirmMsg, ...btnProps } = props;
+  const { text, icon, onClick, loading, error, disabled, popconfirmMsg, intl, ...btnProps } = props;
 
   const handleError = (err, component) => {
     if (err) {
       return (
-        <Tooltip placement="bottom" title={`${err} - Click to retry`}>
+        <Tooltip placement="bottom" title={intl.formatMessage({ ...messages.title }, { err })}>
           <ErrorSpan>{component}</ErrorSpan>
         </Tooltip>
       );
@@ -98,6 +94,7 @@ IconButton.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   disabled: PropTypes.bool,
   popconfirmMsg: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
+  intl: intlShape.isRequired,
 };
 
-export default IconButton;
+export default injectIntl(IconButton);
