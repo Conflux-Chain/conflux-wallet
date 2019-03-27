@@ -44,12 +44,13 @@ export function* DeployContract() {
     const gasPrice = new BigNumber(yield select(makeSelectGasPrice())).times(Gwei);
     const password = yield select(makeSelectPassword());
 
-    if (!password) {
-      throw new Error('No password found - please unlock wallet before send');
-    }
+    // if (!password) {
+    //   throw new Error('No password found - please unlock wallet before send');
+    // }
     if (!keystore) {
       throw new Error('No keystore found - please create wallet');
     }
+    console.log(keystore);
     keystore.passwordProvider = (callback) => {
       // we cannot use selector inside this callback so we use a const value
       const ksPassword = password;

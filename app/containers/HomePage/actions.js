@@ -57,6 +57,8 @@ import {
   LOAD_WALLET,
   LOAD_WALLET_SUCCESS,
   LOAD_WALLET_ERROR,
+  SHOW_DEPLOY_CONTRACT,
+  HIDE_DEPLOY_CONTRACT,
 } from './constants';
 
 /* ********************************Generate Wallet ******************************* */
@@ -668,5 +670,19 @@ export function loadWalletError(error) {
   return {
     type: LOAD_WALLET_ERROR,
     error,
+  };
+}
+
+/* ******************* Show / hide DEPLOAY_CONTRACT ***************************** */
+
+export function showDeployContract() {
+  // console.log(address);
+  return {
+    type: SHOW_DEPLOY_CONTRACT,
+  };
+}
+export function hideDeployContract() {
+  return {
+    type: HIDE_DEPLOY_CONTRACT,
   };
 }

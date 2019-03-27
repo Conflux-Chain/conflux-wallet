@@ -23,7 +23,7 @@ import SendToken from 'containers/SendToken';
 import TokenChooser from 'containers/TokenChooser';
 import PageFooter from 'components/PageFooter';
 import { Content } from 'components/PageFooter/sticky';
-
+import DeployContract from 'containers/DeployContract';
 /* Header: */
 import Header from 'containers/Header';
 import { loadNetwork, checkBalances, getExchangeRates } from 'containers/Header/actions';
@@ -65,6 +65,8 @@ import {
   closeWallet,
   saveWallet,
   loadWallet,
+  showDeployContract,
+  hideDeployContract,
 } from './actions';
 
 import {
@@ -94,6 +96,7 @@ import {
   makeSelectLoadWalletLoading,
   makeSelectLoadwalletError,
   makeSelectTokenDecimalsMap,
+  makeSelectIsShowDeployContract,
 } from './selectors';
 
 export class HomePage extends React.PureComponent {
@@ -170,6 +173,10 @@ export class HomePage extends React.PureComponent {
       onLoadWallet,
       loadWalletLoading,
       loadWalletError,
+
+      isShowDeployContract,
+      onShowDeployContract,
+      onHideDeployContract,
     } = this.props;
 
     const subHeaderProps = {
@@ -245,11 +252,13 @@ export class HomePage extends React.PureComponent {
       getExchangeRatesDoneTime,
       getExchangeRatesLoading,
       getExchangeRatesError,
+
+      onShowDeployContract,
     };
 
     const sendTokenProps = { isShowSendToken, onHideSendToken };
     const tokenChooserProps = { isShowTokenChooser, onHideTokenChooser };
-
+    const DeployContractProps = { isShowDeployContract, onHideDeployContract };
     return (
       <div>
         <Content>
@@ -264,6 +273,7 @@ export class HomePage extends React.PureComponent {
           {/* <HomeContent subHeaderProps={subHeaderProps}/> */}
           {/* <SubHeader {...subHeaderProps} /> */}
           <GenerateWalletModal {...generateWalletProps} />
+          <DeployContract {...DeployContractProps} />
         </Content>
         <PageFooter />
       </div>
@@ -344,6 +354,10 @@ HomePage.propTypes = {
   onLoadWallet: PropTypes.func,
   loadWalletLoading: PropTypes.bool,
   loadWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
+
+  isShowDeployContract: PropTypes.bool,
+  onShowDeployContract: PropTypes.func,
+  onHideDeployContract: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -435,6 +449,12 @@ export function mapDispatchToProps(dispatch) {
     onLoadWallet: () => {
       dispatch(loadWallet());
     },
+    onShowDeployContract: () => {
+      dispatch(showDeployContract());
+    },
+    onHideDeployContract: () => {
+      dispatch(hideDeployContract());
+    },
   };
 }
 
@@ -482,6 +502,8 @@ const mapStateToProps = createStructuredSelector({
   saveWalletError: makeSelectSaveWalletError(),
   loadWalletLoading: makeSelectLoadWalletLoading(),
   loadWalletError: makeSelectLoadwalletError(),
+
+  isShowDeployContract: makeSelectIsShowDeployContract(),
 });
 
 const withConnect = connect(

@@ -259,7 +259,11 @@ const makeSelectLoadwalletError = () =>
     selectHome,
     (homeState) => homeState.get('loadWalletError')
   );
-
+const makeSelectIsShowDeployContract = () =>
+  createSelector(
+    selectHome,
+    (homeState) => homeState.get('isShowDeployContract')
+  );
 export {
   selectHome,
   makeSelectIsWaringShow,
@@ -295,4 +299,5 @@ export {
   makeSelectSaveWalletError,
   makeSelectLoadWalletLoading,
   makeSelectLoadwalletError,
+  makeSelectIsShowDeployContract,
 };

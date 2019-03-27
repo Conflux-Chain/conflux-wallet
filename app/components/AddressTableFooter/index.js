@@ -59,7 +59,9 @@ function AddressTableFooter(props) {
     // getExchangeRatesError,
 
     // onShowTokenChooser,
+    onShowDeployContract,
   } = props;
+  console.log(props);
   const lockButtonProps = { onLockWallet, password, onUnlockWallet };
   return (
     <Div>
@@ -76,7 +78,13 @@ function AddressTableFooter(props) {
               disabled={!isComfirmed}
               popconfirmMsg={false}
             />
-            <IconButton style={{ marginRight: 0 }} text="Deploy Contract" />
+            <IconButton
+              onClick={() => {
+                onShowDeployContract();
+              }}
+              style={{ marginRight: 0 }}
+              text="Deploy Contract"
+            />
           </Row>
         </DivPC>
       ) : (
@@ -97,6 +105,9 @@ function AddressTableFooter(props) {
           </Row>
           <Row type="flex" justify="center">
             <IconButton
+              onClick={() => {
+                onShowDeployContract();
+              }}
               style={{ marginRight: 0 }}
               text={intl.formatMessage({ ...messages.deployContract })}
             />
@@ -127,6 +138,7 @@ AddressTableFooter.propTypes = {
   getExchangeRatesError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   onShowTokenChooser: PropTypes.func,
   intl: intlShape.isRequired,
+  onShowDeployContract: PropTypes.func,
 };
 
 export default injectIntl(AddressTableFooter);

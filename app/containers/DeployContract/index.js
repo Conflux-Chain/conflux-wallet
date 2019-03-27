@@ -136,8 +136,6 @@ function DeployContract(props) {
           </DivLeftWrapper>
           <DivRightWrapper>
             <DeployContractFrom {...DeployFromProps} /> <br />
-            {/* <DeployContractGas {...DeployGasProps} /> */}
-            <br /> <br />
             <DeployContractGasPrice {...DeployGasPriceProps} /> <br />
             <Button onClick={onConfirmDeployContract} disabled={locked}>
               Confirm Info

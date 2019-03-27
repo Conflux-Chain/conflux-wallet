@@ -60,6 +60,7 @@ function AddressView(props) {
     getExchangeRatesError,
     onShowTokenChooser,
     intl,
+    onShowDeployContract,
   } = props;
 
   const addressTableProps = {
@@ -94,6 +95,7 @@ function AddressView(props) {
     getExchangeRatesError,
 
     onShowTokenChooser,
+    onShowDeployContract,
   };
 
   let addressViewContent = (

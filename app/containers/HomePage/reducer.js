@@ -52,6 +52,8 @@ import {
   LOAD_WALLET,
   LOAD_WALLET_SUCCESS,
   LOAD_WALLET_ERROR,
+  SHOW_DEPLOY_CONTRACT,
+  HIDE_DEPLOY_CONTRACT,
 } from './constants';
 
 // The initial state of the App
@@ -123,6 +125,7 @@ const initialState = fromJS({
     //   contractAddress: '0xece9fa304cc965b00afc186f5d0281a00d3dbbfd',
     //   decimals: 18,
     // },
+    isShowDeployContract: false,
   },
 });
 
@@ -267,6 +270,11 @@ function homeReducer(state = initialState, action) {
       return state.set('loadWalletLoading', false);
     case LOAD_WALLET_ERROR:
       return state.set('loadWalletLoading', false).set('loadWalletError', action.error);
+
+    case SHOW_DEPLOY_CONTRACT:
+      return state.set('isShowDeployContract', true);
+    case HIDE_DEPLOY_CONTRACT:
+      return state.set('isShowDeployContract', false);
 
     default:
       return state;
