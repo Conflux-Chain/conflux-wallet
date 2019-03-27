@@ -20,7 +20,7 @@ import messages from './messages';
 
 const Div = global.isMobile
   ? styled.div`
-      padding: 0 0 20px;
+      /* padding: 0 0 20px; */
       min-height: 100px;
       background: #f2f2f2;
     `

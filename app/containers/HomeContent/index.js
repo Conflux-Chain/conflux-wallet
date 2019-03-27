@@ -28,15 +28,18 @@ const RestoreCon = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 426px;
-  @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+  @media only screen and (min-device-width: 300px) and (max-device-width: 1025px) {
     width: 90%;
     margin: 20px auto;
+    padding: 0 20px;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 426px;
+    padding: 0 36px;
   }
   height: 360px;
   background: #fff;
   border-radius: 10px;
-  padding: 0 36px;
 `;
 
 function HomeContent(props) {

@@ -15,7 +15,7 @@ const Div = styled.div`
   display: flex;
   justify-content: space-between;
   .ant-btn {
-    width: 42%;
+    width: 45%;
     height: 48px;
     border-radius: 10px;
     padding: 0;
