@@ -12,13 +12,13 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import styled from 'styled-components';
 
-// import injectSaga from 'utils/injectSaga';
+import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
 // eslint-disable-next-line import/no-unresolved
 import DeployContractCode from 'components/DeployContractCode';
 import DeployContractFrom from 'components/DeployContractFrom';
-import DeployContractGas from 'components/DeployContractGas';
+// import DeployContractGas from 'components/DeployContractGas';
 import DeployContractGasPrice from 'components/DeployContractGasPrice';
 import DeployContractConfirmationView from 'components/DeployContractConfirmationView';
 import DeployContractProgress from 'components/DeployContractProgress';
@@ -49,7 +49,7 @@ import {
   makeSelectDeployError,
 } from './selectors';
 import reducer from './reducer';
-// saga from './saga';
+import saga from './saga';
 // import messages from './messages';
 
 const DivWrapper = styled.div`
@@ -97,7 +97,7 @@ function DeployContract(props) {
 
   const DeployCodeProps = { code, onChangeCode, locked };
   const DeployFromProps = { from, addressList, onChangeFrom, locked };
-  const DeployGasProps = { gas, onChangeGas, locked };
+  // const DeployGasProps = { gas, onChangeGas, locked };
   const DeployGasPriceProps = { gasPrice, onChangeGasPrice, locked };
 
   const DeployConfirmationViewProps = {
@@ -136,18 +136,18 @@ function DeployContract(props) {
           </DivLeftWrapper>
           <DivRightWrapper>
             <DeployContractFrom {...DeployFromProps} /> <br />
-            <DeployContractGas {...DeployGasProps} />
+            {/* <DeployContractGas {...DeployGasProps} /> */}
             <br /> <br />
             <DeployContractGasPrice {...DeployGasPriceProps} /> <br />
+            <Button onClick={onConfirmDeployContract} disabled={locked}>
+              Confirm Info
+            </Button>
+            <br />
             <DeployContractConfirmationView {...DeployConfirmationViewProps} />
             <br />
             <DeployContractProgress {...DeployProgressProps} />
           </DivRightWrapper>
         </DivWrapper>
-        <br />
-        <Button onClick={onConfirmDeployContract} disabled={locked}>
-          Deploy Contract
-        </Button>
       </Modal>
     </div>
   );
@@ -242,10 +242,10 @@ const withConnect = connect(
 );
 
 const withReducer = injectReducer({ key: 'deploycontract', reducer });
-// const withSaga = injectSaga({ key: 'deploycontract', saga });
+const withSaga = injectSaga({ key: 'deploycontract', saga });
 
 export default compose(
   withReducer,
-  // withSaga,
+  withSaga,
   withConnect
 )(DeployContract);

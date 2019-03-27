@@ -67,7 +67,8 @@ const makeSelectLocked = () =>
 const makeSelectIsDeployComfirmationLocked = () =>
   createSelector(
     selectDeployContractDomain,
-    (substate) => substate.get('deployInProgress') !== false || substate.get('sendTx') !== false
+    (substate) =>
+      substate.get('deployInProgress') !== false || substate.get('deploySuccess') !== false
   );
 
 export {

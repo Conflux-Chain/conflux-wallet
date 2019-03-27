@@ -11,7 +11,7 @@ import { Input } from 'antd';
 function DeployContracCode({ code, onChangeCode, locked }) {
   return (
     <span>
-      {'Gas: '}
+      {'Code '}
       <Input.TextArea
         style={{
           height: '100%',

@@ -17,6 +17,8 @@ export const timeBetweenCheckbalances = 180 * 1000;
 export const maxGasForEthSend = 25000;
 /* Max gas for token send transaction (not gas price) */
 export const maxGasForTokenSend = 60000;
+/* Max gas for DeployContract (not gas price) */
+export const maxGasForDeployContract = 60000;
 
 /* Eth unit constants will be saved as strings to prevent accidental manipulation
     usage: convert amount to wei

@@ -52,10 +52,10 @@ function SendConfirmationView(props) {
   if (confirmationMsg !== false) {
     return (
       <Div>
-        <Alert message="Transaction is valid" description={confirmationMsg} type="info" />
+        <Alert message="Deploy info is valid" description={confirmationMsg} type="info" />
         <br />
         <Button icon="to-top" onClick={onDeployContract} disabled={isDeployComfirmationLocked}>
-          {deployError ? 'Try again' : 'Send ETH'}
+          {deployError ? 'Try again' : 'Go Deploy'}
         </Button>{' '}
         <Button icon="close" onClick={onAbortDeploy} disabled={isDeployComfirmationLocked}>
           Back

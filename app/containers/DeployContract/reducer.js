@@ -79,7 +79,7 @@ function deployContarctReducer(state = initialState, action) {
       return state
         .set('deployInProgress', false)
         .set('deployError', false)
-        .set('deploySuccess', action.tx);
+        .set('deploySuccess', action.deploySuccess);
     case DEPLOY_CONTRACT_ERROR:
       return state
         .set('deployInProgress', false)
