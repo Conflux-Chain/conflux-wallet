@@ -9,17 +9,37 @@ import PropTypes from 'prop-types';
 import { Slider, InputNumber, Row, Col } from 'antd';
 // import { Gwei } from 'utils/constants';
 // import BigNumber from 'bignumber.js';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
 // import { FormattedMessage } from 'react-intl';
 // import messages from './messages';
+const Div = styled.div`
+  .ant-input-number {
+    width: 60px;
+    height: 28px;
+  }
+  .ant-input-number-input {
+    height: 26px;
+    line-height: 26px;
+    font-size: 16px;
+    color: #049cdb;
+  }
+`;
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  font-size: 14px;
+  color: #333;
+`;
 
 function SendGasPrice({ gasPrice, onChangeGasPrice, locked }) {
   return (
-    <div>
-      {'Gas price (Gwei):'}
-      <Row type="flex" justify="center">
-        <Col span={12}>
+    <Div>
+      <TitleDiv>Gas price</TitleDiv>
+      <Row type="flex" justify="space-between">
+        <Col span={18}>
           <Slider
             min={0.5}
             max={100}
@@ -41,7 +61,7 @@ function SendGasPrice({ gasPrice, onChangeGasPrice, locked }) {
           />
         </Col>
       </Row>
-    </div>
+    </Div>
   );
 }
 

@@ -111,6 +111,7 @@ AddressTableFooter.propTypes = {
   onLockWallet: PropTypes.func,
   password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onUnlockWallet: PropTypes.func,
+
   onCheckBalances: PropTypes.func,
   networkReady: PropTypes.bool,
   checkingBalances: PropTypes.bool,

@@ -6,11 +6,34 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Select } from 'antd';
 const Option = Select.Option;
 
 // import styled from 'styled-components';
 
+const Div = styled.div`
+  .ant-select {
+    width: 100%;
+  }
+  .ant-select-selection--single {
+    height: 46px;
+  }
+  .ant-select-selection__rendered {
+    line-height: 46px;
+    font-size: 14px;
+    color: #666;
+  }
+`;
+
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  font-size: 14px;
+  color: #333;
+`;
 function SendFrom({ addressList, from, onChangeFrom, locked }) {
   // let options;
   let selectOptions;
@@ -31,13 +54,12 @@ function SendFrom({ addressList, from, onChangeFrom, locked }) {
   }
 
   return (
-    <div>
-      Source:
-      <br />
-      <Select value={from} style={{ width: 300 }} onChange={onChangeFrom} disabled={locked}>
+    <Div>
+      <TitleDiv>Source</TitleDiv>
+      <Select value={from} onChange={onChangeFrom} disabled={locked}>
         {selectOptions}
       </Select>
-    </div>
+    </Div>
   );
 }
 

@@ -151,4 +151,3 @@ if (process.env.NODE_ENV === 'production') {
 // check devices type
 const info = navigator.userAgent;
 global.isMobile = !!info.match(/AppleWebKit.*Mobile.*/) && !(info.indexOf('iPad') > -1);
-console.log(global.isMobile, 11111111);

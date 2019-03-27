@@ -6,16 +6,24 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Icon } from 'antd';
-// import styled from 'styled-components';
+import { Input } from 'antd';
+import styled from 'styled-components';
+
+const Div = styled.div`
+  margin-top: 10px;
+  .ant-input {
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    color: #666;
+  }
+`;
 
 function SendTo({ to, onChangeTo, locked }) {
   return (
-    <div>
+    <Div>
       <Input
-        style={{ width: '300px' }}
         placeholder="Send to address"
-        prefix={<Icon type="contacts" />}
         value={to}
         onChange={onChangeTo}
         disabled={locked}
@@ -24,7 +32,7 @@ function SendTo({ to, onChangeTo, locked }) {
         autoCapitalize="off"
         spellCheck={false}
       />
-    </div>
+    </Div>
   );
 }
 
