@@ -29,7 +29,7 @@ const DivPC = styled.div`
   }
 `;
 const DivMobile = styled.div`
-  margin-top: 164px;
+  margin-top: 140px;
   .ant-btn {
     margin-bottom: 24px;
     width: 200px;
@@ -63,7 +63,7 @@ function AddressTableFooter(props) {
   const lockButtonProps = { onLockWallet, password, onUnlockWallet };
   return (
     <Div>
-      {global.isMobile ? (
+      {!global.isMobile ? (
         <DivPC>
           <Row type="flex" justify="center">
             <LockButton key="lock_button" {...lockButtonProps} />
@@ -99,11 +99,6 @@ function AddressTableFooter(props) {
             <IconButton
               style={{ marginRight: 0 }}
               text={intl.formatMessage({ ...messages.deployContract })}
-              onClick={onGenerateAddress}
-              loading={addressListLoading}
-              error={addressListError}
-              disabled={!isComfirmed}
-              popconfirmMsg={false}
             />
           </Row>
         </DivMobile>
@@ -116,6 +111,7 @@ AddressTableFooter.propTypes = {
   onLockWallet: PropTypes.func,
   password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onUnlockWallet: PropTypes.func,
+
   onCheckBalances: PropTypes.func,
   networkReady: PropTypes.bool,
   checkingBalances: PropTypes.bool,

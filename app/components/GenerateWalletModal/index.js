@@ -72,6 +72,7 @@ const NewModal = styled(Modal)`
     }
     height: 46px;
     font-size: 14px;
+    border-radius: 8px;
   }
 `;
 

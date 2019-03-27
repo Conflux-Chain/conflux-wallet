@@ -6,6 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Modal, Button } from 'antd';
 import { connect } from 'react-redux';
 // import { FormattedMessage } from 'react-intl';
@@ -18,10 +19,11 @@ import injectReducer from 'utils/injectReducer';
 import SendFrom from 'components/SendFrom';
 import SendTo from 'components/SendTo';
 import SendAmount from 'components/SendAmount';
-import SendTokenSymbol from 'components/SendTokenSymbol';
+// import SendTokenSymbol from 'components/SendTokenSymbol';
 import SendGasPrice from 'components/SendGasPrice';
-import SendConfirmationView from 'components/SendConfirmationView';
-import SendProgress from 'components/SendProgress';
+// import SendConfirmationView from 'components/SendConfirmationView';
+// import SendProgress from 'components/SendProgress';
+import SendErroeInfo from 'components/SendErrorInfo';
 
 import { makeSelectAddressList, makeSelectTokenInfoList } from 'containers/HomePage/selectors';
 import { makeSelectTxExplorer } from 'containers/Header/selectors';
@@ -54,6 +56,64 @@ import {
 import reducer from './reducer';
 // import saga from './saga';
 // import messages from './messages';
+
+const NewModal = styled(Modal)`
+  .ant-modal {
+    @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+      width: 90%;
+    }
+    @media screen and (min-width: 768px) {
+      width: 426px !important;
+    }
+  }
+  .ant-modal-body {
+    padding: 0 35px;
+  }
+  .ant-modal-content {
+    border-radius: 8px;
+  }
+  .ant-modal-header {
+    background-color: #049cdb;
+    padding: 27px 24px;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+  }
+  .ant-modal-title {
+    font-size: 30px;
+    color: #fff;
+  }
+  .ant-modal-close {
+    color: #fff;
+  }
+  .ant-modal-close-x {
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    font-size: 21px;
+  }
+  .ant-btn {
+    border: none;
+  }
+  .anticon-sync {
+    font-size: 28px;
+  }
+  .ant-modal-footer {
+    border-top: none;
+    text-align: center;
+    padding: 0 0 35px;
+  }
+  .ant-btn-primary {
+    @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+      width: 90%;
+    }
+    @media screen and (min-width: 768px) {
+      width: 355px;
+    }
+    height: 46px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+`;
 
 function SendToken(props) {
   const {
@@ -113,36 +173,36 @@ function SendToken(props) {
   };
 
   const modalFooter = [
-    <Button key="reset" type="default" size="large" onClick={onAbortTransaction}>
-      Reset
+    <Button key="reset" type="primary" size="large" onClick={onAbortTransaction}>
+      Send
     </Button>,
-    <Button key="close" type="default" size="large" onClick={onHideSendToken}>
-      Close
-    </Button>,
+    // <Button key="close" type="primary" size="large" onClick={onHideSendToken}>
+    //   Close
+    // </Button>,
   ];
 
   return (
     <div style={{ maxWidth: '600px', margin: 'auto' }}>
-      <Modal
+      <NewModal
         visible={isShowSendToken}
         title="Send Token"
         onOk={onHideSendToken}
         onCancel={onHideSendToken}
         footer={modalFooter}
       >
-        <SendFrom {...SendFromProps} /> <br />
+        <SendFrom {...SendFromProps} />
         <SendAmount {...SendAmountProps} />
-        <SendTokenSymbol {...SendTokenSymbolProps} />
-        <br /> <br />
-        <SendTo {...SendToProps} /> <br />
-        <SendGasPrice {...SendGasPriceProps} /> <br />
-        <Button onClick={onConfirmSendTransaction} disabled={locked}>
+        {/* <SendTokenSymbol {...SendTokenSymbolProps} /> */}
+        <SendTo {...SendToProps} />
+        <SendGasPrice {...SendGasPriceProps} />
+        {/* <Button onClick={onConfirmSendTransaction} disabled={locked}>
           Create transaction
         </Button>
         <SendConfirmationView {...SendConfirmationViewProps} />
         <br />
-        <SendProgress {...SendProgressProps} />
-      </Modal>
+        <SendProgress {...SendProgressProps} /> */}
+        <SendErroeInfo />
+      </NewModal>
     </div>
   );
 }

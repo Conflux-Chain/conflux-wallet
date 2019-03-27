@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const TableCon = styled.div`
   background: #f2f2f2;
-  padding-top: 24px;
+  padding: 24px 0;
 `;
 const ItemCon = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const ItemCon = styled.div`
   justify-content: center;
   width: 93%;
   height: 282px;
-  margin: 0 auto;
+  margin: 0 auto 24px;
   padding: 0 20px;
   background: #fff;
   border-radius: 10px;

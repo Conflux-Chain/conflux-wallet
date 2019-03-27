@@ -194,7 +194,7 @@ function AddressTable(props) {
 
   return (
     <div>
-      {global.isMobile ? (
+      {!global.isMobile ? (
         <AddrTable
           dataSource={completeRowList}
           // bordered
