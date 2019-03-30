@@ -1,9 +1,9 @@
 import Web3 from 'vendor/web3';
-import Tx from 'ethereumjs-tx';
+import lightwallet from 'eth-lightwallet';
 import BigNumber from 'bignumber.js';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { makeSelectKeystore, makeSelectPassword } from 'containers/HomePage/selectors';
-import { Gwei, maxGasForDeployContract } from 'utils/constants';
+import { Gwei, maxGasLimitForDeployContract } from 'utils/constants';
 import { makeSelectCode, makeSelectFrom, makeSelectGasPrice } from './selectors';
 import {
   confirmDeployContractSuccess,
@@ -12,7 +12,12 @@ import {
   deployError,
 } from './actions';
 import { COMFIRM_DEPLOY_CONTRACT, DEPLOY_CONTRACT } from './constants';
+import Network from '../Header/network';
+
 const web3 = new Web3();
+const txutils = lightwallet.txutils;
+const signing = lightwallet.signing;
+
 export function* confirmSendTransaction() {
   try {
     const fromAddress = yield select(makeSelectFrom());
@@ -42,7 +47,7 @@ export function* DeployContract() {
     const fromAddress = yield select(makeSelectFrom());
     const code = yield select(makeSelectCode());
     // const gas = yield select(makeSelectGas());
-    const gasPrice = new BigNumber(yield select(makeSelectGasPrice())).times(Gwei);
+    const gasPrice = new BigNumber(yield select(makeSelectGasPrice())).times(Gwei).toNumber();
     const password = yield select(makeSelectPassword());
 
     if (!password) {
@@ -57,19 +62,37 @@ export function* DeployContract() {
       callback(null, ksPassword);
     };
 
-    const sendParams = {
-      from: fromAddress,
-      gasPrice,
-      gas: maxGasForDeployContract,
-    };
-    // TODO:complie code
-    // const calcCompiled = web3.eth.compile.solidity(code);
-    // const abi = calcCompiled.info.abiDefinition;
-    // const data = calcCompiled.code;
-    // const myContract = new web3.eth.Contract(abi);
+    // TODO 把这里的 saga 内容都移动到 Header/saga 里面，里面有很多可以复用的，比如 loadNetwork
     web3.setProvider(
       new web3.providers.HttpProvider('http://testnet-jsonrpc.conflux-chain.org:12537')
     );
+
+    // eslint-disable-next-line no-inner-declarations
+    function getNoncePromise(addr) {
+      // 获取最新的 nonce
+      return new Promise((resolve, reject) => {
+        web3.cfx.getTransactionCount(addr, (err, data) => {
+          if (err !== null) return reject(err);
+          return resolve(data);
+        });
+      });
+    }
+
+    // TODO 这个 nonce 应该在第一次获取后缓存起来，以后每次交易 +1
+    // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
+    // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
+    const nonce = yield call(getNoncePromise, fromAddress);
+
+    console.log('nonce: ', nonce);
+
+    const sendParams = {
+      gasPrice,
+      gasLimit: maxGasLimitForDeployContract,
+      value: 0,
+      data: code,
+      nonce,
+    };
+
     // eslint-disable-next-line no-inner-declarations
     function keyFromPasswordPromise(param) {
       return new Promise((resolve, reject) => {
@@ -81,34 +104,35 @@ export function* DeployContract() {
     }
 
     const pwDerivedKey = yield call(keyFromPasswordPromise, password);
-    const privKey = keystore.exportPrivateKey(fromAddress, pwDerivedKey);
-    const privateKey = new Buffer(privKey, 'hex');
-    const rawTx = {
-      ...sendParams,
-      data: `0x${code}`,
-    };
-    const serializedTx = new Tx(rawTx);
-    serializedTx.sign(privateKey);
-    const transactionHash = web3.cfx.sendRawTransaction(`0x${serializedTx.toString('hex')}`);
-    // TODO:需要编译获得code和abi来部署
+
+    // 使用 eth-lightwallet 的方法来签名交易
+    const contractData = txutils.createContractTx(fromAddress, sendParams);
+    const signedTx = signing.signTx(keystore, pwDerivedKey, contractData.tx, fromAddress);
+
+    console.log(`Signed Contract creation TX: ${signedTx}`);
+    console.log(`Contract Address: ${contractData.addr}`);
+
     // eslint-disable-next-line no-inner-declarations
-    // function deployContractPromise(params) {
-    //   return new Promise((reslove, reject) => {
-    //     myContract
-    //       .deploy({
-    //         data,
-    //       })
-    //       .send(params, (newContractInstance) => {
-    //         reslove(newContractInstance);
-    //       })
-    //       .on('error', (error) => {
-    //         reject(error);
-    //       });
-    //   });
-    // }
-    // const newContractInstance = yield call(deployContractPromise, sendParams);
-    yield put(deploySuccess(transactionHash));
+    function sendRawTransactionPromise(params) {
+      // 发送签名后的交易
+      return new Promise((resolve, reject) => {
+        web3.cfx.sendRawTransaction(params, function(err, hash) {
+          if (err != null) return reject(err);
+          return resolve(hash);
+        });
+      });
+    }
+
+    // 获取交易的 tx
+    const tx = yield call(sendRawTransactionPromise, `0x${signedTx}`);
+
+    // 搞定了
+    console.log('Contract Deploy Success，TxHash is: ', tx);
+
+    // TODO tx获取成功后，做点啥
+    yield put(deploySuccess(tx));
   } catch (err) {
+    console.error(err);
     const loc = err.message.indexOf('at runCall');
     const errMsg = loc > -1 ? err.message.slice(0, loc) : err.message;
     yield put(deployError(errMsg));

@@ -21,8 +21,8 @@ import SendTo from 'components/SendTo';
 import SendAmount from 'components/SendAmount';
 // import SendTokenSymbol from 'components/SendTokenSymbol';
 import SendGasPrice from 'components/SendGasPrice';
-// import SendConfirmationView from 'components/SendConfirmationView';
-// import SendProgress from 'components/SendProgress';
+import SendConfirmationView from 'components/SendConfirmationView';
+import SendProgress from 'components/SendProgress';
 import SendErroeInfo from 'components/SendErrorInfo';
 
 import { makeSelectAddressList, makeSelectTokenInfoList } from 'containers/HomePage/selectors';
@@ -177,12 +177,9 @@ function SendToken(props) {
   };
 
   const modalFooter = [
-    <Button key="reset" type="primary" size="large" onClick={onAbortTransaction}>
-      Send
+    <Button key="reset" type="default" size="large" onClick={onAbortTransaction}>
+      Reset
     </Button>,
-    // <Button key="close" type="primary" size="large" onClick={onHideSendToken}>
-    //   Close
-    // </Button>,
   ];
 
   return (
@@ -199,13 +196,15 @@ function SendToken(props) {
         {/* <SendTokenSymbol {...SendTokenSymbolProps} /> */}
         <SendTo {...SendToProps} />
         <SendGasPrice {...SendGasPriceProps} />
-        {/* <Button onClick={onConfirmSendTransaction} disabled={locked}>
+        <br />
+        <Button onClick={onConfirmSendTransaction} disabled={locked} type="primary">
           Create transaction
         </Button>
+        <br />
         <SendConfirmationView {...SendConfirmationViewProps} />
         <br />
-        <SendProgress {...SendProgressProps} /> */}
-        <SendErroeInfo />
+        <SendProgress {...SendProgressProps} />
+        {/* <SendErroeInfo /> */}
       </NewModal>
     </div>
   );

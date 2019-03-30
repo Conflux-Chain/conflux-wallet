@@ -3,7 +3,6 @@ import Web3 from 'vendor/web3';
 import SignerProvider from 'vendor/ethjs-provider-signer/ethjs-provider-signer';
 import BigNumber from 'bignumber.js';
 import { take, call, put, select, takeLatest, race, fork } from 'redux-saga/effects';
-import Tx from 'ethereumjs-tx';
 
 import {
   makeSelectKeystore,
@@ -207,7 +206,6 @@ export function* SendTransaction() {
     const password = yield select(makeSelectPassword());
 
     const tokenToSend = yield select(makeSelectSendTokenSymbol());
-
     if (!password) {
       throw new Error('No password found - please unlock wallet before send');
     }
@@ -221,7 +219,7 @@ export function* SendTransaction() {
     };
 
     let tx;
-    if (tokenToSend === 'eth') {
+    if (tokenToSend === 'cfx') {
       const sendAmount = new BigNumber(amount).times(Ether);
       const sendParams = {
         from: fromAddress,
@@ -229,6 +227,7 @@ export function* SendTransaction() {
         value: sendAmount,
         gasPrice,
         gas: maxGasForEthSend,
+        nonce: 10,
       };
       // eslint-disable-next-line no-inner-declarations
       function sendTransactionPromise(params) {
@@ -281,7 +280,7 @@ export function* SendTransaction() {
 }
 
 /* *************  Polling saga and polling flow for check balances ***************** */
-export function getEthBalancePromise(address) {
+export function getCfxBalancePromise(address) {
   return new Promise((resolve, reject) => {
     web3.cfx.getBalance(address, (err, data) => {
       if (err !== null) return reject(err);
@@ -301,35 +300,35 @@ export function getTokenBalancePromise(address, tokenContractAddress) {
   });
 }
 
-function* checkTokenBalance(address, symbol) {
-  if (!address || !symbol) {
-    return null;
-  }
-  const tokenInfo = yield select(makeSelectTokenInfo(symbol));
-  const contractAddress = tokenInfo.contractAddress;
-
-  const balance = yield call(getTokenBalancePromise, address, contractAddress);
-
-  yield put(changeBalance(address, symbol, balance));
-
-  return true;
-}
-
-function* checkTokensBalances(address) {
-  const opt = {
-    returnList: true,
-    removeIndex: true,
-    removeEth: true,
-  };
-  const tokenList = yield select(makeSelectAddressMap(address, opt));
-
-  for (let i = 0; i < tokenList.length; i += 1) {
-    const symbol = tokenList[i];
-    // console.log('address: ' + address + ' token: ' + tokenList[i]);
-    yield checkTokenBalance(address, symbol);
-  }
-  // console.log(tokenMap);
-}
+// function* checkTokenBalance(address, symbol) {
+//   if (!address || !symbol) {
+//     return null;
+//   }
+//   const tokenInfo = yield select(makeSelectTokenInfo(symbol));
+//   const contractAddress = tokenInfo.contractAddress;
+//
+//   const balance = yield call(getTokenBalancePromise, address, contractAddress);
+//
+//   yield put(changeBalance(address, symbol, balance));
+//
+//   return true;
+// }
+//
+// function* checkTokensBalances(address) {
+//   const opt = {
+//     returnList: true,
+//     removeIndex: true,
+//     removeEth: true,
+//   };
+//   const tokenList = yield select(makeSelectAddressMap(address, opt));
+//
+//   for (let i = 0; i < tokenList.length; i += 1) {
+//     const symbol = tokenList[i];
+//     // console.log('address: ' + address + ' token: ' + tokenList[i]);
+//     yield checkTokenBalance(address, symbol);
+//   }
+//   // console.log(tokenMap);
+// }
 
 export function* checkAllBalances() {
   try {
@@ -340,11 +339,11 @@ export function* checkAllBalances() {
       // Iterate over all addresses and check for balance
       const address = addressList[j];
       // handle eth
-      const balance = yield call(getEthBalancePromise, address);
-      yield put(changeBalance(address, 'eth', balance));
+      const balance = yield call(getCfxBalancePromise, address);
+      yield put(changeBalance(address, 'cfx', balance));
 
       // handle tokens
-      yield checkTokensBalances(address);
+      // yield checkTokensBalances(address);
 
       j += 1;
     } while (j < addressList.length);

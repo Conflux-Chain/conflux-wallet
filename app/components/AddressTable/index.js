@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Table, Button } from 'antd';
+import BigNumber from 'bignumber.js';
 
 // import CurrencyDropdown from 'components/CurrencyDropdown';
 // import TokenIcon from 'components/TokenIcon';
@@ -66,26 +67,43 @@ const AddrTable = styled(Table)`
   convert: '',
 } */
 const splitAddrToRows = (tokenDecimalsMap, tokenMapIN, address, startKey) => {
-  let key = startKey;
+  const key = startKey;
   const tokenMap = tokenMapIN;
   const index = tokenMap.index;
   delete tokenMap.index;
 
-  return Object.keys(tokenMap).map((token) => {
-    const sameAddressRow = {};
-    sameAddressRow.index = index;
-    sameAddressRow.key = key;
-    key += 1;
-    sameAddressRow.token = token;
-    sameAddressRow.address = address;
-    const balance = tokenMap[token].balance;
-    const decimals = tokenDecimalsMap[token];
-    sameAddressRow.balance = balance
-      ? balance.div((10 ** decimals).toString()).toString(10)
-      : 'n/a';
-    // sameAddressRow.convert = '';
-    return sameAddressRow;
-  });
+  const balance = tokenMap.cfx.balance;
+  const decimals = tokenDecimalsMap.cfx;
+
+  // 只有单币种
+  return [
+    {
+      index,
+      key,
+      token: 'cfx',
+      address,
+      balance: balance
+        ? new BigNumber(balance).div((10 ** decimals).toString()).toString(10)
+        : 'n/a',
+      decimals,
+    },
+  ];
+
+  // return Object.keys(tokenMap).map((token) => {
+  //   const sameAddressRow = {};
+  //   sameAddressRow.index = index;
+  //   sameAddressRow.key = key;
+  //   key += 1;
+  //   sameAddressRow.token = token;
+  //   sameAddressRow.address = address;
+  //   const balance = tokenMap[token].balance;
+  //   const decimals = tokenDecimalsMap[token];
+  //   sameAddressRow.balance = balance
+  //     ? balance.div((10 ** decimals).toString()).toString(10)
+  //     : 'n/a';
+  //   // sameAddressRow.convert = '';
+  //   return sameAddressRow;
+  // });
 };
 
 /**
@@ -121,6 +139,7 @@ const transformList = (addressMap, tokenDecimalsMap) => {
   //eslint-disable-line
   // const showTokens = true;
   let iKey = 1;
+
   const list = Object.keys(addressMap).map((address) => {
     const tokenMap = addressMap[address];
     const sameAddressList = splitAddrToRows(tokenDecimalsMap, tokenMap, address, iKey);
@@ -140,8 +159,8 @@ const transformList = (addressMap, tokenDecimalsMap) => {
  * @return {Array} array as data for table, see example above
  */
 const getConvertRate = (exchangeRates, from, to) => {
-  const fromKey = `eth_${from}`;
-  // convert token to eth by invert(eth_token)
+  const fromKey = `cfx_${from}`;
+  // convert token to cfx by invert(eth_token)
   const toEthRate = exchangeRates[fromKey].rate.toPower(-1);
   const toTokenRate = exchangeRates[to].rate;
   return toEthRate && toTokenRate && toEthRate.times(toTokenRate);
@@ -213,20 +232,18 @@ function AddressTable(props) {
             key="address"
             // width="267px"
             // className="columnCenter"
-            colSpan="1"
-            rowSpan="3"
             render={(text, record) => {
               const obj = {
                 children: text,
                 props: {},
               };
-              if (record.token !== 'eth') {
-                // obj.props.rowSpan = 0;
-                obj.props.rowSpan = 0;
-                // obj.children = '~';
-              } else {
-                obj.props.rowSpan = Object.keys(tokenDecimalsMap).length || 2;
-              }
+              // if (record.token !== 'cfx') {
+              //   // obj.props.rowSpan = 0;
+              //   obj.props.rowSpan = 0;
+              //   // obj.children = '~';
+              // } else {
+              //   obj.props.rowSpan = Object.keys(tokenDecimalsMap).length || 2;
+              // }
               return obj;
             }}
           />
@@ -263,7 +280,7 @@ function AddressTable(props) {
             // filters={[
             //   {
             //     text: 'Remove empty',
-            //     value: '0 ETH',
+            //     value: '0 CFX',
             //   },
             // ]}
             // onFilter={(value, record) => record.balance !== value}

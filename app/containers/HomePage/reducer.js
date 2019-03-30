@@ -109,6 +109,11 @@ const initialState = fromJS({
       contractAddress: null,
       decimals: 18,
     },
+    cfx: {
+      name: 'Conflux',
+      contractAddress: null,
+      decimals: 18,
+    },
     // omg: {
     //   name: 'OmiseGo',
     //   contractAddress: '0xbcad569fe454e78ca90e4120d89b6b69f8db402f',

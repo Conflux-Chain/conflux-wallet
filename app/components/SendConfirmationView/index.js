@@ -55,7 +55,7 @@ function SendConfirmationView(props) {
         <Alert message="Transaction is valid" description={confirmationMsg} type="info" />
         <br />
         <Button icon="to-top" onClick={onSendTransaction} disabled={isSendComfirmationLocked}>
-          {sendError ? 'Try again' : 'Send ETH'}
+          {sendError ? 'Try again' : 'Send CFX'}
         </Button>{' '}
         <Button icon="close" onClick={onAbortTransaction} disabled={isSendComfirmationLocked}>
           Back

@@ -14,7 +14,7 @@ import messages from './messages';
 
 function AddressItem(props) {
   const { address, data, onChangeFrom, exchangeRates, convertTo } = props;
-  const ethData = data.get('eth');
+  const ethData = data.get('cfx');
 
   const balance =
     ethData.get('balance') !== false

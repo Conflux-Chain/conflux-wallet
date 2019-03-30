@@ -43,10 +43,10 @@ function AddressTableFooter(props) {
     password,
     onUnlockWallet,
 
-    // checkingBalancesError,
-    // checkingBalances,
-    // onCheckBalances,
-    // networkReady,
+    checkingBalancesError,
+    checkingBalances,
+    onCheckBalances,
+    networkReady,
 
     isComfirmed,
     onGenerateAddress,
@@ -79,6 +79,15 @@ function AddressTableFooter(props) {
               popconfirmMsg={false}
             />
             <IconButton
+              text="Check balances"
+              icon="reload"
+              onClick={onCheckBalances}
+              loading={checkingBalances}
+              error={checkingBalancesError}
+              disabled={!networkReady}
+              popconfirmMsg={false}
+            />
+            <IconButton
               onClick={() => {
                 onShowDeployContract();
               }}
@@ -100,6 +109,17 @@ function AddressTableFooter(props) {
               loading={addressListLoading}
               error={addressListError}
               disabled={!isComfirmed}
+              popconfirmMsg={false}
+            />
+          </Row>
+          <Row type="flex" justify="center">
+            <IconButton
+              text="Check balances"
+              icon="reload"
+              onClick={onCheckBalances}
+              loading={checkingBalances}
+              error={checkingBalancesError}
+              disabled={!networkReady}
               popconfirmMsg={false}
             />
           </Row>

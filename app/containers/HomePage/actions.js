@@ -406,6 +406,11 @@ export function updateTokenInfo(addressList, newTokenInfo) {
       contractAddress: null,
       decimals: 18,
     },
+    cfx: {
+      name: 'Conflux',
+      contractAddress: null,
+      decimals: 18,
+    },
     ...newTokenInfo,
   };
 

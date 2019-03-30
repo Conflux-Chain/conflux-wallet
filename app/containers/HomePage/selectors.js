@@ -144,7 +144,7 @@ const makeSelectAddressMap = (address, options = {}) =>
         addressMap = addressMap.delete('index');
       }
       if (address && removeEth) {
-        addressMap = addressMap.delete('eth');
+        addressMap = addressMap.delete('cfx');
       }
       const returnS = returnList ? addressMap.keySeq().toArray() : addressMap.toJS();
       return returnS;
