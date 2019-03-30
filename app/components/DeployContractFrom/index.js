@@ -7,9 +7,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Select } from 'antd';
+import styled from 'styled-components';
+
 const Option = Select.Option;
 
-// import styled from 'styled-components';
+const Div = styled.div`
+  .ant-select {
+    width: 100% !important;
+  }
+  .ant-select-selection--single {
+    height: 46px;
+  }
+  .ant-select-selection__rendered {
+    line-height: 46px;
+    font-size: 14px;
+    color: #666;
+  }
+`;
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  font-size: 14px;
+  color: #333;
+`;
 
 function DeployContractFrom({ addressList, from, onChangeFrom, locked }) {
   // let options;
@@ -31,13 +53,12 @@ function DeployContractFrom({ addressList, from, onChangeFrom, locked }) {
   }
 
   return (
-    <div>
-      Source:
-      <br />
+    <Div>
+      <TitleDiv>Source</TitleDiv>
       <Select value={from} style={{ width: 300 }} onChange={onChangeFrom} disabled={locked}>
         {selectOptions}
       </Select>
-    </div>
+    </Div>
   );
 }
 

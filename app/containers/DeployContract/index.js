@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button } from 'antd';
+import { Modal, Button, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -52,15 +52,67 @@ import reducer from './reducer';
 import saga from './saga';
 // import messages from './messages';
 
-const DivWrapper = styled.div`
-  display: flex;
+const NewModal = styled(Modal)`
+  @media only screen and (min-device-width: 300px) and (max-device-width: 1025px) {
+    width: 90%;
+  }
+  @media screen and (min-width: 1025px) {
+    width: 816px !important;
+  }
+  .ant-modal {
+    // @media only screen and (min-device-width: 300px) and (max-device-width: 1025px) {
+    //   width: 90%;
+    // }
+    // @media screen and (min-width: 1025px) {
+    //   width: 816px !important;
+    // }
+  }
+  .ant-modal-body {
+    padding: 0 35px 36px;
+  }
+  .ant-modal-content {
+    border-radius: 8px;
+  }
+  .ant-modal-header {
+    background-color: #049cdb;
+    padding: 27px 24px;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+  }
+  .ant-modal-title {
+    font-size: 30px;
+    color: #fff;
+  }
+  .ant-modal-close {
+    color: #fff;
+  }
+  .ant-modal-close-x {
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    font-size: 21px;
+  }
+  .anticon-sync {
+    font-size: 28px;
+  }
+  .ant-modal-footer {
+    border-top: none;
+    text-align: center;
+    width: 50%;
+    display: none;
+  }
 `;
-const DivLeftWrapper = styled.div`
-  flex: 1;
-`;
+
 const DivRightWrapper = styled.div`
-  margin-left: 20px;
   flex: 1;
+  .ant-btn {
+    width: 45%;
+    height: 46px;
+    color: #333;
+  }
+  .ant-alert-info {
+    border: none;
+  }
 `;
 
 function DeployContract(props) {
@@ -112,41 +164,41 @@ function DeployContract(props) {
   };
   const DeployProgressProps = { sendInProgress, deployError };
 
-  const modalFooter = [
-    <Button key="reset" type="default" size="large" onClick={onAbortDeploy}>
-      Reset
-    </Button>,
-    <Button key="close" type="default" size="large" onClick={onHideDeployContract}>
-      Close
-    </Button>,
-  ];
+  // const modalFooter = [
+  //   <Button key="reset" type="default" size="large" onClick={onAbortDeploy}>
+  //     Reset
+  //   </Button>,
+  //   <Button key="close" type="default" size="large" onClick={onHideDeployContract}>
+  //     Close
+  //   </Button>,
+  // ];
 
   return (
     <div style={{ maxWidth: '1000px', margin: 'auto' }}>
-      <Modal
+      <NewModal
         visible={isShowDeployContract}
         title="Deploy Contract"
         onOk={onHideDeployContract}
         onCancel={onHideDeployContract}
-        footer={modalFooter}
+        // footer={modalFooter}
       >
-        <DivWrapper>
-          <DivLeftWrapper>
-            <DeployContractCode {...DeployCodeProps} /> <br />
-          </DivLeftWrapper>
-          <DivRightWrapper>
-            <DeployContractFrom {...DeployFromProps} /> <br />
-            <DeployContractGasPrice {...DeployGasPriceProps} /> <br />
-            <Button onClick={onConfirmDeployContract} disabled={locked}>
-              Confirm Info
-            </Button>
-            <br />
-            <DeployContractConfirmationView {...DeployConfirmationViewProps} />
-            <br />
-            <DeployContractProgress {...DeployProgressProps} />
-          </DivRightWrapper>
-        </DivWrapper>
-      </Modal>
+        <Row>
+          <Col xs={24} sm={12}>
+            <DeployContractCode {...DeployCodeProps} />
+          </Col>
+          <Col xs={24} sm={12}>
+            <DivRightWrapper style={{ marginLeft: global.isMobile ? '0' : '20px' }}>
+              <DeployContractFrom {...DeployFromProps} />
+              <DeployContractGasPrice {...DeployGasPriceProps} />
+              <Button onClick={onConfirmDeployContract} disabled={locked}>
+                Confirm Info
+              </Button>
+              <DeployContractConfirmationView {...DeployConfirmationViewProps} />
+              <DeployContractProgress {...DeployProgressProps} />
+            </DivRightWrapper>
+          </Col>
+        </Row>
+      </NewModal>
     </div>
   );
 }

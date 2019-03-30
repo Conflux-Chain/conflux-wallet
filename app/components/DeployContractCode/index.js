@@ -5,16 +5,26 @@
  */
 
 import React from 'react';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Input } from 'antd';
+
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  font-size: 14px;
+  color: #333;
+`;
+
 function DeployContracCode({ code, onChangeCode, locked }) {
   return (
     <span>
-      {'Code '}
+      <TitleDiv>Code</TitleDiv>
       <Input.TextArea
         style={{
-          height: '100%',
+          height: '344px',
         }}
         value={code}
         onChange={(e) => {

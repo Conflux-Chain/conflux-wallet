@@ -6,11 +6,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Button, Spin } from 'antd';
+import { Alert, Button, Spin, Row } from 'antd';
 import styled from 'styled-components';
 
 const Div = styled.div`
-  margin-top: 22px;
+  margin-top: 14px;
 `;
 
 // import { FormattedMessage } from 'react-intl';
@@ -49,12 +49,14 @@ function SendConfirmationView(props) {
       <Div>
         <Alert message="Deploy info is valid" description={confirmationMsg} type="info" />
         <br />
-        <Button icon="to-top" onClick={onDeployContract} disabled={isDeployComfirmationLocked}>
-          {deployError ? 'Try again' : 'Go Deploy'}
-        </Button>{' '}
-        <Button icon="close" onClick={onAbortDeploy} disabled={isDeployComfirmationLocked}>
-          Back
-        </Button>
+        <Row type="flex" justify="space-between">
+          <Button icon="to-top" onClick={onDeployContract} disabled={isDeployComfirmationLocked}>
+            {deployError ? 'Try again' : 'Go Deploy'}
+          </Button>{' '}
+          <Button icon="close" onClick={onAbortDeploy} disabled={isDeployComfirmationLocked}>
+            Back
+          </Button>
+        </Row>
       </Div>
     );
   }

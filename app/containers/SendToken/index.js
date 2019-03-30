@@ -58,18 +58,22 @@ import reducer from './reducer';
 // import messages from './messages';
 
 const NewModal = styled(Modal)`
-  .ant-modal {
-    @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
-      width: 90%;
-    }
-    @media screen and (min-width: 768px) {
-      width: 426px !important;
-    }
+  @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+    width: 90%;
+  }
+  @media screen and (min-width: 768px) {
+    width: 8426px;
   }
   .ant-modal-body {
     padding: 0 35px;
   }
   .ant-modal-content {
+    @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
+      width: 90%;
+    }
+    @media screen and (min-width: 768px) {
+      width: 426px;
+    }
     border-radius: 8px;
   }
   .ant-modal-header {
