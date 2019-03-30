@@ -28,6 +28,10 @@ var eth = function() {
     var type = args[0];
 
     switch (type) {
+      case 'latest_state':
+        args.shift();
+        this.params = 0;
+        return 'eth_newBlockFilter';
       case 'latest':
         args.shift();
         this.params = 0;

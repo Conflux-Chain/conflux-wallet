@@ -1,5 +1,5 @@
 var Settings = function() {
-  this.defaultBlock = 'latest';
+  this.defaultBlock = 'latest_state';
   this.defaultAccount = undefined;
 };
 
