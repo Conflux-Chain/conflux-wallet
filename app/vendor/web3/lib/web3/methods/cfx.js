@@ -37,7 +37,9 @@ var Iban = require('../iban');
 var transfer = require('../transfer');
 
 var blockCall = function(args) {
-  return utils.isString(args[0]) && args[0].indexOf('0x') === 0 ? 'cfx_getBlockByHash' : 'cfx_getBlockByNumber';
+  return utils.isString(args[0]) && args[0].indexOf('0x') === 0
+    ? 'cfx_getBlockByHash'
+    : 'cfx_getBlockByNumber';
 };
 
 var transactionFromBlockCall = function(args) {
@@ -113,7 +115,7 @@ var methods = function() {
       formatters.inputAddressFormatter,
       function(val) {
         if (val !== undefined) val = utils.toHex(val);
-        else val = '0xffffffffffffffff';
+        else val = 'latest_state';
         return val;
       },
     ],
