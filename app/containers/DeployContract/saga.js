@@ -74,7 +74,7 @@ export function* DeployContract() {
       });
     }
 
-    // TODO 这个 nonce 应该在第一次获取后缓存起来，以后每次交易 +1
+    //  这个 nonce 应该在第一次获取后缓存起来，以后每次交易 +1
     // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
     // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
     let nonce = yield call(getNoncePromise, fromAddress);
@@ -131,7 +131,7 @@ export function* DeployContract() {
     // 搞定了
     console.log('Contract Deploy Success，TxHash is: ', tx);
 
-    // TODO tx获取成功后，做点啥
+    //  tx获取成功后，显示出来
     yield put(deploySuccess(tx));
   } catch (err) {
     console.error(err);
