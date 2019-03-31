@@ -62,7 +62,7 @@ const NewModal = styled(Modal)`
     width: 90%;
   }
   @media screen and (min-width: 768px) {
-    width: 8426px;
+    width: 426px;
   }
   .ant-modal-body {
     padding: 0 35px;

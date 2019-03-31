@@ -24,7 +24,7 @@ const DivPC = styled.div`
   margin-top: 104px;
   .ant-btn {
     margin-right: 30px;
-    width: 200px;
+    width: 170px;
     height: 46px;
   }
 `;
