@@ -45,7 +45,7 @@ import {
 
 import { timer } from 'utils/common';
 
-import { getEthBalancePromise } from 'containers/Header/saga';
+import { getCfxBalancePromise } from 'containers/Header/saga';
 
 import {
   generateWalletSucces,
@@ -212,7 +212,7 @@ export function* generateAddress() {
 
     // balance checking for new address (will be aborted in offline mode)
     try {
-      const balance = yield call(getEthBalancePromise, newAddress);
+      const balance = yield call(getCfxBalancePromise, newAddress);
       yield put(changeBalance(newAddress, 'cfx', balance));
     } catch (err) {} // eslint-disable-line
   } catch (err) {

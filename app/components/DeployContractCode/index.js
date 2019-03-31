@@ -1,6 +1,6 @@
 /**
  *
- * DeployContracCode
+ * DeployContractCode
  *
  */
 
@@ -8,6 +8,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Input } from 'antd';
+
+const { TextArea } = Input;
 
 const TitleDiv = styled.div`
   display: flex;
@@ -18,11 +20,11 @@ const TitleDiv = styled.div`
   color: #333;
 `;
 
-function DeployContracCode({ code, onChangeCode, locked }) {
+function DeployContractCode({ code, onChangeCode, locked }) {
   return (
     <span>
       <TitleDiv>Contract Bytecode</TitleDiv>
-      <Input.TextArea
+      <TextArea
         style={{
           height: '344px',
         }}
@@ -36,10 +38,10 @@ function DeployContracCode({ code, onChangeCode, locked }) {
   );
 }
 
-DeployContracCode.propTypes = {
+DeployContractCode.propTypes = {
   code: PropTypes.string,
   onChangeCode: PropTypes.func,
   locked: PropTypes.bool,
 };
 
-export default DeployContracCode;
+export default DeployContractCode;
