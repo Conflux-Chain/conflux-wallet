@@ -71,15 +71,15 @@ function AddressTableFooter(props) {
         <DivPC>
           <Row type="flex" justify="center">
             <LockButton key="lock_button" {...lockButtonProps} />
-            <IconButton
-              text={intl.formatMessage({ ...messages.addAddress })}
-              icon="plus"
-              onClick={onGenerateAddress}
-              loading={addressListLoading}
-              error={addressListError}
-              disabled={!isComfirmed}
-              popconfirmMsg={false}
-            />
+            {/* <IconButton */}
+            {/* text={intl.formatMessage({ ...messages.addAddress })} */}
+            {/* icon="plus" */}
+            {/* onClick={onGenerateAddress} */}
+            {/* loading={addressListLoading} */}
+            {/* error={addressListError} */}
+            {/* disabled={!isComfirmed} */}
+            {/* popconfirmMsg={false} */}
+            {/* /> */}
             <IconButton
               text="Check balances"
               icon="check"
@@ -113,17 +113,17 @@ function AddressTableFooter(props) {
           <Row type="flex" justify="center">
             <LockButton key="lock_button" {...lockButtonProps} />
           </Row>
-          <Row type="flex" justify="center">
-            <IconButton
-              text={intl.formatMessage({ ...messages.addAddress })}
-              icon="plus"
-              onClick={onGenerateAddress}
-              loading={addressListLoading}
-              error={addressListError}
-              disabled={!isComfirmed}
-              popconfirmMsg={false}
-            />
-          </Row>
+          {/* <Row type="flex" justify="center"> */}
+          {/* <IconButton */}
+          {/* text={intl.formatMessage({ ...messages.addAddress })} */}
+          {/* icon="plus" */}
+          {/* onClick={onGenerateAddress} */}
+          {/* loading={addressListLoading} */}
+          {/* error={addressListError} */}
+          {/* disabled={!isComfirmed} */}
+          {/* popconfirmMsg={false} */}
+          {/* /> */}
+          {/* </Row> */}
           <Row type="flex" justify="center">
             <IconButton
               text="Check balances"
