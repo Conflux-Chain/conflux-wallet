@@ -218,7 +218,7 @@ export function checkFaucetSuccess() {
   });
   const icon = React.createElement(Icon, { type: 'bulb', style: { color: '#108ee9' } });
   notification.open({
-    message: 'Ropsten Testnet faucet',
+    message: 'Testnet faucet',
     description: 'Need some coins for testing?',
     duration: 10,
     key,

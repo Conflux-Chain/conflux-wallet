@@ -30,14 +30,14 @@ export const Gwei = (1.0e9).toString();
 /* offline mode is special case of error */
 export const offlineModeString = 'Offline';
 /* Default network to connect after wallet creation (see network.js) */
-export const defaultNetwork = 'Ropsten Testnet';
+export const defaultNetwork = 'Testnet';
 
 /* keystore will be saved to local storage under this key */
 export const localStorageKey = 'ks';
 
 // addresses:
-export const website = 'https://eth-hot-wallet.com';
-export const github = 'https://github.com/PaulLaux/eth-hot-wallet';
+export const website = 'http://www.conflux-chain.org';
+export const github = 'http://www.conflux-chain.org';
 
 // APIs:
 // export const checkFaucetAddress = 'http://localhost:3000/status';

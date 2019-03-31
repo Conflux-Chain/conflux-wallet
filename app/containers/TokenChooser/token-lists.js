@@ -1,7 +1,7 @@
 export const TokenSelection = {
   Offline: [],
   'Local RPC': [],
-  'Ropsten Testnet': [
+  Testnet: [
     {
       symbol: 'symb',
       name: 'Hot Symbol',
