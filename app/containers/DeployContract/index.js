@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -51,7 +52,7 @@ import {
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-// import messages from './messages';
+import messages from './messages';
 
 const NewModal = styled(Modal)`
   @media only screen and (min-device-width: 300px) and (max-device-width: 1025px) {
@@ -147,6 +148,7 @@ function DeployContract(props) {
     deployInProgress,
     deploySuccess,
     deployError,
+    intl,
   } = props;
 
   const DeployCodeProps = { code, onChangeCode, locked };
@@ -179,7 +181,7 @@ function DeployContract(props) {
     <div style={{ maxWidth: '1000px', margin: 'auto' }}>
       <NewModal
         visible={isShowDeployContract}
-        title="Deploy Contract"
+        title={intl.formatMessage({ ...messages.modalTitle })}
         onOk={onHideDeployContract}
         onCancel={onHideDeployContract}
         // footer={modalFooter}
@@ -193,7 +195,7 @@ function DeployContract(props) {
               <DeployContractForm {...DeployFromProps} />
               <DeployContractGasPrice {...DeployGasPriceProps} />
               <Button onClick={onConfirmDeployContract} disabled={locked}>
-                Confirm Info
+                <FormattedMessage {...messages.btnConfirmInfo} />
               </Button>
               <DeployContractConfirmationView {...DeployConfirmationViewProps} />
             </DivRightWrapper>
@@ -241,6 +243,7 @@ DeployContract.propTypes = {
     PropTypes.bool,
     PropTypes.object,
   ]),
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -300,8 +303,10 @@ const withConnect = connect(
 const withReducer = injectReducer({ key: 'deploycontract', reducer });
 const withSaga = injectSaga({ key: 'deploycontract', saga });
 
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect
-)(DeployContract);
+export default injectIntl(
+  compose(
+    withReducer,
+    withSaga,
+    withConnect
+  )(DeployContract)
+);

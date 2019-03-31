@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Modal, Button } from 'antd';
 import { connect } from 'react-redux';
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -23,10 +23,11 @@ import SendAmount from 'components/SendAmount';
 import SendGasPrice from 'components/SendGasPrice';
 import SendConfirmationView from 'components/SendConfirmationView';
 import SendProgress from 'components/SendProgress';
-import SendErroeInfo from 'components/SendErrorInfo';
+import SendErrorInfo from 'components/SendErrorInfo';
 
 import { makeSelectAddressList, makeSelectTokenInfoList } from 'containers/HomePage/selectors';
 import { makeSelectTxExplorer } from 'containers/Header/selectors';
+import messages from './messages';
 
 import {
   changeFrom,
@@ -144,6 +145,7 @@ function SendToken(props) {
     sendTx,
 
     txExplorer,
+    intl,
   } = props;
 
   const SendFromProps = { from, addressList, onChangeFrom, locked };
@@ -180,7 +182,7 @@ function SendToken(props) {
     <div style={{ maxWidth: '600px', margin: 'auto' }}>
       <NewModal
         visible={isShowSendToken}
-        title="Send Token"
+        title={intl.formatMessage({ ...messages.sendTokenTitle })}
         onOk={onHideSendToken}
         onCancel={onHideSendToken}
         footer={modalFooter}
@@ -192,13 +194,13 @@ function SendToken(props) {
         <SendGasPrice {...SendGasPriceProps} />
         <br />
         <Button onClick={onConfirmSendTransaction} disabled={locked} type="primary">
-          Create transaction
+          <FormattedMessage {...messages.btnCreateTx} />
         </Button>
         <br />
         <SendConfirmationView {...SendConfirmationViewProps} />
         <br />
         <SendProgress {...SendProgressProps} />
-        {/* <SendErroeInfo /> */}
+        {/* <SendErrorInfo /> */}
       </NewModal>
     </div>
   );
@@ -241,6 +243,7 @@ SendToken.propTypes = {
     PropTypes.object,
   ]),
   txExplorer: PropTypes.string,
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -305,8 +308,10 @@ const withConnect = connect(
 const withReducer = injectReducer({ key: 'sendtoken', reducer });
 // const withSaga = injectSaga({ key: 'sendtoken', saga });
 
-export default compose(
-  withReducer,
-  // withSaga,
-  withConnect
-)(SendToken);
+export default injectIntl(
+  compose(
+    withReducer,
+    // withSaga,
+    withConnect
+  )(SendToken)
+);

@@ -5,9 +5,15 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.SendToken';
+
 export default defineMessages({
-  header: {
-    id: 'app.containers.SendToken.header',
-    defaultMessage: 'This is SendToken container !',
+  sendTokenTitle: {
+    id: `${scope}.sendTokenTitle`,
+    defaultMessage: 'Send Token',
+  },
+  btnCreateTx: {
+    id: `${scope}.btnCreateTx`,
+    defaultMessage: 'Create transaction',
   },
 });

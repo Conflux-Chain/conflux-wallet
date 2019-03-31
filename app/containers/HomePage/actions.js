@@ -16,6 +16,7 @@
  */
 import extractRates from 'utils/unitConverter';
 import { message } from 'antd';
+import msgText from 'translations/msg';
 import {
   CLOSE_WARNING,
   GENERATE_WALLET,
@@ -60,6 +61,7 @@ import {
   SHOW_DEPLOY_CONTRACT,
   HIDE_DEPLOY_CONTRACT,
 } from './constants';
+import { store } from '../../app';
 
 /* ********************************Generate Wallet ******************************* */
 
@@ -570,7 +572,8 @@ export function selectCurrency(convertTo) {
  * @return {object} An action object with a type of CLOSE_WALLET
  */
 export function closeWallet() {
-  message.success('Wallet removed from memory');
+  const locale = store.getState().get('language').locale || 'en';
+  message.success(msgText[locale]['Wallet removed from memory']);
   return {
     type: CLOSE_WALLET,
   };

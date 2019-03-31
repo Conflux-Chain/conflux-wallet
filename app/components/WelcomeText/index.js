@@ -6,6 +6,8 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const H1 = styled.h1`
   font-size: 48px;
@@ -22,23 +24,15 @@ const H2 = styled.h2`
   text-align: left;
   line-height: 22px;
 `;
-const Div = styled.div`
-  margin-top: 20px;
-`;
 
 function WelcomeText() {
   return (
     <div style={{ marginLeft: 20, marginRight: 20 }}>
-      <H1>Welcome to Conflux Wallet</H1>
+      <H1>
+        <FormattedMessage {...messages.welcomeTitle} />
+      </H1>
       <H2>
-        <Div>
-          Conflux wallet is a zero client. Connection to Conflux network is made via local node.
-        </Div>
-        <Div>
-          Keystore is encrypted using the password. When the wallet is locked, you can only view
-          balances.
-        </Div>
-        <Div>All keys are saved inside the browser and never sent.</Div>
+        <FormattedHTMLMessage {...messages.welcomeDes} />
       </H2>
     </div>
   );

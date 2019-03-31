@@ -10,13 +10,16 @@
  */
 
 import React from 'react';
-// import { FormattedMessage } from 'react-intl';
-
-// import messages from './messages';
+import { FormattedMessage } from 'react-intl';
+import messages from './messages';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class NotFound extends React.PureComponent {
   render() {
-    return <h1>404 Page not found</h1>;
+    return (
+      <h1>
+        <FormattedMessage {...messages.notFound} />
+      </h1>
+    );
   }
 }

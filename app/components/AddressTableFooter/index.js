@@ -101,8 +101,6 @@ function AddressTableFooter(props) {
               placement="bottom"
               title={intl.formatMessage({ ...messages.closeWalletConfirmMsg })}
               onConfirm={onCloseWallet}
-              okText="Confirm"
-              cancelText="Abort"
             >
               <IconButton text={intl.formatMessage({ ...messages.closeWallet })} icon="close" />
             </Popconfirm>
@@ -151,8 +149,6 @@ function AddressTableFooter(props) {
               placement="bottom"
               title={intl.formatMessage({ ...messages.closeWalletConfirmMsg })}
               onConfirm={onCloseWallet}
-              okText="Confirm"
-              cancelText="Abort"
             >
               <IconButton text={intl.formatMessage({ ...messages.closeWallet })} icon="close" />
             </Popconfirm>

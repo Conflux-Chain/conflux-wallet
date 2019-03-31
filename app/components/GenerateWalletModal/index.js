@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Modal, Button, Alert } from 'antd';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl, intlShape } from 'react-intl';
 import messages from './messages';
 
 const NewModal = styled(Modal)`
@@ -125,7 +125,7 @@ function GenerateWalletModal(props) {
       ) : null}
       <Alert
         // message={<b>The seed is imposible to recover if lost</b>}
-        description={intl.formatHTMLMessage({ ...messages.description })}
+        description={<FormattedHTMLMessage {...messages.description} />}
         type="warning"
         showIcon
         closable

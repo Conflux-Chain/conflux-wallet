@@ -23,7 +23,7 @@ const Text = styled.text`
   color: #fd4141;
 `;
 
-function SendErroeInfo() {
+function SendErrorInfo() {
   return (
     <Div>
       <Row type="flex" justify="center" align="middle">
@@ -34,6 +34,6 @@ function SendErroeInfo() {
   );
 }
 
-SendErroeInfo.propTypes = {};
+SendErrorInfo.propTypes = {};
 
-export default SendErroeInfo;
+export default SendErrorInfo;

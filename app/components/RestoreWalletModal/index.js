@@ -8,6 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Input, Icon } from 'antd';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Div = styled.div`
   display: flex;
@@ -34,6 +36,7 @@ function RestoreWalletModal(props) {
     onChangeUserPassword,
     // onRestoreWalletCancel,
     // onRestoreWalletFromSeed,
+    intl,
   } = props;
   // const suffix = userSeed ? <Icon type="close-circle" onClick={this.emitEmpty} /> : null;
   // const errorComponent = (
@@ -59,7 +62,7 @@ function RestoreWalletModal(props) {
     // >
     <Div>
       <Input
-        placeholder="Enter seed"
+        placeholder={intl.formatMessage({ ...messages.placeholderSeed })}
         value={userSeed}
         onChange={onChangeUserSeed}
         autoComplete="off"
@@ -72,7 +75,7 @@ function RestoreWalletModal(props) {
       {/* seed error */}
       {/* </Text> */}
       <Input
-        placeholder="Enter password for keystore encryption"
+        placeholder={intl.formatMessage({ ...messages.placeholderPassword })}
         value={userPassword}
         onChange={onChangeUserPassword}
         autoComplete="off"
@@ -97,6 +100,7 @@ RestoreWalletModal.propTypes = {
   // restoreWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   // onRestoreWalletCancel: PropTypes.func,
   // onRestoreWalletFromSeed: PropTypes.func,
+  intl: intlShape.isRequired,
 };
 
-export default RestoreWalletModal;
+export default injectIntl(RestoreWalletModal);

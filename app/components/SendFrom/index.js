@@ -8,6 +8,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Select } from 'antd';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
+
 const Option = Select.Option;
 
 // import styled from 'styled-components';
@@ -55,7 +58,9 @@ function SendFrom({ addressList, from, onChangeFrom, locked }) {
 
   return (
     <Div>
-      <TitleDiv>Source</TitleDiv>
+      <TitleDiv>
+        <FormattedMessage {...messages.sourceTitle} />
+      </TitleDiv>
       <Select value={from} onChange={onChangeFrom} disabled={locked}>
         {selectOptions}
       </Select>

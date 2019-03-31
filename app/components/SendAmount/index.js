@@ -8,6 +8,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { InputNumber } from 'antd';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Div = styled.div`
   font-size: 14px;
@@ -32,7 +34,9 @@ const TitleDiv = styled.div`
 function SendAmount({ amount, onChangeAmount, locked }) {
   return (
     <Div>
-      <TitleDiv>Amount</TitleDiv>
+      <TitleDiv>
+        <FormattedMessage {...messages.amountTitle} />
+      </TitleDiv>
       <InputNumber
         value={amount}
         min={0}

@@ -9,6 +9,9 @@ import { Button, Popconfirm } from 'antd';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LockButton from 'components/LockButton';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
+
 // import IconButton from 'components/IconButton';
 const Div = styled.div`
   margin-top: 45px;
@@ -39,6 +42,7 @@ function SubHeader(props) {
     password,
     onUnlockWallet,
     onRestoreWalletFromSeed,
+    intl,
     /* optional laod / save buttons
      onSaveWallet, saveWalletLoading, saveWalletError,
      onLoadWallet, loadWalletLoading, loadWalletError, */
@@ -48,10 +52,10 @@ function SubHeader(props) {
 
   const noWalletSubHeader = [
     <Button key="new_wallet" type="primary" size="large" onClick={onGenerateWallet}>
-      New wallet
+      <FormattedMessage {...messages.btnNewWallet} />
     </Button>,
     <Button key="restore_wallet" type="default" size="large" onClick={onRestoreWalletFromSeed}>
-      Restore wallet
+      <FormattedMessage {...messages.btnRestoreWallet} />
     </Button>,
     /* optional laod / save buttons
      <IconButton
@@ -69,13 +73,11 @@ function SubHeader(props) {
     <Popconfirm
       key="close_wallet"
       placement="bottom"
-      title="Wallet will be deleted from memory and LocalStorage"
+      title={intl.formatMessage({ ...messages.closeWalletConfirmMsg })}
       onConfirm={onCloseWallet}
-      okText="Confirm"
-      cancelText="Abort"
     >
       <Button key="close_wallet" type="default" icon="close-square-o" size="large">
-        Close wallet
+        <FormattedMessage {...messages.btnCloseWallet} />
       </Button>
     </Popconfirm>,
     /* optional laod / save buttons
@@ -104,6 +106,8 @@ SubHeader.propTypes = {
   password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onUnlockWallet: PropTypes.func,
   onRestoreWalletFromSeed: PropTypes.func,
+  intl: intlShape.isRequired,
+
   /* optional laod / save buttons
   onSaveWallet: PropTypes.func,
   saveWalletLoading: PropTypes.bool,
@@ -113,4 +117,4 @@ SubHeader.propTypes = {
   loadWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]), */
 };
 
-export default SubHeader;
+export default injectIntl(SubHeader);

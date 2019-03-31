@@ -3,6 +3,8 @@
  * SendToken actions
  *
  */
+
+import msgText from 'translations/msg';
 import {
   CHANGE_AMOUNT,
   CHANGE_FROM,
@@ -16,6 +18,7 @@ import {
   SEND_TRANSACTION_SUCCESS,
   SEND_TRANSACTION_ERROR,
 } from './constants';
+import { store } from '../../app';
 
 /**
  * Update from address and token, both parameters are optional
@@ -79,6 +82,7 @@ export function confirmSendTransaction() {
  * @return {object}    An action object with a type of COMFIRM_SEND_TRANSACTION_SUCCESS
  */
 export function confirmSendTransactionSuccess(msg) {
+  const locale = store.getState().get('language').locale || 'en';
   if (msg) {
     return {
       type: COMFIRM_SEND_TRANSACTION_SUCCESS,
@@ -88,7 +92,7 @@ export function confirmSendTransactionSuccess(msg) {
 
   return {
     type: COMFIRM_SEND_TRANSACTION_SUCCESS,
-    msg: 'Transaction confirmed successfully, Send to transmit',
+    msg: msgText[locale]['Transaction confirmed successfully, Send to transmit'],
   };
 }
 

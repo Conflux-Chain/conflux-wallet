@@ -32,7 +32,7 @@ export class LanguageProvider extends React.PureComponent {
         antdLocale = zhCN;
         break;
       default:
-        antdLocale = zhCN;
+        antdLocale = enUS;
         break;
     }
 

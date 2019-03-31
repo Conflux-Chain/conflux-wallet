@@ -5,9 +5,15 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.DeployContract';
+
 export default defineMessages({
-  header: {
-    id: 'app.containers.DeployContract.header',
-    defaultMessage: 'This is DeployContract container !',
+  modalTitle: {
+    id: `${scope}.modalTitle`,
+    defaultMessage: 'Deploy Contract',
+  },
+  btnConfirmInfo: {
+    id: `${scope}.btnConfirmInfo`,
+    defaultMessage: 'Confirm Info',
   },
 });

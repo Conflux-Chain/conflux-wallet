@@ -12,6 +12,9 @@ import {
   makeSelectTokenInfoList,
   makeSelectTokenInfo,
 } from 'containers/HomePage/selectors';
+
+import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
+
 import { changeBalance, setExchangeRates, updateTokenInfo } from 'containers/HomePage/actions';
 import request from 'utils/request';
 
@@ -43,6 +46,7 @@ import {
 import { timer } from 'utils/common';
 import { erc20Abi } from 'utils/contracts/abi';
 import { message } from 'antd';
+import msgText from 'translations/msg';
 
 import { makeSelectUsedFaucet, makeSelectPrevNetworkName } from './selectors';
 import {
@@ -74,6 +78,7 @@ import {
 } from './constants';
 
 import Network from './network';
+
 const web3 = new Web3(); // eslint-disable-line
 // const erc20Contract = web3.eth.contract(erc20Abi);
 
@@ -90,13 +95,14 @@ if (!online) message.warn('Debug mode: online = false in Header/saga.js');
  * connect to rpc and attach keystore as siger provider
  */
 export function* loadNetwork(action) {
+  const locale = yield select(makeSelectLocale());
   if (!online) {
-    message.warn('debug mode: online = false in Header/saga.js');
+    message.warn(msgText[locale]['debug mode: online = false in Header/saga.js']);
   }
   try {
     const rpcAddress = online ? Network[action.networkName].rpc : Network['Local RPC'].rpc;
     if (!rpcAddress) {
-      throw new Error(`${action.networkName} network not found`);
+      throw new Error(`${action.networkName} ${msgText[locale]['network not found']}`);
     }
 
     if (action.networkName === offlineModeString) {
@@ -153,7 +159,7 @@ export function* loadNetwork(action) {
         yield put(checkFaucet());
       }
     } else {
-      throw new Error('keystore not initiated - Create wallet before connecting');
+      throw new Error(msgText[locale]['keystore not initiated - Create wallet before connecting']);
     }
   } catch (err) {
     // const errorString = `loadNetwork error - ${err.message}`;
@@ -169,9 +175,10 @@ export function* confirmSendTransaction() {
     const amount = yield select(makeSelectAmount());
     const toAddress = yield select(makeSelectTo());
     const gasPrice = yield select(makeSelectGasPrice());
+    const locale = yield select(makeSelectLocale());
 
     if (!web3.isAddress(fromAddress)) {
-      throw new Error('Source address invalid');
+      throw new Error(msgText[locale]['Source address invalid']);
     }
 
     // if (amount <= 0) {
@@ -179,15 +186,16 @@ export function* confirmSendTransaction() {
     // }
 
     if (!web3.isAddress(toAddress)) {
-      throw new Error('Destenation address invalid');
+      throw new Error(msgText[locale]['Destenation address invalid']);
     }
 
     // if (!(gasPrice > 0.1)) {
     //   throw new Error('Gas price must be at least 0.1 Gwei');
     // }
 
-    const msg = `Transaction created successfully. 
-    Sending ${amount} from ...${fromAddress.slice(-5)} to ...${toAddress.slice(-5)}`;
+    const msg = `${
+      msgText[locale]['Transaction created successfully. Sending']
+    } ${amount} from ...${fromAddress.slice(-5)} to ...${toAddress.slice(-5)}`;
     yield put(confirmSendTransactionSuccess(msg));
   } catch (err) {
     // const errorString = `confirmSendTransaction error - ${err.message}`;
@@ -199,6 +207,7 @@ export function* SendTransaction() {
   const keystore = yield select(makeSelectKeystore());
   const origProvider = keystore.passwordProvider;
   try {
+    const locale = yield select(makeSelectLocale());
     const fromAddress = yield select(makeSelectFrom());
     const amount = yield select(makeSelectAmount());
     const toAddress = yield select(makeSelectTo());
@@ -207,10 +216,10 @@ export function* SendTransaction() {
 
     const tokenToSend = yield select(makeSelectSendTokenSymbol());
     if (!password) {
-      throw new Error('No password found - please unlock wallet before send');
+      throw new Error(msgText[locale]['No password found - please unlock wallet before send']);
     }
     if (!keystore) {
-      throw new Error('No keystore found - please create wallet');
+      throw new Error(msgText[locale]['No keystore found - please create wallet']);
     }
     keystore.passwordProvider = (callback) => {
       // we cannot use selector inside this callback so we use a const value
@@ -243,7 +252,11 @@ export function* SendTransaction() {
       // any other token
       const tokenInfo = yield select(makeSelectTokenInfo(tokenToSend));
       if (!tokenInfo) {
-        throw new Error(`Contract address for token '${tokenToSend}' not found`);
+        throw new Error(
+          `${msgText[locale]['Contract address for token']} '${tokenToSend}' ${
+            msgText[locale]['not found']
+          }`
+        );
       }
       const contractAddress = tokenInfo.contractAddress;
       const sendParams = {
@@ -440,6 +453,7 @@ export function* getRates() {
  */
 export function* checkFaucetApi() {
   const requestURL = checkFaucetAddress;
+  const locale = yield select(makeSelectLocale());
   // console.log(`requestURL: ${requestURL}`);
   try {
     const result = online ? yield call(request, requestURL) : { message: { serviceReady: true } };
@@ -447,7 +461,7 @@ export function* checkFaucetApi() {
     if (result.message.serviceReady) {
       yield put(checkFaucetSuccess());
     } else {
-      yield put(checkFaucetError('faucet not ready'));
+      yield put(checkFaucetError(msgText[locale]['faucet not ready']));
     }
   } catch (err) {
     yield put(checkFaucetError(err));

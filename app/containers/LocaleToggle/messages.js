@@ -16,4 +16,8 @@ export default defineMessages({
     id: `${scope}.zh`,
     defaultMessage: '中文',
   },
+  selectLang: {
+    id: `${scope}.selectLang`,
+    defaultMessage: 'Select Language',
+  },
 });

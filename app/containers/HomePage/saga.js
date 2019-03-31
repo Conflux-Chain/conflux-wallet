@@ -29,6 +29,8 @@ import {
   makeSelectTokenInfoList,
 } from 'containers/HomePage/selectors';
 
+import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
+
 import { loadNetwork } from 'containers/Header/actions';
 
 import { changeFrom } from 'containers/SendToken/actions';
@@ -46,6 +48,8 @@ import {
 import { timer } from 'utils/common';
 
 import { getCfxBalancePromise } from 'containers/Header/saga';
+
+import msgText from 'translations/msg';
 
 import {
   generateWalletSucces,
@@ -93,18 +97,21 @@ export function* restoreFromSeed() {
   try {
     const userPassword = yield select(makeSelectUserPassword());
     let userSeed = yield select(makeSelectUserSeed());
+    const locale = yield select(makeSelectLocale());
 
     // remove trailing spaces if needed
     yield put(changeUserSeed(userSeed.replace(/^\s+|\s+$/g, '')));
     userSeed = yield select(makeSelectUserSeed());
 
     if (!lightwallet.keystore.isSeedValid(userSeed)) {
-      yield put(restoreWalletFromSeedError('Invalid seed'));
+      yield put(restoreWalletFromSeedError(msgText[locale]['Invalid seed']));
       return;
     }
 
     if (userPassword.length < 8) {
-      yield put(restoreWalletFromSeedError('Password length must be 8 characters at least'));
+      yield put(
+        restoreWalletFromSeedError(msgText[locale]['Password length must be 8 characters at least'])
+      );
       return;
     }
 
@@ -133,6 +140,7 @@ export function* genKeystore() {
   try {
     const password = yield select(makeSelectPassword());
     const seedPhrase = yield select(makeSelectSeed());
+    const locale = yield select(makeSelectLocale());
     const opt = {
       password,
       seedPhrase,
@@ -155,7 +163,10 @@ export function* genKeystore() {
 
     ks.passwordProvider = (callback) => {
       // const password = yield select(makeSelectPassword());
-      const pw = prompt('Please enter keystore password', 'Password'); // eslint-disable-line
+      const pw = prompt(
+        msgText[locale]['Please enter keystore password'],
+        msgText[locale].Password
+      ); // eslint-disable-line
       callback(null, pw);
     };
 
@@ -180,6 +191,7 @@ export function* genKeystore() {
 export function* generateAddress() {
   try {
     const ks = yield select(makeSelectKeystore());
+    const locale = yield select(makeSelectLocale());
     if (!ks) {
       throw new Error('No keystore found');
     }
@@ -187,7 +199,7 @@ export function* generateAddress() {
     const password = yield select(makeSelectPassword());
     if (!password) {
       // TODO: Handle password
-      throw new Error('Wallet Locked');
+      throw new Error(msgText[locale]['Wallet Locked']);
     }
 
     // eslint-disable-next-line no-inner-declarations
@@ -225,15 +237,16 @@ export function* generateAddress() {
  * unlock wallet using user given password
  */
 export function* unlockWallet() {
+  const locale = yield select(makeSelectLocale());
   try {
     const currentPassword = yield select(makeSelectPassword());
     if (currentPassword) {
-      throw Error('Wallet Already unlocked');
+      throw Error(msgText[locale]['Wallet Already unlocked']);
     }
 
     const ks = yield select(makeSelectKeystore());
     if (!ks) {
-      throw new Error('No keystore to unlock');
+      throw new Error(msgText[locale]['No keystore to unlock']);
     }
 
     const passwordProvider = ks.passwordProvider;
@@ -269,12 +282,12 @@ export function* unlockWallet() {
     const isPasswordCorrect = ks.isDerivedKeyCorrect(pwDerivedKey);
 
     if (!isPasswordCorrect) {
-      throw Error('Invalid Password');
+      throw Error(msgText[locale]['Invalid Password']);
     }
 
     yield put(unlockWalletSuccess(userPassword));
   } catch (err) {
-    const errorString = `Unlock wallet error - ${err.message}`;
+    const errorString = `${msgText[locale]['Unlock wallet error']} - ${err.message}`;
     yield put(unlockWalletError(errorString));
   }
 }
@@ -303,8 +316,9 @@ export function* closeWallet() {
 export function* saveWalletS() {
   try {
     const ks = yield select(makeSelectKeystore());
+    const locale = yield select(makeSelectLocale());
     if (!ks) {
-      throw new Error('No keystore defined');
+      throw new Error(msgText[locale]['No keystore defined']);
     }
 
     const dump = {
@@ -330,13 +344,16 @@ export function* loadWalletS() {
   try {
     yield call(timer, 1000);
     const existingKs = yield select(makeSelectKeystore());
+    const locale = yield select(makeSelectLocale());
     if (existingKs) {
-      throw new Error('Existing keystore present  - aborting load form localStorage');
+      throw new Error(
+        msgText[locale]['Existing keystore present  - aborting load form localStorage']
+      );
     }
 
     const dump = localStore.get(localStorageKey);
     if (!dump) {
-      throw new Error('No keystore found in localStorage');
+      throw new Error(msgText[locale]['No keystore found in localStorage']);
     }
     // console.log(`Load len: ${JSON.stringify(dump).length}`);
 

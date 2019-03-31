@@ -5,9 +5,23 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.SubHeader';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.SubHeader.header',
-    defaultMessage: 'This is the SubHeader component !',
+  btnNewWallet: {
+    id: `${scope}.btnNewWallet`,
+    defaultMessage: 'New wallet',
+  },
+  btnRestoreWallet: {
+    id: `${scope}.btnRestoreWallet`,
+    defaultMessage: 'Restore wallet',
+  },
+  btnCloseWallet: {
+    id: `${scope}.btnCloseWallet`,
+    defaultMessage: 'Close wallet',
+  },
+  closeWalletConfirmMsg: {
+    id: `${scope}.closeWalletConfirmMsg`,
+    defaultMessage: 'Wallet will be deleted from memory and LocalStorage',
   },
 });

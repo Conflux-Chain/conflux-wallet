@@ -8,6 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input } from 'antd';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Div = styled.div`
   margin-top: 10px;
@@ -19,11 +21,11 @@ const Div = styled.div`
   }
 `;
 
-function SendTo({ to, onChangeTo, locked }) {
+function SendTo({ to, onChangeTo, locked, intl }) {
   return (
     <Div>
       <Input
-        placeholder="Send to address"
+        placeholder={intl.formatMessage({ ...messages.placeholderSendTo })}
         value={to}
         onChange={onChangeTo}
         disabled={locked}
@@ -40,6 +42,7 @@ SendTo.propTypes = {
   to: PropTypes.string,
   onChangeTo: PropTypes.func,
   locked: PropTypes.bool,
+  intl: intlShape.isRequired,
 };
 
-export default SendTo;
+export default injectIntl(SendTo);

@@ -5,9 +5,11 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.SendAmount';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.SendAmount.header',
-    defaultMessage: 'Amount to send: ',
+  amountTitle: {
+    id: `${scope}.amountTitle`,
+    defaultMessage: 'Amount',
   },
 });

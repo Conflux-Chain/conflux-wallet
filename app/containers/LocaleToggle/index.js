@@ -57,7 +57,7 @@ export class LocaleToggle extends React.PureComponent {
     const menu = (
       <PCMenu>
         <StyledMenuItem disabled key="title">
-          Select Language
+          <FormattedMessage {...messages.selectLang} />
         </StyledMenuItem>
         {options}
       </PCMenu>

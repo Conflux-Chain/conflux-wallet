@@ -2,7 +2,10 @@ import lightwallet from 'eth-lightwallet';
 import BigNumber from 'bignumber.js';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { makeSelectKeystore, makeSelectPassword } from 'containers/HomePage/selectors';
+import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { Gwei, maxGasLimitForDeployContract } from 'utils/constants';
+import msgText from 'translations/msg';
+
 import { makeSelectCode, makeSelectFrom, makeSelectGasPrice } from './selectors';
 import {
   confirmDeployContractSuccess,
@@ -12,7 +15,8 @@ import {
   deployInProgress,
 } from './actions';
 import { COMFIRM_DEPLOY_CONTRACT, DEPLOY_CONTRACT } from './constants';
-import web3 from '../Header/web3';
+
+import web3 from '../Header/web3'; // TODO provider
 const txutils = lightwallet.txutils;
 const signing = lightwallet.signing;
 
@@ -20,17 +24,18 @@ export function* confirmSendTransaction() {
   try {
     const fromAddress = yield select(makeSelectFrom());
     const code = yield select(makeSelectCode());
+    const locale = yield select(makeSelectLocale());
     // const gasPrice = yield select(makeSelectGasPrice());
 
     if (!web3.isAddress(fromAddress)) {
-      throw new Error('Source address invalid');
+      throw new Error(msgText[locale]['Source address invalid']);
     }
 
     if (!code) {
-      throw new Error('code invalid');
+      throw new Error(msgText[locale]['code invalid']);
     }
     // TODO:提示语
-    const msg = `you can continue deploy contract`;
+    const msg = msgText[locale]['you can continue deploy contract'];
     yield put(confirmDeployContractSuccess(msg));
   } catch (err) {
     // const errorString = `confirmSendTransaction error - ${err.message}`;
@@ -41,6 +46,7 @@ export function* confirmSendTransaction() {
 export function* DeployContract() {
   const keystore = yield select(makeSelectKeystore());
   const origProvider = keystore.passwordProvider;
+  const locale = yield select(makeSelectLocale());
   try {
     const fromAddress = yield select(makeSelectFrom());
     const code = yield select(makeSelectCode());
@@ -49,10 +55,10 @@ export function* DeployContract() {
     const password = yield select(makeSelectPassword());
 
     if (!password) {
-      throw new Error('No password found - please unlock wallet before send');
+      throw new Error(msgText[locale]['No password found - please unlock wallet before send']);
     }
     if (!keystore) {
-      throw new Error('No keystore found - please create wallet');
+      throw new Error(msgText[locale]['No keystore found - please create wallet']);
     }
     //  开始部署
     yield put(deployInProgress(true));

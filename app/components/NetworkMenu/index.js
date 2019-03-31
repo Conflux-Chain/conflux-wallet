@@ -48,7 +48,7 @@ function NetworkMenu(props) {
     options = availableNetworks.map((network) => (
       <StyledMenuItem key={network}>
         <a tabIndex="0" role="button" onClick={() => onLoadNetwork(network)}>
-          {network}
+          <FormattedMessage {...messages[network]} />
         </a>
       </StyledMenuItem>
     ));
@@ -66,7 +66,7 @@ function NetworkMenu(props) {
   return (
     <Dropdown overlay={menu}>
       <StyledButton size="large">
-        {networkName}
+        <FormattedMessage {...messages[networkName]} />
         <Icon type="caret-down" />
       </StyledButton>
     </Dropdown>

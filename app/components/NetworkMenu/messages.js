@@ -12,4 +12,16 @@ export default defineMessages({
     id: `${scope}.menu`,
     defaultMessage: 'Select Conflux network',
   },
+  Offline: {
+    id: `${scope}.Offline`,
+    defaultMessage: 'Offline',
+  },
+  Testnet: {
+    id: `${scope}.Testnet`,
+    defaultMessage: 'Testnet',
+  },
+  'Local RPC': {
+    id: `${scope}.LocalRPC`,
+    defaultMessage: 'Local RPC',
+  },
 });

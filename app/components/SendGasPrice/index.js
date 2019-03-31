@@ -10,9 +10,9 @@ import { Slider, InputNumber, Row, Col } from 'antd';
 // import { Gwei } from 'utils/constants';
 // import BigNumber from 'bignumber.js';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
-// import { FormattedMessage } from 'react-intl';
-// import messages from './messages';
 const Div = styled.div`
   .ant-input-number {
     width: 60px;
@@ -37,7 +37,9 @@ const TitleDiv = styled.div`
 function SendGasPrice({ gasPrice, onChangeGasPrice, locked }) {
   return (
     <Div>
-      <TitleDiv>Gas price</TitleDiv>
+      <TitleDiv>
+        <FormattedMessage {...messages.gasPriceTitle} />
+      </TitleDiv>
       <Row type="flex" justify="space-between">
         <Col span={18}>
           <Slider

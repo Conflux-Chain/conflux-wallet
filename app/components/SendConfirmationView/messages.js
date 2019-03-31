@@ -5,9 +5,27 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.SendConfirmationView';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.SendConfirmationView.header',
-    defaultMessage: 'This is the SendConfirmationView component !',
+  checkingTip: {
+    id: `${scope}.checkingTip`,
+    defaultMessage: 'Contract Bytecode',
+  },
+  alertErr1: {
+    id: `${scope}.alertErr1`,
+    defaultMessage: 'Transaction not created',
+  },
+  alertErr2: {
+    id: `${scope}.alertErr2`,
+    defaultMessage: 'Transaction is valid',
+  },
+  btnTryAgain: {
+    id: `${scope}.btnTryAgain`,
+    defaultMessage: 'Try again',
+  },
+  btnSendCfx: {
+    id: `${scope}.btnSendCfx`,
+    defaultMessage: 'Send CFX',
   },
 });

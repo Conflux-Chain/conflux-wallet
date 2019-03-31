@@ -8,6 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, Button, Spin } from 'antd';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Div = styled.div`
   margin-top: 22px;
@@ -25,11 +27,17 @@ function SendConfirmationView(props) {
     onAbortTransaction,
     isSendComfirmationLocked,
     sendError,
+    intl,
   } = props;
   if (comfirmationLoading) {
     return (
       <Div>
-        <Spin spinning style={{ position: 'static' }} size="large" tip="checking transaction....">
+        <Spin
+          spinning
+          style={{ position: 'static' }}
+          size="large"
+          tip={intl.formatMessage({ ...messages.checkingTip })}
+        >
           <br />
         </Spin>
       </Div>
@@ -40,7 +48,7 @@ function SendConfirmationView(props) {
     return (
       <Div>
         <Alert
-          message="Transaction not created"
+          message={intl.formatMessage({ ...messages.alertErr1 })}
           description={confirmationError}
           type="error"
           showIcon
@@ -52,7 +60,11 @@ function SendConfirmationView(props) {
   if (confirmationMsg !== false) {
     return (
       <Div>
-        <Alert message="Transaction is valid" description={confirmationMsg} type="info" />
+        <Alert
+          message={intl.formatMessage({ ...messages.alertErr2 })}
+          description={confirmationMsg}
+          type="info"
+        />
         <br />
         <Button
           type="primary"
@@ -60,7 +72,11 @@ function SendConfirmationView(props) {
           onClick={onSendTransaction}
           disabled={isSendComfirmationLocked}
         >
-          {sendError ? 'Try again' : 'Send CFX'}
+          {sendError ? (
+            <FormattedMessage {...messages.btnTryAgain} />
+          ) : (
+            <FormattedMessage {...messages.btnSendCfx} />
+          )}
         </Button>
         {/* <br /> */}
         {/* <Button */}
@@ -89,6 +105,7 @@ SendConfirmationView.propTypes = {
   onAbortTransaction: PropTypes.func.isRequired,
 
   sendError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  intl: intlShape.isRequired,
 };
 
-export default SendConfirmationView;
+export default injectIntl(SendConfirmationView);

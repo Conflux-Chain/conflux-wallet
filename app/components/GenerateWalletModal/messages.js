@@ -30,7 +30,6 @@ export default defineMessages({
   },
   description: {
     id: `${scope}.description`,
-    defaultMessage: `WTF is wallet security?
-            <br /> Do not save password in screenshot!`,
+    defaultMessage: `WTF is wallet security? <br /> Do not save password in screenshot!`,
   },
 });

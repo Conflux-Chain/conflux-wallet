@@ -3,6 +3,7 @@
  * SendToken actions
  *
  */
+import msgText from 'translations/msg';
 import {
   CHANGE_CODE,
   CHANGE_FROM,
@@ -17,6 +18,7 @@ import {
   DEPLOY_CONTRACT_ERROR,
   DEPLOY_IN_PROGRESS,
 } from './constants';
+import { store } from '../../app';
 
 export function changeCode(code) {
   return {
@@ -64,6 +66,7 @@ export function confirmDeployContract() {
 }
 
 export function confirmDeployContractSuccess(msg) {
+  const locale = store.getState().get('language').locale || 'en';
   if (msg) {
     return {
       type: COMFIRM_DEPLOY_CONTRACT_SUCCESS,
@@ -73,7 +76,7 @@ export function confirmDeployContractSuccess(msg) {
 
   return {
     type: COMFIRM_DEPLOY_CONTRACT_SUCCESS,
-    msg: 'Deploy confirmed successfully, Send to transmit',
+    msg: msgText[locale]['Deploy confirmed successfully, Send to transmit'],
   };
 }
 
