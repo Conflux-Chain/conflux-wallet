@@ -22,6 +22,7 @@ import AddressView from 'components/AddressView';
 import SendToken from 'containers/SendToken';
 import TokenChooser from 'containers/TokenChooser';
 import PageFooter from 'components/PageFooter';
+import SubHeader from 'components/SubHeader';
 import { Content } from 'components/PageFooter/sticky';
 import DeployContract from 'containers/DeployContract';
 /* Header: */
@@ -194,6 +195,7 @@ export class HomePage extends React.PureComponent {
       onLoadWallet,
       loadWalletLoading,
       loadWalletError,
+      onRestoreWalletFromSeed,
     };
 
     const generateWalletProps = {
@@ -254,6 +256,7 @@ export class HomePage extends React.PureComponent {
       getExchangeRatesError,
 
       onShowDeployContract,
+      onCloseWallet,
     };
 
     const sendTokenProps = { isShowSendToken, onHideSendToken };

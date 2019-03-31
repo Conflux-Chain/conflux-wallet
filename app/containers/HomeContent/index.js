@@ -21,6 +21,7 @@ const Div = styled.div`
     height: 596px;
   }
   width: 100%;
+  padding-top: 10px;
   background: url(${bgImg}) no-repeat center top;
   background-size: cover;
 `;

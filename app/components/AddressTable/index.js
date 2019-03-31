@@ -217,7 +217,7 @@ function AddressTable(props) {
         <AddrTable
           dataSource={completeRowList}
           // bordered
-          scroll={{ x: 1200 }}
+          // scroll={{ x: 1200 }}
           pagination={false}
           locale={{
             filterTitle: null,

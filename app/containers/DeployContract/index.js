@@ -184,7 +184,7 @@ function DeployContract(props) {
         onCancel={onHideDeployContract}
         // footer={modalFooter}
       >
-        <Row>
+        <Row gutter={15}>
           <Col xs={24} sm={12}>
             <DeployContractCode {...DeployCodeProps} />
           </Col>

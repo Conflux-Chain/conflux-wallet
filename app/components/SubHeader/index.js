@@ -38,6 +38,7 @@ function SubHeader(props) {
     onLockWallet,
     password,
     onUnlockWallet,
+    onRestoreWalletFromSeed,
     /* optional laod / save buttons
      onSaveWallet, saveWalletLoading, saveWalletError,
      onLoadWallet, loadWalletLoading, loadWalletError, */
@@ -49,7 +50,7 @@ function SubHeader(props) {
     <Button key="new_wallet" type="primary" size="large" onClick={onGenerateWallet}>
       New wallet
     </Button>,
-    <Button key="restore_wallet" type="default" size="large" onClick={onShowRestoreWallet}>
+    <Button key="restore_wallet" type="default" size="large" onClick={onRestoreWalletFromSeed}>
       Restore wallet
     </Button>,
     /* optional laod / save buttons
@@ -102,6 +103,7 @@ SubHeader.propTypes = {
   onLockWallet: PropTypes.func,
   password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onUnlockWallet: PropTypes.func,
+  onRestoreWalletFromSeed: PropTypes.func,
   /* optional laod / save buttons
   onSaveWallet: PropTypes.func,
   saveWalletLoading: PropTypes.bool,

@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 import IconButton from 'components/IconButton';
 import LockButton from 'components/LockButton';
-import { Row } from 'antd';
+import { Button, Popconfirm, Row } from 'antd';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import messages from './messages';
 
@@ -23,16 +23,17 @@ const Div = styled.div`
 const DivPC = styled.div`
   margin-top: 104px;
   .ant-btn {
-    margin-right: 44px;
+    margin-right: 30px;
     width: 200px;
     height: 46px;
   }
 `;
 const DivMobile = styled.div`
-  margin-top: 140px;
+  margin-top: 10px;
   .ant-btn {
     margin-bottom: 24px;
-    width: 200px;
+    width: 90%;
+    min-width: 200px;
     height: 44px;
   }
 `;
@@ -52,6 +53,7 @@ function AddressTableFooter(props) {
     onGenerateAddress,
     addressListLoading,
     addressListError,
+    onCloseWallet,
     intl,
 
     // onGetExchangeRates,
@@ -80,7 +82,7 @@ function AddressTableFooter(props) {
             />
             <IconButton
               text="Check balances"
-              icon="reload"
+              icon="check"
               onClick={onCheckBalances}
               loading={checkingBalances}
               error={checkingBalancesError}
@@ -88,12 +90,22 @@ function AddressTableFooter(props) {
               popconfirmMsg={false}
             />
             <IconButton
+              text="Deploy Contract"
+              icon="up"
               onClick={() => {
                 onShowDeployContract();
               }}
-              style={{ marginRight: 0 }}
-              text="Deploy Contract"
             />
+            <Popconfirm
+              key="close_wallet"
+              placement="bottom"
+              title="Wallet will be deleted from memory and LocalStorage"
+              onConfirm={onCloseWallet}
+              okText="Confirm"
+              cancelText="Abort"
+            >
+              <IconButton text="Close wallet" icon="close" />
+            </Popconfirm>
           </Row>
         </DivPC>
       ) : (
@@ -115,7 +127,7 @@ function AddressTableFooter(props) {
           <Row type="flex" justify="center">
             <IconButton
               text="Check balances"
-              icon="reload"
+              icon="check"
               onClick={onCheckBalances}
               loading={checkingBalances}
               error={checkingBalancesError}
@@ -125,12 +137,25 @@ function AddressTableFooter(props) {
           </Row>
           <Row type="flex" justify="center">
             <IconButton
+              text={intl.formatMessage({ ...messages.deployContract })}
+              icon="up"
               onClick={() => {
                 onShowDeployContract();
               }}
               style={{ marginRight: 0 }}
-              text={intl.formatMessage({ ...messages.deployContract })}
             />
+          </Row>
+          <Row type="flex" justify="center">
+            <Popconfirm
+              key="close_wallet"
+              placement="bottom"
+              title="Wallet will be deleted from memory and LocalStorage"
+              onConfirm={onCloseWallet}
+              okText="Confirm"
+              cancelText="Abort"
+            >
+              <IconButton text="Close wallet" icon="close" />
+            </Popconfirm>
           </Row>
         </DivMobile>
       )}

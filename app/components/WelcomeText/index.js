@@ -11,6 +11,7 @@ const H1 = styled.h1`
   font-size: 48px;
   color: #fff;
   text-align: left;
+  line-height: 1.1;
 `;
 
 const H2 = styled.h2`

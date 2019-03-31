@@ -61,6 +61,7 @@ function AddressView(props) {
     onShowTokenChooser,
     intl,
     onShowDeployContract,
+    onCloseWallet,
   } = props;
 
   const addressTableProps = {
@@ -96,6 +97,7 @@ function AddressView(props) {
 
     onShowTokenChooser,
     onShowDeployContract,
+    onCloseWallet,
   };
 
   let addressViewContent = (

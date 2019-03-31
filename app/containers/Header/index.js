@@ -44,9 +44,10 @@ import { loadNetwork } from './actions';
 
 const HeaderWrapped = styled.header`
   transition: opacity 0.5s;
-  margin-bottom: 50px;
   padding: 0;
+  margin: 0 auto;
   width: 100%;
+  max-width: 1400px;
   font-size: 16px;
   border-bottom: 1px solid #f5f5f5;
 `;
@@ -68,12 +69,12 @@ function Header(props) {
 
   return (
     <HeaderWrapped className="clearfix">
-      <Row type="flex" align="middle" justify="space-between" style={{ backgroundColor: '#fff' }}>
-        <Col sm={{ span: 6, offset: 1 }} xs={12}>
+      <Row type="flex" align="middle" justify="space-around" style={{ backgroundColor: '#fff' }}>
+        <Col span={6} style={{ textAlign: 'left', paddingLeft: 20 }}>
           <Logo />
         </Col>
-        <Col sm={{ span: 10, offset: 2 }} xs={24}>
-          <Row type="flex" align="middle" justify="start">
+        <Col span={18}>
+          <Row type="flex" align="middle" justify="end" style={{ paddingRight: 20 }}>
             <NetworkIndicator {...networkIndicatorProps} />
             <NetworkMenu {...networkMenuProps} />
             <LocaleToggle />

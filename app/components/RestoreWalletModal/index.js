@@ -67,10 +67,10 @@ function RestoreWalletModal(props) {
         autoCapitalize="off"
         spellCheck={false}
       />
-      <Text>
-        <Icon type="close-circle" style={{ color: 'red', marginRight: '5px' }} />
-        seed error
-      </Text>
+      {/* <Text> */}
+      {/* <Icon type="close-circle" style={{ color: 'red', marginRight: '5px' }} /> */}
+      {/* seed error */}
+      {/* </Text> */}
       <Input
         placeholder="Enter password for keystore encryption"
         value={userPassword}
@@ -80,10 +80,10 @@ function RestoreWalletModal(props) {
         autoCapitalize="off"
         spellCheck={false}
       />
-      <Text>
-        <Icon type="close-circle" style={{ color: 'red', marginRight: '5px' }} />
-        password error
-      </Text>
+      {/* <Text> */}
+      {/* <Icon type="close-circle" style={{ color: 'red', marginRight: '5px' }} /> */}
+      {/* password error */}
+      {/* </Text> */}
     </Div>
   );
 }
