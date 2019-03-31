@@ -77,8 +77,14 @@ export function* DeployContract() {
     // TODO 这个 nonce 应该在第一次获取后缓存起来，以后每次交易 +1
     // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
     // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
-    const nonce = yield call(getNoncePromise, fromAddress);
-
+    let nonce = yield call(getNoncePromise, fromAddress);
+    console.log(nonce);
+    const localNonce = Number(localStorage.getItem(fromAddress)) || 0;
+    // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
+    if (localNonce > nonce) {
+      nonce = localNonce;
+    }
+    localStorage.setItem(fromAddress, nonce + 1);
     console.log('nonce: ', nonce);
 
     const sendParams = {
