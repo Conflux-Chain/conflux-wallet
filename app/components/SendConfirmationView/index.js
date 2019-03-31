@@ -54,12 +54,24 @@ function SendConfirmationView(props) {
       <Div>
         <Alert message="Transaction is valid" description={confirmationMsg} type="info" />
         <br />
-        <Button icon="to-top" onClick={onSendTransaction} disabled={isSendComfirmationLocked}>
+        <Button
+          type="primary"
+          icon="to-top"
+          onClick={onSendTransaction}
+          disabled={isSendComfirmationLocked}
+        >
           {sendError ? 'Try again' : 'Send CFX'}
-        </Button>{' '}
-        <Button icon="close" onClick={onAbortTransaction} disabled={isSendComfirmationLocked}>
-          Back
         </Button>
+        {/* <br /> */}
+        {/* <Button */}
+        {/* type="primary" */}
+        {/* icon="close" */}
+        {/* onClick={onAbortTransaction} */}
+        {/* disabled={isSendComfirmationLocked} */}
+        {/* style={{ marginTop: 10 }} */}
+        {/* > */}
+        {/* Back */}
+        {/* </Button> */}
       </Div>
     );
   }

@@ -26,6 +26,7 @@ const AddrTable = styled(Table)`
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
   tbody {
     background: white;
   }

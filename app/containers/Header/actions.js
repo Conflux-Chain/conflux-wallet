@@ -305,6 +305,7 @@ export function askFaucetSuccess(tx) {
  * @return {object} An action object with a type of ASK_FAUCET_ERROR passing the error
  */
 export function askFaucetError(error) {
+  notification.close('ask');
   const key = `open${Date.now()}`;
   const closeNotification = () => {
     notification.close(key);

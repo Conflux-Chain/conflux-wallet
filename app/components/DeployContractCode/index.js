@@ -21,7 +21,7 @@ const TitleDiv = styled.div`
 function DeployContracCode({ code, onChangeCode, locked }) {
   return (
     <span>
-      <TitleDiv>Code</TitleDiv>
+      <TitleDiv>Contract Bytecode</TitleDiv>
       <Input.TextArea
         style={{
           height: '344px',

@@ -25,21 +25,27 @@ function SendProgress({ sendInProgress, sendError, sendTx, txExplorer }) {
   }
 
   if (sendError !== false) {
-    return <Alert message="Send Error" description={sendError} type="error" />;
+    return (
+      <div style={{ marginBottom: 10 }}>
+        <Alert message="Send Error" description={sendError} type="error" />
+      </div>
+    );
   }
 
   if (sendTx) {
     return (
-      <Alert
-        message="Send sucessfull"
-        description={
-          <Span>
-            {' '}
-            TX: <br /> <TxLink tx={sendTx} explorer={txExplorer} />{' '}
-          </Span>
-        }
-        type="success"
-      />
+      <div style={{ marginBottom: 10 }}>
+        <Alert
+          message="Send sucessfull"
+          description={
+            <Span>
+              {' '}
+              TX: <br /> <TxLink tx={sendTx} explorer={txExplorer} />{' '}
+            </Span>
+          }
+          type="success"
+        />
+      </div>
     );
   }
 

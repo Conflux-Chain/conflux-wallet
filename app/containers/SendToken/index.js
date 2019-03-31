@@ -177,7 +177,7 @@ function SendToken(props) {
   };
 
   const modalFooter = [
-    <Button key="reset" type="default" size="large" onClick={onAbortTransaction}>
+    <Button key="reset" type="primary" size="large" onClick={onAbortTransaction}>
       Reset
     </Button>,
   ];
