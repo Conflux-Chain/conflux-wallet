@@ -8,8 +8,8 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.components.PageFooter';
 
 export default defineMessages({
-  menu: {
-    id: `${scope}.menu`,
-    defaultMessage: 'Select Conflux network',
+  websiteName: {
+    id: `${scope}.websiteName`,
+    defaultMessage: 'Conflux Offical Website',
   },
 });

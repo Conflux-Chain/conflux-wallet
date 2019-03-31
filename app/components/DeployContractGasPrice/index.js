@@ -8,6 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Slider, InputNumber, Row, Col } from 'antd';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Div = styled.div`
   .ant-input-number {
@@ -34,7 +36,9 @@ const TitleDiv = styled.div`
 function DeployContractGasPrice({ gasPrice, onChangeGasPrice, locked }) {
   return (
     <Div>
-      <TitleDiv>Gas price</TitleDiv>
+      <TitleDiv>
+        <FormattedMessage {...messages.gasPriceTitle} />
+      </TitleDiv>
       <Row type="flex" justify="space-between">
         <Col span={18}>
           <Slider

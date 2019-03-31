@@ -5,9 +5,11 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.DeployContractGasPrice';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.DeployContractGasPrice.header',
-    defaultMessage: 'Gas price: ',
+  gasPriceTitle: {
+    id: `${scope}.gasPriceTitle`,
+    defaultMessage: 'Gas price',
   },
 });

@@ -8,11 +8,13 @@ import React from 'react';
 // import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { InputNumber } from 'antd';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 function DeployContractGas({ gas, onChangeGas, locked }) {
   return (
     <span>
-      {'Gas: '}
+      <FormattedMessage {...messages.gasLabel} />
       <InputNumber
         value={gas}
         min={0}

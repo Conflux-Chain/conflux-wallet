@@ -81,7 +81,7 @@ function AddressTableFooter(props) {
             {/* popconfirmMsg={false} */}
             {/* /> */}
             <IconButton
-              text="Check balances"
+              text={intl.formatMessage({ ...messages.checkBalance })}
               icon="check"
               onClick={onCheckBalances}
               loading={checkingBalances}
@@ -90,7 +90,7 @@ function AddressTableFooter(props) {
               popconfirmMsg={false}
             />
             <IconButton
-              text="Deploy Contract"
+              text={intl.formatMessage({ ...messages.deployContract })}
               icon="up"
               onClick={() => {
                 onShowDeployContract();
@@ -99,12 +99,12 @@ function AddressTableFooter(props) {
             <Popconfirm
               key="close_wallet"
               placement="bottom"
-              title="Wallet will be deleted from memory and LocalStorage"
+              title={intl.formatMessage({ ...messages.closeWalletConfirmMsg })}
               onConfirm={onCloseWallet}
               okText="Confirm"
               cancelText="Abort"
             >
-              <IconButton text="Close wallet" icon="close" />
+              <IconButton text={intl.formatMessage({ ...messages.closeWallet })} icon="close" />
             </Popconfirm>
           </Row>
         </DivPC>
@@ -126,7 +126,7 @@ function AddressTableFooter(props) {
           {/* </Row> */}
           <Row type="flex" justify="center">
             <IconButton
-              text="Check balances"
+              text={intl.formatMessage({ ...messages.checkBalance })}
               icon="check"
               onClick={onCheckBalances}
               loading={checkingBalances}
@@ -149,12 +149,12 @@ function AddressTableFooter(props) {
             <Popconfirm
               key="close_wallet"
               placement="bottom"
-              title="Wallet will be deleted from memory and LocalStorage"
+              title={intl.formatMessage({ ...messages.closeWalletConfirmMsg })}
               onConfirm={onCloseWallet}
               okText="Confirm"
               cancelText="Abort"
             >
-              <IconButton text="Close wallet" icon="close" />
+              <IconButton text={intl.formatMessage({ ...messages.closeWallet })} icon="close" />
             </Popconfirm>
           </Row>
         </DivMobile>

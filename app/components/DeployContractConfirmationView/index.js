@@ -8,6 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Alert, Button, Spin, Row } from 'antd';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Div = styled.div`
   margin-top: 14px;
@@ -25,11 +27,17 @@ function SendConfirmationView(props) {
     onAbortDeploy,
     isDeployComfirmationLocked,
     deployError,
+    intl,
   } = props;
   if (comfirmationLoading) {
     return (
       <Div>
-        <Spin spinning style={{ position: 'static' }} size="large" tip="checking transaction....">
+        <Spin
+          spinning
+          style={{ position: 'static' }}
+          size="large"
+          tip={intl.formatMessage({ ...messages.checkingTip })}
+        >
           <br />
         </Spin>
       </Div>
@@ -39,7 +47,12 @@ function SendConfirmationView(props) {
   if (confirmationError !== false) {
     return (
       <Div>
-        <Alert message="Incomplete data" description={confirmationError} type="error" showIcon />
+        <Alert
+          message={intl.formatMessage({ ...messages.alertErr1 })}
+          description={confirmationError}
+          type="error"
+          showIcon
+        />
       </Div>
     );
   }
@@ -47,14 +60,22 @@ function SendConfirmationView(props) {
   if (confirmationMsg !== false) {
     return (
       <Div>
-        <Alert message="Deploy info is valid" description={confirmationMsg} type="info" />
+        <Alert
+          message={intl.formatMessage({ ...messages.alertErr2 })}
+          description={confirmationMsg}
+          type="info"
+        />
         <br />
         <Row type="flex" justify="space-between">
           <Button icon="to-top" onClick={onDeployContract} disabled={isDeployComfirmationLocked}>
-            {deployError ? 'Try again' : 'Go Deploy'}
+            {deployError ? (
+              <FormattedMessage {...messages.btnTryAgain} />
+            ) : (
+              <FormattedMessage {...messages.btnGoDeploy} />
+            )}
           </Button>{' '}
           <Button icon="close" onClick={onAbortDeploy} disabled={isDeployComfirmationLocked}>
-            Back
+            <FormattedMessage {...messages.btnBack} />
           </Button>
         </Row>
       </Div>
@@ -74,6 +95,7 @@ SendConfirmationView.propTypes = {
   onAbortDeploy: PropTypes.func.isRequired,
 
   deployError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  intl: intlShape.isRequired,
 };
 
-export default SendConfirmationView;
+export default injectIntl(SendConfirmationView);

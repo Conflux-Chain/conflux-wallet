@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Row } from 'antd';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const TableCon = styled.div`
   background: #f2f2f2;
@@ -31,27 +33,36 @@ const ContentSpan = styled.span`
   word-break: break-all;
   text-align: left;
 `;
+
 function MobileAddressTable(props) {
   const { data, onShowSendToken } = props;
   let mobileTable = null;
+
   mobileTable = data.map((item, index) => (
     <ItemCon key={item.key}>
       <Row type="flex" justify="start">
-        <TitleSpan>Address</TitleSpan>
+        <TitleSpan>
+          <FormattedMessage {...messages.address} />
+        </TitleSpan>
         <ContentSpan>{item.address}</ContentSpan>
       </Row>
       <Row type="flex" justify="start" style={{ marginTop: '20px' }}>
-        <TitleSpan>Balance</TitleSpan>
+        <TitleSpan>
+          <FormattedMessage {...messages.balance} />
+        </TitleSpan>
         <ContentSpan>{item.balance}</ContentSpan>
       </Row>
       <Row type="flex" justify="start" style={{ marginTop: '20px' }}>
-        <TitleSpan>Action</TitleSpan>
+        <TitleSpan>
+          <FormattedMessage {...messages.action} />
+        </TitleSpan>
         <Button type="primary" ghost onClick={() => onShowSendToken(item.address, item.token)}>
-          Send
+          <FormattedMessage {...messages.send} />
         </Button>
       </Row>
     </ItemCon>
   ));
+
   return <TableCon>{mobileTable}</TableCon>;
 }
 
@@ -59,4 +70,5 @@ MobileAddressTable.propTypes = {
   data: PropTypes.array,
   onShowSendToken: PropTypes.func,
 };
+
 export default MobileAddressTable;

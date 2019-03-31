@@ -1,13 +1,35 @@
 /*
- * SendConfirmationView Messages
+ * DeployContractConfirmationView Messages
  *
- * This contains all the text for the SendConfirmationView component.
+ * This contains all the text for the DeployContractConfirmationView component.
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.DeployContractConfirmationView';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.DeployContractConfirmationView.header',
-    defaultMessage: 'This is the SendConfirmationView component !',
+  checkingTip: {
+    id: `${scope}.checkingTip`,
+    defaultMessage: 'checking transaction....',
+  },
+  alertErr1: {
+    id: `${scope}.alertErr1`,
+    defaultMessage: 'Incomplete data',
+  },
+  alertErr2: {
+    id: `${scope}.alertErr2`,
+    defaultMessage: 'Deploy info is valid',
+  },
+  btnBack: {
+    id: `${scope}.btnBack`,
+    defaultMessage: 'Back',
+  },
+  btnTryAgain: {
+    id: `${scope}.btnTryAgain`,
+    defaultMessage: 'Try again',
+  },
+  btnGoDeploy: {
+    id: `${scope}.btnGoDeploy`,
+    defaultMessage: 'Go Deploy',
   },
 });

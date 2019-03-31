@@ -10,38 +10,46 @@ export const scope = 'app.components.AddressTableFooter';
 export default defineMessages({
   addAddress: {
     id: `${scope}.addAddress`,
-    defaultMessage: 'Add address',
+    defaultMessage: 'Add Address',
   },
   checkBalance: {
     id: `${scope}.checkBalance`,
-    defaultMessage: 'Check balances',
+    defaultMessage: 'Check Balances',
   },
   deployContract: {
     id: `${scope}.deployContract`,
     defaultMessage: 'Deploy Contract',
   },
-  popconfirmMsg: {
-    id: `${scope}.popconfirmMsg`,
-    defaultMessage: 'Refresh balance?',
+  closeWallet: {
+    id: `${scope}.closeWallet`,
+    defaultMessage: 'Close Wallet',
   },
-  token: {
-    id: `${scope}.token`,
-    defaultMessage: 'Token',
+  closeWalletConfirmMsg: {
+    id: `${scope}.closeWalletConfirmMsg`,
+    defaultMessage: 'Wallet will be deleted from memory and LocalStorage',
   },
-  balance: {
-    id: `${scope}.balance`,
-    defaultMessage: 'Balance',
-  },
-  action: {
-    id: `${scope}.action`,
-    defaultMessage: 'Action',
-  },
-  send: {
-    id: `${scope}.send`,
-    defaultMessage: 'Send',
-  },
-  removeEmpty: {
-    id: `${scope}.removeEmpty`,
-    defaultMessage: 'Remove empty',
-  },
+  // popconfirmMsg: {
+  //   id: `${scope}.popconfirmMsg`,
+  //   defaultMessage: 'Refresh balance?',
+  // },
+  // token: {
+  //   id: `${scope}.token`,
+  //   defaultMessage: 'Token',
+  // },
+  // balance: {
+  //   id: `${scope}.balance`,
+  //   defaultMessage: 'Balance',
+  // },
+  // action: {
+  //   id: `${scope}.action`,
+  //   defaultMessage: 'Action',
+  // },
+  // send: {
+  //   id: `${scope}.send`,
+  //   defaultMessage: 'Send',
+  // },
+  // removeEmpty: {
+  //   id: `${scope}.removeEmpty`,
+  //   defaultMessage: 'Remove empty',
+  // },
 });

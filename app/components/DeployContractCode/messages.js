@@ -1,13 +1,15 @@
 /*
- * SendAmount Messages
+ * DeployContractCode Messages
  *
- * This contains all the text for the SendAmount component.
+ * This contains all the text for the DeployContractCode component.
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.DeployContractCode';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.DeployContractGas.header',
-    defaultMessage: 'Gas to Deploy: ',
+  codeTitle: {
+    id: `${scope}.codeTitle`,
+    defaultMessage: 'Contract Bytecode',
   },
 });

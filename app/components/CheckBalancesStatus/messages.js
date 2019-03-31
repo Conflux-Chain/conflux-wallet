@@ -9,7 +9,7 @@ export const scope = 'app.components.CheckBalancesStatus';
 
 export default defineMessages({
   checkingBalances: {
-    id: `${scope}.checkingBalances`,
+    id: `${scope}.checkingBalancesww`,
     defaultMessage: 'Checking Balances ....',
   },
   checkSuccess: {

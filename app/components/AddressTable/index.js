@@ -220,12 +220,6 @@ function AddressTable(props) {
           // bordered
           // scroll={{ x: 1200 }}
           pagination={false}
-          locale={{
-            filterTitle: null,
-            filterConfirm: 'Ok',
-            filterReset: 'Reset',
-            emptyText: 'No Data',
-          }}
         >
           <Column
             title={intl.formatMessage({ ...messages.address })}

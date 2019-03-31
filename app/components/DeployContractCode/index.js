@@ -8,6 +8,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Input } from 'antd';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const { TextArea } = Input;
 
@@ -23,7 +25,9 @@ const TitleDiv = styled.div`
 function DeployContractCode({ code, onChangeCode, locked }) {
   return (
     <span>
-      <TitleDiv>Contract Bytecode</TitleDiv>
+      <TitleDiv>
+        <FormattedMessage {...messages.codeTitle} />
+      </TitleDiv>
       <TextArea
         style={{
           height: '344px',

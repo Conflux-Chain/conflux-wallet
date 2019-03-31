@@ -17,7 +17,7 @@ import injectReducer from 'utils/injectReducer';
 
 // eslint-disable-next-line import/no-unresolved
 import DeployContractCode from 'components/DeployContractCode';
-import DeployContractFrom from 'components/DeployContractFrom';
+import DeployContractForm from 'components/DeployContractForm';
 // import DeployContractGas from 'components/DeployContractGas';
 import DeployContractGasPrice from 'components/DeployContractGasPrice';
 import DeployContractConfirmationView from 'components/DeployContractConfirmationView';
@@ -190,7 +190,7 @@ function DeployContract(props) {
           </Col>
           <Col xs={24} sm={12}>
             <DivRightWrapper style={{ marginLeft: global.isMobile ? '0' : '20px' }}>
-              <DeployContractFrom {...DeployFromProps} />
+              <DeployContractForm {...DeployFromProps} />
               <DeployContractGasPrice {...DeployGasPriceProps} />
               <Button onClick={onConfirmDeployContract} disabled={locked}>
                 Confirm Info

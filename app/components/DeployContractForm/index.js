@@ -8,6 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Select } from 'antd';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Option = Select.Option;
 
@@ -33,7 +35,7 @@ const TitleDiv = styled.div`
   color: #333;
 `;
 
-function DeployContractFrom({ addressList, from, onChangeFrom, locked }) {
+function DeployContractForm({ addressList, from, onChangeFrom, locked }) {
   // let options;
   let selectOptions;
   if (addressList && addressList.keySeq().toArray()) {
@@ -54,7 +56,9 @@ function DeployContractFrom({ addressList, from, onChangeFrom, locked }) {
 
   return (
     <Div>
-      <TitleDiv>Source</TitleDiv>
+      <TitleDiv>
+        <FormattedMessage {...messages.title} />
+      </TitleDiv>
       <Select value={from} style={{ width: 300 }} onChange={onChangeFrom} disabled={locked}>
         {selectOptions}
       </Select>
@@ -62,7 +66,7 @@ function DeployContractFrom({ addressList, from, onChangeFrom, locked }) {
   );
 }
 
-DeployContractFrom.propTypes = {
+DeployContractForm.propTypes = {
   from: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onChangeFrom: PropTypes.func,
   addressList: PropTypes.oneOfType([
@@ -73,4 +77,4 @@ DeployContractFrom.propTypes = {
   locked: PropTypes.bool,
 };
 
-export default DeployContractFrom;
+export default DeployContractForm;

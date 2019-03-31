@@ -7,6 +7,8 @@
 import React from 'react';
 // import { github } from 'utils/constants';
 import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 import { StickyFooter } from './sticky';
 
@@ -29,7 +31,8 @@ function PageFooter() {
     <Footer>
       {/* <Text1>Conflux Hot Wallet&nbsp;<A>(Github)</A></Text1> */}
       <text>
-        Conflux Offical Website&nbsp;
+        <FormattedMessage {...messages.websiteName} />
+        &nbsp;
         <A href="http://www.conflux-chain.org">http://www.conflux-chain.org</A>
       </text>
     </Footer>
