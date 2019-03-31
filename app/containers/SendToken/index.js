@@ -68,12 +68,6 @@ const NewModal = styled(Modal)`
     padding: 0 35px;
   }
   .ant-modal-content {
-    @media only screen and (min-device-width: 300px) and (max-device-width: 768px) {
-      width: 90%;
-    }
-    @media screen and (min-width: 768px) {
-      width: 426px;
-    }
     border-radius: 8px;
   }
   .ant-modal-header {
