@@ -6117,6 +6117,11 @@ isexe@^2.0.0:
   resolved "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
+ismobilejs@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.npmjs.org/ismobilejs/-/ismobilejs-0.5.1.tgz#0e3f825e29e32f84ad5ddbb60e9e04a894046488"
+  integrity sha512-QX4STsOcBYqlTjVGuAdP1MiRVxtiUbRHOKH0v7Gn1EvfUVIQnrSdgCM4zB4VCZuIejnb2NUMUx0Bwd3EIG6yyA==
+
 isobject@^2.0.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/isobject/-/isobject-2.1.0.tgz#f065561096a3f1da2ef46272f815c840d87e0c89"

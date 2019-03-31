@@ -241,6 +241,7 @@
     "intl": "1.2.5",
     "invariant": "2.2.4",
     "ip": "1.1.5",
+    "ismobilejs": "^0.5.1",
     "lodash": "4.17.10",
     "minimist": "1.2.0",
     "prop-types": "15.6.2",

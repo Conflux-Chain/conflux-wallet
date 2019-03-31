@@ -13,6 +13,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
+import isMobile from 'ismobilejs';
 import createHistory from 'history/createBrowserHistory';
 import 'sanitize.css/sanitize.css';
 
@@ -149,5 +150,16 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // check devices type
-const info = navigator.userAgent;
-global.isMobile = !!info.match(/AppleWebKit.*Mobile.*/) && !(info.indexOf('iPad') > -1);
+// const info = navigator.userAgent;
+
+const getWidth = () =>
+  Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+
+// detect is Mobile browser or small screen
+global.isMobile = isMobile.phone || getWidth() <= 768; // !!info.match(/AppleWebKit.*Mobile.*/) && !(info.indexOf('iPad') > -1);
