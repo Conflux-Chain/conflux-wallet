@@ -47,6 +47,7 @@ import {
   makeSelectIsDeployComfirmationLocked,
   makeSelectDeployInProgress,
   makeSelectDeployError,
+  makeSelectDeploySuccess,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -143,7 +144,8 @@ function DeployContract(props) {
     onDeployContract,
     onAbortDeploy,
 
-    sendInProgress,
+    deployInProgress,
+    deploySuccess,
     deployError,
   } = props;
 
@@ -158,11 +160,11 @@ function DeployContract(props) {
     confirmationMsg,
     onDeployContract,
     onAbortDeploy,
-    sendInProgress,
+    deployInProgress,
     isDeployComfirmationLocked,
     deployError,
   };
-  const DeployProgressProps = { sendInProgress, deployError };
+  const DeployProgressProps = { deployInProgress, deployError, deploySuccess };
 
   // const modalFooter = [
   //   <Button key="reset" type="default" size="large" onClick={onAbortDeploy}>
@@ -194,9 +196,11 @@ function DeployContract(props) {
                 Confirm Info
               </Button>
               <DeployContractConfirmationView {...DeployConfirmationViewProps} />
-              <DeployContractProgress {...DeployProgressProps} />
             </DivRightWrapper>
           </Col>
+        </Row>
+        <Row style={{ marginTop: '14px' }}>
+          <DeployContractProgress {...DeployProgressProps} />
         </Row>
       </NewModal>
     </div>
@@ -226,8 +230,9 @@ DeployContract.propTypes = {
 
   isDeployComfirmationLocked: PropTypes.bool,
 
-  sendInProgress: PropTypes.oneOfType([PropTypes.bool]),
+  deployInProgress: PropTypes.oneOfType([PropTypes.bool]),
   deployError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  deploySuccess: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   isShowDeployContract: PropTypes.bool,
   onHideDeployContract: PropTypes.func,
@@ -253,8 +258,9 @@ const mapStateToProps = createStructuredSelector({
 
   isDeployComfirmationLocked: makeSelectIsDeployComfirmationLocked(),
 
-  sendInProgress: makeSelectDeployInProgress(),
+  deployInProgress: makeSelectDeployInProgress(),
   deployError: makeSelectDeployError(),
+  deploySuccess: makeSelectDeploySuccess(),
 });
 
 function mapDispatchToProps(dispatch) {

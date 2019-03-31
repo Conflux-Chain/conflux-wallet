@@ -15,6 +15,7 @@ import {
   DEPLOY_CONTRACT,
   DEPLOY_CONTRACT_SUCCESS,
   DEPLOY_CONTRACT_ERROR,
+  DEPLOY_IN_PROGRESS,
 } from './constants';
 
 export function changeCode(code) {
@@ -98,7 +99,7 @@ export function deployContract() {
 export function deploySuccess(tx) {
   return {
     type: DEPLOY_CONTRACT_SUCCESS,
-    tx,
+    deploySuccess: tx,
   };
 }
 
@@ -106,5 +107,12 @@ export function deployError(error) {
   return {
     type: DEPLOY_CONTRACT_ERROR,
     error,
+  };
+}
+
+export function deployInProgress(value) {
+  return {
+    type: DEPLOY_IN_PROGRESS,
+    deployInProgress: value,
   };
 }

@@ -58,6 +58,12 @@ const makeSelectDeployError = () =>
     (substate) => substate.get('deployError')
   );
 
+const makeSelectDeploySuccess = () =>
+  createSelector(
+    selectDeployContractDomain,
+    (substate) => substate.get('deploySuccess')
+  );
+
 const makeSelectLocked = () =>
   createSelector(
     selectDeployContractDomain,
@@ -84,4 +90,5 @@ export {
   makeSelectIsDeployComfirmationLocked,
   makeSelectDeployInProgress,
   makeSelectDeployError,
+  makeSelectDeploySuccess,
 };

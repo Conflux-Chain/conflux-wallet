@@ -1,4 +1,3 @@
-import Web3 from 'vendor/web3';
 import lightwallet from 'eth-lightwallet';
 import BigNumber from 'bignumber.js';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
@@ -10,11 +9,10 @@ import {
   confirmDeployContractError,
   deploySuccess,
   deployError,
+  deployInProgress,
 } from './actions';
 import { COMFIRM_DEPLOY_CONTRACT, DEPLOY_CONTRACT } from './constants';
-import Network from '../Header/network';
-
-const web3 = new Web3();
+import web3 from '../Header/web3';
 const txutils = lightwallet.txutils;
 const signing = lightwallet.signing;
 
@@ -56,16 +54,14 @@ export function* DeployContract() {
     if (!keystore) {
       throw new Error('No keystore found - please create wallet');
     }
+    //  开始部署
+    yield put(deployInProgress(true));
+
     keystore.passwordProvider = (callback) => {
       // we cannot use selector inside this callback so we use a const value
       const ksPassword = password;
       callback(null, ksPassword);
     };
-
-    // TODO 把这里的 saga 内容都移动到 Header/saga 里面，里面有很多可以复用的，比如 loadNetwork
-    web3.setProvider(
-      new web3.providers.HttpProvider('http://testnet-jsonrpc.conflux-chain.org:12537')
-    );
 
     // eslint-disable-next-line no-inner-declarations
     function getNoncePromise(addr) {

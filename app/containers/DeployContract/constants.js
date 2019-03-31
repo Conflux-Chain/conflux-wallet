@@ -19,3 +19,4 @@ export const ABORT_DEPLOY = 'app/DeployContract/ABORT_DEPLOY';
 export const DEPLOY_CONTRACT = 'app/DeployContract/DEPLOY_CONTRACT';
 export const DEPLOY_CONTRACT_SUCCESS = 'app/DeployContract/DEPLOY_CONTRACT_SUCCESS';
 export const DEPLOY_CONTRACT_ERROR = 'app/DeployContract/DEPLOY_CONTRACT_ERROR';
+export const DEPLOY_IN_PROGRESS = 'app/DeployContract/DEPLOY_IN_PROGRESS';

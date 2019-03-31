@@ -16,7 +16,7 @@ const Span = styled.span`
 
 // TODO:部署成功后的回调数据如何展示或者交互？
 
-function DeployContractProgress({ deployInProgress, deployError, sendTx, txExplorer }) {
+function DeployContractProgress({ deployInProgress, deployError, deploySuccess }) {
   if (deployInProgress) {
     return (
       <Spin spinning style={{ position: 'static' }} size="large" tip="Sending...">
@@ -29,14 +29,14 @@ function DeployContractProgress({ deployInProgress, deployError, sendTx, txExplo
     return <Alert message="Send Error" description={deployError} type="error" />;
   }
 
-  if (sendTx) {
+  if (deploySuccess) {
     return (
       <Alert
         message="Send sucessfull"
         description={
           <Span>
             {' '}
-            TX: <br /> <TxLink tx={sendTx} explorer={txExplorer} />{' '}
+            TxHash: <br /> <TxLink tx={deploySuccess} />{' '}
           </Span>
         }
         type="success"
@@ -50,8 +50,7 @@ function DeployContractProgress({ deployInProgress, deployError, sendTx, txExplo
 DeployContractProgress.propTypes = {
   deployInProgress: PropTypes.oneOfType([PropTypes.bool]),
   deployError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  sendTx: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  txExplorer: PropTypes.string,
+  deploySuccess: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default DeployContractProgress;
