@@ -24,4 +24,8 @@ export default defineMessages({
     id: `${scope}.send`,
     defaultMessage: 'Send',
   },
+  deployContract: {
+    id: `${scope}.deployContract`,
+    defaultMessage: 'Deploy Contract',
+  },
 });

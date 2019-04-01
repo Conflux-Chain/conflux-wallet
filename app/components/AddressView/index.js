@@ -71,6 +71,7 @@ function AddressView(props) {
     exchangeRates,
     onSelectCurrency,
     convertTo,
+    onShowDeployContract,
   };
 
   const addressTableFooterProps = {

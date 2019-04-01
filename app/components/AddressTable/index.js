@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Table, Button } from 'antd';
+import { Table, Button, Row } from 'antd';
 import BigNumber from 'bignumber.js';
 
 // import CurrencyDropdown from 'components/CurrencyDropdown';
@@ -204,6 +204,7 @@ function AddressTable(props) {
     exchangeRates,
     // onSelectCurrency,
     convertTo,
+    onShowDeployContract,
     intl,
   } = props;
 
@@ -285,18 +286,28 @@ function AddressTable(props) {
             title={intl.formatMessage({ ...messages.action })}
             key="action"
             render={(text, record) => (
-              <Button
-                type="primary"
-                ghost
-                onClick={() => onShowSendToken(record.address, record.token)}
-              >
-                <FormattedMessage {...messages.send} />
-              </Button>
+              <div>
+                <Button
+                  type="primary"
+                  ghost
+                  onClick={() => onShowSendToken(record.address, record.token)}
+                >
+                  <FormattedMessage {...messages.send} />
+                </Button>
+                <Button
+                  type="primary"
+                  ghost
+                  onClick={() => onShowDeployContract()}
+                  style={{ marginLeft: 10 }}
+                >
+                  <FormattedMessage {...messages.deployContract} />
+                </Button>
+              </div>
             )}
           />
         </AddrTable>
       ) : (
-        <MobileAddressTable data={completeRowList} onShowSendToken={onShowSendToken} />
+        <MobileAddressTable data={completeRowList} {...props} />
       )}
     </div>
   );
@@ -309,6 +320,7 @@ AddressTable.propTypes = {
   exchangeRates: PropTypes.object,
   // onSelectCurrency: PropTypes.func,
   convertTo: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  onShowDeployContract: PropTypes.func,
   intl: intlShape.isRequired,
 };
 

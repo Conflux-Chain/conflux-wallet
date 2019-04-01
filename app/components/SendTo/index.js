@@ -21,9 +21,21 @@ const Div = styled.div`
   }
 `;
 
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  font-size: 14px;
+  color: #333;
+`;
+
 function SendTo({ to, onChangeTo, locked, intl }) {
   return (
     <Div>
+      <TitleDiv>
+        <FormattedMessage {...messages.sourceTitle} />
+      </TitleDiv>
       <Input
         placeholder={intl.formatMessage({ ...messages.placeholderSendTo })}
         value={to}

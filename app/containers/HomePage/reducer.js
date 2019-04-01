@@ -104,11 +104,11 @@ const initialState = fromJS({
   loadWalletError: false,
 
   tokenInfo: {
-    eth: {
-      name: 'Ethereum',
-      contractAddress: null,
-      decimals: 18,
-    },
+    // eth: {
+    //   name: 'Ethereum',
+    //   contractAddress: null,
+    //   decimals: 18,
+    // },
     cfx: {
       name: 'Conflux',
       contractAddress: null,

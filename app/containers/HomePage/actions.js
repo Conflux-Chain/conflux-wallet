@@ -403,11 +403,11 @@ export function hideTokenChooser() {
  */
 export function updateTokenInfo(addressList, newTokenInfo) {
   const tokenInfo = {
-    eth: {
-      name: 'Ethereum',
-      contractAddress: null,
-      decimals: 18,
-    },
+    // eth: {
+    //   name: 'Ethereum',
+    //   contractAddress: null,
+    //   decimals: 18,
+    // },
     cfx: {
       name: 'Conflux',
       contractAddress: null,

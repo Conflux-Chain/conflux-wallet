@@ -14,7 +14,7 @@ export const hdPathString = `m/44'/60'/0'/0`; // eslint-disable-line
 export const timeBetweenCheckbalances = 180 * 1000;
 
 /* Max gas for send transaction (not gas price) */
-export const maxGasForEthSend = 25000;
+export const maxGasForCfxSend = 25000;
 /* Max gas for token send transaction (not gas price) */
 export const maxGasForTokenSend = 60000;
 /* Max gas for DeployContract (not gas price) */

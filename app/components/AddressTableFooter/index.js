@@ -89,13 +89,13 @@ function AddressTableFooter(props) {
               disabled={!networkReady}
               popconfirmMsg={false}
             />
-            <IconButton
-              text={intl.formatMessage({ ...messages.deployContract })}
-              icon="up"
-              onClick={() => {
-                onShowDeployContract();
-              }}
-            />
+            {/* <IconButton */}
+            {/* text={intl.formatMessage({ ...messages.deployContract })} */}
+            {/* icon="up" */}
+            {/* onClick={() => { */}
+            {/* onShowDeployContract(); */}
+            {/* }} */}
+            {/* /> */}
             <Popconfirm
               key="close_wallet"
               placement="bottom"
@@ -133,16 +133,16 @@ function AddressTableFooter(props) {
               popconfirmMsg={false}
             />
           </Row>
-          <Row type="flex" justify="center">
-            <IconButton
-              text={intl.formatMessage({ ...messages.deployContract })}
-              icon="up"
-              onClick={() => {
-                onShowDeployContract();
-              }}
-              style={{ marginRight: 0 }}
-            />
-          </Row>
+          {/* <Row type="flex" justify="center"> */}
+          {/* <IconButton */}
+          {/* text={intl.formatMessage({ ...messages.deployContract })} */}
+          {/* icon="up" */}
+          {/* onClick={() => { */}
+          {/* onShowDeployContract(); */}
+          {/* }} */}
+          {/* style={{ marginRight: 0 }} */}
+          {/* /> */}
+          {/* </Row> */}
           <Row type="flex" justify="center">
             <Popconfirm
               key="close_wallet"
