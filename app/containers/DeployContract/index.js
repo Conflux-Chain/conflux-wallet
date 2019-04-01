@@ -19,7 +19,7 @@ import injectReducer from 'utils/injectReducer';
 // eslint-disable-next-line import/no-unresolved
 import DeployContractCode from 'components/DeployContractCode';
 import DeployContractForm from 'components/DeployContractForm';
-// import DeployContractGas from 'components/DeployContractGas';
+import DeployContractGas from 'components/DeployContractGas';
 import DeployContractGasPrice from 'components/DeployContractGasPrice';
 import DeployContractConfirmationView from 'components/DeployContractConfirmationView';
 import DeployContractProgress from 'components/DeployContractProgress';
@@ -153,7 +153,7 @@ function DeployContract(props) {
 
   const DeployCodeProps = { code, onChangeCode, locked };
   const DeployFromProps = { from, addressList, onChangeFrom, locked };
-  // const DeployGasProps = { gas, onChangeGas, locked };
+  const DeployGasProps = { gas, onChangeGas, locked };
   const DeployGasPriceProps = { gasPrice, onChangeGasPrice, locked };
 
   const DeployConfirmationViewProps = {
@@ -194,6 +194,7 @@ function DeployContract(props) {
             <DivRightWrapper style={{ marginLeft: global.isMobile ? '0' : '20px' }}>
               <DeployContractForm {...DeployFromProps} />
               <DeployContractGasPrice {...DeployGasPriceProps} />
+              <DeployContractGas {...DeployGasProps} />
               <Button onClick={onConfirmDeployContract} disabled={locked}>
                 <FormattedMessage {...messages.btnConfirmInfo} />
               </Button>

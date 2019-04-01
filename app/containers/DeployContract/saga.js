@@ -6,7 +6,7 @@ import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { Gwei, maxGasLimitForDeployContract } from 'utils/constants';
 import msgText from 'translations/msg';
 
-import { makeSelectCode, makeSelectFrom, makeSelectGasPrice } from './selectors';
+import { makeSelectCode, makeSelectFrom, makeSelectGas, makeSelectGasPrice } from './selectors';
 import {
   confirmDeployContractSuccess,
   confirmDeployContractError,
@@ -50,7 +50,7 @@ export function* DeployContract() {
   try {
     const fromAddress = yield select(makeSelectFrom());
     const code = yield select(makeSelectCode());
-    // const gas = yield select(makeSelectGas());
+    const gas = yield select(makeSelectGas());
     const gasPrice = new BigNumber(yield select(makeSelectGasPrice())).times(Gwei).toNumber();
     const password = yield select(makeSelectPassword());
 
@@ -95,6 +95,7 @@ export function* DeployContract() {
 
     const sendParams = {
       gasPrice,
+      gas,
       gasLimit: maxGasLimitForDeployContract,
       value: 0,
       data: code,

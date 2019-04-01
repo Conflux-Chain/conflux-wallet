@@ -34,7 +34,7 @@ export function changeFrom(address) {
 }
 
 export function changeGas(gas) {
-  if (!gas) {
+  if (gas === '') {
     return {
       type: CHANGE_GAS,
       gas: 1,

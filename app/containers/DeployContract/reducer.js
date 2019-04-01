@@ -22,7 +22,7 @@ const initialState = fromJS({
   // for test
   code: '7f7465737432000000000000000000000000000000000000000000000000000000600057',
   from: '',
-  gas: 0,
+  gas: 10000000,
   gasPrice: 10, // gwei
   locked: false,
 
