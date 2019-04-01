@@ -32,7 +32,7 @@ const Btn = ({
   ...btnProps
 }) => (
   <Button
-    // icon={icon}
+    icon={icon || ''}
     type="primary"
     size="large"
     onClick={popconfirmMsg ? null : onClick}
@@ -41,7 +41,6 @@ const Btn = ({
     {...btnProps}
   >
     {text}
-    {icon ? <Icon type={icon} /> : null}
   </Button>
 );
 Btn.propTypes = {
