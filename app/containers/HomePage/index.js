@@ -47,6 +47,7 @@ import saga from './saga';
 /* HomePage */
 import {
   generateWallet,
+  generateWalletChangePassword,
   closeWarning,
   generateWalletCancel,
   showRestoreWallet,
@@ -109,6 +110,7 @@ export class HomePage extends React.PureComponent {
   render() {
     const {
       onGenerateWallet,
+      onGenerateWalletChangePassword,
       onGenerateWalletCancel,
       isWaringShow,
       isShowGenerateWallet,
@@ -206,6 +208,7 @@ export class HomePage extends React.PureComponent {
 
       seed,
       password,
+      onGenerateWalletChangePassword,
 
       onGenerateWallet,
       onGenerateWalletCancel,
@@ -287,6 +290,7 @@ export class HomePage extends React.PureComponent {
 HomePage.propTypes = {
   onCloseWarning: PropTypes.func,
   onGenerateWallet: PropTypes.func,
+  onGenerateWalletChangePassword: PropTypes.func,
   onGenerateWalletCancel: PropTypes.func,
   isWaringShow: PropTypes.bool,
   isShowGenerateWallet: PropTypes.bool,
@@ -368,6 +372,10 @@ export function mapDispatchToProps(dispatch) {
     onGenerateWallet: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(generateWallet());
+    },
+    onGenerateWalletChangePassword: (evt) => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(generateWalletChangePassword(evt.target.value));
     },
     onCloseWarning: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();

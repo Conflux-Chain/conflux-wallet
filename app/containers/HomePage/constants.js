@@ -5,6 +5,8 @@
 
 export const CLOSE_WARNING = 'conflux-wallet/HomePage/CLOSE_WARNING';
 export const GENERATE_WALLET = 'conflux-wallet/HomePage/GENERATE_WALLET';
+export const GENERATE_WALLET_CHANGE_PASSWORD =
+  'conflux-wallet/HomePage/GENERATE_WALLET_CHANGE_PASSWORD';
 export const GENERATE_WALLET_SUCCESS = 'conflux-wallet/HomePage/GENERATE_WALLET_SUCCESS';
 export const GENERATE_WALLET_ERROR = 'conflux-wallet/HomePage/GENERATE_WALLET_ERROR';
 export const GENERATE_WALLET_CANCEL = 'conflux-wallet/HomePage/GENERATE_WALLET_CANCEL';

@@ -20,6 +20,7 @@ import msgText from 'translations/msg';
 import {
   CLOSE_WARNING,
   GENERATE_WALLET,
+  GENERATE_WALLET_CHANGE_PASSWORD,
   GENERATE_WALLET_SUCCESS,
   GENERATE_WALLET_ERROR,
   GENERATE_WALLET_CANCEL,
@@ -83,6 +84,18 @@ export function closeWarning() {
 export function generateWallet() {
   return {
     type: GENERATE_WALLET,
+  };
+}
+
+/**
+ * generate wallet modal password change
+ * @param password
+ * @return {{password: *, type: string}}
+ */
+export function generateWalletChangePassword(password) {
+  return {
+    type: GENERATE_WALLET_CHANGE_PASSWORD,
+    password,
   };
 }
 /**

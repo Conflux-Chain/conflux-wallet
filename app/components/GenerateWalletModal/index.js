@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Modal, Button, Alert } from 'antd';
+import { Modal, Button, Alert, Input } from 'antd';
 import { FormattedMessage, FormattedHTMLMessage, injectIntl, intlShape } from 'react-intl';
 import messages from './messages';
 
@@ -98,6 +98,7 @@ function GenerateWalletModal(props) {
     // generateWalletError,
     seed,
     password,
+    onGenerateWalletChangePassword,
 
     onCloseWarning,
     onGenerateWallet,
@@ -128,7 +129,7 @@ function GenerateWalletModal(props) {
         description={<FormattedHTMLMessage {...messages.description} />}
         type="warning"
         showIcon
-        closable
+        closable={false}
         onClose={onCloseWarning}
       />
       <br />
@@ -140,7 +141,17 @@ function GenerateWalletModal(props) {
       <Title2>
         <FormattedMessage {...messages.title3} />
       </Title2>
-      <Alert description={<b>{password}</b>} type="info" />
+      {/* <Alert description={<b>{password}</b>} type="info" /> */}
+      <Input
+        placeholder={intl.formatMessage({ ...messages.placeholderPassword })}
+        value={password}
+        onChange={onGenerateWalletChangePassword}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+      />
+      <br />
       <br />
       <Button
         shape="circle"
@@ -165,6 +176,7 @@ GenerateWalletModal.propTypes = {
   ]), */
   seed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  onGenerateWalletChangePassword: PropTypes.func,
   onGenerateWallet: PropTypes.func,
   onGenerateWalletCancel: PropTypes.func,
   onGenerateKeystore: PropTypes.func,
