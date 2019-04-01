@@ -11,29 +11,30 @@ import { InputNumber } from 'antd';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import messages from './messages';
 
-function DeployContractGas({ gas, onChangeGas, locked }) {
-  const Div = styled.div`
-    margin-bottom: 10px;
-    .ant-input-number {
-      width: 100%;
-      height: 46px;
-      margin-left: 0 !important;
-    }
-    .ant-input-number-input {
-      height: 44px;
-      line-height: 44px;
-      font-size: 16px;
-      color: #049cdb;
-    }
-  `;
-  const TitleDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+const Div = styled.div`
+  margin-bottom: 10px;
+  .ant-input-number {
+    width: 100%;
+    height: 46px;
+    margin-left: 0 !important;
+  }
+  .ant-input-number-input {
     height: 44px;
-    font-size: 14px;
-    color: #333;
-  `;
+    line-height: 44px;
+    font-size: 16px;
+    color: #049cdb;
+  }
+`;
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  font-size: 14px;
+  color: #333;
+`;
+
+function DeployContractGas({ gas, onChangeGas, locked }) {
   return (
     <Div>
       <TitleDiv>
