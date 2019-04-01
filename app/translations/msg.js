@@ -91,7 +91,7 @@ export default {
     'Faucet request failed': '水龙头服务请求失败',
     'Please try again later': '请稍后重试',
     'No man': '不要了',
-    Sure: '当然',
+    Sure: '当然需要',
     'Deploy confirmed successfully, Send to transmit': '部署确认成功，发送到交易',
     'Wallet removed from memory': '钱包从缓存中删除',
     'Transaction confirmed successfully, Send to transmit': '交易确认成功，发送到交易',

@@ -13,10 +13,10 @@ import messages from './messages';
 
 const ErrorSpan = styled.span`
   .anticon {
-    color: red;
+    color: #ff9000;
   }
   .ant-btn {
-    color: red;
+    color: #ff9000;
   }
 `;
 

@@ -66,7 +66,11 @@ export function confirmDeployContract() {
 }
 
 export function confirmDeployContractSuccess(msg) {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   if (msg) {
     return {
       type: COMFIRM_DEPLOY_CONTRACT_SUCCESS,

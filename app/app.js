@@ -120,10 +120,6 @@ if (module.hot) {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
     render(translationMessages);
   });
-  module.hot.accept(['containers/App'], () => {
-    ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    render();
-  });
 }
 
 // Chunked polyfill for browsers without Intl support

@@ -22,9 +22,10 @@ import { makeSelectLocale } from './selectors';
 export class LanguageProvider extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
   render() {
+    const { locale, messages } = this.props;
     // add antd locale support
     let antdLocale = null;
-    switch (this.props.locale) {
+    switch (locale) {
       case 'en':
         antdLocale = enUS;
         break;
@@ -38,11 +39,7 @@ export class LanguageProvider extends React.PureComponent {
 
     return (
       <AntdLocaleProvider locale={antdLocale}>
-        <IntlProvider
-          locale={this.props.locale}
-          key={this.props.locale}
-          messages={this.props.messages[this.props.locale]}
-        >
+        <IntlProvider locale={locale} key={locale} messages={messages[locale]}>
           {React.Children.only(this.props.children)}
         </IntlProvider>
       </AntdLocaleProvider>

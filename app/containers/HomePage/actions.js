@@ -572,7 +572,11 @@ export function selectCurrency(convertTo) {
  * @return {object} An action object with a type of CLOSE_WALLET
  */
 export function closeWallet() {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   message.success(msgText[locale]['Wallet removed from memory']);
   return {
     type: CLOSE_WALLET,

@@ -51,7 +51,11 @@ export function loadNetwork(networkName) {
  * @return {object}      An action object with a type of LOAD_NETWORK_SUCCESS passing the repos
  */
 export function loadNetworkSuccess(blockNumber) {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   message.success(`${msgText[locale]['Connected sucessfully, best epoch number']}: ${blockNumber}`);
   return {
     type: LOAD_NETWORK_SUCCESS,
@@ -67,7 +71,11 @@ export function loadNetworkSuccess(blockNumber) {
  * @return {object} An action object with a type of LOAD_NETWORK_ERROR passing the error
  */
 export function loadNetworkError(error) {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   if (error !== offlineModeString) {
     const err =
       error.indexOf('Invalid JSON RPC response from host provider') >= 0
@@ -151,7 +159,11 @@ export function getExchangeRates() {
  * @return {object}      An action object with a type of GET_EXCHANGE_RATES_SUCCESS
  */
 export function getExchangeRatesSuccess() {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   const timeString = new Date().toLocaleTimeString();
   message.success('Exchange rates updated succesfully');
   return {
@@ -194,7 +206,11 @@ export function checkFaucet() {
  * @return {object}      An action object with a type of CHECK_FAUCET_SUCCESS
  */
 export function checkFaucetSuccess() {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   //  message.success('Exchange rates updated succesfully');
   const key = `open${Date.now()}`;
   const closeNotification = () => {
@@ -256,7 +272,11 @@ export function checkFaucetError(error) {
  * @return {object}    An action object with a type of ASK_FAUCET
  */
 export function askFaucet() {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   const icon = React.createElement(Icon, { type: 'loading' });
   notification.info({
     message: msgText[locale]['Sending request'],
@@ -276,7 +296,11 @@ export function askFaucet() {
  * @return {object}      An action object with a type of ASK_FAUCET_SUCCESS
  */
 export function askFaucetSuccess(tx) {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   notification.close('ask');
   const key = `open${Date.now()}`;
   const closeNotification = () => {
@@ -313,7 +337,11 @@ export function askFaucetSuccess(tx) {
  * @return {object} An action object with a type of ASK_FAUCET_ERROR passing the error
  */
 export function askFaucetError(error) {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   notification.close('ask');
   const key = `open${Date.now()}`;
   const closeNotification = () => {
