@@ -28,4 +28,8 @@ export default defineMessages({
     id: `${scope}.btnSendCfx`,
     defaultMessage: 'Send CFX',
   },
+  btnReset: {
+    id: `${scope}.btnReset`,
+    defaultMessage: 'Reset Transaction',
+  },
 });

@@ -20,6 +20,7 @@ import msgText from 'translations/msg';
 import {
   CLOSE_WARNING,
   GENERATE_WALLET,
+  GENERATE_WALLET_CHANGE_PASSWORD,
   GENERATE_WALLET_SUCCESS,
   GENERATE_WALLET_ERROR,
   GENERATE_WALLET_CANCEL,
@@ -83,6 +84,18 @@ export function closeWarning() {
 export function generateWallet() {
   return {
     type: GENERATE_WALLET,
+  };
+}
+
+/**
+ * generate wallet modal password change
+ * @param password
+ * @return {{password: *, type: string}}
+ */
+export function generateWalletChangePassword(password) {
+  return {
+    type: GENERATE_WALLET_CHANGE_PASSWORD,
+    password,
   };
 }
 /**
@@ -403,11 +416,11 @@ export function hideTokenChooser() {
  */
 export function updateTokenInfo(addressList, newTokenInfo) {
   const tokenInfo = {
-    eth: {
-      name: 'Ethereum',
-      contractAddress: null,
-      decimals: 18,
-    },
+    // eth: {
+    //   name: 'Ethereum',
+    //   contractAddress: null,
+    //   decimals: 18,
+    // },
     cfx: {
       name: 'Conflux',
       contractAddress: null,
@@ -572,7 +585,11 @@ export function selectCurrency(convertTo) {
  * @return {object} An action object with a type of CLOSE_WALLET
  */
 export function closeWallet() {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   message.success(msgText[locale]['Wallet removed from memory']);
   return {
     type: CLOSE_WALLET,

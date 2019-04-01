@@ -32,4 +32,8 @@ export default defineMessages({
     id: `${scope}.description`,
     defaultMessage: `WTF is wallet security? <br /> Do not save password in screenshot!`,
   },
+  placeholderPassword: {
+    id: `${scope}.placeholderPassword`,
+    defaultMessage: 'Password for browser encryption',
+  },
 });

@@ -84,14 +84,22 @@ export function* DeployContract() {
     // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
     // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
     let nonce = yield call(getNoncePromise, fromAddress);
-    console.log(nonce);
-    const localNonce = Number(localStorage.getItem(fromAddress)) || 0;
+    const localNonce = JSON.parse(localStorage.getItem(`conflux_wallet_${fromAddress}`) || null);
     // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
-    if (localNonce > nonce) {
-      nonce = localNonce;
+    // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
+    const maxInterval = 1000 * 60 * 10;
+    if (
+      localNonce &&
+      +new Date() - +localNonce.updateTime > maxInterval &&
+      localNonce.nonce >= nonce
+    ) {
+      console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce);
+      nonce = localNonce.nonce;
     }
-    localStorage.setItem(fromAddress, nonce + 1);
-    console.log('nonce: ', nonce);
+    localStorage.setItem(
+      `conflux_wallet_${fromAddress}`,
+      JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
+    );
 
     const sendParams = {
       gasPrice,

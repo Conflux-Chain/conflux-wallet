@@ -78,6 +78,10 @@ function SendConfirmationView(props) {
             <FormattedMessage {...messages.btnSendCfx} />
           )}
         </Button>
+        <br />
+        <Button key="reset" type="primary" onClick={onAbortTransaction} style={{ marginTop: 10 }}>
+          <FormattedMessage {...messages.btnReset} />
+        </Button>
         {/* <br /> */}
         {/* <Button */}
         {/* type="primary" */}

@@ -16,7 +16,7 @@ const Span = styled.span`
 function FaucetDescription(props) {
   const { tx, text } = props;
 
-  const explorer = 'https://ropsten.etherscan.io/tx/';
+  const explorer = 'http://confluxscan.io/tx/';
   const TxLinkProps = { tx, explorer };
 
   return (

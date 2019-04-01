@@ -35,7 +35,7 @@ const ContentSpan = styled.span`
 `;
 
 function MobileAddressTable(props) {
-  const { data, onShowSendToken } = props;
+  const { data, onShowSendToken, onShowDeployContract } = props;
   let mobileTable = null;
 
   mobileTable = data.map((item, index) => (
@@ -59,6 +59,14 @@ function MobileAddressTable(props) {
         <Button type="primary" ghost onClick={() => onShowSendToken(item.address, item.token)}>
           <FormattedMessage {...messages.send} />
         </Button>
+        <Button
+          type="primary"
+          ghost
+          onClick={() => onShowDeployContract()}
+          style={{ marginLeft: 10 }}
+        >
+          <FormattedMessage {...messages.deployContract} />
+        </Button>
       </Row>
     </ItemCon>
   ));
@@ -69,6 +77,7 @@ function MobileAddressTable(props) {
 MobileAddressTable.propTypes = {
   data: PropTypes.array,
   onShowSendToken: PropTypes.func,
+  onShowDeployContract: PropTypes.func,
 };
 
 export default MobileAddressTable;

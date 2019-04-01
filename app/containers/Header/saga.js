@@ -37,7 +37,7 @@ import {
   timeBetweenCheckbalances,
   Ether,
   Gwei,
-  maxGasForEthSend,
+  maxGasForCfxSend,
   maxGasForTokenSend,
   offlineModeString,
   checkFaucetAddress,
@@ -235,7 +235,7 @@ export function* SendTransaction() {
         to: toAddress,
         value: sendAmount,
         gasPrice,
-        gas: maxGasForEthSend,
+        gas: maxGasForCfxSend,
         nonce: 10,
       };
       // eslint-disable-next-line no-inner-declarations
@@ -297,7 +297,7 @@ export function getCfxBalancePromise(address) {
   return new Promise((resolve, reject) => {
     web3.cfx.getBalance(address, (err, data) => {
       if (err !== null) return reject(err);
-      return resolve(data.toNumber() / 10 ** 8);
+      return resolve(data.toNumber());
     });
   });
 }

@@ -172,11 +172,7 @@ function SendToken(props) {
     locked,
   };
 
-  const modalFooter = [
-    <Button key="reset" type="primary" size="large" onClick={onAbortTransaction}>
-      Reset
-    </Button>,
-  ];
+  const modalFooter = [];
 
   return (
     <div style={{ maxWidth: '600px', margin: 'auto' }}>

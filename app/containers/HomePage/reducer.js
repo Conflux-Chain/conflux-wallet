@@ -14,6 +14,7 @@ import { fromJS } from 'immutable';
 import {
   CLOSE_WARNING,
   GENERATE_WALLET,
+  GENERATE_WALLET_CHANGE_PASSWORD,
   GENERATE_WALLET_SUCCESS,
   GENERATE_WALLET_ERROR,
   GENERATE_WALLET_CANCEL,
@@ -104,11 +105,11 @@ const initialState = fromJS({
   loadWalletError: false,
 
   tokenInfo: {
-    eth: {
-      name: 'Ethereum',
-      contractAddress: null,
-      decimals: 18,
-    },
+    // eth: {
+    //   name: 'Ethereum',
+    //   contractAddress: null,
+    //   decimals: 18,
+    // },
     cfx: {
       name: 'Conflux',
       contractAddress: null,
@@ -143,6 +144,8 @@ function homeReducer(state = initialState, action) {
         .set('isShowGenerateWallet', true)
         .set('generateWalletLoading', true)
         .set('generateWalletError', false);
+    case GENERATE_WALLET_CHANGE_PASSWORD:
+      return state.set('password', action.password);
     case GENERATE_WALLET_SUCCESS:
       return state
         .set('generateWalletLoading', false)

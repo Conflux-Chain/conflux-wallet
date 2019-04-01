@@ -71,15 +71,15 @@ function AddressTableFooter(props) {
         <DivPC>
           <Row type="flex" justify="center">
             <LockButton key="lock_button" {...lockButtonProps} />
-            {/* <IconButton */}
-            {/* text={intl.formatMessage({ ...messages.addAddress })} */}
-            {/* icon="plus" */}
-            {/* onClick={onGenerateAddress} */}
-            {/* loading={addressListLoading} */}
-            {/* error={addressListError} */}
-            {/* disabled={!isComfirmed} */}
-            {/* popconfirmMsg={false} */}
-            {/* /> */}
+            <IconButton
+              text={intl.formatMessage({ ...messages.addAddress })}
+              icon="plus"
+              onClick={onGenerateAddress}
+              loading={addressListLoading}
+              error={addressListError}
+              disabled={!isComfirmed}
+              popconfirmMsg={false}
+            />
             <IconButton
               text={intl.formatMessage({ ...messages.checkBalance })}
               icon="check"
@@ -89,13 +89,13 @@ function AddressTableFooter(props) {
               disabled={!networkReady}
               popconfirmMsg={false}
             />
-            <IconButton
-              text={intl.formatMessage({ ...messages.deployContract })}
-              icon="up"
-              onClick={() => {
-                onShowDeployContract();
-              }}
-            />
+            {/* <IconButton */}
+            {/* text={intl.formatMessage({ ...messages.deployContract })} */}
+            {/* icon="up" */}
+            {/* onClick={() => { */}
+            {/* onShowDeployContract(); */}
+            {/* }} */}
+            {/* /> */}
             <Popconfirm
               key="close_wallet"
               placement="bottom"
@@ -111,17 +111,17 @@ function AddressTableFooter(props) {
           <Row type="flex" justify="center">
             <LockButton key="lock_button" {...lockButtonProps} />
           </Row>
-          {/* <Row type="flex" justify="center"> */}
-          {/* <IconButton */}
-          {/* text={intl.formatMessage({ ...messages.addAddress })} */}
-          {/* icon="plus" */}
-          {/* onClick={onGenerateAddress} */}
-          {/* loading={addressListLoading} */}
-          {/* error={addressListError} */}
-          {/* disabled={!isComfirmed} */}
-          {/* popconfirmMsg={false} */}
-          {/* /> */}
-          {/* </Row> */}
+          <Row type="flex" justify="center">
+            <IconButton
+              text={intl.formatMessage({ ...messages.addAddress })}
+              icon="plus"
+              onClick={onGenerateAddress}
+              loading={addressListLoading}
+              error={addressListError}
+              disabled={!isComfirmed}
+              popconfirmMsg={false}
+            />
+          </Row>
           <Row type="flex" justify="center">
             <IconButton
               text={intl.formatMessage({ ...messages.checkBalance })}
@@ -133,16 +133,16 @@ function AddressTableFooter(props) {
               popconfirmMsg={false}
             />
           </Row>
-          <Row type="flex" justify="center">
-            <IconButton
-              text={intl.formatMessage({ ...messages.deployContract })}
-              icon="up"
-              onClick={() => {
-                onShowDeployContract();
-              }}
-              style={{ marginRight: 0 }}
-            />
-          </Row>
+          {/* <Row type="flex" justify="center"> */}
+          {/* <IconButton */}
+          {/* text={intl.formatMessage({ ...messages.deployContract })} */}
+          {/* icon="up" */}
+          {/* onClick={() => { */}
+          {/* onShowDeployContract(); */}
+          {/* }} */}
+          {/* style={{ marginRight: 0 }} */}
+          {/* /> */}
+          {/* </Row> */}
           <Row type="flex" justify="center">
             <Popconfirm
               key="close_wallet"

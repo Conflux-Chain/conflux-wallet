@@ -82,7 +82,11 @@ export function confirmSendTransaction() {
  * @return {object}    An action object with a type of COMFIRM_SEND_TRANSACTION_SUCCESS
  */
 export function confirmSendTransactionSuccess(msg) {
-  const locale = store.getState().get('language').locale || 'en';
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   if (msg) {
     return {
       type: COMFIRM_SEND_TRANSACTION_SUCCESS,
