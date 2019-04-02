@@ -69,6 +69,8 @@ function deployContarctReducer(state = initialState, action) {
         .set('confirmationMsg', false)
         .set('confirmationError', false)
         .set('locked', false)
+        .set('deployInProgress', false)
+        .set('deploySuccess', false)
         .set('deployError', false);
 
     case DEPLOY_CONTRACT:
