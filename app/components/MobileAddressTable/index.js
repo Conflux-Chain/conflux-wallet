@@ -62,7 +62,7 @@ function MobileAddressTable(props) {
         <Button
           type="primary"
           ghost
-          onClick={() => onShowDeployContract()}
+          onClick={() => onShowDeployContract(item.address)}
           style={{ marginLeft: 10 }}
         >
           <FormattedMessage {...messages.deployContract} />

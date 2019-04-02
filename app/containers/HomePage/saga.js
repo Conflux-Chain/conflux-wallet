@@ -16,6 +16,7 @@ import {
   SHOW_SEND_TOKEN,
   SAVE_WALLET,
   LOAD_WALLET,
+  SHOW_DEPLOY_CONTRACT,
 } from 'containers/HomePage/constants';
 
 import { CONFIRM_UPDATE_TOKEN_INFO } from 'containers/TokenChooser/constants';
@@ -34,6 +35,7 @@ import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { loadNetwork } from 'containers/Header/actions';
 
 import { changeFrom } from 'containers/SendToken/actions';
+import { changeFrom as changeContractFrom } from 'containers/DeployContract/actions';
 
 import generateString from 'utils/crypto';
 
@@ -303,6 +305,16 @@ export function* changeSourceAddress(action) {
 }
 
 /**
+ * change source address and token when opening send modal
+ */
+export function* changeContractSourceAddress(action) {
+  // wait for container to load and then change from address
+  if (action.address) {
+    yield put(changeContractFrom(action.address));
+  }
+}
+
+/**
  * Disconnect from network during closeWallet
  */
 export function* closeWallet() {
@@ -403,6 +415,7 @@ export default function* walletData() {
   yield takeLatest(RESTORE_WALLET_FROM_SEED, restoreFromSeed);
   yield takeLatest(UNLOCK_WALLET, unlockWallet);
   yield takeLatest(SHOW_SEND_TOKEN, changeSourceAddress);
+  yield takeLatest(SHOW_DEPLOY_CONTRACT, changeContractSourceAddress);
   yield takeLatest(CLOSE_WALLET, closeWallet);
 
   yield takeLatest(SAVE_WALLET, saveWalletS);

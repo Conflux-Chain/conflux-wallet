@@ -297,7 +297,7 @@ function AddressTable(props) {
                 <Button
                   type="primary"
                   ghost
-                  onClick={() => onShowDeployContract()}
+                  onClick={() => onShowDeployContract(record.address)}
                   style={{ marginLeft: 10 }}
                 >
                   <FormattedMessage {...messages.deployContract} />

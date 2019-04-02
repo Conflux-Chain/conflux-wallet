@@ -460,8 +460,8 @@ export function mapDispatchToProps(dispatch) {
     onLoadWallet: () => {
       dispatch(loadWallet());
     },
-    onShowDeployContract: () => {
-      dispatch(showDeployContract());
+    onShowDeployContract: (address) => {
+      dispatch(showDeployContract(address));
     },
     onHideDeployContract: () => {
       dispatch(hideDeployContract());

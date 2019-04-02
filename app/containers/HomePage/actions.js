@@ -700,10 +700,11 @@ export function loadWalletError(error) {
 
 /* ******************* Show / hide DEPLOAY_CONTRACT ***************************** */
 
-export function showDeployContract() {
+export function showDeployContract(address) {
   // console.log(address);
   return {
     type: SHOW_DEPLOY_CONTRACT,
+    address,
   };
 }
 export function hideDeployContract() {
