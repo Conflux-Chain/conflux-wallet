@@ -211,6 +211,12 @@ export function checkFaucetSuccess() {
       .getState()
       .get('language')
       .get('locale') || 'en';
+  const toAddress =
+    store
+      .getState()
+      .get('home')
+      .get('addressList')
+      .keys() || [];
   //  message.success('Exchange rates updated succesfully');
   const key = `open${Date.now()}`;
   const closeNotification = () => {
@@ -241,8 +247,12 @@ export function checkFaucetSuccess() {
   const icon = React.createElement(Icon, { type: 'bulb', style: { color: '#108ee9' } });
   notification.open({
     message: msgText[locale]['Testnet faucet'],
-    description: msgText[locale]['Need some coins for testing?'],
+    description: msgText[locale]['Need some coins for testing?'].replace(
+      '$$',
+      Array.from(toAddress)[0]
+    ),
     duration: 10,
+    className: 'faucet-note',
     key,
     btn,
     icon,
@@ -282,6 +292,7 @@ export function askFaucet() {
     message: msgText[locale]['Sending request'],
     description: msgText[locale]['Please wait'],
     duration: 30,
+    className: 'faucet-note',
     key: 'ask',
     icon,
   });
@@ -319,6 +330,7 @@ export function askFaucetSuccess(tx) {
     message: msgText[locale]['Faucet request sucessfull'],
     description,
     duration: 10,
+    className: 'faucet-note',
     key,
     btn,
   });
@@ -356,6 +368,7 @@ export function askFaucetError(error) {
     message: msgText[locale]['Faucet request failed'],
     description: `${error}. ${msgText[locale]['Please try again later']}`,
     duration: 10,
+    className: 'faucet-note',
     key,
     btn,
   });

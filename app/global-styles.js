@@ -35,4 +35,12 @@ injectGlobal`
     text-align:center !important;
     margin: 0 auto !important;
   }
+  
+  .faucet-note {
+    word-break: break-all;
+  }
+  
+  .faucet-note .ant-notification-notice-description {
+    margin-left: 0 !important;
+  }
 `;

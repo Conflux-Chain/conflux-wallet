@@ -35,7 +35,7 @@ export default {
     'Check Internet connection and connectivity to RPC':
       'Check Internet connection and connectivity to RPC',
     'Testnet faucet': 'Testnet faucet',
-    'Need some coins for testing?': 'Need some coins for testing?',
+    'Need some coins for testing?': 'Address: $$ Need some coins for testing?',
     'Sending request': 'Sending request',
     'Please wait': 'Please wait',
     'Faucet request sucessfull': 'Faucet request sucessfull',
@@ -82,7 +82,7 @@ export default {
     'Connected sucessfully, best epoch number': '连接成功，最佳 epoch 编号',
     'Check Internet connection and connectivity to RPC': '检查互联网和 RPC 连接',
     'Testnet faucet': '测试网络水龙头服务',
-    'Need some coins for testing?': '需要一些代币用于测试么？',
+    'Need some coins for testing?': '地址：$$ 需要一些代币用于测试么？',
     'Sending request': '发送请求',
     'Please wait': '请等待',
     'Faucet request sucessfull': '水龙头服务请求成功',
