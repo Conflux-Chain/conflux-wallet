@@ -5,8 +5,10 @@
  */
 import msgText from 'translations/msg';
 import {
+  CHANGE_OPERATION_TYPE,
   CHANGE_CODE,
   CHANGE_FROM,
+  CHANGE_TO,
   CHANGE_GAS,
   CHANGE_GAS_PRICE,
   COMFIRM_DEPLOY_CONTRACT,
@@ -20,15 +22,30 @@ import {
 } from './constants';
 import { store } from '../../app';
 
+export function changeOperationType(operationType) {
+  return {
+    type: CHANGE_OPERATION_TYPE,
+    operationType,
+  };
+}
+
 export function changeCode(code) {
   return {
     type: CHANGE_CODE,
     code,
   };
 }
+
 export function changeFrom(address) {
   return {
     type: CHANGE_FROM,
+    address,
+  };
+}
+
+export function changeTo(address) {
+  return {
+    type: CHANGE_TO,
     address,
   };
 }

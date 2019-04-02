@@ -34,7 +34,7 @@ export default defineMessages({
   },
   deployContract: {
     id: `${scope}.deployContract`,
-    defaultMessage: 'Deploy Contract',
+    defaultMessage: 'Contract',
   },
   removeEmpty: {
     id: `${scope}.removeEmpty`,

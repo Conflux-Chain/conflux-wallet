@@ -18,7 +18,7 @@ export default defineMessages({
   },
   deployContract: {
     id: `${scope}.deployContract`,
-    defaultMessage: 'Deploy Contract',
+    defaultMessage: 'Contract',
   },
   closeWallet: {
     id: `${scope}.closeWallet`,

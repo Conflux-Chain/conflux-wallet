@@ -6,7 +6,14 @@ import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { Gwei, maxGasLimitForDeployContract } from 'utils/constants';
 import msgText from 'translations/msg';
 
-import { makeSelectCode, makeSelectFrom, makeSelectGas, makeSelectGasPrice } from './selectors';
+import {
+  makeSelectOperationType,
+  makeSelectCode,
+  makeSelectFrom,
+  makeSelectTo,
+  makeSelectGas,
+  makeSelectGasPrice,
+} from './selectors';
 import {
   confirmDeployContractSuccess,
   confirmDeployContractError,
@@ -48,7 +55,9 @@ export function* DeployContract() {
   const origProvider = keystore.passwordProvider;
   const locale = yield select(makeSelectLocale());
   try {
+    const operationType = yield select(makeSelectOperationType());
     const fromAddress = yield select(makeSelectFrom());
+    const toAddresss = yield select(makeSelectTo());
     const code = yield select(makeSelectCode());
     const gas = yield select(makeSelectGas());
     const gasPrice = new BigNumber(yield select(makeSelectGasPrice())).times(Gwei).toNumber();
@@ -109,6 +118,12 @@ export function* DeployContract() {
       data: code,
       nonce,
     };
+
+    // 调用合约需要合约地址
+    if (operationType === 'call') {
+      // TODO 校验地址有效性
+      sendParams.to = toAddresss;
+    }
 
     // eslint-disable-next-line no-inner-declarations
     function keyFromPasswordPromise(param) {

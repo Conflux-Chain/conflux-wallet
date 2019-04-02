@@ -12,4 +12,8 @@ export default defineMessages({
     id: `${scope}.codeTitle`,
     defaultMessage: 'Contract Bytecode',
   },
+  codeTitle2: {
+    id: `${scope}.codeTitle2`,
+    defaultMessage: 'Call Contract Bytecode',
+  },
 });

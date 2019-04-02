@@ -20,6 +20,7 @@ const Div = styled.div`
 
 function SendConfirmationView(props) {
   const {
+    operationType,
     comfirmationLoading,
     confirmationError,
     confirmationMsg,
@@ -68,10 +69,13 @@ function SendConfirmationView(props) {
         <br />
         <Row type="flex" justify="space-between">
           <Button icon="to-top" onClick={onDeployContract} disabled={isDeployComfirmationLocked}>
-            {deployError ? (
+            {// eslint-disable-next-line no-nested-ternary
+            deployError ? (
               <FormattedMessage {...messages.btnTryAgain} />
-            ) : (
+            ) : operationType === 'deploy' ? (
               <FormattedMessage {...messages.btnGoDeploy} />
+            ) : (
+              <FormattedMessage {...messages.btnGoCall} />
             )}
           </Button>{' '}
           <Button key="reset" onClick={onAbortDeploy} icon="edit">
@@ -86,6 +90,7 @@ function SendConfirmationView(props) {
 }
 
 SendConfirmationView.propTypes = {
+  operationType: PropTypes.string,
   comfirmationLoading: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   confirmationError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   confirmationMsg: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),

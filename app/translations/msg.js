@@ -18,7 +18,7 @@ export default {
     'No keystore found in localStorage': 'No keystore found in localStorage',
     'Source address invalid': 'Source address invalid',
     'code invalid': 'code invalid',
-    'you can continue deploy contract': 'you can continue deploy contract',
+    'you can continue deploy contract': 'you can continue deploy/call contract',
     'No password found - please unlock wallet before send':
       'No password found - please unlock wallet before send',
     'No keystore found - please create wallet': 'No keystore found - please create wallet',
@@ -67,7 +67,7 @@ export default {
     'No keystore found in localStorage': '在本地缓存中未找到密钥',
     'Source address invalid': '源地址无效',
     'code invalid': '无效的代码',
-    'you can continue deploy contract': '您可以继续部署合约',
+    'you can continue deploy contract': '您可以继续部署或调用合约',
     'No password found - please unlock wallet before send': '找不到密码，请在发送之前先解锁钱包',
     'No keystore found - please create wallet': '找不到密钥，请先创建钱包',
     'debug mode: online = false in Header/saga.js': '本地调试模式',

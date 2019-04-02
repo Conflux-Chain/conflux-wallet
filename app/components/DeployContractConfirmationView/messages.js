@@ -18,7 +18,7 @@ export default defineMessages({
   },
   alertErr2: {
     id: `${scope}.alertErr2`,
-    defaultMessage: 'Deploy info is valid',
+    defaultMessage: 'Transaction info is valid',
   },
   btnReset: {
     id: `${scope}.btnReset`,
@@ -31,5 +31,9 @@ export default defineMessages({
   btnGoDeploy: {
     id: `${scope}.btnGoDeploy`,
     defaultMessage: 'Go Deploy',
+  },
+  btnGoCall: {
+    id: `${scope}.btnGoCall`,
+    defaultMessage: 'Go Call',
   },
 });

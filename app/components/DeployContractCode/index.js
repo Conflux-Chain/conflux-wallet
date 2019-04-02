@@ -22,15 +22,19 @@ const TitleDiv = styled.div`
   color: #333;
 `;
 
-function DeployContractCode({ code, onChangeCode, locked }) {
+function DeployContractCode({ code, onChangeCode, locked, operationType }) {
   return (
     <span>
       <TitleDiv>
-        <FormattedMessage {...messages.codeTitle} />
+        {operationType === 'deploy' ? (
+          <FormattedMessage {...messages.codeTitle} />
+        ) : (
+          <FormattedMessage {...messages.codeTitle2} />
+        )}
       </TitleDiv>
       <TextArea
         style={{
-          height: '344px',
+          height: '380px',
         }}
         value={code}
         onChange={(e) => {
@@ -43,6 +47,7 @@ function DeployContractCode({ code, onChangeCode, locked }) {
 }
 
 DeployContractCode.propTypes = {
+  operationType: PropTypes.string,
   code: PropTypes.string,
   onChangeCode: PropTypes.func,
   locked: PropTypes.bool,

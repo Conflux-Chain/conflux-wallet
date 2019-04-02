@@ -5,8 +5,10 @@
  */
 import { fromJS } from 'immutable';
 import {
+  CHANGE_OPERATION_TYPE,
   CHANGE_CODE,
   CHANGE_FROM,
+  CHANGE_TO,
   CHANGE_GAS,
   CHANGE_GAS_PRICE,
   COMFIRM_DEPLOY_CONTRACT,
@@ -19,8 +21,8 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  // for test
-  code: '7f7465737432000000000000000000000000000000000000000000000000000000600057',
+  operationType: 'deploy',
+  code: '7f7465737432000000000000000000000000000000000000000000000000000000600057', // for test
   from: '',
   gas: 10000000, // default deploy contract gas
   gasPrice: 10, // gwei
@@ -37,10 +39,14 @@ const initialState = fromJS({
 
 function deployContarctReducer(state = initialState, action) {
   switch (action.type) {
+    case CHANGE_OPERATION_TYPE:
+      return state.set('operationType', action.operationType);
     case CHANGE_CODE:
       return state.set('code', action.code);
     case CHANGE_FROM:
       return state.update('from', (fromValue) => action.address || fromValue);
+    case CHANGE_TO:
+      return state.set('to', action.address);
 
     case CHANGE_GAS:
       return state.set('gas', action.gas);

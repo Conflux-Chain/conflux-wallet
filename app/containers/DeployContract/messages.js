@@ -10,10 +10,18 @@ export const scope = 'app.components.DeployContract';
 export default defineMessages({
   modalTitle: {
     id: `${scope}.modalTitle`,
-    defaultMessage: 'Deploy Contract',
+    defaultMessage: 'Contract',
   },
   btnConfirmInfo: {
     id: `${scope}.btnConfirmInfo`,
     defaultMessage: 'Confirm Info',
+  },
+  typeDeploy: {
+    id: `${scope}.typeDeploy`,
+    defaultMessage: 'Deploy Contract',
+  },
+  typeCall: {
+    id: `${scope}.typeCall`,
+    defaultMessage: 'Call Contract',
   },
 });

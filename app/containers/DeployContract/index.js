@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, Button, Row, Col } from 'antd';
+import { Modal, Button, Row, Col, Radio } from 'antd';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -21,14 +21,17 @@ import DeployContractCode from 'components/DeployContractCode';
 import DeployContractForm from 'components/DeployContractForm';
 import DeployContractGas from 'components/DeployContractGas';
 import DeployContractGasPrice from 'components/DeployContractGasPrice';
+import DeployContractTo from 'components/DeployContractTo';
 import DeployContractConfirmationView from 'components/DeployContractConfirmationView';
 import DeployContractProgress from 'components/DeployContractProgress';
 
 import { makeSelectAddressList } from 'containers/HomePage/selectors';
 
 import {
+  changeOperationType,
   changeCode,
   changeFrom,
+  changeTo,
   changeGas,
   changeGasPrice,
   confirmDeployContract,
@@ -37,8 +40,10 @@ import {
 } from './actions';
 
 import {
+  makeSelectOperationType,
   makeSelectCode,
   makeSelectFrom,
+  makeSelectTo,
   makeSelectGas,
   makeSelectGasPrice,
   makeSelectLocked,
@@ -53,6 +58,8 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+
+const RadioGroup = Radio.Group;
 
 const NewModal = styled(Modal)`
   @media only screen and (min-device-width: 300px) and (max-device-width: 1025px) {
@@ -117,8 +124,17 @@ const DivRightWrapper = styled.div`
   }
 `;
 
+const SwitchWrapper = styled.div`
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+`;
+
 function DeployContract(props) {
   const {
+    operationType,
+    onChangeOperationType,
+
     isShowDeployContract,
     onHideDeployContract,
 
@@ -129,7 +145,9 @@ function DeployContract(props) {
     onChangeCode,
 
     from,
+    to,
     onChangeFrom,
+    onChangeTo,
 
     gas,
     onChangeGas,
@@ -151,12 +169,14 @@ function DeployContract(props) {
     intl,
   } = props;
 
-  const DeployCodeProps = { code, onChangeCode, locked };
+  const DeployCodeProps = { code, onChangeCode, locked, operationType };
   const DeployFromProps = { from, addressList, onChangeFrom, locked };
   const DeployGasProps = { gas, onChangeGas, locked };
+  const DeployToProps = { to, onChangeTo, locked };
   const DeployGasPriceProps = { gasPrice, onChangeGasPrice, locked };
 
   const DeployConfirmationViewProps = {
+    operationType,
     comfirmationLoading,
     confirmationError,
     confirmationMsg,
@@ -187,6 +207,18 @@ function DeployContract(props) {
         // footer={modalFooter}
       >
         <Row gutter={15}>
+          <Col span={24}>
+            <SwitchWrapper>
+              <RadioGroup onChange={onChangeOperationType} value={operationType}>
+                <Radio value="deploy">
+                  <FormattedMessage {...messages.typeDeploy} />
+                </Radio>
+                <Radio value="call">
+                  <FormattedMessage {...messages.typeCall} />
+                </Radio>
+              </RadioGroup>
+            </SwitchWrapper>
+          </Col>
           <Col xs={24} sm={12}>
             <DeployContractCode {...DeployCodeProps} />
           </Col>
@@ -195,7 +227,8 @@ function DeployContract(props) {
               <DeployContractForm {...DeployFromProps} />
               <DeployContractGasPrice {...DeployGasPriceProps} />
               <DeployContractGas {...DeployGasProps} />
-              <Button onClick={onConfirmDeployContract} disabled={locked}>
+              {operationType === 'deploy' ? null : <DeployContractTo {...DeployToProps} />}
+              <Button onClick={onConfirmDeployContract} disabled={locked} style={{ marginTop: 20 }}>
                 <FormattedMessage {...messages.btnConfirmInfo} />
               </Button>
               <DeployContractConfirmationView {...DeployConfirmationViewProps} />
@@ -211,16 +244,20 @@ function DeployContract(props) {
 }
 
 DeployContract.propTypes = {
+  onChangeOperationType: PropTypes.func.isRequired,
   onChangeCode: PropTypes.func.isRequired,
   onChangeFrom: PropTypes.func.isRequired,
   onChangeGas: PropTypes.func.isRequired,
   onChangeGasPrice: PropTypes.func.isRequired,
+  onChangeTo: PropTypes.func.isRequired,
   onConfirmDeployContract: PropTypes.func.isRequired,
   onDeployContract: PropTypes.func.isRequired,
   onAbortDeploy: PropTypes.func.isRequired,
 
+  operationType: PropTypes.string,
   code: PropTypes.string,
   from: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  to: PropTypes.string,
 
   gas: PropTypes.number,
   gasPrice: PropTypes.number,
@@ -248,8 +285,10 @@ DeployContract.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
+  operationType: makeSelectOperationType(),
   code: makeSelectCode(),
   from: makeSelectFrom(),
+  to: makeSelectTo(),
   gas: makeSelectGas(),
   addressList: makeSelectAddressList(),
   gasPrice: makeSelectGasPrice(),
@@ -269,11 +308,17 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    onChangeOperationType: (evt) => {
+      dispatch(changeOperationType(evt.target.value));
+    },
     onChangeCode: (code) => {
       dispatch(changeCode(code));
     },
     onChangeFrom: (address) => {
       dispatch(changeFrom(address));
+    },
+    onChangeTo: (evt) => {
+      dispatch(changeTo(evt.target.value));
     },
     onChangeGas: (gas) => {
       dispatch(changeGas(gas));

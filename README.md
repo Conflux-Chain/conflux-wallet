@@ -324,3 +324,9 @@ nginx 的配置如下：
 
 1、原项目 build 有问题，eth-lightwallet 依赖的 ethereumjs-tx 本身为 es6，现有 build 脚本会报错，已经转成 es5 编译，使用 1.3.3 版本，ethereumjs-tx@https://github.com/jnoodle/ethereumjs-tx.git
 2、precommit 加了代码格式化和 lint，如果提交不了，请先看下是否lint出错，过了才能提交。
+
+# 获取交易信息
+
+```bash
+curl -X POST --data '{"jsonrpc":"2.0","method":"cfx_getTransactionByHash","params":["0xa68f0d871cd7eea324029114d4fc8f784e0a3ebbef392d12b12bdd2e2a69fb03"],"id":1}' -H "Content-Type: application/json" http://testnet-jsonrpc.conflux-chain.org:12537
+```

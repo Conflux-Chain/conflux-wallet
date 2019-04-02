@@ -10,11 +10,11 @@ export const scope = 'app.components.SubHeader';
 export default defineMessages({
   btnNewWallet: {
     id: `${scope}.btnNewWallet`,
-    defaultMessage: 'New wallet',
+    defaultMessage: 'New Wallet',
   },
   btnRestoreWallet: {
     id: `${scope}.btnRestoreWallet`,
-    defaultMessage: 'Restore wallet',
+    defaultMessage: 'Restore Wallet',
   },
   btnCloseWallet: {
     id: `${scope}.btnCloseWallet`,
