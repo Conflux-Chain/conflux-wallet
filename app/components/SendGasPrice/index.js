@@ -41,7 +41,7 @@ function SendGasPrice({ gasPrice, onChangeGasPrice, locked }) {
         <FormattedMessage {...messages.gasPriceTitle} />
       </TitleDiv>
       <Row type="flex" justify="space-between">
-        <Col span={17}>
+        <Col span={16}>
           <Slider
             min={0.5}
             max={100}
@@ -51,7 +51,7 @@ function SendGasPrice({ gasPrice, onChangeGasPrice, locked }) {
             disabled={locked}
           />
         </Col>
-        <Col span={6} offset={1}>
+        <Col span={7} offset={1}>
           <InputNumber
             min={0.5}
             max={100}
@@ -61,7 +61,7 @@ function SendGasPrice({ gasPrice, onChangeGasPrice, locked }) {
             onChange={onChangeGasPrice} // Bignumber created by reducer
             disabled={locked}
           />
-          <span>&nbsp;Gwei</span>
+          <span>&nbsp;Gdrip</span>
         </Col>
       </Row>
     </Div>

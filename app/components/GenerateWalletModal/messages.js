@@ -26,7 +26,7 @@ export default defineMessages({
   },
   title3: {
     id: `${scope}.title3`,
-    defaultMessage: 'Password for browser encryption:',
+    defaultMessage: 'Password for browser encryption (at least 8 characters long):',
   },
   description: {
     id: `${scope}.description`,
@@ -34,6 +34,6 @@ export default defineMessages({
   },
   placeholderPassword: {
     id: `${scope}.placeholderPassword`,
-    defaultMessage: 'Password for browser encryption',
+    defaultMessage: 'Password for browser encryption (at least 8 characters long)',
   },
 });

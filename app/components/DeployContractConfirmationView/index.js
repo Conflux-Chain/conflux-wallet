@@ -74,7 +74,7 @@ function SendConfirmationView(props) {
               <FormattedMessage {...messages.btnGoDeploy} />
             )}
           </Button>{' '}
-          <Button key="reset" onClick={onAbortDeploy}>
+          <Button key="reset" onClick={onAbortDeploy} icon="edit">
             <FormattedMessage {...messages.btnReset} />
           </Button>
         </Row>

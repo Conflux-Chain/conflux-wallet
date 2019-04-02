@@ -114,7 +114,13 @@ function GenerateWalletModal(props) {
       onOk={onGenerateKeystore}
       onCancel={onGenerateWalletCancel}
       footer={[
-        <Button key="submit" type="primary" size="large" onClick={onGenerateKeystore}>
+        <Button
+          key="submit"
+          type="primary"
+          size="large"
+          onClick={onGenerateKeystore}
+          disabled={!password || password.length < 8}
+        >
           <FormattedMessage {...messages.create} />
         </Button>,
       ]}
@@ -144,7 +150,7 @@ function GenerateWalletModal(props) {
       {/* <Alert description={<b>{password}</b>} type="info" /> */}
       <Input
         placeholder={intl.formatMessage({ ...messages.placeholderPassword })}
-        value={password}
+        value={password == null || password === false ? '' : password}
         onChange={onGenerateWalletChangePassword}
         autoComplete="off"
         autoCorrect="off"

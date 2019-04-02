@@ -45,6 +45,7 @@ function SendAmount({ amount, onChangeAmount, locked }) {
         onChange={(value) => onChangeAmount(value)}
         disabled={locked}
       />
+      &nbsp;CFX
     </Div>
   );
 }
