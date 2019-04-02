@@ -10,6 +10,6 @@ export const scope = 'app.components.DeployContractGas';
 export default defineMessages({
   gasLabel: {
     id: `${scope}.gasLabel`,
-    defaultMessage: 'Gas: ',
+    defaultMessage: 'Gas',
   },
 });

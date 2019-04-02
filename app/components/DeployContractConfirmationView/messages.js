@@ -21,8 +21,8 @@ export default defineMessages({
     defaultMessage: 'Deploy info is valid',
   },
   btnBack: {
-    id: `${scope}.btnBack`,
-    defaultMessage: 'Back',
+    id: `${scope}.btnReset`,
+    defaultMessage: 'Reset',
   },
   btnTryAgain: {
     id: `${scope}.btnTryAgain`,

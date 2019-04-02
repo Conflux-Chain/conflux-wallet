@@ -8,7 +8,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { InputNumber } from 'antd';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 const Div = styled.div`
@@ -42,8 +42,8 @@ function DeployContractGas({ gas, onChangeGas, locked }) {
       </TitleDiv>
       <InputNumber
         value={gas}
-        min={0}
-        step={0.1}
+        min={21000}
+        step={1}
         onChange={(value) => onChangeGas(value)}
         disabled={locked}
       />

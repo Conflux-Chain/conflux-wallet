@@ -74,8 +74,8 @@ function SendConfirmationView(props) {
               <FormattedMessage {...messages.btnGoDeploy} />
             )}
           </Button>{' '}
-          <Button icon="close" onClick={onAbortDeploy} disabled={isDeployComfirmationLocked}>
-            <FormattedMessage {...messages.btnBack} />
+          <Button key="reset" onClick={onAbortDeploy}>
+            <FormattedMessage {...messages.btnReset} />
           </Button>
         </Row>
       </Div>
