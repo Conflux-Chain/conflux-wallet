@@ -20,7 +20,7 @@ export default defineMessages({
     id: `${scope}.alertErr2`,
     defaultMessage: 'Deploy info is valid',
   },
-  btnBack: {
+  btnReset: {
     id: `${scope}.btnReset`,
     defaultMessage: 'Reset',
   },
