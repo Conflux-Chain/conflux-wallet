@@ -7,9 +7,7 @@ const WebpackMonitor = require('webpack-monitor');
 
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
-  entry: [
-    path.join(process.cwd(), 'app/app.js'),
-  ],
+  entry: [path.join(process.cwd(), 'app/app.js')],
 
   // Utilize long-term caching by adding content hashes (not compilation hashes) to compiled assets
   output: {
@@ -44,12 +42,12 @@ module.exports = require('./webpack.base.babel')({
       inject: true,
     }),
 
-    new WebpackMonitor({
-      capture: true, // -> default 'true'
-      target: '../monitor/myStatsStore.json', // default -> '../monitor/stats.json'
-      launch: true, // -> default 'false'
-      port: 3030, // default -> 8081
-    }),
+    // new WebpackMonitor({
+    //   capture: true, // -> default 'true'
+    //   target: '../monitor/stats.json', // default -> '../monitor/stats.json'
+    //   launch: true, // -> default 'false'
+    //   port: 3030, // default -> 8081
+    // }),
 
     // Put it in the end to capture all the HtmlWebpackPlugin's
     // assets manipulations and do leak its manipulations to HtmlWebpackPlugin
@@ -78,6 +76,6 @@ module.exports = require('./webpack.base.babel')({
   ],
 
   performance: {
-    assetFilter: (assetFilename) => !(/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename)),
+    assetFilter: (assetFilename) => !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
   },
 });
