@@ -36,7 +36,7 @@ export const defaultNetwork = 'Testnet';
 export const localStorageKey = 'ks';
 
 // addresses:
-export const website = 'http://www.conflux-chain.org';
+export const website = 'http://wallet.confluxscan.io/';
 export const github = 'http://www.conflux-chain.org';
 
 // APIs:
