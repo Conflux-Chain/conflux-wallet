@@ -159,7 +159,7 @@
                 }
 
                 var localNonce = JSON.parse(
-                  localStorage.getItem(`conflux_wallet_${fromAddress}`) || null
+                  localStorage.getItem(`conflux_wallet_${payload.params[0].from}`) || null
                 );
                 // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
                 // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
@@ -173,7 +173,7 @@
                   nonce = localNonce.nonce;
                 }
                 localStorage.setItem(
-                  `conflux_wallet_${fromAddress}`,
+                  `conflux_wallet_${payload.params[0].from}`,
                   JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
                 );
 
