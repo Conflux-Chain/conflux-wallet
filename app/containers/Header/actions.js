@@ -56,7 +56,9 @@ export function loadNetworkSuccess(blockNumber) {
       .getState()
       .get('language')
       .get('locale') || 'en';
-  message.success(`${msgText[locale]['Connected sucessfully, best epoch number']}: ${blockNumber}`);
+  message.success(
+    `${msgText[locale]['Connected sucessfully, latest epoch number']}: ${blockNumber}`
+  );
   return {
     type: LOAD_NETWORK_SUCCESS,
     blockNumber,

@@ -11,6 +11,7 @@ import {
   makeSelectCode,
   makeSelectFrom,
   makeSelectTo,
+  makeSelectAmount,
   makeSelectGas,
   makeSelectGasPrice,
 } from './selectors';
@@ -60,6 +61,7 @@ export function* DeployContract() {
     const toAddresss = yield select(makeSelectTo());
     const code = yield select(makeSelectCode());
     const gas = yield select(makeSelectGas());
+    const amount = yield select(makeSelectAmount());
     const gasPrice = new BigNumber(yield select(makeSelectGasPrice())).times(Gwei).toNumber();
     const password = yield select(makeSelectPassword());
 
@@ -99,7 +101,7 @@ export function* DeployContract() {
     const maxInterval = 1000 * 60 * 10;
     if (
       localNonce &&
-      +new Date() - +localNonce.updateTime > maxInterval &&
+      +new Date() - +localNonce.updateTime < maxInterval &&
       localNonce.nonce >= nonce
     ) {
       console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce);
@@ -113,6 +115,7 @@ export function* DeployContract() {
     const sendParams = {
       gasPrice,
       gas,
+      amount,
       gasLimit: maxGasLimitForDeployContract,
       value: 0,
       data: code,

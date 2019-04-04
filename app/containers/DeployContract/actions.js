@@ -9,6 +9,7 @@ import {
   CHANGE_CODE,
   CHANGE_FROM,
   CHANGE_TO,
+  CHANGE_AMOUNT,
   CHANGE_GAS,
   CHANGE_GAS_PRICE,
   COMFIRM_DEPLOY_CONTRACT,
@@ -47,6 +48,13 @@ export function changeTo(address) {
   return {
     type: CHANGE_TO,
     address,
+  };
+}
+
+export function changeAmount(amount) {
+  return {
+    type: CHANGE_AMOUNT,
+    amount,
   };
 }
 

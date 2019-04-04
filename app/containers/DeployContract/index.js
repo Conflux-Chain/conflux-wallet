@@ -19,6 +19,7 @@ import injectReducer from 'utils/injectReducer';
 // eslint-disable-next-line import/no-unresolved
 import DeployContractCode from 'components/DeployContractCode';
 import DeployContractForm from 'components/DeployContractForm';
+import DeployContractAmount from 'components/DeployContractAmount';
 import DeployContractGas from 'components/DeployContractGas';
 import DeployContractGasPrice from 'components/DeployContractGasPrice';
 import DeployContractTo from 'components/DeployContractTo';
@@ -32,6 +33,7 @@ import {
   changeCode,
   changeFrom,
   changeTo,
+  changeAmount,
   changeGas,
   changeGasPrice,
   confirmDeployContract,
@@ -44,6 +46,7 @@ import {
   makeSelectCode,
   makeSelectFrom,
   makeSelectTo,
+  makeSelectAmount,
   makeSelectGas,
   makeSelectGasPrice,
   makeSelectLocked,
@@ -141,6 +144,9 @@ function DeployContract(props) {
     addressList,
     locked,
 
+    amount,
+    onChangeAmount,
+
     code,
     onChangeCode,
 
@@ -171,6 +177,7 @@ function DeployContract(props) {
 
   const DeployCodeProps = { code, onChangeCode, locked, operationType };
   const DeployFromProps = { from, addressList, onChangeFrom, locked };
+  const DeployAmountProps = { amount, onChangeAmount, locked };
   const DeployGasProps = { gas, onChangeGas, locked };
   const DeployToProps = { to, onChangeTo, locked };
   const DeployGasPriceProps = { gasPrice, onChangeGasPrice, locked };
@@ -225,6 +232,7 @@ function DeployContract(props) {
           <Col xs={24} sm={12}>
             <DivRightWrapper style={{ marginLeft: global.isMobile ? '0' : '20px' }}>
               <DeployContractForm {...DeployFromProps} />
+              <DeployContractAmount {...DeployAmountProps} />
               <DeployContractGasPrice {...DeployGasPriceProps} />
               <DeployContractGas {...DeployGasProps} />
               {operationType === 'deploy' ? null : <DeployContractTo {...DeployToProps} />}
@@ -258,6 +266,7 @@ DeployContract.propTypes = {
   code: PropTypes.string,
   from: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   to: PropTypes.string,
+  amount: PropTypes.number,
 
   gas: PropTypes.number,
   gasPrice: PropTypes.number,
@@ -289,6 +298,7 @@ const mapStateToProps = createStructuredSelector({
   code: makeSelectCode(),
   from: makeSelectFrom(),
   to: makeSelectTo(),
+  amount: makeSelectAmount(),
   gas: makeSelectGas(),
   addressList: makeSelectAddressList(),
   gasPrice: makeSelectGasPrice(),
@@ -319,6 +329,9 @@ function mapDispatchToProps(dispatch) {
     },
     onChangeTo: (evt) => {
       dispatch(changeTo(evt.target.value));
+    },
+    onChangeAmount: (amount) => {
+      dispatch(changeAmount(amount));
     },
     onChangeGas: (gas) => {
       dispatch(changeGas(gas));

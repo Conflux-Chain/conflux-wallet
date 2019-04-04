@@ -8,6 +8,7 @@ export const CHANGE_OPERATION_TYPE = 'app/DeployContract/CHANGE_OPERATION_TYPE';
 export const CHANGE_CODE = 'app/DeployContract/CHANGE_CODE';
 export const CHANGE_FROM = 'app/DeployContract/CHANGE_FROM';
 export const CHANGE_TO = 'app/DeployContract/CHANGE_TO';
+export const CHANGE_AMOUNT = 'app/DeployContract/CHANGE_AMOUNT';
 export const CHANGE_GAS = 'app/DeployContract/CHANGE_GAS';
 export const CHANGE_GAS_PRICE = 'app/DeployContract/CHANGE_GAS_PRICE';
 

@@ -9,6 +9,7 @@ import {
   CHANGE_CODE,
   CHANGE_FROM,
   CHANGE_TO,
+  CHANGE_AMOUNT,
   CHANGE_GAS,
   CHANGE_GAS_PRICE,
   COMFIRM_DEPLOY_CONTRACT,
@@ -24,6 +25,7 @@ const initialState = fromJS({
   operationType: 'deploy',
   code: '7f7465737432000000000000000000000000000000000000000000000000000000600057', // for test
   from: '',
+  amount: 0,
   gas: 10000000, // default deploy contract gas
   gasPrice: 10, // gwei
   locked: false,
@@ -47,28 +49,24 @@ function deployContarctReducer(state = initialState, action) {
       return state.update('from', (fromValue) => action.address || fromValue);
     case CHANGE_TO:
       return state.set('to', action.address);
-
+    case CHANGE_AMOUNT:
+      return state.set('amount', action.amount);
     case CHANGE_GAS:
       return state.set('gas', action.gas);
-
     case CHANGE_GAS_PRICE:
       return state.set('gasPrice', action.gasPrice);
-
     case COMFIRM_DEPLOY_CONTRACT:
       return state.set('comfirmationLoading', true).set('locked', true);
-
     case COMFIRM_DEPLOY_CONTRACT_SUCCESS:
       return state
         .set('comfirmationLoading', false)
         .set('confirmationMsg', action.msg)
         .set('confirmationError', false);
-
     case COMFIRM_DEPLOY_CONTRACT_ERROR:
       return state
         .set('comfirmationLoading', false)
         .set('confirmationError', action.error)
         .set('locked', false);
-
     case ABORT_DEPLOY:
       return state
         .set('comfirmationLoading', false)
@@ -78,7 +76,6 @@ function deployContarctReducer(state = initialState, action) {
         .set('deployInProgress', false)
         .set('deploySuccess', false)
         .set('deployError', false);
-
     case DEPLOY_CONTRACT:
       return state
         .set('deployInProgress', true)
@@ -94,7 +91,6 @@ function deployContarctReducer(state = initialState, action) {
         .set('deployInProgress', false)
         .set('deployError', action.error)
         .set('deploySuccess', false);
-
     default:
       return state;
   }

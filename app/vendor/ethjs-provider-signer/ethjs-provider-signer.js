@@ -166,7 +166,7 @@
                 var maxInterval = 1000 * 60 * 10;
                 if (
                   localNonce &&
-                  +new Date() - +localNonce.updateTime > maxInterval &&
+                  +new Date() - +localNonce.updateTime < maxInterval &&
                   localNonce.nonce >= nonce
                 ) {
                   console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce);

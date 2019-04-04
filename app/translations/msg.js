@@ -31,7 +31,7 @@ export default {
     'Contract address for token': 'Contract address for token',
     'not found': 'not found',
     'faucet not ready': 'faucet not ready',
-    'Connected sucessfully, best epoch number': 'Connected sucessfully, best epoch number',
+    'Connected sucessfully, latest epoch number': 'Connected sucessfully, latest epoch number',
     'Check Internet connection and connectivity to RPC':
       'Check Internet connection and connectivity to RPC',
     'Testnet faucet': 'Testnet faucet',
@@ -79,7 +79,7 @@ export default {
     'Contract address for token': '代币的合约地址',
     'not found': '未找到',
     'faucet not ready': '水龙头服务未准备好',
-    'Connected sucessfully, best epoch number': '连接成功，最佳 epoch 编号',
+    'Connected sucessfully, latest epoch number': '连接成功，最新 epoch 编号',
     'Check Internet connection and connectivity to RPC': '检查互联网和 RPC 连接',
     'Testnet faucet': '测试网络水龙头服务',
     'Need some coins for testing?': '地址：$$ 需要一些代币用于测试么？',

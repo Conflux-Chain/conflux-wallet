@@ -29,6 +29,12 @@ const makeSelectTo = () =>
     (substate) => substate.get('to')
   );
 
+const makeSelectAmount = () =>
+  createSelector(
+    selectDeployContractDomain,
+    (substate) => substate.get('amount')
+  );
+
 const makeSelectGas = () =>
   createSelector(
     selectDeployContractDomain,
@@ -96,6 +102,7 @@ export {
   makeSelectCode,
   makeSelectFrom,
   makeSelectTo,
+  makeSelectAmount,
   makeSelectGas,
   makeSelectGasPrice,
   makeSelectLocked,
