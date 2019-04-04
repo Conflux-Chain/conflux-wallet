@@ -308,6 +308,12 @@ var methods = function() {
     params: 0,
   });
 
+  var getEpochNumber = new Method({
+    name: 'getEpochNumber',
+    call: 'cfx_epochNumber',
+    params: 0,
+  });
+
   return [
     getBalance,
     getStorageAt,
@@ -334,6 +340,7 @@ var methods = function() {
     submitWork,
     getWork,
     getBlocksByEpoch,
+    getEpochNumber,
   ];
 };
 
