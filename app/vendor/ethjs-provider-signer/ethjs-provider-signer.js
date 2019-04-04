@@ -158,6 +158,25 @@
                   );
                 }
 
+                var localNonce = JSON.parse(
+                  localStorage.getItem(`conflux_wallet_${fromAddress}`) || null
+                );
+                // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
+                // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
+                var maxInterval = 1000 * 60 * 10;
+                if (
+                  localNonce &&
+                  +new Date() - +localNonce.updateTime > maxInterval &&
+                  localNonce.nonce >= nonce
+                ) {
+                  console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce);
+                  nonce = localNonce.nonce;
+                }
+                localStorage.setItem(
+                  `conflux_wallet_${fromAddress}`,
+                  JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
+                );
+
                 // get the gas price, if any
                 self.rpc.sendAsync({ method: 'cfx_gasPrice' }, function(gasPriceError, gasPrice) {
                   // eslint-disable-line

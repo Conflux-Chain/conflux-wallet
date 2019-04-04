@@ -128,13 +128,17 @@ export function* loadNetwork(action) {
           //   if (err !== null) return reject(err);
           //   return resolve(data);
           // });
+          web3.cfx.getEpochNumber((err, data) => {
+            if (err !== null) return reject(err);
+            return resolve(data);
+          });
           // try{
           //   let epochNumber=web3.cfx.epochNumber;
           //   resolve(epochNumber);
           // }catch(err){
           //   reject(err);
           // }
-          resolve(10020);
+          // resolve(10020);
         });
       }
       const blockNumber = yield call(getBlockNumberPromise);
@@ -236,7 +240,7 @@ export function* SendTransaction() {
         value: sendAmount,
         gasPrice,
         gas: maxGasForCfxSend,
-        nonce: 10,
+        // nonce: 10,
       };
       // eslint-disable-next-line no-inner-declarations
       function sendTransactionPromise(params) {
