@@ -42,7 +42,15 @@ const initialState = fromJS({
 function deployContarctReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_OPERATION_TYPE:
-      return state.set('operationType', action.operationType);
+      return state
+        .set('operationType', action.operationType)
+        .set('comfirmationLoading', false)
+        .set('confirmationMsg', false)
+        .set('confirmationError', false)
+        .set('locked', false)
+        .set('deployInProgress', false)
+        .set('deploySuccess', false)
+        .set('deployError', false);
     case CHANGE_CODE:
       return state.set('code', action.code);
     case CHANGE_FROM:

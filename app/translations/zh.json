@@ -29,6 +29,7 @@
   "app.components.DeployContract.modalTitle": "合约",
   "app.components.DeployContract.typeCall": "调用合约",
   "app.components.DeployContract.typeDeploy": "部署合约",
+  "app.components.DeployContractAmount.amountTitle": "金额",
   "app.components.DeployContractCode.codeTitle": "智能合约字节码",
   "app.components.DeployContractCode.codeTitle2": "调用智能合约字节码",
   "app.components.DeployContractConfirmationView.alertErr1": "数据不完整",

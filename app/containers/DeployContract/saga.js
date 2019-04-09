@@ -30,9 +30,11 @@ const signing = lightwallet.signing;
 
 export function* confirmSendTransaction() {
   try {
+    const operationType = yield select(makeSelectOperationType());
     const fromAddress = yield select(makeSelectFrom());
     const code = yield select(makeSelectCode());
     const locale = yield select(makeSelectLocale());
+    const toAddresss = yield select(makeSelectTo());
     // const gasPrice = yield select(makeSelectGasPrice());
 
     if (!web3.isAddress(fromAddress)) {
@@ -42,8 +44,17 @@ export function* confirmSendTransaction() {
     if (!code) {
       throw new Error(msgText[locale]['code invalid']);
     }
+
+    if (operationType === 'call' && !web3.isAddress(toAddresss)) {
+      throw new Error(msgText[locale]['Contract address invalid']);
+    }
     // TODO:提示语
-    const msg = msgText[locale]['you can continue deploy contract'];
+    const msg =
+      msgText[locale][
+        operationType === 'call'
+          ? 'you can continue call contract'
+          : 'you can continue deploy contract'
+      ];
     yield put(confirmDeployContractSuccess(msg));
   } catch (err) {
     // const errorString = `confirmSendTransaction error - ${err.message}`;

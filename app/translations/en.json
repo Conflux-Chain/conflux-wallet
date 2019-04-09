@@ -29,6 +29,7 @@
   "app.components.DeployContract.modalTitle": "Contract",
   "app.components.DeployContract.typeCall": "Call Contract",
   "app.components.DeployContract.typeDeploy": "Deploy Contract",
+  "app.components.DeployContractAmount.amountTitle": "Amount",
   "app.components.DeployContractCode.codeTitle": "Contract Bytecode",
   "app.components.DeployContractCode.codeTitle2": "Call Contract Bytecode",
   "app.components.DeployContractConfirmationView.alertErr1": "Incomplete data",
