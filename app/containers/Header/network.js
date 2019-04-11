@@ -4,8 +4,9 @@ const Network = {
   Testnet: {
     rpc:
       process.env.NODE_ENV === 'production'
-        ? 'https://wallet.confluxscan.io/api'
+        ? '//wallet.confluxscan.io/api'
         : 'http://testnet-jsonrpc.conflux-chain.org:12537',
+    // rpc: 'http://testnet-jsonrpc.conflux-chain.org:12537',
     tx_explorer: 'http://confluxscan.io/tx/',
   },
   // 'Main Net': { rpc: 'https://mainnet.infura.io/GjiCzFxpQAUkPtDUpKEP', tx_explorer: 'https://etherscan.io/tx/' },
