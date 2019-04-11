@@ -42,5 +42,5 @@ export const github = 'http://www.conflux-chain.org';
 // APIs:
 // export const checkFaucetAddress = 'http://localhost:3000/status';
 // export const askFaucetAddress = 'http://localhost:3000/ask';
-export const checkFaucetAddress = 'http://testnet-jsonrpc.conflux-chain.org:18082/dev/status';
-export const askFaucetAddress = 'http://testnet-jsonrpc.conflux-chain.org:18082/dev/ask';
+export const checkFaucetAddress = '//wallet.confluxscan.io/faucet/dev/status';
+export const askFaucetAddress = '//wallet.confluxscan.io/faucet/dev/ask';
