@@ -36,6 +36,10 @@ export default defineMessages({
     id: `${scope}.deployContract`,
     defaultMessage: 'Contract',
   },
+  showPrivKey: {
+    id: `${scope}.showPrivKey`,
+    defaultMessage: 'Show Private Key',
+  },
   removeEmpty: {
     id: `${scope}.removeEmpty`,
     defaultMessage: 'Remove empty',

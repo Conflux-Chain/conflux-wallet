@@ -61,6 +61,7 @@ import {
   LOAD_WALLET_ERROR,
   SHOW_DEPLOY_CONTRACT,
   HIDE_DEPLOY_CONTRACT,
+  SHOW_PRIVATE_KEY,
 } from './constants';
 import { store } from '../../app';
 
@@ -710,5 +711,12 @@ export function showDeployContract(address) {
 export function hideDeployContract() {
   return {
     type: HIDE_DEPLOY_CONTRACT,
+  };
+}
+
+export function showPrivKey(address) {
+  return {
+    type: SHOW_PRIVATE_KEY,
+    address,
   };
 }

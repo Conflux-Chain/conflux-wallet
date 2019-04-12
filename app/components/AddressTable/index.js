@@ -205,6 +205,7 @@ function AddressTable(props) {
     // onSelectCurrency,
     convertTo,
     onShowDeployContract,
+    onShowPrivKey,
     intl,
   } = props;
 
@@ -301,6 +302,14 @@ function AddressTable(props) {
                   style={{ marginLeft: 10 }}
                 >
                   <FormattedMessage {...messages.deployContract} />
+                </Button>
+                <Button
+                  type="primary"
+                  ghost
+                  onClick={() => onShowPrivKey(record.address)}
+                  style={{ marginLeft: 10 }}
+                >
+                  <FormattedMessage {...messages.showPrivKey} />
                 </Button>
               </div>
             )}

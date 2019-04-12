@@ -17,6 +17,7 @@ import {
   SAVE_WALLET,
   LOAD_WALLET,
   SHOW_DEPLOY_CONTRACT,
+  SHOW_PRIVATE_KEY,
 } from 'containers/HomePage/constants';
 
 import { CONFIRM_UPDATE_TOKEN_INFO } from 'containers/TokenChooser/constants';
@@ -399,6 +400,33 @@ export function* chosenTokenInfo(action) {
   yield put(updateTokenInfo(addressList, action.tokenInfo));
 }
 
+export function* showPrivKey(action) {
+  // To Do try catch
+  const ks = yield select(makeSelectKeystore());
+  const locale = yield select(makeSelectLocale());
+  const password = yield select(makeSelectPassword());
+  if (!password) {
+    throw new Error(msgText[locale]['Wallet Locked']);
+  }
+  if (!ks) {
+    throw new Error('No keystore found');
+  }
+  // eslint-disable-next-line no-inner-declarations
+  function keyFromPasswordPromise(param) {
+    return new Promise((resolve, reject) => {
+      ks.keyFromPassword(param, (err, data) => {
+        if (err !== null) return reject(err);
+        return resolve(data);
+      });
+    });
+  }
+
+  const pwDerivedKey = yield call(keyFromPasswordPromise, password);
+  const privKey = ks.exportPrivateKey(action.address, pwDerivedKey);
+  console.log(privKey);
+  window.alert(privKey); // To Do display with popup
+}
+
 /**
  * Root saga manages watcher lifecycle
  */
@@ -422,6 +450,7 @@ export default function* walletData() {
   yield takeLatest(LOAD_WALLET, loadWalletS);
 
   yield takeLatest(CONFIRM_UPDATE_TOKEN_INFO, chosenTokenInfo);
+  yield takeLatest(SHOW_PRIVATE_KEY, showPrivKey);
   /*
   while (yield takeLatest(INIT_WALLET, initSeed)) {
     // yield takeLatest(GENERATE_KEYSTORE, genKeystore);

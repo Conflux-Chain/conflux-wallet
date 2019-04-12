@@ -61,6 +61,7 @@ function AddressView(props) {
     onShowTokenChooser,
     intl,
     onShowDeployContract,
+    onShowPrivKey,
     onCloseWallet,
   } = props;
 
@@ -72,6 +73,7 @@ function AddressView(props) {
     onSelectCurrency,
     convertTo,
     onShowDeployContract,
+    onShowPrivKey,
   };
 
   const addressTableFooterProps = {

@@ -69,6 +69,7 @@ import {
   loadWallet,
   showDeployContract,
   hideDeployContract,
+  showPrivKey,
 } from './actions';
 
 import {
@@ -180,6 +181,7 @@ export class HomePage extends React.PureComponent {
       isShowDeployContract,
       onShowDeployContract,
       onHideDeployContract,
+      onShowPrivKey,
     } = this.props;
 
     const subHeaderProps = {
@@ -260,6 +262,7 @@ export class HomePage extends React.PureComponent {
 
       onShowDeployContract,
       onCloseWallet,
+      onShowPrivKey,
     };
 
     const sendTokenProps = { isShowSendToken, onHideSendToken };
@@ -365,6 +368,7 @@ HomePage.propTypes = {
   isShowDeployContract: PropTypes.bool,
   onShowDeployContract: PropTypes.func,
   onHideDeployContract: PropTypes.func,
+  onShowPrivKey: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -465,6 +469,9 @@ export function mapDispatchToProps(dispatch) {
     },
     onHideDeployContract: () => {
       dispatch(hideDeployContract());
+    },
+    onShowPrivKey: (address) => {
+      dispatch(showPrivKey(address));
     },
   };
 }

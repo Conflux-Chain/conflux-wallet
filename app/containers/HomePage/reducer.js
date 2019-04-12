@@ -283,7 +283,6 @@ function homeReducer(state = initialState, action) {
       return state.set('isShowDeployContract', true);
     case HIDE_DEPLOY_CONTRACT:
       return state.set('isShowDeployContract', false);
-
     default:
       return state;
   }
