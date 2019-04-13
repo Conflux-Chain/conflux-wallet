@@ -38,7 +38,7 @@ export default defineMessages({
   },
   showPrivKey: {
     id: `${scope}.showPrivKey`,
-    defaultMessage: 'Show Private Key',
+    defaultMessage: 'Private Key',
   },
   removeEmpty: {
     id: `${scope}.removeEmpty`,
