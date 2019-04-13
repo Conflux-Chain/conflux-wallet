@@ -65,3 +65,5 @@ export const LOAD_WALLET_ERROR = 'conflux-wallet/HomePage/LOAD_WALLET_ERROR';
 export const SHOW_DEPLOY_CONTRACT = 'conflux-wallet/HomePage/SHOW_DEPLOY_CONTRACT';
 export const HIDE_DEPLOY_CONTRACT = 'conflux-wallet/HomePage/HIDE_DEPLOY_CONTRACT';
 export const SHOW_PRIVATE_KEY = 'conflux-wallet/HomePage/SHOW_PRIVATE_KEY';
+export const SHOW_PRIVATE_KEY_SUCCESS = 'conflux-wallet/HomePage/SHOW_PRIVATE_KEY_SUCCESS';
+export const SHOW_PRIVATE_KEY_ERROR = 'conflux-wallet/HomePage/SHOW_PRIVATE_KEY_ERROR';

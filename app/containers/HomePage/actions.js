@@ -62,6 +62,8 @@ import {
   SHOW_DEPLOY_CONTRACT,
   HIDE_DEPLOY_CONTRACT,
   SHOW_PRIVATE_KEY,
+  SHOW_PRIVATE_KEY_SUCCESS,
+  SHOW_PRIVATE_KEY_ERROR,
 } from './constants';
 import { store } from '../../app';
 
@@ -718,5 +720,19 @@ export function showPrivKey(address) {
   return {
     type: SHOW_PRIVATE_KEY,
     address,
+  };
+}
+
+export function showPrivKeySuccess() {
+  return {
+    type: SHOW_PRIVATE_KEY_SUCCESS,
+  };
+}
+
+export function showPrivKeyError(error) {
+  message.error(error);
+  return {
+    type: SHOW_PRIVATE_KEY_ERROR,
+    error,
   };
 }
