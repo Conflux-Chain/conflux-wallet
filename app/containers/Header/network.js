@@ -7,7 +7,7 @@ const Network = {
         ? '//wallet.confluxscan.io/api/'
         : 'http://testnet-jsonrpc.conflux-chain.org:12537',
     // rpc: '//wallet.confluxscan.io/api/',
-    tx_explorer: 'http://confluxscan.io/tx/',
+    tx_explorer: 'http://confluxscan.io/transactionsdetail/',
   },
   // 'Main Net': { rpc: 'https://mainnet.infura.io/GjiCzFxpQAUkPtDUpKEP', tx_explorer: 'https://etherscan.io/tx/' },
 };
