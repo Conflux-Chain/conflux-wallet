@@ -59,7 +59,7 @@ import {
 
 // The initial state of the App
 const initialState = fromJS({
-  isWaringShow: true,
+  isWarningShow: true,
   isShowGenerateWallet: false,
   generateWalletLoading: false, // generate new seed and password
   generateWalletError: false,
@@ -138,7 +138,7 @@ const initialState = fromJS({
 function homeReducer(state = initialState, action) {
   switch (action.type) {
     case CLOSE_WARNING:
-      return state.set('isWaringShow', false);
+      return state.set('isWarningShow', false);
     case GENERATE_WALLET:
       return state
         .set('isShowGenerateWallet', true)

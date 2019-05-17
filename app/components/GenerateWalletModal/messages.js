@@ -18,7 +18,7 @@ export default defineMessages({
   },
   title1: {
     id: `${scope}.title1`,
-    defaultMessage: 'Waring:',
+    defaultMessage: 'Warning:',
   },
   title2: {
     id: `${scope}.title2`,

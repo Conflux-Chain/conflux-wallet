@@ -73,7 +73,7 @@ import {
 } from './actions';
 
 import {
-  makeSelectIsWaringShow,
+  makeSelectIsWarningShow,
   makeSelectIsShowGenerateWallet,
   makeSelectGenerateWalletLoading,
   makeSelectGenerateWalletError,
@@ -113,7 +113,7 @@ export class HomePage extends React.PureComponent {
       onGenerateWallet,
       onGenerateWalletChangePassword,
       onGenerateWalletCancel,
-      isWaringShow,
+      isWarningShow,
       isShowGenerateWallet,
       generateWalletLoading,
       generateWalletError,
@@ -203,7 +203,7 @@ export class HomePage extends React.PureComponent {
     };
 
     const generateWalletProps = {
-      isWaringShow,
+      isWarningShow,
       isShowGenerateWallet,
       generateWalletLoading,
       generateWalletError,
@@ -295,7 +295,7 @@ HomePage.propTypes = {
   onGenerateWallet: PropTypes.func,
   onGenerateWalletChangePassword: PropTypes.func,
   onGenerateWalletCancel: PropTypes.func,
-  isWaringShow: PropTypes.bool,
+  isWarningShow: PropTypes.bool,
   isShowGenerateWallet: PropTypes.bool,
   generateWalletLoading: PropTypes.bool,
   generateWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
@@ -477,7 +477,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  isWaringShow: makeSelectIsWaringShow(),
+  isWarningShow: makeSelectIsWarningShow(),
   isShowGenerateWallet: makeSelectIsShowGenerateWallet(),
   generateWalletLoading: makeSelectGenerateWalletLoading(),
   generateWalletError: makeSelectGenerateWalletError(),

@@ -52,7 +52,7 @@
   "app.components.GenerateWalletModal.description": "WTF is wallet security? <br /> Do not save password in screenshot!",
   "app.components.GenerateWalletModal.placeholderPassword": "Password for browser encryption (at least 8 characters long)",
   "app.components.GenerateWalletModal.title": "New Wallet",
-  "app.components.GenerateWalletModal.title1": "Waring:",
+  "app.components.GenerateWalletModal.title1": "Warning:",
   "app.components.GenerateWalletModal.title2": "Seed:",
   "app.components.GenerateWalletModal.title3": "Password for browser encryption (at least 8 characters long):",
   "app.components.IconButton.title": "{err} - Click to retry",

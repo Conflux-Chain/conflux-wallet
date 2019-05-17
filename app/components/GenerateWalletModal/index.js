@@ -92,7 +92,7 @@ const Title2 = styled.div`
 
 function GenerateWalletModal(props) {
   const {
-    isWaringShow,
+    isWarningShow,
     isShowGenerateWallet,
     generateWalletLoading,
     // generateWalletError,
@@ -125,7 +125,7 @@ function GenerateWalletModal(props) {
         </Button>,
       ]}
     >
-      {isWaringShow ? (
+      {isWarningShow ? (
         <Title1>
           <FormattedMessage {...messages.title1} />
         </Title1>
@@ -172,7 +172,7 @@ function GenerateWalletModal(props) {
 }
 
 GenerateWalletModal.propTypes = {
-  isWaringShow: PropTypes.bool,
+  isWarningShow: PropTypes.bool,
   isShowGenerateWallet: PropTypes.bool,
   generateWalletLoading: PropTypes.bool,
   /* generateWalletError: PropTypes.oneOfType([
