@@ -50,7 +50,7 @@
   "app.components.DeployContractTo.placeholderDeployContractTo": "Send to contract address",
   "app.components.DeployContractTo.sourceTitle": "Contract Address",
   "app.components.GenerateWalletModal.create": "Create Now",
-  "app.components.GenerateWalletModal.description": "WTF is wallet security? <br /> Do not save password in screenshot!",
+  "app.components.GenerateWalletModal.description": "Do not save password in screenshot!",
   "app.components.GenerateWalletModal.placeholderPassword": "Password for browser encryption (at least 8 characters long)",
   "app.components.GenerateWalletModal.title": "New Wallet",
   "app.components.GenerateWalletModal.title1": "Warning:",

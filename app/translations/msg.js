@@ -45,7 +45,7 @@ export default {
     'Got it': 'Got it',
     'Faucet request failed': 'Faucet request failed',
     'Please try again later': 'Please try again later',
-    'No man': 'No man',
+    'No man': 'No, thanks',
     Sure: 'Sure',
     'Deploy confirmed successfully, Send to transmit':
       'Deploy confirmed successfully, Send to transmit',
