@@ -74,6 +74,7 @@ import {
   loadWalletSuccess,
   loadWalletError,
   updateTokenInfo,
+  showPrivKeyError,
 } from './actions';
 
 /**
@@ -401,30 +402,34 @@ export function* chosenTokenInfo(action) {
 }
 
 export function* showPrivKey(action) {
-  // To Do try catch
-  const ks = yield select(makeSelectKeystore());
-  const locale = yield select(makeSelectLocale());
-  const password = yield select(makeSelectPassword());
-  if (!password) {
-    throw new Error(msgText[locale]['Wallet Locked']);
-  }
-  if (!ks) {
-    throw new Error('No keystore found');
-  }
-  // eslint-disable-next-line no-inner-declarations
-  function keyFromPasswordPromise(param) {
-    return new Promise((resolve, reject) => {
-      ks.keyFromPassword(param, (err, data) => {
-        if (err !== null) return reject(err);
-        return resolve(data);
+  try {
+    const ks = yield select(makeSelectKeystore());
+    const locale = yield select(makeSelectLocale());
+    const password = yield select(makeSelectPassword());
+    if (!password) {
+      throw new Error(msgText[locale]['Wallet Locked']);
+    }
+    if (!ks) {
+      throw new Error('No keystore found');
+    }
+    // eslint-disable-next-line no-inner-declarations
+    function keyFromPasswordPromise(param) {
+      return new Promise((resolve, reject) => {
+        ks.keyFromPassword(param, (err, data) => {
+          if (err !== null) return reject(err);
+          return resolve(data);
+        });
       });
-    });
-  }
+    }
 
-  const pwDerivedKey = yield call(keyFromPasswordPromise, password);
-  const privKey = ks.exportPrivateKey(action.address, pwDerivedKey);
-  console.log(privKey);
-  window.alert(privKey); // To Do display with popup
+    const pwDerivedKey = yield call(keyFromPasswordPromise, password);
+    const privKey = ks.exportPrivateKey(action.address, pwDerivedKey);
+    console.log(privKey);
+    window.alert(privKey); // To Do display with popup
+  } catch (err) {
+    const errorString = `${err.message}`;
+    yield put(showPrivKeyError(errorString));
+  }
 }
 
 /**

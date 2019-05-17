@@ -9,6 +9,7 @@
   "app.components.AddressTable.icon": "Icon",
   "app.components.AddressTable.removeEmpty": "Remove empty",
   "app.components.AddressTable.send": "Send",
+  "app.components.AddressTable.showPrivKey": "Private Key",
   "app.components.AddressTable.token": "Token",
   "app.components.AddressTableFooter.addAddress": "Add Address",
   "app.components.AddressTableFooter.checkBalance": "Check Balances",

@@ -16,7 +16,7 @@ const Span = styled.span`
 function FaucetDescription(props) {
   const { tx, text } = props;
 
-  const explorer = 'http://confluxscan.io/tx/';
+  const explorer = 'http://confluxscan.io/transactionsdetail/';
   const TxLinkProps = { tx, explorer };
 
   return (

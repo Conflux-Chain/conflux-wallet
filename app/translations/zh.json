@@ -9,6 +9,7 @@
   "app.components.AddressTable.icon": "图标",
   "app.components.AddressTable.removeEmpty": "删除空地址",
   "app.components.AddressTable.send": "发送",
+  "app.components.AddressTable.showPrivKey": "私钥",
   "app.components.AddressTable.token": "代币",
   "app.components.AddressTableFooter.addAddress": "增加地址",
   "app.components.AddressTableFooter.checkBalance": "更新余额",
