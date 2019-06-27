@@ -1,8 +1,8 @@
 /**
-*
-* CurrencySelector
-*
-*/
+ *
+ * CurrencySelector
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,7 +16,11 @@ function CurrencySelector({ convertTo, exchangeRates, onSelectCurrency }) {
   if (exchangeRates.size > 0) {
     exchangeRates.entrySeq().forEach((entry) => {
       // console.log(`key: ${entry[0]}, value: ${entry[1]}`);
-      options.push(<option value={entry[0]} key={entry[0]}>{entry[1].get('name')}</option>);
+      options.push(
+        <option value={entry[0]} key={entry[0]}>
+          {entry[1].get('name')}
+        </option>
+      );
     });
   }
   /* if (availableNetworks) {

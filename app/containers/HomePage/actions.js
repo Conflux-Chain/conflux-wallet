@@ -16,16 +16,17 @@
  */
 import extractRates from 'utils/unitConverter';
 import { message } from 'antd';
+import msgText from 'translations/msg';
 import {
+  CLOSE_WARNING,
   GENERATE_WALLET,
+  GENERATE_WALLET_CHANGE_PASSWORD,
   GENERATE_WALLET_SUCCESS,
   GENERATE_WALLET_ERROR,
   GENERATE_WALLET_CANCEL,
-
   GENERATE_KEYSTORE,
   GENERATE_KEYSTORE_SUCCESS,
   GENERATE_KEYSTORE_ERROR,
-
   SHOW_RESTORE_WALLET,
   RESTORE_WALLET_CANCEL,
   CHANGE_USER_SEED,
@@ -33,43 +34,38 @@ import {
   RESTORE_WALLET_FROM_SEED,
   RESTORE_WALLET_FROM_SEED_SUCCESS,
   RESTORE_WALLET_FROM_SEED_ERROR,
-
   CHANGE_BALANCE,
-
   SHOW_SEND_TOKEN,
   HIDE_SEND_TOKEN,
   SHOW_TOKEN_CHOOSER,
   HIDE_TOKEN_CHOOSER,
-
   UPDATE_TOKEN_INFO,
-
   GENERATE_ADDRESS,
   GENERATE_ADDRESS_SUCCESS,
   GENERATE_ADDRESS_ERROR,
-
   LOCK_WALLET,
   UNLOCK_WALLET,
   UNLOCK_WALLET_SUCCESS,
   UNLOCK_WALLET_ERROR,
-
   SET_EXCHANGE_RATES,
   SELECT_CURRENCY,
-
   CLOSE_WALLET,
-
   CHECK_LOCAL_STORAGE,
   LOCAL_STORAGE_EXIST,
   LOCAL_STORAGE_NOT_EXIST,
-
   SAVE_WALLET,
   SAVE_WALLET_SUCCESS,
   SAVE_WALLET_ERROR,
-
   LOAD_WALLET,
   LOAD_WALLET_SUCCESS,
   LOAD_WALLET_ERROR,
+  SHOW_DEPLOY_CONTRACT,
+  HIDE_DEPLOY_CONTRACT,
+  SHOW_PRIVATE_KEY,
+  SHOW_PRIVATE_KEY_SUCCESS,
+  SHOW_PRIVATE_KEY_ERROR,
 } from './constants';
-
+import { store } from '../../app';
 
 /* ********************************Generate Wallet ******************************* */
 
@@ -78,9 +74,31 @@ import {
  *
  * @return {object}    An action object with a type of GENERATE_WALLET
  */
+export function closeWarning() {
+  return {
+    type: CLOSE_WARNING,
+  };
+}
+/**
+ * Open generate wallet modal and generate new random seed and password
+ *
+ * @return {object}    An action object with a type of GENERATE_WALLET
+ */
 export function generateWallet() {
   return {
     type: GENERATE_WALLET,
+  };
+}
+
+/**
+ * generate wallet modal password change
+ * @param password
+ * @return {{password: *, type: string}}
+ */
+export function generateWalletChangePassword(password) {
+  return {
+    type: GENERATE_WALLET_CHANGE_PASSWORD,
+    password,
   };
 }
 /**
@@ -169,7 +187,7 @@ export function changeUserSeed(userSeed) {
  * @return {object}    An action object with a type of CHANGE_USER_SEED
  */
 export function changeUserPassword(userPassword) {
-  const password = userPassword;// .replace(/^\s+|\s+$/g, '');
+  const password = userPassword; // .replace(/^\s+|\s+$/g, '');
   return {
     type: CHANGE_USER_PASSWORD,
     password,
@@ -319,7 +337,6 @@ export function generateKeystoreError(error) {
   };
 }
 
-
 /* **********************************Change balance ********************** */
 /**
  * Changes ballance for a given address and symbol
@@ -391,7 +408,6 @@ export function hideTokenChooser() {
   };
 }
 
-
 /* ******************* UPDATE_TOKEN_INFO ***************************** */
 
 /**
@@ -403,8 +419,13 @@ export function hideTokenChooser() {
  */
 export function updateTokenInfo(addressList, newTokenInfo) {
   const tokenInfo = {
-    eth: {
-      name: 'Ethereum',
+    // eth: {
+    //   name: 'Ethereum',
+    //   contractAddress: null,
+    //   decimals: 18,
+    // },
+    cfx: {
+      name: 'Conflux',
       contractAddress: null,
       decimals: 18,
     },
@@ -419,7 +440,6 @@ export function updateTokenInfo(addressList, newTokenInfo) {
     addressMap,
   };
 }
-
 
 /* ******************* Generate new address from existing keystore********** */
 /**
@@ -445,7 +465,7 @@ export function generateAddress() {
  * newAddress and tokenMap for the new address
  */
 export function generateAddressSuccess(newAddress, index, tokenList) {
-  const tokenMap = createTokenMap(tokenList);// , index);
+  const tokenMap = createTokenMap(tokenList); // , index);
   console.log(tokenMap);
 
   tokenMap.index = index;
@@ -471,9 +491,7 @@ export function generateAddressError(error) {
   };
 }
 
-
 /* **********************LOCK AND UNLOCK WALLET ***************************** */
-
 
 /**
  * Lock wallet by removing encription password from state (syncronic)
@@ -530,7 +548,6 @@ export function unlockWalletError(error) {
 
 /* ************************* Exchange Rates ************************************ */
 
-
 /**
  * Recives api response and requestUrl used, transforms the api response into the proper format to
  * save in state
@@ -565,14 +582,18 @@ export function selectCurrency(convertTo) {
 
 /* ********************* CLOSE WALLET **************************************** */
 
-
 /**
  * Removes keystore from memory and closes wallet
  *
  * @return {object} An action object with a type of CLOSE_WALLET
  */
 export function closeWallet() {
-  message.success('Wallet removed from memory');
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
+  message.success(msgText[locale]['Wallet removed from memory']);
   return {
     type: CLOSE_WALLET,
   };
@@ -611,7 +632,6 @@ export function localStorageNotExist() {
     type: LOCAL_STORAGE_NOT_EXIST,
   };
 }
-
 
 /**
  * Saves Wallet to local storage
@@ -681,3 +701,38 @@ export function loadWalletError(error) {
   };
 }
 
+/* ******************* Show / hide DEPLOAY_CONTRACT ***************************** */
+
+export function showDeployContract(address) {
+  // console.log(address);
+  return {
+    type: SHOW_DEPLOY_CONTRACT,
+    address,
+  };
+}
+export function hideDeployContract() {
+  return {
+    type: HIDE_DEPLOY_CONTRACT,
+  };
+}
+
+export function showPrivKey(address) {
+  return {
+    type: SHOW_PRIVATE_KEY,
+    address,
+  };
+}
+
+export function showPrivKeySuccess() {
+  return {
+    type: SHOW_PRIVATE_KEY_SUCCESS,
+  };
+}
+
+export function showPrivKeyError(error) {
+  message.error(error);
+  return {
+    type: SHOW_PRIVATE_KEY_ERROR,
+    error,
+  };
+}

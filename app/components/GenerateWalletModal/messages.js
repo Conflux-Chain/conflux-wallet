@@ -5,9 +5,35 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.GenerateWalletModal';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.GenerateWalletModal.header',
-    defaultMessage: 'This is the GenerateWalletModal component !',
+  title: {
+    id: `${scope}.title`,
+    defaultMessage: 'New Wallet',
+  },
+  create: {
+    id: `${scope}.create`,
+    defaultMessage: 'Create Now',
+  },
+  title1: {
+    id: `${scope}.title1`,
+    defaultMessage: 'Warning:',
+  },
+  title2: {
+    id: `${scope}.title2`,
+    defaultMessage: 'Seed:',
+  },
+  title3: {
+    id: `${scope}.title3`,
+    defaultMessage: 'Password for browser encryption (at least 8 characters long):',
+  },
+  description: {
+    id: `${scope}.description`,
+    defaultMessage: `Do not save password in screenshot!`,
+  },
+  placeholderPassword: {
+    id: `${scope}.placeholderPassword`,
+    defaultMessage: 'Password for browser encryption (at least 8 characters long)',
   },
 });

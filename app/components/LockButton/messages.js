@@ -5,9 +5,19 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.LockButton';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.LockButton.header',
-    defaultMessage: 'This is the LockButton component !',
+  btnLock: {
+    id: `${scope}.btnLock`,
+    defaultMessage: 'Lock Wallet',
+  },
+  btnUnlock: {
+    id: `${scope}.btnUnlock`,
+    defaultMessage: 'Unlock Wallet',
+  },
+  popTitle: {
+    id: `${scope}.popTitle`,
+    defaultMessage: 'Comfirm locking wallet',
   },
 });

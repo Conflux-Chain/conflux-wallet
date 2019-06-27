@@ -4,10 +4,12 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import { Alert, Button, Spin } from "antd";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Alert, Button, Spin } from 'antd';
+import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 const Div = styled.div`
   margin-top: 22px;
@@ -24,16 +26,17 @@ function SendConfirmationView(props) {
     onSendTransaction,
     onAbortTransaction,
     isSendComfirmationLocked,
-    sendError
+    sendError,
+    intl,
   } = props;
   if (comfirmationLoading) {
     return (
       <Div>
         <Spin
           spinning
-          style={{ position: "static" }}
+          style={{ position: 'static' }}
           size="large"
-          tip="checking transaction...."
+          tip={intl.formatMessage({ ...messages.checkingTip })}
         >
           <br />
         </Spin>
@@ -45,7 +48,7 @@ function SendConfirmationView(props) {
     return (
       <Div>
         <Alert
-          message="Transaction not created"
+          message={intl.formatMessage({ ...messages.alertErr1 })}
           description={confirmationError}
           type="error"
           showIcon
@@ -58,25 +61,37 @@ function SendConfirmationView(props) {
     return (
       <Div>
         <Alert
-          message="Transaction is valid"
+          message={intl.formatMessage({ ...messages.alertErr2 })}
           description={confirmationMsg}
           type="info"
         />
         <br />
         <Button
+          type="primary"
           icon="to-top"
           onClick={onSendTransaction}
           disabled={isSendComfirmationLocked}
         >
-          {sendError ? "Try again" : "Send ETH"}
-        </Button>{" "}
-        <Button
-          icon="close"
-          onClick={onAbortTransaction}
-          disabled={isSendComfirmationLocked}
-        >
-          Back
+          {sendError ? (
+            <FormattedMessage {...messages.btnTryAgain} />
+          ) : (
+            <FormattedMessage {...messages.btnSendCfx} />
+          )}
         </Button>
+        <br />
+        <Button key="reset" type="primary" onClick={onAbortTransaction} style={{ marginTop: 10 }}>
+          <FormattedMessage {...messages.btnReset} />
+        </Button>
+        {/* <br /> */}
+        {/* <Button */}
+        {/* type="primary" */}
+        {/* icon="close" */}
+        {/* onClick={onAbortTransaction} */}
+        {/* disabled={isSendComfirmationLocked} */}
+        {/* style={{ marginTop: 10 }} */}
+        {/* > */}
+        {/* Back */}
+        {/* </Button> */}
       </Div>
     );
   }
@@ -93,7 +108,8 @@ SendConfirmationView.propTypes = {
   onSendTransaction: PropTypes.func.isRequired,
   onAbortTransaction: PropTypes.func.isRequired,
 
-  sendError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
+  sendError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  intl: intlShape.isRequired,
 };
 
-export default SendConfirmationView;
+export default injectIntl(SendConfirmationView);

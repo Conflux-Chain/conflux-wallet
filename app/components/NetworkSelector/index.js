@@ -1,8 +1,8 @@
 /**
-*
-* NetworkSelector
-*
-*/
+ *
+ * NetworkSelector
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -11,9 +11,11 @@ import PropTypes from 'prop-types';
 function NetworkSelector({ networkName, availableNetworks, onLoadNetwork }) {
   let options;
   if (availableNetworks) {
-    options = availableNetworks.map((network) =>
-      <option value={network} key={network}>{network} </option>
-    );
+    options = availableNetworks.map((network) => (
+      <option value={network} key={network}>
+        {network}{' '}
+      </option>
+    ));
   }
 
   return (

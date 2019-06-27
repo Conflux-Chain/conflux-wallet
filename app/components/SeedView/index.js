@@ -1,14 +1,13 @@
 /**
-*
-* SeedView
-*
-*/
+ *
+ * SeedView
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 // import { generateKeystore } from 'containers/HomePage/actions';
-
 
 function SeedView({ loading, error, seed, password, onGenerateKeystore }) {
   if (loading) {
@@ -26,14 +25,13 @@ function SeedView({ loading, error, seed, password, onGenerateKeystore }) {
         Seed:
         <br />
         {seed}
-        <br /><br />
+        <br />
+        <br />
         keystore password:
         <br />
         {password}
         <br />
-        <button onClick={onGenerateKeystore} >
-          Confirm seed
-        </button>
+        <button onClick={onGenerateKeystore}>Confirm seed</button>
       </div>
     );
   }
@@ -43,21 +41,10 @@ function SeedView({ loading, error, seed, password, onGenerateKeystore }) {
 
 SeedView.propTypes = {
   loading: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  seed: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  password: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
+  seed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onGenerateKeystore: PropTypes.func,
 };
-
 
 export default SeedView;

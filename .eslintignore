@@ -1,0 +1,16 @@
+/functions/mock/**
+/scripts
+/config
+coverage
+build
+node_modules
+stats.json
+.DS_Store
+npm-debug.log
+.idea
+yarn-error.log
+/internals
+/monitor
+/server
+/docs
+/app/vendor

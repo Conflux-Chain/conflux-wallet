@@ -1,8 +1,8 @@
 /**
-*
-* FaucetDescription
-*
-*/
+ *
+ * FaucetDescription
+ *
+ */
 
 import React from 'react';
 import styled from 'styled-components';
@@ -16,7 +16,7 @@ const Span = styled.span`
 function FaucetDescription(props) {
   const { tx, text } = props;
 
-  const explorer = 'https://ropsten.etherscan.io/tx/';
+  const explorer = 'http://confluxscan.io/transactionsdetail/';
   const TxLinkProps = { tx, explorer };
 
   return (

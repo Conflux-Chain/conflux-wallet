@@ -2,97 +2,103 @@
  * Homepage selectors
  */
 
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
-const selectHome = state => state.get("home");
+const selectHome = (state) => state.get('home');
+
+const makeSelectIsWarningShow = () =>
+  createSelector(
+    selectHome,
+    (homeState) => homeState.get('isWarningShow')
+  );
 
 const makeSelectIsShowGenerateWallet = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("isShowGenerateWallet")
+    (homeState) => homeState.get('isShowGenerateWallet')
   );
 
 const makeSelectGenerateWalletLoading = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("generateWalletLoading")
+    (homeState) => homeState.get('generateWalletLoading')
   );
 
 const makeSelectGenerateWalletError = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("generateWalletError")
+    (homeState) => homeState.get('generateWalletError')
   );
 
 const makeSelectGenerateKeystoreLoading = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("generateKeystoreLoading")
+    (homeState) => homeState.get('generateKeystoreLoading')
   );
 
 const makeSelectGenerateKeystoreError = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("generateKeystoreError")
+    (homeState) => homeState.get('generateKeystoreError')
   );
 
 const makeSelectRestoreWalletError = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("restoreWalletError")
+    (homeState) => homeState.get('restoreWalletError')
   );
 
 const makeSelectSeed = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("seed")
+    (homeState) => homeState.get('seed')
   );
 
 const makeSelectPassword = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("password")
+    (homeState) => homeState.get('password')
   );
 
 const makeSelectIsComfirmed = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("isComfirmed")
+    (homeState) => homeState.get('isComfirmed')
   );
 
 const makeSelectKeystore = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("keystore")
+    (homeState) => homeState.get('keystore')
   );
 
 const makeSelectShowRestoreWallet = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("isShowRestoreWallet")
+    (homeState) => homeState.get('isShowRestoreWallet')
   );
 
 const makeSelectUserSeed = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("userSeed")
+    (homeState) => homeState.get('userSeed')
   );
 const makeSelectUserPassword = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("userPassword")
+    (homeState) => homeState.get('userPassword')
   );
 
 const makeSelectIsShowSendToken = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("isShowSendToken")
+    (homeState) => homeState.get('isShowSendToken')
   );
 
 const makeSelectIsShowTokenChooser = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("isShowTokenChooser")
+    (homeState) => homeState.get('isShowTokenChooser')
   );
 
 /*
@@ -102,7 +108,7 @@ const makeSelectIsShowTokenChooser = () =>
 const makeSelectAddressList = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("addressList")
+    (homeState) => homeState.get('addressList')
   );
 
 /**
@@ -126,23 +132,21 @@ const makeSelectAddressList = () =>
 const makeSelectAddressMap = (address, options = {}) =>
   createSelector(
     selectHome,
-    homeState => {
+    (homeState) => {
       const { returnList, removeIndex, removeEth } = options;
       let addressMap = address
-        ? homeState.getIn(["addressList", address])
-        : homeState.get("addressList");
+        ? homeState.getIn(['addressList', address])
+        : homeState.get('addressList');
       if (!addressMap) {
         return null;
       }
       if (address && removeIndex) {
-        addressMap = addressMap.delete("index");
+        addressMap = addressMap.delete('index');
       }
       if (address && removeEth) {
-        addressMap = addressMap.delete("eth");
+        addressMap = addressMap.delete('cfx');
       }
-      const returnS = returnList
-        ? addressMap.keySeq().toArray()
-        : addressMap.toJS();
+      const returnS = returnList ? addressMap.keySeq().toArray() : addressMap.toJS();
       return returnS;
     }
   );
@@ -150,28 +154,28 @@ const makeSelectAddressMap = (address, options = {}) =>
 const makeSelectAddressListLoading = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("addressListLoading")
+    (homeState) => homeState.get('addressListLoading')
   );
 const makeSelectAddressListError = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("addressListError")
+    (homeState) => homeState.get('addressListError')
   );
 const makeSelectAddressListMsg = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("addressListMsg")
+    (homeState) => homeState.get('addressListMsg')
   );
 const makeSelectExchangeRates = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("exchangeRates").toJS()
+    (homeState) => homeState.get('exchangeRates').toJS()
   );
 
 const makeSelectConvertTo = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("convertTo")
+    (homeState) => homeState.get('convertTo')
   );
 
 /**
@@ -190,13 +194,13 @@ const makeSelectConvertTo = () =>
  *
  * @return {object} An object which holds the tokensInfo for given symbol
  */
-const makeSelectTokenInfo = symbol =>
+const makeSelectTokenInfo = (symbol) =>
   createSelector(
     selectHome,
-    homeState => {
+    (homeState) => {
       const tokenInfo = symbol
-        ? homeState.getIn(["tokenInfo", symbol])
-        : homeState.get("tokenInfo");
+        ? homeState.getIn(['tokenInfo', symbol])
+        : homeState.get('tokenInfo');
       if (tokenInfo) {
         return tokenInfo.toJS();
       }
@@ -207,9 +211,9 @@ const makeSelectTokenInfo = symbol =>
 const makeSelectTokenInfoList = () =>
   createSelector(
     selectHome,
-    homeState =>
+    (homeState) =>
       homeState
-        .get("tokenInfo")
+        .get('tokenInfo')
         .keySeq()
         .toArray()
   );
@@ -226,13 +230,11 @@ const makeSelectTokenInfoList = () =>
 const makeSelectTokenDecimalsMap = () =>
   createSelector(
     selectHome,
-    homeState => {
-      const tokenInfo = homeState.get("tokenInfo")
-        ? homeState.get("tokenInfo").toJS()
-        : {};
+    (homeState) => {
+      const tokenInfo = homeState.get('tokenInfo') ? homeState.get('tokenInfo').toJS() : {};
       return Object.assign(
         {},
-        ...Object.keys(tokenInfo).map(k => ({ [k]: tokenInfo[k].decimals }))
+        ...Object.keys(tokenInfo).map((k) => ({ [k]: tokenInfo[k].decimals }))
       );
     }
   );
@@ -240,26 +242,31 @@ const makeSelectTokenDecimalsMap = () =>
 const makeSelectSaveWalletLoading = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("saveWalletLoading")
+    (homeState) => homeState.get('saveWalletLoading')
   );
 const makeSelectSaveWalletError = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("saveWalletError")
+    (homeState) => homeState.get('saveWalletError')
   );
 const makeSelectLoadWalletLoading = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("loadWalletLoading")
+    (homeState) => homeState.get('loadWalletLoading')
   );
 const makeSelectLoadwalletError = () =>
   createSelector(
     selectHome,
-    homeState => homeState.get("loadWalletError")
+    (homeState) => homeState.get('loadWalletError')
   );
-
+const makeSelectIsShowDeployContract = () =>
+  createSelector(
+    selectHome,
+    (homeState) => homeState.get('isShowDeployContract')
+  );
 export {
   selectHome,
+  makeSelectIsWarningShow,
   makeSelectIsShowGenerateWallet,
   makeSelectGenerateWalletLoading,
   makeSelectGenerateWalletError,
@@ -291,5 +298,6 @@ export {
   makeSelectSaveWalletLoading,
   makeSelectSaveWalletError,
   makeSelectLoadWalletLoading,
-  makeSelectLoadwalletError
+  makeSelectLoadwalletError,
+  makeSelectIsShowDeployContract,
 };

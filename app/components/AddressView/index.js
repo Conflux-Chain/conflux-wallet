@@ -1,8 +1,8 @@
 /**
-*
-* AddressView
-*
-*/
+ *
+ * AddressView
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -13,27 +13,57 @@ import AddressTable from 'components/AddressTable';
 // import AddressListStatus from 'components/AddressListStatus';
 // import CheckBalancesStatus from 'components/CheckBalancesStatus';
 import AddressTableFooter from 'components/AddressTableFooter';
-import WelcomeText from 'components/WelcomeText';
+// import WelcomeText from 'components/WelcomeText';
+import HomeContent from 'containers/HomeContent';
+import { injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
-const Div = styled.div`
-  padding: 30px 5px 20px 10px;
-  min-height: 100px;
-`;
+const Div = global.isMobile
+  ? styled.div`
+      /* padding: 0 0 20px; */
+      min-height: 100px;
+      background: #f2f2f2;
+    `
+  : styled.div`
+      padding: 0 0 20px;
+      min-height: 100px;
+    `;
 
 function AddressView(props) {
   const {
-    generateKeystoreLoading, generateKeystoreError,
+    subHeaderProps,
+    restoreWalletModalProps,
+    onLockWallet,
+    password,
+    onUnlockWallet,
+    generateKeystoreLoading,
+    generateKeystoreError,
     isComfirmed,
-    addressMap, tokenDecimalsMap,
-    onShowSendToken, onCheckBalances,
+    addressMap,
+    tokenDecimalsMap,
+    onShowSendToken,
+    onCheckBalances,
     onGenerateAddress,
-    networkReady, checkingBalanceDoneTime, checkingBalances, checkingBalancesError,
-    addressListLoading, addressListError, addressListMsg,
-    exchangeRates, onSelectCurrency, convertTo,
+    networkReady,
+    checkingBalanceDoneTime,
+    checkingBalances,
+    checkingBalancesError,
+    addressListLoading,
+    addressListError,
+    addressListMsg,
+    exchangeRates,
+    onSelectCurrency,
+    convertTo,
     onGetExchangeRates,
-    getExchangeRatesDoneTime, getExchangeRatesLoading, getExchangeRatesError,
+    getExchangeRatesDoneTime,
+    getExchangeRatesLoading,
+    getExchangeRatesError,
     onShowTokenChooser,
-   } = props;
+    intl,
+    onShowDeployContract,
+    onShowPrivKey,
+    onCloseWallet,
+  } = props;
 
   const addressTableProps = {
     addressMap,
@@ -42,9 +72,15 @@ function AddressView(props) {
     exchangeRates,
     onSelectCurrency,
     convertTo,
+    onShowDeployContract,
+    onShowPrivKey,
   };
 
   const addressTableFooterProps = {
+    onLockWallet,
+    password,
+    onUnlockWallet,
+
     checkingBalanceDoneTime,
     checkingBalances,
     checkingBalancesError,
@@ -63,19 +99,25 @@ function AddressView(props) {
     getExchangeRatesError,
 
     onShowTokenChooser,
+    onShowDeployContract,
+    onCloseWallet,
   };
 
   let addressViewContent = (
     <Div>
-      {generateKeystoreError ?
+      {generateKeystoreError ? (
         <Alert
-          message="Generate Keystore Error"
+          message={intl.formatMessage({ ...messages.generateKeystoreError })}
           description={generateKeystoreError}
           type="error"
           showIcon
         />
-        :
-        <WelcomeText />}
+      ) : (
+        <HomeContent
+          subHeaderProps={subHeaderProps}
+          restoreWalletModalProps={restoreWalletModalProps}
+        />
+      )}
     </Div>
   );
 
@@ -87,13 +129,12 @@ function AddressView(props) {
       </Div>
     );
   }
-
   return (
     <Spin
       spinning={generateKeystoreLoading}
       style={{ position: 'static' }}
       size="large"
-      tip="Loading..."
+      tip={intl.formatMessage({ ...messages.loading })}
     >
       {addressViewContent}
     </Spin>
@@ -101,18 +142,15 @@ function AddressView(props) {
 }
 
 AddressView.propTypes = {
+  subHeaderProps: PropTypes.object,
+  restoreWalletModalProps: PropTypes.object,
+  onLockWallet: PropTypes.func,
+  password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  onUnlockWallet: PropTypes.func,
   generateKeystoreLoading: PropTypes.bool,
-  generateKeystoreError: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  generateKeystoreError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   isComfirmed: PropTypes.bool,
-  addressMap: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool,
-    PropTypes.array,
-  ]),
+  addressMap: PropTypes.oneOfType([PropTypes.object, PropTypes.bool, PropTypes.array]),
   tokenDecimalsMap: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   onShowSendToken: PropTypes.func,
   onShowTokenChooser: PropTypes.func,
@@ -136,6 +174,7 @@ AddressView.propTypes = {
   getExchangeRatesDoneTime: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   getExchangeRatesLoading: PropTypes.bool,
   getExchangeRatesError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
+  intl: intlShape.isRequired,
 };
 
-export default AddressView;
+export default injectIntl(AddressView);

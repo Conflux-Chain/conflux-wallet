@@ -7,21 +7,20 @@ import React from 'react';
 import { message, Button, notification, Icon } from 'antd';
 import FaucetDescription from 'components/FaucetDescription';
 import { offlineModeString } from 'utils/constants';
+import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
+import msgText from 'translations/msg';
 
 import {
   LOAD_NETWORK,
   LOAD_NETWORK_SUCCESS,
   LOAD_NETWORK_ERROR,
-
   CHECK_BALANCES,
   CHECK_BALANCES_SUCCESS,
   CHECK_BALANCES_ERROR,
   STOP_POLL_BALANCES,
-
   GET_EXCHANGE_RATES,
   GET_EXCHANGE_RATES_SUCCESS,
   GET_EXCHANGE_RATES_ERROR,
-
   CHECK_FAUCET,
   CHECK_FAUCET_SUCCESS,
   CHECK_FAUCET_ERROR,
@@ -52,7 +51,14 @@ export function loadNetwork(networkName) {
  * @return {object}      An action object with a type of LOAD_NETWORK_SUCCESS passing the repos
  */
 export function loadNetworkSuccess(blockNumber) {
-  message.success(`Connected sucessfully, best epoch number: ${blockNumber}`);
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
+  message.success(
+    `${msgText[locale]['Connected sucessfully, latest epoch number']}: ${blockNumber}`
+  );
   return {
     type: LOAD_NETWORK_SUCCESS,
     blockNumber,
@@ -67,9 +73,16 @@ export function loadNetworkSuccess(blockNumber) {
  * @return {object} An action object with a type of LOAD_NETWORK_ERROR passing the error
  */
 export function loadNetworkError(error) {
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   if (error !== offlineModeString) {
-    const err = error.indexOf('Invalid JSON RPC response from host provider') >= 0 ?
-      `${error}, Check Internet connection and connectivity to RPC` : error;
+    const err =
+      error.indexOf('Invalid JSON RPC response from host provider') >= 0
+        ? `${error}, ${msgText[locale]['Check Internet connection and connectivity to RPC']}`
+        : error;
     message.error(err, 10);
   }
   return {
@@ -77,7 +90,6 @@ export function loadNetworkError(error) {
     error,
   };
 }
-
 
 /* *********************************** Check Balances Actions ******************* */
 /**
@@ -120,7 +132,6 @@ export function CheckBalancesError(error) {
   };
 }
 
-
 /**
  * Stop polling balances when going to offline mode
  *
@@ -150,6 +161,11 @@ export function getExchangeRates() {
  * @return {object}      An action object with a type of GET_EXCHANGE_RATES_SUCCESS
  */
 export function getExchangeRatesSuccess() {
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   const timeString = new Date().toLocaleTimeString();
   message.success('Exchange rates updated succesfully');
   return {
@@ -173,7 +189,6 @@ export function getExchangeRatesError(error) {
   };
 }
 
-
 /* *********************************** Faucet Actions ******************* */
 
 /**
@@ -193,6 +208,17 @@ export function checkFaucet() {
  * @return {object}      An action object with a type of CHECK_FAUCET_SUCCESS
  */
 export function checkFaucetSuccess() {
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
+  const toAddress =
+    store
+      .getState()
+      .get('home')
+      .get('addressList')
+      .keys() || [];
   //  message.success('Exchange rates updated succesfully');
   const key = `open${Date.now()}`;
   const closeNotification = () => {
@@ -208,25 +234,27 @@ export function checkFaucetSuccess() {
     React.createElement(
       Button,
       { key: 'b1', type: 'default', size: 'default', onClick: closeNotification },
-      'No man'
+      msgText[locale]['No man']
     ),
     '  ',
     React.createElement(
       Button,
       { key: 'b2', type: 'primary', size: 'default', onClick: ask },
-      'Sure'
-    )];
+      msgText[locale].Sure
+    ),
+  ];
   notification.config({
     placement: 'bottomRight',
   });
-  const icon = React.createElement(
-    Icon,
-    { type: 'bulb', style: { color: '#108ee9' } }
-  );
+  const icon = React.createElement(Icon, { type: 'bulb', style: { color: '#108ee9' } });
   notification.open({
-    message: 'Ropsten Testnet faucet',
-    description: 'Need some coins for testing?',
+    message: msgText[locale]['Testnet faucet'],
+    description: msgText[locale]['Need some coins for testing?'].replace(
+      '$$',
+      Array.from(toAddress)[0]
+    ),
     duration: 10,
+    className: 'faucet-note',
     key,
     btn,
     icon,
@@ -256,11 +284,17 @@ export function checkFaucetError(error) {
  * @return {object}    An action object with a type of ASK_FAUCET
  */
 export function askFaucet() {
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   const icon = React.createElement(Icon, { type: 'loading' });
   notification.info({
-    message: 'Sending request',
-    description: 'Please wait',
+    message: msgText[locale]['Sending request'],
+    description: msgText[locale]['Please wait'],
     duration: 30,
+    className: 'faucet-note',
     key: 'ask',
     icon,
   });
@@ -275,17 +309,30 @@ export function askFaucet() {
  * @return {object}      An action object with a type of ASK_FAUCET_SUCCESS
  */
 export function askFaucetSuccess(tx) {
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
   notification.close('ask');
   const key = `open${Date.now()}`;
   const closeNotification = () => {
     notification.close(key);
   };
-  const btn = React.createElement(Button, { type: 'default', size: 'small', onClick: closeNotification }, 'Got it');
-  const description = React.createElement(FaucetDescription, { tx, text: 'Check balance in ~30 seconds. TX:' });
+  const btn = React.createElement(
+    Button,
+    { type: 'default', size: 'small', onClick: closeNotification },
+    msgText[locale]['Got it']
+  );
+  const description = React.createElement(FaucetDescription, {
+    tx,
+    text: msgText[locale]['Check balance in ~30 seconds. TX:'],
+  });
   notification.success({
-    message: 'Faucet request sucessfull',
+    message: msgText[locale]['Faucet request sucessfull'],
     description,
     duration: 10,
+    className: 'faucet-note',
     key,
     btn,
   });
@@ -304,15 +351,26 @@ export function askFaucetSuccess(tx) {
  * @return {object} An action object with a type of ASK_FAUCET_ERROR passing the error
  */
 export function askFaucetError(error) {
+  const locale =
+    store
+      .getState()
+      .get('language')
+      .get('locale') || 'en';
+  notification.close('ask');
   const key = `open${Date.now()}`;
   const closeNotification = () => {
     notification.close(key);
   };
-  const btn = React.createElement(Button, { type: 'default', size: 'small', onClick: closeNotification }, 'Got it');
+  const btn = React.createElement(
+    Button,
+    { type: 'default', size: 'small', onClick: closeNotification },
+    msgText[locale]['Got it']
+  );
   notification.error({
-    message: 'Faucet request failed',
-    description: `${error}. Please try again later`,
+    message: msgText[locale]['Faucet request failed'],
+    description: `${error}. ${msgText[locale]['Please try again later']}`,
     duration: 10,
+    className: 'faucet-note',
     key,
     btn,
   });

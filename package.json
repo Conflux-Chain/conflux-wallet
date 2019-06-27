@@ -1,16 +1,16 @@
 {
-  "name": "eth-hot-wallet",
-  "version": "0.6.0",
-  "description": "Ethereum and ERC20 Hot Wallet",
+  "name": "conflux-wallet",
+  "version": "1.0.0",
+  "description": "Conflux Web Wallet",
   "repository": {
     "type": "git",
-    "url": "git://github.com/PaulLaux/eth-hot-wallet.git"
+    "url": "git://github.com/-"
   },
   "engines": {
     "npm": ">=3",
     "node": ">=7"
   },
-  "author": "Paul Laux",
+  "author": "Conflux Team",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
@@ -35,20 +35,30 @@
     "clean:all": "npm run analyze:clean && npm run test:clean && npm run build:clean",
     "generate": "plop --plopfile internals/generators/index.js",
     "lint": "npm run lint:js",
-    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern internals/scripts",
+    "lint:eslint": "eslint --ignore-path .eslintignore --ignore-pattern internals/scripts",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:staged": "lint-staged",
+    "lint:fix": "eslint --fix --ext .js app --ignore-path .eslintignore",
     "pretest": "npm run test:clean && npm run lint",
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "dev":"node ./internals/scripts/dependencies.js && cross-env NODE_ENV=development node server"
+    "dev": "node ./internals/scripts/dependencies.js && cross-env NODE_ENV=development node server",
+    "prettier": "node ./internals/scripts/prettier.js"
   },
   "lint-staged": {
-    "*.js": "lint:eslint"
+    "**/*.{js,json,jsx,css,less}": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.js": "lint:eslint"
   },
-  "pre-commit": "lint:staged",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:staged"
+    }
+  },
   "babel": {
     "plugins": [
       "styled-components"
@@ -88,7 +98,10 @@
   ],
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": "airbnb",
+    "extends": [
+      "airbnb",
+      "plugin:prettier/recommended"
+    ],
     "env": {
       "browser": true,
       "node": true,
@@ -129,13 +142,7 @@
       "import/no-unresolved": 2,
       "import/no-webpack-loader-syntax": 0,
       "import/prefer-default-export": 0,
-      "indent": [
-        2,
-        2,
-        {
-          "SwitchCase": 1
-        }
-      ],
+      "indent": 1,
       "jsx-a11y/aria-props": 2,
       "jsx-a11y/heading-has-content": 0,
       "jsx-a11y/href-no-hash": 2,
@@ -161,7 +168,10 @@
       "react/self-closing-comp": 0,
       "redux-saga/no-yield-in-race": 2,
       "redux-saga/yield-effects": 2,
-      "require-yield": 0
+      "require-yield": 0,
+      "no-unused-vars": 1,
+      "no-param-reassign": 1,
+      "no-underscore-dangle": 1
     },
     "settings": {
       "import/resolver": {
@@ -222,7 +232,7 @@
     "chalk": "1.1.3",
     "compression": "1.7.3",
     "cross-env": "5.2.0",
-    "eth-lightwallet": "3.0.1",
+    "eth-lightwallet": "https://github.com/jnoodle/eth-lightwallet.git",
     "express": "4.16.3",
     "fontfaceobserver": "2.0.9",
     "history": "4.7.2",
@@ -231,12 +241,14 @@
     "intl": "1.2.5",
     "invariant": "2.2.4",
     "ip": "1.1.5",
+    "ismobilejs": "^0.5.1",
     "lodash": "4.17.10",
     "minimist": "1.2.0",
     "prop-types": "15.6.2",
     "react": "^15.6.0",
     "react-dom": "^15.6.0",
     "react-helmet": "5.1.3",
+    "react-intl": "^2.8.0",
     "react-loadable": "4.0.5",
     "react-redux": "5.0.7",
     "react-router-dom": "4.1.1",
@@ -259,6 +271,7 @@
     "babel-loader": "7.1.2",
     "babel-plugin-dynamic-import-node": "1.0.2",
     "babel-plugin-import": "^1.8.0",
+    "babel-plugin-react-intl": "2",
     "babel-plugin-react-transform": "2.0.2",
     "babel-plugin-styled-components": "1.6.3",
     "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
@@ -277,9 +290,11 @@
     "eslint": "3.19.0",
     "eslint-config-airbnb": "15.0.1",
     "eslint-config-airbnb-base": "11.2.0",
+    "eslint-config-prettier": "^4.1.0",
     "eslint-import-resolver-webpack": "0.8.3",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-jsx-a11y": "5.0.3",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "7.11.1",
     "eslint-plugin-redux-saga": "0.3.0",
     "eventsource-polyfill": "0.9.6",
@@ -287,15 +302,16 @@
     "file-loader": "0.11.1",
     "html-loader": "0.4.5",
     "html-webpack-plugin": "2.29.0",
+    "husky": "^1.3.1",
     "image-webpack-loader": "2.0.0",
     "imports-loader": "0.7.1",
     "jest-cli": "20.0.4",
     "lint-staged": "3.5.1",
-    "ngrok": "2.2.9",
     "node-plop": "0.7.0",
     "null-loader": "0.1.1",
     "offline-plugin": "4.8.1",
     "plop": "1.8.0",
+    "prettier": "^1.16.4",
     "react-test-renderer": "15.5.4",
     "rimraf": "2.6.2",
     "shelljs": "0.7.7",

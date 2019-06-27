@@ -1,18 +1,23 @@
 /**
-*
-* NetworkLabel
-*
-*/
+ *
+ * NetworkLabel
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
-
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
 function NetworkLabel(props) {
   const { loading, error, networkName, blockNumber } = props;
   if (loading) {
-    return <div> Loading Network</div>;
+    return (
+      <div>
+        <FormattedMessage {...messages.loadingTitle} />
+      </div>
+    );
   }
 
   if (error !== false) {
@@ -23,9 +28,11 @@ function NetworkLabel(props) {
   if (networkName !== '') {
     return (
       <div>
-        Network Name:{networkNameStr}
+        <FormattedMessage {...messages.networkName} />
+        {networkNameStr}
         <br />
-        blockNumber: {blockNumber}
+        <FormattedMessage {...messages.blockNumber} />
+        {blockNumber}
       </div>
     );
   }
@@ -35,11 +42,7 @@ function NetworkLabel(props) {
 
 NetworkLabel.propTypes = {
   loading: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
   networkName: PropTypes.string,
   blockNumber: PropTypes.number,
 };

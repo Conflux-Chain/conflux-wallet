@@ -1,15 +1,13 @@
 /**
-*
-* AddressList
-*
-*/
+ *
+ * AddressList
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import AddressItem from 'components/AddressItem';
-// import { FormattedMessage } from 'react-intl';
-// import messages from './messages';
 
 function AddressList({ addressList, onChangeFrom, exchangeRates, convertTo }) {
   let mainList = null;

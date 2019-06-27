@@ -24,7 +24,6 @@ injectGlobal`
 
   p,
   label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
   }
 
@@ -35,5 +34,13 @@ injectGlobal`
     width: 200px;
     text-align:center !important;
     margin: 0 auto !important;
+  }
+  
+  .faucet-note {
+    word-break: break-all;
+  }
+  
+  .faucet-note .ant-notification-notice-description {
+    margin-left: 0 !important;
   }
 `;

@@ -1,10 +1,10 @@
 /**
  * Wallet operations
  */
-import lightwallet from "vendor/eth-lightwallet";
-import localStore from "store/dist/store.modern";
+import lightwallet from 'eth-lightwallet';
+import localStore from 'store/dist/store.modern';
 
-import { call, put, select, takeLatest } from "redux-saga/effects";
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 
 import {
   GENERATE_WALLET,
@@ -15,10 +15,12 @@ import {
   CLOSE_WALLET,
   SHOW_SEND_TOKEN,
   SAVE_WALLET,
-  LOAD_WALLET
-} from "containers/HomePage/constants";
+  LOAD_WALLET,
+  SHOW_DEPLOY_CONTRACT,
+  SHOW_PRIVATE_KEY,
+} from 'containers/HomePage/constants';
 
-import { CONFIRM_UPDATE_TOKEN_INFO } from "containers/TokenChooser/constants";
+import { CONFIRM_UPDATE_TOKEN_INFO } from 'containers/TokenChooser/constants';
 
 import {
   makeSelectPassword,
@@ -26,26 +28,31 @@ import {
   makeSelectUserSeed,
   makeSelectUserPassword,
   makeSelectKeystore,
-  makeSelectTokenInfoList
-} from "containers/HomePage/selectors";
+  makeSelectTokenInfoList,
+} from 'containers/HomePage/selectors';
 
-import { loadNetwork } from "containers/Header/actions";
+import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 
-import { changeFrom } from "containers/SendToken/actions";
+import { loadNetwork } from 'containers/Header/actions';
 
-import generateString from "utils/crypto";
+import { changeFrom } from 'containers/SendToken/actions';
+import { changeFrom as changeContractFrom } from 'containers/DeployContract/actions';
+
+import generateString from 'utils/crypto';
 
 import {
   generatedPasswordLength,
   hdPathString,
   offlineModeString,
   defaultNetwork,
-  localStorageKey
-} from "utils/constants";
+  localStorageKey,
+} from 'utils/constants';
 
-import { timer } from "utils/common";
+import { timer } from 'utils/common';
 
-import { getEthBalancePromise } from "containers/Header/saga";
+import { getCfxBalancePromise } from 'containers/Header/saga';
+
+import msgText from 'translations/msg';
 
 import {
   generateWalletSucces,
@@ -66,8 +73,9 @@ import {
   saveWalletError,
   loadWalletSuccess,
   loadWalletError,
-  updateTokenInfo
-} from "./actions";
+  updateTokenInfo,
+  showPrivKeyError,
+} from './actions';
 
 /**
  * Create new seed and password
@@ -93,21 +101,20 @@ export function* restoreFromSeed() {
   try {
     const userPassword = yield select(makeSelectUserPassword());
     let userSeed = yield select(makeSelectUserSeed());
+    const locale = yield select(makeSelectLocale());
 
     // remove trailing spaces if needed
-    yield put(changeUserSeed(userSeed.replace(/^\s+|\s+$/g, "")));
+    yield put(changeUserSeed(userSeed.replace(/^\s+|\s+$/g, '')));
     userSeed = yield select(makeSelectUserSeed());
 
     if (!lightwallet.keystore.isSeedValid(userSeed)) {
-      yield put(restoreWalletFromSeedError("Invalid seed"));
+      yield put(restoreWalletFromSeedError(msgText[locale]['Invalid seed']));
       return;
     }
 
     if (userPassword.length < 8) {
       yield put(
-        restoreWalletFromSeedError(
-          "Password length must be 8 characters at least"
-        )
+        restoreWalletFromSeedError(msgText[locale]['Password length must be 8 characters at least'])
       );
       return;
     }
@@ -137,16 +144,17 @@ export function* genKeystore() {
   try {
     const password = yield select(makeSelectPassword());
     const seedPhrase = yield select(makeSelectSeed());
+    const locale = yield select(makeSelectLocale());
     const opt = {
       password,
       seedPhrase,
-      hdPathString
+      hdPathString,
     };
     // allow time to render components before cpu intensive tasks:
     yield call(timer, 300);
 
+    // eslint-disable-next-line no-inner-declarations
     function keyFromPasswordPromise(param) {
-      // eslint-disable-line no-inner-declarations
       return new Promise((resolve, reject) => {
         ks.keyFromPassword(param, (err, data) => {
           if (err !== null) return reject(err);
@@ -157,9 +165,12 @@ export function* genKeystore() {
 
     const ks = yield call(createVaultPromise, opt);
 
-    ks.passwordProvider = callback => {
+    ks.passwordProvider = (callback) => {
       // const password = yield select(makeSelectPassword());
-      const pw = prompt("Please enter keystore password", "Password"); // eslint-disable-line
+      const pw = prompt(
+        msgText[locale]['Please enter keystore password'],
+        msgText[locale].Password
+      ); // eslint-disable-line
       callback(null, pw);
     };
 
@@ -184,18 +195,19 @@ export function* genKeystore() {
 export function* generateAddress() {
   try {
     const ks = yield select(makeSelectKeystore());
+    const locale = yield select(makeSelectLocale());
     if (!ks) {
-      throw new Error("No keystore found");
+      throw new Error('No keystore found');
     }
 
     const password = yield select(makeSelectPassword());
     if (!password) {
       // TODO: Handle password
-      throw new Error("Wallet Locked");
+      throw new Error(msgText[locale]['Wallet Locked']);
     }
 
+    // eslint-disable-next-line no-inner-declarations
     function keyFromPasswordPromise(param) {
-      // eslint-disable-line no-inner-declarations
       return new Promise((resolve, reject) => {
         ks.keyFromPassword(param, (err, data) => {
           if (err !== null) return reject(err);
@@ -216,8 +228,8 @@ export function* generateAddress() {
 
     // balance checking for new address (will be aborted in offline mode)
     try {
-      const balance = yield call(getEthBalancePromise, newAddress);
-      yield put(changeBalance(newAddress, "eth", balance));
+      const balance = yield call(getCfxBalancePromise, newAddress);
+      yield put(changeBalance(newAddress, 'cfx', balance));
     } catch (err) {} // eslint-disable-line
   } catch (err) {
     yield call(timer, 1000); // eye candy
@@ -229,21 +241,22 @@ export function* generateAddress() {
  * unlock wallet using user given password
  */
 export function* unlockWallet() {
+  const locale = yield select(makeSelectLocale());
   try {
     const currentPassword = yield select(makeSelectPassword());
     if (currentPassword) {
-      throw Error("Wallet Already unlocked");
+      throw Error(msgText[locale]['Wallet Already unlocked']);
     }
 
     const ks = yield select(makeSelectKeystore());
     if (!ks) {
-      throw new Error("No keystore to unlock");
+      throw new Error(msgText[locale]['No keystore to unlock']);
     }
 
     const passwordProvider = ks.passwordProvider;
 
+    // eslint-disable-next-line no-inner-declarations
     function passwordProviderPromise() {
-      // eslint-disable-line no-inner-declarations
       return new Promise((resolve, reject) => {
         passwordProvider((err, data) => {
           if (err !== null) return reject(err);
@@ -252,8 +265,8 @@ export function* unlockWallet() {
       });
     }
 
+    // eslint-disable-next-line no-inner-declarations
     function keyFromPasswordPromise(param) {
-      // eslint-disable-line no-inner-declarations
       return new Promise((resolve, reject) => {
         ks.keyFromPassword(param, (err, data) => {
           if (err !== null) return reject(err);
@@ -265,7 +278,7 @@ export function* unlockWallet() {
     const userPassword = yield call(passwordProviderPromise);
 
     if (!userPassword) {
-      throw Error("No password entered");
+      throw Error('No password entered');
     }
 
     const pwDerivedKey = yield call(keyFromPasswordPromise, userPassword);
@@ -273,12 +286,12 @@ export function* unlockWallet() {
     const isPasswordCorrect = ks.isDerivedKeyCorrect(pwDerivedKey);
 
     if (!isPasswordCorrect) {
-      throw Error("Invalid Password");
+      throw Error(msgText[locale]['Invalid Password']);
     }
 
     yield put(unlockWalletSuccess(userPassword));
   } catch (err) {
-    const errorString = `Unlock wallet error - ${err.message}`;
+    const errorString = `${msgText[locale]['Unlock wallet error']} - ${err.message}`;
     yield put(unlockWalletError(errorString));
   }
 }
@@ -290,6 +303,16 @@ export function* changeSourceAddress(action) {
   // wait for container to load and then change from address
   if (action.address) {
     yield put(changeFrom(action.address, action.sendTokenSymbol));
+  }
+}
+
+/**
+ * change source address and token when opening send modal
+ */
+export function* changeContractSourceAddress(action) {
+  // wait for container to load and then change from address
+  if (action.address) {
+    yield put(changeContractFrom(action.address));
   }
 }
 
@@ -307,14 +330,15 @@ export function* closeWallet() {
 export function* saveWalletS() {
   try {
     const ks = yield select(makeSelectKeystore());
+    const locale = yield select(makeSelectLocale());
     if (!ks) {
-      throw new Error("No keystore defined");
+      throw new Error(msgText[locale]['No keystore defined']);
     }
 
     const dump = {
-      ver: "1",
+      ver: '1',
       saved: new Date().toISOString(),
-      ks: ks.serialize()
+      ks: ks.serialize(),
     };
     // console.log(`Saving len: ${JSON.stringify(dump).length}`);
 
@@ -334,15 +358,16 @@ export function* loadWalletS() {
   try {
     yield call(timer, 1000);
     const existingKs = yield select(makeSelectKeystore());
+    const locale = yield select(makeSelectLocale());
     if (existingKs) {
       throw new Error(
-        "Existing keystore present  - aborting load form localStorage"
+        msgText[locale]['Existing keystore present  - aborting load form localStorage']
       );
     }
 
     const dump = localStore.get(localStorageKey);
     if (!dump) {
-      throw new Error("No keystore found in localStorage");
+      throw new Error(msgText[locale]['No keystore found in localStorage']);
     }
     // console.log(`Load len: ${JSON.stringify(dump).length}`);
 
@@ -376,6 +401,37 @@ export function* chosenTokenInfo(action) {
   yield put(updateTokenInfo(addressList, action.tokenInfo));
 }
 
+export function* showPrivKey(action) {
+  try {
+    const ks = yield select(makeSelectKeystore());
+    const locale = yield select(makeSelectLocale());
+    const password = yield select(makeSelectPassword());
+    if (!password) {
+      throw new Error(msgText[locale]['Wallet Locked']);
+    }
+    if (!ks) {
+      throw new Error('No keystore found');
+    }
+    // eslint-disable-next-line no-inner-declarations
+    function keyFromPasswordPromise(param) {
+      return new Promise((resolve, reject) => {
+        ks.keyFromPassword(param, (err, data) => {
+          if (err !== null) return reject(err);
+          return resolve(data);
+        });
+      });
+    }
+
+    const pwDerivedKey = yield call(keyFromPasswordPromise, password);
+    const privKey = ks.exportPrivateKey(action.address, pwDerivedKey);
+    console.log(privKey);
+    window.alert(privKey); // To Do display with popup
+  } catch (err) {
+    const errorString = `${err.message}`;
+    yield put(showPrivKeyError(errorString));
+  }
+}
+
 /**
  * Root saga manages watcher lifecycle
  */
@@ -392,12 +448,14 @@ export default function* walletData() {
   yield takeLatest(RESTORE_WALLET_FROM_SEED, restoreFromSeed);
   yield takeLatest(UNLOCK_WALLET, unlockWallet);
   yield takeLatest(SHOW_SEND_TOKEN, changeSourceAddress);
+  yield takeLatest(SHOW_DEPLOY_CONTRACT, changeContractSourceAddress);
   yield takeLatest(CLOSE_WALLET, closeWallet);
 
   yield takeLatest(SAVE_WALLET, saveWalletS);
   yield takeLatest(LOAD_WALLET, loadWalletS);
 
   yield takeLatest(CONFIRM_UPDATE_TOKEN_INFO, chosenTokenInfo);
+  yield takeLatest(SHOW_PRIVATE_KEY, showPrivKey);
   /*
   while (yield takeLatest(INIT_WALLET, initSeed)) {
     // yield takeLatest(GENERATE_KEYSTORE, genKeystore);

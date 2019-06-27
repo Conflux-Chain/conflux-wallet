@@ -1,8 +1,8 @@
 /**
-*
-* TokenChooserList
-*
-*/
+ *
+ * TokenChooserList
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -18,9 +18,9 @@ onTokenToggle={(x) => console.log(x)}
 */
 
 const LeftDiv = styled.div`
-.ant-list-item-meta-content{
-  text-align:left;
-}
+  .ant-list-item-meta-content {
+    text-align: left;
+  }
 `;
 
 function TokenChooserList(props) {
@@ -31,10 +31,21 @@ function TokenChooserList(props) {
         itemLayout="horizontal"
         dataSource={tokenList}
         renderItem={(item) => (
-          <ListItem actions={[<Switch checked={chosenTokens[item.symbol]} onChange={(toggle) => onTokenToggle(item.symbol, toggle)} />]}>
+          <ListItem
+            actions={[
+              <Switch
+                checked={chosenTokens[item.symbol]}
+                onChange={(toggle) => onTokenToggle(item.symbol, toggle)}
+              />,
+            ]}
+          >
             <ListItemMeta
               avatar={<TokenIcon tokenSymbol={item.symbol} size={32} />}
-              title={<a href={item.url} target="_blank" rel="noopener">{item.name} ({item.symbol.toUpperCase()})</a>}
+              title={
+                <a href={item.url} target="_blank" rel="noopener">
+                  {item.name} ({item.symbol.toUpperCase()})
+                </a>
+              }
               description={item.description}
             />
           </ListItem>

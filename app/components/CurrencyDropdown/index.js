@@ -1,8 +1,8 @@
 /**
-*
-* CurrencyDropdown
-*
-*/
+ *
+ * CurrencyDropdown
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -31,7 +31,8 @@ function CurrencyDropdown(props) {
   return (
     <Dropdown overlay={convertToMenu}>
       <span>
-        {convertToSymbol === 'none' ? 'Convert' : `${convertToSymbol}`}<Icon type="down" />
+        {convertToSymbol === 'none' ? 'Convert' : `${convertToSymbol}`}
+        <Icon type="down" />
       </span>
     </Dropdown>
   );

@@ -4,18 +4,36 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import { Menu, Button, Dropdown, Icon } from "antd";
+import { Menu, Button, Dropdown, Icon } from 'antd';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
+
 // const SubMenu = Menu.SubMenu;
 // const MenuItemGroup = Menu.ItemGroup;
 const MenuItem = Menu.Item;
 // const MenuDivider = Menu.Divider;
 
+const PCMenu = styled(Menu)`
+  .ant-dropdown-menu-item {
+    color: #666;
+  }
+  .ant-dropdown-menu-item-disabled {
+    color: rgba(0, 0, 0, 0.25);
+  }
+  .ant-dropdown-menu-item-selected,
+  .ant-dropdown-menu-item-selected > a {
+    background-color: #5acfff;
+    color: #fff;
+  }
+`;
 const StyledButton = styled(Button)`
-  margin: 15px;
+  border: none;
+  font-size: 14px;
+  color: #049cdb;
 `;
 
 const StyledMenuItem = styled(MenuItem)`
@@ -27,33 +45,29 @@ function NetworkMenu(props) {
 
   let options;
   if (availableNetworks) {
-    options = availableNetworks.map(network => (
+    options = availableNetworks.map((network) => (
       <StyledMenuItem key={network}>
         <a tabIndex="0" role="button" onClick={() => onLoadNetwork(network)}>
-          {network}
+          <FormattedMessage {...messages[network]} />
         </a>
       </StyledMenuItem>
     ));
   }
 
   const menu = (
-    <Menu
-      forceSubMenuRender
-      defaultSelectedKeys={[networkName]}
-      selectedKeys={[networkName]}
-    >
+    <PCMenu forceSubMenuRender defaultSelectedKeys={[networkName]} selectedKeys={[networkName]}>
       <StyledMenuItem disabled key="title">
-        Select Conflux network
+        <FormattedMessage {...messages.menu} />
       </StyledMenuItem>
       {options}
-    </Menu>
+    </PCMenu>
   );
 
   return (
     <Dropdown overlay={menu}>
-      <StyledButton size="large" icon="wifi">
-        {networkName}
-        <Icon type="down" />
+      <StyledButton size="large">
+        <FormattedMessage {...messages[networkName]} />
+        <Icon type="caret-down" />
       </StyledButton>
     </Dropdown>
   );
@@ -62,7 +76,7 @@ function NetworkMenu(props) {
 NetworkMenu.propTypes = {
   onLoadNetwork: PropTypes.func.isRequired,
   networkName: PropTypes.string,
-  availableNetworks: PropTypes.object
+  availableNetworks: PropTypes.object,
 };
 
 export default NetworkMenu;

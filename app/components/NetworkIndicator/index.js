@@ -1,8 +1,8 @@
 /**
-*
-* NetworkIndicator
-*
-*/
+ *
+ * NetworkIndicator
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -26,26 +26,19 @@ function NetworkIndicator(props) {
     component = <Icon type="loading" />;
   }
   if (error && error !== offlineModeString) {
-    component =
-      (<Tooltip placement="bottom" title={error}>
+    component = (
+      <Tooltip placement="bottom" title={error}>
         <Icon type="close-circle-o" style={{ color: 'red' }} />
-      </Tooltip>);
+      </Tooltip>
+    );
   }
 
-  return (
-    <Span>
-      {component}
-    </Span>
-  );
+  return <Span>{component}</Span>;
 }
 
 NetworkIndicator.propTypes = {
   loading: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]),
 };
 
 export default NetworkIndicator;

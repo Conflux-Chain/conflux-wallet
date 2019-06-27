@@ -3,12 +3,10 @@
 /* eslint-disable */
 
 (function webpackUniversalModuleDefinition(root, factory) {
-  if (typeof exports === "object" && typeof module === "object")
-    module.exports = factory();
-  else if (typeof define === "function" && define.amd)
-    define("SignerProvider", [], factory);
-  else if (typeof exports === "object") exports["SignerProvider"] = factory();
-  else root["SignerProvider"] = factory();
+  if (typeof exports === 'object' && typeof module === 'object') module.exports = factory();
+  else if (typeof define === 'function' && define.amd) define('SignerProvider', [], factory);
+  else if (typeof exports === 'object') exports['SignerProvider'] = factory();
+  else root['SignerProvider'] = factory();
 })(this, function() {
   return /******/ (function(modules) {
     // webpackBootstrap
@@ -17,13 +15,12 @@
 
     /******/ /******/ function __webpack_require__(moduleId) {
       /******/ // Check if module is in cache
-      /******/ if (installedModules[moduleId])
-        /******/ return installedModules[moduleId].exports; // Create a new module (and put it into the cache)
+      /******/ if (installedModules[moduleId]) /******/ return installedModules[moduleId].exports; // Create a new module (and put it into the cache)
 
       /******/ /******/ var module = (installedModules[moduleId] = {
         /******/ i: moduleId,
         /******/ l: false,
-        /******/ exports: {}
+        /******/ exports: {},
         /******/
       }); // Execute the module function
 
@@ -52,7 +49,7 @@
       /******/ Object.defineProperty(exports, name, {
         /******/ configurable: false,
         /******/ enumerable: true,
-        /******/ get: getter
+        /******/ get: getter,
         /******/
       });
       /******/
@@ -62,7 +59,7 @@
       return Object.prototype.hasOwnProperty.call(object, property);
     }; // __webpack_public_path__
 
-    /******/ /******/ __webpack_require__.p = ""; // Load entry module and return exports
+    /******/ /******/ __webpack_require__.p = ''; // Load entry module and return exports
 
     /******/ /******/ return __webpack_require__((__webpack_require__.s = 4));
     /******/
@@ -71,8 +68,8 @@
     /******/ [
       /* 0 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
-        "use strict";
+        'use strict';
+        'use strict';
 
         var HTTPProvider = __webpack_require__(1);
         var EthRPC = __webpack_require__(2);
@@ -93,14 +90,14 @@
               '[ethjs-provider-signer] the SignerProvider instance requires the "new" flag in order to function normally (e.g. `const eth = new Eth(new SignerProvider(...));`).'
             );
           }
-          if (typeof options !== "object") {
+          if (typeof options !== 'object') {
             throw new Error(
               "[ethjs-provider-signer] the SignerProvider requires an options object be provided with the 'privateKey' property specified, you provided type " +
                 typeof options +
-                "."
+                '.'
             );
           }
-          if (typeof options.signTransaction !== "function") {
+          if (typeof options.signTransaction !== 'function') {
             throw new Error(
               "[ethjs-provider-signer] the SignerProvider requires an options object be provided with the 'signTransaction' property specified, you provided type " +
                 typeof options.privateKey +
@@ -111,7 +108,7 @@
           var self = this;
           self.options = Object.assign(
             {
-              provider: HTTPProvider
+              provider: HTTPProvider,
             },
             options
           );
@@ -131,7 +128,7 @@
         SignerProvider.prototype.sendAsync = function(payload, callback) {
           // eslint-disable-line
           var self = this;
-          if (payload.method === "cfx_accounts" && self.options.accounts) {
+          if (payload.method === 'cfx_accounts' && self.options.accounts) {
             self.options.accounts(function(accountsError, accounts) {
               // create new output payload
               var inputPayload = Object.assign(
@@ -139,43 +136,53 @@
                 {
                   id: payload.id,
                   jsonrpc: payload.jsonrpc,
-                  result: accounts
+                  result: accounts,
                 }
               );
 
               callback(accountsError, inputPayload);
             });
-          } else if (payload.method === "cfx_sendTransaction") {
+          } else if (payload.method === 'cfx_sendTransaction') {
             // get the nonce, if any
             self.rpc.sendAsync(
               {
-                method: "cfx_getTransactionCount",
-                params: [payload.params[0].from, "latest"]
+                method: 'cfx_getTransactionCount',
+                params: [payload.params[0].from, 'latest_state'],
               },
               function(nonceError, nonce) {
                 // eslint-disable-line
                 if (nonceError) {
                   return callback(
-                    new Error(
-                      "[ethjs-provider-signer] while getting nonce: " +
-                        nonceError
-                    ),
+                    new Error('[ethjs-provider-signer] while getting nonce: ' + nonceError),
                     null
                   );
                 }
 
-                // get the gas price, if any
-                self.rpc.sendAsync({ method: "cfx_gasPrice" }, function(
-                  gasPriceError,
-                  gasPrice
+                var localNonce = JSON.parse(
+                  localStorage.getItem(`conflux_wallet_${payload.params[0].from}`) || null
+                );
+                // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
+                // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
+                var maxInterval = 1000 * 60 * 10;
+                if (
+                  localNonce &&
+                  +new Date() - +localNonce.updateTime < maxInterval &&
+                  localNonce.nonce >= nonce
                 ) {
+                  console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce);
+                  nonce = localNonce.nonce;
+                }
+                localStorage.setItem(
+                  `conflux_wallet_${payload.params[0].from}`,
+                  JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
+                );
+
+                // get the gas price, if any
+                self.rpc.sendAsync({ method: 'cfx_gasPrice' }, function(gasPriceError, gasPrice) {
                   // eslint-disable-line
                   if (gasPriceError) {
                     return callback(
-                      new Error(
-                        "[ethjs-provider-signer] while getting gasPrice: " +
-                          gasPriceError
-                      ),
+                      new Error('[ethjs-provider-signer] while getting gasPrice: ' + gasPriceError),
                       null
                     );
                   }
@@ -184,16 +191,13 @@
                   var rawTxPayload = Object.assign(
                     {
                       nonce: nonce,
-                      gasPrice: gasPrice
+                      gasPrice: gasPrice,
                     },
                     payload.params[0]
                   );
 
                   // sign transaction with raw tx payload
-                  self.options.signTransaction(rawTxPayload, function(
-                    keyError,
-                    signedHexPayload
-                  ) {
+                  self.options.signTransaction(rawTxPayload, function(keyError, signedHexPayload) {
                     // eslint-disable-line
                     if (!keyError) {
                       // create new output payload
@@ -202,8 +206,8 @@
                         {
                           id: payload.id,
                           jsonrpc: payload.jsonrpc,
-                          method: "cfx_sendRawTransaction",
-                          params: [signedHexPayload]
+                          method: 'cfx_sendRawTransaction',
+                          params: [signedHexPayload],
                         }
                       );
 
@@ -212,7 +216,7 @@
                     } else {
                       //callback(new Error('[ethjs-provider-signer] while signing your transaction payload: ' + JSON.stringify(keyError)), null);
                       console.error(
-                        "[ethjs-provider-signer] while signing your transaction payload:",
+                        '[ethjs-provider-signer] while signing your transaction payload:',
                         keyError
                       );
                       callback(keyError, null);
@@ -230,8 +234,8 @@
       },
       /* 1 */
       /***/ function(module, exports, __webpack_require__) {
-        "use strict";
-        "use strict";
+        'use strict';
+        'use strict';
 
         /**
          * @original-authors:
@@ -250,10 +254,10 @@
         function invalidResponseError(result, host) {
           var message =
             !!result && !!result.error && !!result.error.message
-              ? "[ethjs-provider-http] " + result.error.message
-              : "[ethjs-provider-http] Invalid JSON RPC response from host provider " +
+              ? '[ethjs-provider-http] ' + result.error.message
+              : '[ethjs-provider-http] Invalid JSON RPC response from host provider ' +
                 host +
-                ": " +
+                ': ' +
                 JSON.stringify(result, null, 2);
           return new Error(message);
         }
@@ -267,7 +271,7 @@
               '[ethjs-provider-http] the HttpProvider instance requires the "new" flag in order to function normally (e.g. `const eth = new Eth(new HttpProvider());`).'
             );
           }
-          if (typeof host !== "string") {
+          if (typeof host !== 'string') {
             throw new Error(
               '[ethjs-provider-http] the HttpProvider instance requires that the host be specified (e.g. `new HttpProvider("http://localhost:8545")` or via service like infura `new HttpProvider("http://ropsten.infura.io")`)'
             );
@@ -291,8 +295,8 @@
           var request = new XHR2(); // eslint-disable-line
 
           request.timeout = self.timeout;
-          request.open("POST", self.host, true);
-          request.setRequestHeader("Content-Type", "application/json");
+          request.open('POST', self.host, true);
+          request.setRequestHeader('Content-Type', 'application/json');
 
           request.onreadystatechange = function() {
             if (request.readyState === 4 && request.timeout !== 1) {
@@ -311,9 +315,9 @@
 
           request.ontimeout = function() {
             callback(
-              "[ethjs-provider-http] CONNECTION TIMEOUT: http request timeout after " +
+              '[ethjs-provider-http] CONNECTION TIMEOUT: http request timeout after ' +
                 self.timeout +
-                " ms. (i.e. your connect has timed out for whatever reason, check your provider).",
+                ' ms. (i.e. your connect has timed out for whatever reason, check your provider).',
               null
             );
           };
@@ -337,8 +341,8 @@
       },
       /* 2 */
       /***/ function(module, exports) {
-        "use strict";
-        "use strict";
+        'use strict';
+        'use strict';
 
         module.exports = EthRPC;
 
@@ -362,11 +366,11 @@
 
           self.options = Object.assign({
             jsonSpace: optionsObject.jsonSpace || 0,
-            max: optionsObject.max || 9999999999999
+            max: optionsObject.max || 9999999999999,
           });
           self.idCounter = Math.floor(Math.random() * self.options.max);
           self.setProvider = function(provider) {
-            if (typeof provider !== "object") {
+            if (typeof provider !== 'object') {
               throw new Error(
                 "[ethjs-rpc] the EthRPC object requires that the first input 'provider' must be an object, got '" +
                   typeof provider +
@@ -390,30 +394,25 @@
         EthRPC.prototype.sendAsync = function sendAsync(payload, cb) {
           var self = this;
           self.idCounter = self.idCounter % self.options.max;
-          self.currentProvider.sendAsync(
-            createPayload(payload, self.idCounter++),
-            function(err, response) {
-              var responseObject = response || {};
+          self.currentProvider.sendAsync(createPayload(payload, self.idCounter++), function(
+            err,
+            response
+          ) {
+            var responseObject = response || {};
 
-              if (err || responseObject.error) {
-                var payloadErrorMessage =
-                  "[ethjs-rpc] " +
-                  ((responseObject.error && "rpc") || "") +
-                  " error with payload " +
-                  JSON.stringify(payload, null, self.options.jsonSpace) +
-                  " " +
-                  (err ||
-                    JSON.stringify(
-                      responseObject.error,
-                      null,
-                      self.options.jsonSpace
-                    ));
-                return cb(new Error(payloadErrorMessage), null);
-              }
-
-              return cb(null, responseObject.result);
+            if (err || responseObject.error) {
+              var payloadErrorMessage =
+                '[ethjs-rpc] ' +
+                ((responseObject.error && 'rpc') || '') +
+                ' error with payload ' +
+                JSON.stringify(payload, null, self.options.jsonSpace) +
+                ' ' +
+                (err || JSON.stringify(responseObject.error, null, self.options.jsonSpace));
+              return cb(new Error(payloadErrorMessage), null);
             }
-          );
+
+            return cb(null, responseObject.result);
+          });
         };
 
         /**
@@ -428,8 +427,8 @@
           return Object.assign(
             {
               id: id,
-              jsonrpc: "2.0",
-              params: []
+              jsonrpc: '2.0',
+              params: [],
             },
             data
           );
@@ -448,7 +447,7 @@
         module.exports = __webpack_require__(0);
 
         /***/
-      }
+      },
       /******/
     ]
   );

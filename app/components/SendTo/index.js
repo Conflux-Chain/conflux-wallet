@@ -1,21 +1,43 @@
 /**
-*
-* SendTo
-*
-*/
+ *
+ * SendTo
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Icon } from 'antd';
-// import styled from 'styled-components';
+import { Input } from 'antd';
+import styled from 'styled-components';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
 
-function SendTo({ to, onChangeTo, locked }) {
+const Div = styled.div`
+  margin-top: 10px;
+  .ant-input {
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    color: #666;
+  }
+`;
+
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  font-size: 14px;
+  color: #333;
+`;
+
+function SendTo({ to, onChangeTo, locked, intl }) {
   return (
-    <div>
+    <Div>
+      <TitleDiv>
+        <FormattedMessage {...messages.sourceTitle} />
+      </TitleDiv>
       <Input
-        style={{ width: '300px' }}
-        placeholder="Send to address"
-        prefix={<Icon type="contacts" />}
+        placeholder={intl.formatMessage({ ...messages.placeholderSendTo })}
         value={to}
         onChange={onChangeTo}
         disabled={locked}
@@ -24,7 +46,7 @@ function SendTo({ to, onChangeTo, locked }) {
         autoCapitalize="off"
         spellCheck={false}
       />
-    </div>
+    </Div>
   );
 }
 
@@ -32,6 +54,7 @@ SendTo.propTypes = {
   to: PropTypes.string,
   onChangeTo: PropTypes.func,
   locked: PropTypes.bool,
+  intl: intlShape.isRequired,
 };
 
-export default SendTo;
+export default injectIntl(SendTo);

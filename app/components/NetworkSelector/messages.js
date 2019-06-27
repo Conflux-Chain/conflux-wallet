@@ -5,9 +5,11 @@
  */
 import { defineMessages } from 'react-intl';
 
+export const scope = 'app.components.NetworkSelector';
+
 export default defineMessages({
-  header: {
-    id: 'app.components.NetworkSelector.header',
-    defaultMessage: 'This is the NetworkSelector component !',
-  },
+  // menu: {
+  //   id: `${scope}.menu`,
+  //   defaultMessage: 'Select Conflux network',
+  // },
 });

@@ -1,14 +1,19 @@
 /**
-*
-* RestoreWallet
-*
-*/
+ *
+ * RestoreWallet
+ *
+ */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
-function RestoreWallet({ isShowRestoreWallet, userSeed, onChangeUserSeed, onRestoreWalletFromSeed }) {
+function RestoreWallet({
+  isShowRestoreWallet,
+  userSeed,
+  onChangeUserSeed,
+  onRestoreWalletFromSeed,
+}) {
   // console.log(isShowRestoreWallet);
   // onSubmit={props.onSubmitForm}
   /*
@@ -21,7 +26,9 @@ function RestoreWallet({ isShowRestoreWallet, userSeed, onChangeUserSeed, onRest
     return (
       <div>
         <br />
-        <form > { /* todo: cancel default action */}
+        <form>
+          {' '}
+          {/* todo: cancel default action */}
           <label htmlFor="restoreWalletBox">
             <input
               id="restoreWalletBox"
@@ -36,9 +43,7 @@ function RestoreWallet({ isShowRestoreWallet, userSeed, onChangeUserSeed, onRest
             />
           </label>
           <br />
-          <button onClick={onRestoreWalletFromSeed}>
-            Restore from seed
-          </button>
+          <button onClick={onRestoreWalletFromSeed}>Restore from seed</button>
         </form>
       </div>
     );

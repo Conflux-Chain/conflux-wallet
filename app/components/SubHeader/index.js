@@ -1,20 +1,27 @@
 /**
-*
-* SubHeader
-*
-*/
+ *
+ * SubHeader
+ *
+ */
 
 import React from 'react';
 import { Button, Popconfirm } from 'antd';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LockButton from 'components/LockButton';
-import IconButton from 'components/IconButton';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from './messages';
+
+// import IconButton from 'components/IconButton';
 const Div = styled.div`
   margin-top: 45px;
+  display: flex;
+  justify-content: space-between;
   .ant-btn {
-  margin-right: 8px;
-  margin-bottom: 12px;
+    width: 45%;
+    height: 48px;
+    border-radius: 10px;
+    padding: 0;
   }
 
   .anticon-lock {
@@ -27,8 +34,15 @@ const Div = styled.div`
 
 function SubHeader(props) {
   const {
-    onGenerateWallet, onShowRestoreWallet, isComfirmed, onCloseWallet,
-    onLockWallet, password, onUnlockWallet,
+    onGenerateWallet,
+    onShowRestoreWallet,
+    isComfirmed,
+    onCloseWallet,
+    onLockWallet,
+    password,
+    onUnlockWallet,
+    onRestoreWalletFromSeed,
+    intl,
     /* optional laod / save buttons
      onSaveWallet, saveWalletLoading, saveWalletError,
      onLoadWallet, loadWalletLoading, loadWalletError, */
@@ -38,10 +52,10 @@ function SubHeader(props) {
 
   const noWalletSubHeader = [
     <Button key="new_wallet" type="primary" size="large" onClick={onGenerateWallet}>
-      New wallet
+      <FormattedMessage {...messages.btnNewWallet} />
     </Button>,
-    <Button key="restore_wallet" type="default" size="large" onClick={onShowRestoreWallet}>
-      Restore wallet
+    <Button key="restore_wallet" type="default" size="large" onClick={onRestoreWalletFromSeed}>
+      <FormattedMessage {...messages.btnRestoreWallet} />
     </Button>,
     /* optional laod / save buttons
      <IconButton
@@ -56,9 +70,14 @@ function SubHeader(props) {
 
   const existingWalletSubHeader = [
     <LockButton key="lock_button" {...lockButtonProps} />,
-    <Popconfirm key="close_wallet" placement="bottom" title="Wallet will be deleted from memory and LocalStorage" onConfirm={onCloseWallet} okText="Confirm" cancelText="Abort">
+    <Popconfirm
+      key="close_wallet"
+      placement="bottom"
+      title={intl.formatMessage({ ...messages.closeWalletConfirmMsg })}
+      onConfirm={onCloseWallet}
+    >
       <Button key="close_wallet" type="default" icon="close-square-o" size="large">
-        Close wallet
+        <FormattedMessage {...messages.btnCloseWallet} />
       </Button>
     </Popconfirm>,
     /* optional laod / save buttons
@@ -73,14 +92,9 @@ function SubHeader(props) {
     />, */
   ];
 
-
   const subHeader = isComfirmed ? existingWalletSubHeader : noWalletSubHeader;
 
-  return (
-    <Div>
-      {subHeader}
-    </Div>
-  );
+  return <Div>{subHeader}</Div>;
 }
 
 SubHeader.propTypes = {
@@ -91,6 +105,9 @@ SubHeader.propTypes = {
   onLockWallet: PropTypes.func,
   password: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   onUnlockWallet: PropTypes.func,
+  onRestoreWalletFromSeed: PropTypes.func,
+  intl: intlShape.isRequired,
+
   /* optional laod / save buttons
   onSaveWallet: PropTypes.func,
   saveWalletLoading: PropTypes.bool,
@@ -100,4 +117,4 @@ SubHeader.propTypes = {
   loadWalletError: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.bool]), */
 };
 
-export default SubHeader;
+export default injectIntl(SubHeader);
