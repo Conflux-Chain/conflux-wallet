@@ -84,7 +84,7 @@ const splitAddrToRows = (tokenDecimalsMap, tokenMapIN, address, startKey) => {
       token: 'cfx',
       address,
       balance: balance
-        ? new BigNumber(balance).div((10 ** decimals).toString()).toString(10)
+        ? new BigNumber(balance).div(new BigNumber(10).pow(decimals)).toString(10)
         : 'n/a',
       decimals,
     },

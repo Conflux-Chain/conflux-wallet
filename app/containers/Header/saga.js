@@ -301,7 +301,7 @@ export function getCfxBalancePromise(address) {
   return new Promise((resolve, reject) => {
     web3.cfx.getBalance(address, (err, data) => {
       if (err !== null) return reject(err);
-      return resolve(data.toNumber());
+      return resolve(data.toString());
     });
   });
 }
