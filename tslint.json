@@ -1,0 +1,72 @@
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "rules": {
+    "prettier": true,
+    "interface-name": false,
+    /**copy自antd https://github.com/ant-design/ant-design/blob/master/tslint.json*/
+    "class-name": true,
+    "forin": true,
+    "jsdoc-format": false,
+    "label-position": true,
+    "member-ordering": [
+      true,
+      {
+        "order": "statics-first"
+      }
+    ],
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-conditional-assignment": true,
+
+    "no-construct": true,
+    "no-debugger": true,
+    "no-duplicate-variable": true,
+    "no-eval": true,
+    "no-internal-module": true,
+    "no-namespace": false,
+    "no-reference": true,
+    "no-string-literal": true,
+    "no-unused-expression": true,
+    "no-var-keyword": true,
+    "prefer-const": [
+      true,
+      {
+        "destructuring": "all"
+      }
+    ],
+    "radix": true,
+    "switch-default": true,
+    "triple-equals": [true, "allow-null-check"],
+    "use-isnan": true,
+    "variable-name": [
+      true,
+      "allow-leading-underscore",
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case"
+    ],
+    "jsx-no-lambda": false,
+    "jsx-no-string-ref": false,
+    "jsx-boolean-value": [true, "never"],
+    "jsx-no-multiline-js": false,
+
+    /**后续自定义*/
+    "member-access": false,
+    "import-name": false,
+    "one-variable-per-declaration": false,
+    "object-literal-sort-keys": false,
+    "no-empty": false,
+    "no-unused-variable": false,
+    "no-default-import": false,
+    "typedef": false,
+    "no-default-export": false,
+    "no-shadowed-variable": false,
+    "max-classes-per-file": false,
+    "ordered-imports": false,
+    "no-var-requires": false
+  },
+  "linterOptions": {
+    "exclude": ["./src/serviceWorker.ts"]
+  }
+}

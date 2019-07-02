@@ -1,0 +1,10 @@
+@import 'assets/styles/index.scss';
+
+.testFin {
+  @include flex-center();
+  color: red;
+}
+
+.test {
+  color: green;
+}
