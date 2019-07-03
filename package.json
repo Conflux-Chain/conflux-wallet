@@ -13,6 +13,7 @@
     "lint:css": "stylelint 'src/**/*.css' 'src/**/*.scss' 'src/**/*.less' --fix"
   },
   "dependencies": {
+    "@material-ui/core": "^4.1.3",
     "axios": "^0.18.0",
     "dva-core": "^1.4.0",
     "http-proxy-middleware": "^0.19.1",

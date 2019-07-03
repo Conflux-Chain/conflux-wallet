@@ -4,6 +4,7 @@ import { namespace } from '@/models/home'
 import { connect } from 'react-redux'
 import { IDispatch } from '@/typings'
 import { push } from 'connected-react-router'
+import { Button } from '@material-ui/core'
 
 interface IProps extends IDispatch {
   testState: number
@@ -14,7 +15,7 @@ class Home extends Component<IProps> {
       <>
         <h1 className={styles.test}>Home</h1>
         <h2>testState:{this.props.testState}</h2>
-        <button
+        <Button
           onClick={() => {
             this.props.dispatch({
               type: `${namespace}/setState`,
@@ -25,14 +26,14 @@ class Home extends Component<IProps> {
           }}
         >
           modify state
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             this.props.dispatch(push('/about'))
           }}
         >
           go about
-        </button>
+        </Button>
       </>
     )
   }
