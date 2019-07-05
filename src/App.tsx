@@ -6,6 +6,7 @@ import dva from '@/utils/dva/index'
 import models from '@/models'
 
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router'
+import { I18NContextWrapper } from './i18n/context'
 
 const createHistory = require('history').createBrowserHistory
 export const history = createHistory()
@@ -21,7 +22,9 @@ export const app = dva({
 
 const f: React.FC = app.start(
   <ConnectedRouter history={history}>
-    <Router />
+    <I18NContextWrapper>
+      <Router />
+    </I18NContextWrapper>
   </ConnectedRouter>
 )
 

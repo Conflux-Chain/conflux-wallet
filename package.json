@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "dva-core": "^1.4.0",
     "http-proxy-middleware": "^0.19.1",
+    "kiwi-intl": "^1.2.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
