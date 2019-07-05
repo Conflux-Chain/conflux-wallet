@@ -8,6 +8,7 @@ import models from '@/models'
 import { ThemeProvider } from '@material-ui/styles'
 import theme from '@/theme/index'
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router'
+import { I18NContextWrapper } from './i18n/context'
 
 const createHistory = require('history').createBrowserHistory
 export const history = createHistory()
@@ -23,9 +24,11 @@ export const app = dva({
 
 const f: React.FC = app.start(
   <ConnectedRouter history={history}>
-    <ThemeProvider theme={theme}>
-      <Router />
-    </ThemeProvider>
+    <I18NContextWrapper>
+      <ThemeProvider theme={theme}>
+        <Router />
+      </ThemeProvider>
+    </I18NContextWrapper>
   </ConnectedRouter>
 )
 

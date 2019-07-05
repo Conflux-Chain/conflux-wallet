@@ -5,7 +5,6 @@ import Images from '@/assets/images/index'
 import Button from '@material-ui/core/Button'
 
 import Hidden from '@material-ui/core/Hidden'
-import withWidth from '@material-ui/core/withWidth'
 class TopHeader extends Component {
   render() {
     return (
@@ -23,4 +22,4 @@ class TopHeader extends Component {
     )
   }
 }
-export default withWidth()(TopHeader)
+export default TopHeader
