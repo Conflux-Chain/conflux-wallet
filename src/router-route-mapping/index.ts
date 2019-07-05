@@ -7,4 +7,8 @@ export const routes = [
     routePath: '/about',
     componentPath: '/about',
   },
+  {
+    routePath: '/layout',
+    componentPath: '/layout',
+  },
 ]

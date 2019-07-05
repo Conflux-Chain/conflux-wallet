@@ -1,0 +1,8 @@
+@import 'assets/styles/index.scss';
+
+.breadcrumb {
+  @include flex-align-center();
+  padding-left: 20px;
+  height: '60px';
+  background-color: '#fff';
+}
