@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import AppBar from '@material-ui/core/AppBar'
 import { namespace as globalMenuNamespace } from '@/models/global/menu'
 import { connect } from 'react-redux'
+import TopHeader from './top-header'
 import { RouteComponentProps, withRouter } from 'react-router'
 type IProps = RouteComponentProps & {
   selectedKeys?: any[]
@@ -39,7 +39,7 @@ class BasicLayout extends Component<IProps> {
   render() {
     return (
       <div>
-        <AppBar>123</AppBar>
+        <TopHeader />
       </div>
     )
   }

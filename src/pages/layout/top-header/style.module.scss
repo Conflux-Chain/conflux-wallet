@@ -1,0 +1,20 @@
+@import 'assets/styles/index.scss';
+.walletHeader {
+  background: #fff;
+  padding: 0 25px;
+  height: 72px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.19);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .headerLogo {
+    width: 130px;
+    height: 24px;
+  }
+  .headerBtn {
+    height: 32px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}

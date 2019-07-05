@@ -5,6 +5,8 @@ import Router from '@/routes'
 import dva from '@/utils/dva/index'
 import models from '@/models'
 
+import { ThemeProvider } from '@material-ui/styles'
+import theme from '@/theme/index'
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router'
 
 const createHistory = require('history').createBrowserHistory
@@ -21,8 +23,10 @@ export const app = dva({
 
 const f: React.FC = app.start(
   <ConnectedRouter history={history}>
-    <Router />
+    <ThemeProvider theme={theme}>
+      <Router />
+    </ThemeProvider>
   </ConnectedRouter>
 )
 
-export default (process.env.NODE_ENV === 'development' ? hot(f) : f)
+export default process.env.NODE_ENV === 'development' ? hot(f) : f
