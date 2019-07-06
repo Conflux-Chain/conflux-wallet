@@ -1,0 +1,29 @@
+@import 'assets/styles/index.scss';
+.operateListPc {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 10px;
+  .operateListPcItem {
+    cursor: pointer;
+    padding: 0 16px;
+    position: relative;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+    line-height: 19px;
+    .icon {
+      vertical-align: middle;
+    }
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      margin-top: -9px;
+      width: 2px;
+      height: 18px;
+      background-color: rgba(0, 0, 0, 0.18);
+    }
+  }
+}

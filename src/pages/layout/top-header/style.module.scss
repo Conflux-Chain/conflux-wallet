@@ -1,4 +1,8 @@
 @import 'assets/styles/index.scss';
+.walletHeaderWrap {
+  background-color: transparent !important;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.19) !important;
+}
 .walletHeader {
   background: #fff;
   padding: 0 25px;
@@ -17,4 +21,9 @@
     padding-top: 0;
     padding-bottom: 0;
   }
+}
+.operateWrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
