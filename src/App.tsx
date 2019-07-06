@@ -5,6 +5,8 @@ import Router from '@/routes'
 import dva from '@/utils/dva/index'
 import models from '@/models'
 
+import { ThemeProvider } from '@material-ui/styles'
+import theme from '@/theme/index'
 import { connectRouter, routerMiddleware, ConnectedRouter } from 'connected-react-router'
 import { I18NContextWrapper } from './i18n/context'
 
@@ -23,9 +25,11 @@ export const app = dva({
 const f: React.FC = app.start(
   <ConnectedRouter history={history}>
     <I18NContextWrapper>
-      <Router />
+      <ThemeProvider theme={theme}>
+        <Router />
+      </ThemeProvider>
     </I18NContextWrapper>
   </ConnectedRouter>
 )
 
-export default (process.env.NODE_ENV === 'development' ? hot(f) : f)
+export default process.env.NODE_ENV === 'development' ? hot(f) : f
