@@ -5,59 +5,56 @@ import { connect } from 'react-redux'
 import { IDispatch } from '@/typings'
 import { push } from 'connected-react-router'
 import { Button } from '@material-ui/core'
-import { I18NContext } from '@/i18n/context'
 import { LangEnum } from '@/i18n/typing'
+import { I18NHOC } from '@/utils/tools/react'
+import { I18NProps } from '@/i18n/context'
 
-interface IProps extends IDispatch {
-  testState: number
-}
+type IProps = IDispatch &
+  I18NProps & {
+    testState: number
+  }
 class Home extends Component<IProps> {
   render() {
+    const { I18N, setLangTriggerRender } = this.props
     return (
-      <I18NContext.Consumer>
-        {({ I18N, setLangTriggerRender }) => {
-          return (
-            <>
-              <h1>{I18N.testField}</h1>
-              <Button
-                onClick={() => {
-                  setLangTriggerRender(LangEnum.zh_CN)
-                }}
-              >
-                切换中文语言
-              </Button>
-              <Button
-                onClick={() => {
-                  setLangTriggerRender(LangEnum.en_US)
-                }}
-              >
-                切换英文语言
-              </Button>
-              <h1 className={styles.test}>Home</h1>
-              <h2>testState:{this.props.testState}</h2>
-              <Button
-                onClick={() => {
-                  this.props.dispatch({
-                    type: `${namespace}/setState`,
-                    payload: {
-                      testState: Math.random(),
-                    },
-                  })
-                }}
-              >
-                modify state
-              </Button>
-              <Button
-                onClick={() => {
-                  this.props.dispatch(push('/about'))
-                }}
-              >
-                go about
-              </Button>
-            </>
-          )
-        }}
-      </I18NContext.Consumer>
+      <>
+        <h1>{I18N.testField}</h1>
+        <Button
+          onClick={() => {
+            setLangTriggerRender(LangEnum.zh_CN)
+          }}
+        >
+          切换中文语言
+        </Button>
+        <Button
+          onClick={() => {
+            setLangTriggerRender(LangEnum.en_US)
+          }}
+        >
+          切换英文语言
+        </Button>
+        <h1 className={styles.test}>Home</h1>
+        <h2>testState:{this.props.testState}</h2>
+        <Button
+          onClick={() => {
+            this.props.dispatch({
+              type: `${namespace}/setState`,
+              payload: {
+                testState: Math.random(),
+              },
+            })
+          }}
+        >
+          modify state
+        </Button>
+        <Button
+          onClick={() => {
+            this.props.dispatch(push('/about'))
+          }}
+        >
+          go about
+        </Button>
+      </>
     )
   }
 }
@@ -66,4 +63,4 @@ const mapStateToProps = models => {
     ...models[namespace],
   }
 }
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(I18NHOC(Home))

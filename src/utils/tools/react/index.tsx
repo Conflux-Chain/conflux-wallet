@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
+import { I18NContext } from '@/i18n/context'
 
 export function asyncComponent(importComponent) {
   class AsyncComponent extends Component<
@@ -32,3 +33,20 @@ export function asyncComponent(importComponent) {
 
   return AsyncComponent
 }
+
+export const I18NHOC = WrappedComponent =>
+  class WrapperComponent extends PureComponent {
+    render() {
+      return (
+        <I18NContext.Consumer>
+          {({ I18N, setLangTriggerRender }) => (
+            <WrappedComponent
+              I18N={I18N}
+              setLangTriggerRender={setLangTriggerRender}
+              {...this.props}
+            />
+          )}
+        </I18NContext.Consumer>
+      )
+    }
+  }

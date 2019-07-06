@@ -1,6 +1,11 @@
 import React from 'react'
 import { LangEnum } from './typing'
 import I18N, { Langs } from './index'
+
+export interface I18NProps {
+  I18N: Langs
+  setLangTriggerRender: (lang: LangEnum) => void
+}
 export const I18NContext = React.createContext({
   I18N,
   setLangTriggerRender: (lang: LangEnum) => {},
