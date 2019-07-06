@@ -32,7 +32,11 @@ interface IState {
   menuLang: null | HTMLElement
   menuLangSelected: number
 }
-class OperateList extends Component<{}, IState> {
+interface IProps {
+  isLogin: boolean
+}
+class OperateList extends Component<IProps, IState> {
+  static defaultProps = { isLogin: false }
   state = {
     menuNet: null,
     menuNetSelected: 'Testnet',
@@ -80,18 +84,24 @@ class OperateList extends Component<{}, IState> {
     const { menuNet, menuNetSelected, menuLang, menuLangSelected } = this.state
     const menuNetOpen = Boolean(menuNet)
     const menuLangOpen = Boolean(menuLang)
+    const { isLogin } = this.props
     return (
       <div>
         <Hidden xsDown>
           <div className={styles.operateListPc}>
-            <div className={styles.operateListPcItem}>
-              <img src={Images.pc} alt="" className={styles.icon} />
-              Deploy
-            </div>
-            <div className={styles.operateListPcItem}>
-              <img src={Images.f5} alt="" className={styles.icon} />
-              Refresh
-            </div>
+            {/* 需要登录的操作 */}
+            {isLogin ? (
+              <React.Fragment>
+                <div className={styles.operateListPcItem}>
+                  <img src={Images.pc} alt="" className={styles.icon} />
+                  Deploy
+                </div>
+                <div className={styles.operateListPcItem}>
+                  <img src={Images.f5} alt="" className={styles.icon} />
+                  Refresh
+                </div>
+              </React.Fragment>
+            ) : null}
             <div className={styles.operateListPcItem}>
               <span
                 aria-label="Account of current user"
