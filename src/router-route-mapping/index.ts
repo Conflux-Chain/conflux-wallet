@@ -1,5 +1,9 @@
 export const routes = [
   {
+    routePath: '/demo',
+    componentPath: '/demo',
+  },
+  {
     routePath: '/',
     componentPath: '/home',
   },
