@@ -15,4 +15,8 @@ export const routes = [
     routePath: '/layout',
     componentPath: '/layout',
   },
+  {
+    routePath: '/login',
+    componentPath: '/login',
+  },
 ]
