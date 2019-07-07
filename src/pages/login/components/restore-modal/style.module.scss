@@ -1,0 +1,113 @@
+.restoreModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 389px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+
+    .dotBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:last-child {
+        margin-left: 16px;
+      }
+
+      .dotItem {
+        width: 8px;
+        height: 8px;
+        background: rgba(0, 0, 0, 0.24);
+        border-radius: 50%;
+      }
+
+      .dotItemAc {
+        width: 10px;
+        height: 10px;
+        background: rgba(30, 61, 228, 1);
+        border-radius: 50%;
+      }
+    }
+
+    .uploadBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+      background: rgba(0, 0, 0, 0.24);
+      margin-top: 41px;
+      border-radius: 50%;
+
+      .uploadIc {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .tips {
+      font-size: 16px;
+      font-family: ProximaNova-Bold;
+      font-weight: bold;
+      color: #000;
+      line-height: 24px;
+      padding: 0 80px;
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .button {
+      width: 203px;
+      height: 48px;
+      background: rgba(30, 61, 228, 1);
+      border-radius: 4px;
+      color: #fff;
+      margin-top: 25px;
+    }
+  }
+
+  .bottomInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+
+    .words {
+      font-size: 16px;
+      font-family: ProximaNova-Semibold;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 1);
+      line-height: 19px;
+
+      .linkName {
+        margin: 0 6px;
+        text-decoration: underline;
+      }
+    }
+
+    .errorBox {
+      width: 239px;
+      height: 64px;
+      background: rgba(232, 114, 114, 1);
+      border-radius: 4px;
+      margin-top: 21px;
+
+      .errorInfo {
+        font-size: 16px;
+        font-family: ProximaNova-Regular;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.87);
+        line-height: 24px;
+      }
+    }
+  }
+}
