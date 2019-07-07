@@ -8,6 +8,7 @@ import { Button } from '@material-ui/core'
 import { LangEnum } from '@/i18n/typing'
 import { I18NHOC } from '@/utils/tools/react'
 import { I18NProps } from '@/i18n/context'
+import { ReactComponent as Logo } from './demo.svg'
 
 type IProps = IDispatch &
   I18NProps & {
@@ -18,6 +19,7 @@ class Home extends Component<IProps> {
     const { I18N, setLangTriggerRender } = this.props
     return (
       <>
+        <Logo />
         <h1>{I18N.testField}</h1>
         <Button
           onClick={() => {

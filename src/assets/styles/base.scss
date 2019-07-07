@@ -18,17 +18,33 @@
 .bold {
   font-weight: bold;
 }
+
 .icon {
   width: 18px;
   height: 18px;
   margin-right: 8px;
 }
+
 .triangleIcon {
   width: 10px;
   height: 8px;
   margin-right: 8px;
   margin-left: 8px;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div,
+img {
+  margin: 0;
+  padding: 0;
+}
+
 .countryIcon {
   width: 18px;
   margin-right: 8px;

@@ -1,0 +1,71 @@
+@import 'assets/styles/index.scss';
+
+.login {
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  padding-bottom: 60px;
+
+  .title {
+    font-size: 34px;
+    font-family: ProximaNova-Bold;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.87);
+    line-height: 64px;
+    padding: 48px 49px 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .conBox {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 580px;
+    margin: 0 auto;
+
+    .paper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 270px;
+      height: 357px;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      margin: 32px auto 0;
+      color: #000;
+
+      &:hover {
+        transform: translateY(-16px);
+        transition: transform 0.2s;
+        color: #fff;
+        background-color: #1e3de4;
+      }
+
+      .icon {
+        width: 64px;
+        height: 64px;
+        fill: #1e3de4;
+        color: #1e3de4;
+      }
+
+      .paperTitle {
+        font-size: 24px;
+        font-family: ProximaNova-Bold;
+        font-weight: bold;
+        line-height: 29px;
+        margin-top: 56px;
+      }
+
+      .paperDesc {
+        font-size: 16px;
+        font-family: ProximaNova-Regular;
+        font-weight: 400;
+        line-height: 24px;
+        margin-top: 16px;
+        padding: 0 39px;
+        text-align: center;
+      }
+    }
+  }
+}
