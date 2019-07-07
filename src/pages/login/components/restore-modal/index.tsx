@@ -55,9 +55,9 @@ const RestoreModal = ({ open, onClose }) => {
           </div>
           <div className={styles.container2}>
             <TextField
-              id="filled-adornment-password"
+              id="input-adornment-password"
               // className={clsx(classes.margin, classes.textField)}
-              variant="filled"
+              variant="standard"
               type={values.showPassword ? 'text' : 'password'}
               label="Password"
               value={values.password}
