@@ -27,22 +27,22 @@
 
 二、项目框架。
 
-A、该项目采用了[React 全家桶框架](https://github.com/react-boilerplate/react-boilerplate), 需要对其中用到的技术非常熟悉。比较好的 [Guide](https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/general/introduction.md)：
+该项目采用了[CRA](https://github.com/facebook/create-react-app)来搭建基础框架，主要包含以下技术和实现
 
-核心技术框架为：
+- 环境变量+config
+- sass
+- tslint+prettier
+- husky+lint-stage
+- request+axios
+- import alias 别名配置
+- dev-server+proxy
+- react-app-rewired+customize-cra
+- import alias 别名
+- HMR 支持
+- react-router+dva-core
+- css-modules
 
-- [React](https://facebook.github.io/react/)
-- [React Router](https://github.com/ReactTraining/react-router)
-- [Redux](http://redux.js.org/)
-- [Redux Saga](https://redux-saga.github.io/redux-saga/)
-- [Reselect](https://github.com/reactjs/reselect)
-- [ImmutableJS](https://facebook.github.io/immutable-js/)
-- [Styled Components](https://github.com/styled-components/styled-components)
-
-B、React 领域比较好的学习文档
-
-- [React-howto](https://github.com/petehunt/react-howto)
-- [React Tutorial](https://reactjs.org/tutorial/tutorial.html)
+具体配置和说明可参照[这里](https://github.com/yzStrive/react-template/issues/1)
 
 三、核心代码
 
@@ -323,7 +323,7 @@ nginx 的配置如下：
 # 补充注意
 
 1、原项目 build 有问题，eth-lightwallet 依赖的 ethereumjs-tx 本身为 es6，现有 build 脚本会报错，已经转成 es5 编译，使用 1.3.3 版本，ethereumjs-tx@https://github.com/jnoodle/ethereumjs-tx.git
-2、precommit 加了代码格式化和 lint，如果提交不了，请先看下是否lint出错，过了才能提交。
+2、precommit 加了代码格式化和 lint，如果提交不了，请先看下是否 lint 出错，过了才能提交。
 
 # 获取交易信息
 

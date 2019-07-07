@@ -1,4 +1,7 @@
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import React, { Component } from 'react'
+import styles from './style.module.scss'
 import { namespace as globalMenuNamespace } from '@/models/global/menu'
 import { connect } from 'react-redux'
 import TopHeader from './top-header'
@@ -8,6 +11,7 @@ type IProps = RouteComponentProps & {
   selectedKeys?: any[]
   openKeys?: any[]
   dispatch?: any
+  width?: Breakpoint
 }
 interface IState {
   // 临时作为登录标准
@@ -47,7 +51,7 @@ class BasicLayout extends Component<IProps, IState> {
   render() {
     const { isLogin, mobileOpen } = this.state
     return (
-      <div>
+      <div className={styles.root}>
         <TopHeader
           isLogin={isLogin}
           onToggleMenus={() => {
@@ -61,6 +65,10 @@ class BasicLayout extends Component<IProps, IState> {
             this.onToggleMenus()
           }}
         />
+        <main className={isWidthUp('sm', this.props.width) ? styles.content : styles.contentM}>
+          123
+          {isWidthUp('sm', this.props.width) ? '22222222' : '4444444444444'}
+        </main>
       </div>
     )
   }
@@ -71,4 +79,4 @@ const mapStateToProps = models => {
     ...models[globalMenuNamespace],
   }
 }
-export default withRouter(connect(mapStateToProps)(BasicLayout))
+export default withRouter(connect(mapStateToProps)(withWidth()(BasicLayout)))
