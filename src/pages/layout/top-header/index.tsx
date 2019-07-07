@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import styles from './style.module.scss'
 import Images from '@/assets/images/index'
 import AppBar from '@material-ui/core/AppBar'
@@ -11,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 interface IProps {
   isLogin: boolean
   onToggleMenus?: () => void
+  width?: Breakpoint
 }
 class TopHeader extends Component<IProps> {
   onToggleMenus() {
@@ -19,21 +22,32 @@ class TopHeader extends Component<IProps> {
   render() {
     const { isLogin } = this.props
     return (
-      <AppBar position="static" className={styles.walletHeaderWrap}>
-        <Toolbar className={styles.walletHeader}>
-          <Hidden smUp implementation="css">
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              edge="start"
-              onClick={() => {
-                this.onToggleMenus()
-              }}
-            >
-              <MenuIcon color="inherit" />
-            </IconButton>
-          </Hidden>
-          <img src={Images.logo} alt="" className={styles.headerLogo} />
+      <AppBar position="fixed" className={styles.walletHeaderWrap}>
+        <Toolbar
+          className={isWidthUp('sm', this.props.width) ? styles.walletHeader : styles.walletHeaderM}
+        >
+          {isLogin ? (
+            <React.Fragment>
+              <Hidden smUp implementation="css">
+                <IconButton
+                  color="inherit"
+                  aria-label="Open drawer"
+                  edge="start"
+                  onClick={() => {
+                    this.onToggleMenus()
+                  }}
+                >
+                  <MenuIcon color="inherit" />
+                </IconButton>
+              </Hidden>
+              <Hidden xsDown>
+                <img src={Images.logo} alt="" className={styles.headerLogo} />
+              </Hidden>
+            </React.Fragment>
+          ) : (
+            <img src={Images.logo} alt="" className={styles.headerLogo} />
+          )}
+
           <div className={styles.operateWrap}>
             {isLogin ? (
               <Button variant="contained" color="primary" className={styles.headerBtn}>
@@ -48,4 +62,4 @@ class TopHeader extends Component<IProps> {
     )
   }
 }
-export default TopHeader
+export default withWidth()(TopHeader)

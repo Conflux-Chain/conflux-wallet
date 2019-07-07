@@ -1,1 +1,8 @@
 @import 'assets/styles/index.scss';
+.siderMenusWrap {
+  padding-top: 72px;
+  width: 200px;
+  @media screen and (max-width: 600px) {
+    padding-top: 56px;
+  }
+}

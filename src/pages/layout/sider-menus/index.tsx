@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import styles from './style.module.scss'
+import styles from './style.module.scss'
 // import Images from '@/assets/images/index'
 import Hidden from '@material-ui/core/Hidden'
 import Drawer from '@material-ui/core/Drawer'
@@ -16,9 +16,7 @@ interface IProps {
   onToggleMenus?: () => void
 }
 const drawer = (
-  <div>
-    <div />
-    <Divider />
+  <div className={styles.siderMenusWrap}>
     <List>
       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
         <ListItem button key={text}>
@@ -46,10 +44,10 @@ class OperateList extends Component<IProps> {
   render() {
     const { isLogin, mobileOpen } = this.props
     return (
-      <div>
+      <div className={styles.siderMenusWrap}>
         {isLogin ? (
           <React.Fragment>
-            <Hidden smUp implementation="css">
+            <Hidden smUp>
               <Drawer
                 variant="temporary"
                 open={mobileOpen}
@@ -63,7 +61,7 @@ class OperateList extends Component<IProps> {
                 {drawer}
               </Drawer>
             </Hidden>
-            <Hidden xsDown implementation="css">
+            <Hidden xsDown>
               <Drawer variant="permanent" open>
                 {drawer}
               </Drawer>

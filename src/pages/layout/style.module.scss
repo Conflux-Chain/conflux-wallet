@@ -1,8 +1,13 @@
 @import 'assets/styles/index.scss';
 
-.breadcrumb {
-  @include flex-align-center();
-  padding-left: 20px;
-  height: '60px';
-  background-color: '#fff';
+.root {
+  display: flex;
+}
+.content {
+  flex-grow: 1;
+  padding-top: 72px;
+}
+.contentM {
+  flex-grow: 1;
+  padding-top: 56px;
 }
