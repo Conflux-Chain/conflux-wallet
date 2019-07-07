@@ -40,13 +40,26 @@
         transition: transform 0.2s;
         color: #fff;
         background-color: #1e3de4;
+
+        .nowIcon {
+          fill: #fff;
+          color: #fff;
+        }
       }
 
-      .icon {
-        width: 64px;
-        height: 64px;
+      .nowIcon {
         fill: #1e3de4;
         color: #1e3de4;
+      }
+
+      .icon1 {
+        width: 64px;
+        height: 64px;
+      }
+
+      .icon2 {
+        width: 72px;
+        height: 72px;
       }
 
       .paperTitle {

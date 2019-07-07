@@ -3,31 +3,32 @@
   justify-content: center;
   align-items: center;
 
-  .container1 {
+  .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 350px;
-    height: 389px;
-    background: rgba(255, 255, 255, 1);
+    background-color: #fff;
     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
+    padding: 48px 19px 64px;
 
     .dotBox {
       display: flex;
       justify-content: center;
       align-items: center;
 
-      &:last-child {
-        margin-left: 16px;
-      }
-
       .dotItem {
         width: 8px;
         height: 8px;
         background: rgba(0, 0, 0, 0.24);
         border-radius: 50%;
+        margin-left: 16px;
+
+        &:first-child {
+          margin-left: 0;
+        }
       }
 
       .dotItemAc {
@@ -37,6 +38,22 @@
         border-radius: 50%;
       }
     }
+
+    .button {
+      width: 203px;
+      height: 48px;
+      background: rgba(30, 61, 228, 1);
+      border-radius: 4px;
+      color: #fff;
+      margin: 25px auto 0;
+    }
+  }
+
+  .container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     .uploadBox {
       display: flex;
@@ -51,6 +68,8 @@
       .uploadIc {
         width: 40px;
         height: 40px;
+        fill: #fff;
+        color: #fff;
       }
     }
 
@@ -64,14 +83,37 @@
       margin-top: 25px;
       text-align: center;
     }
+  }
 
-    .button {
-      width: 203px;
-      height: 48px;
-      background: rgba(30, 61, 228, 1);
-      border-radius: 4px;
-      color: #fff;
-      margin-top: 25px;
+  .container2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .MuiFormControl-root {
+      margin-top: 39px;
+    }
+
+    .MuiFilledInput-root {
+      background-color: #fff;
+    }
+
+    .title1 {
+      font-size: 14px;
+      font-family: ProximaNova-Regular;
+      font-weight: 400;
+      color: rgba(12, 34, 154, 1);
+      line-height: 17px;
+      margin-top: 39px;
+    }
+
+    .title2 {
+      font-size: 16px;
+      font-family: ProximaNova-Regular;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.56);
+      line-height: 19px;
+      margin-top: 16px;
     }
   }
 
