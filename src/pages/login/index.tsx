@@ -17,14 +17,14 @@ const Login = () => {
         <div className={styles.conBox}>
           <Paper className={styles.paper} onClick={toogleRestore}>
             <svg className={classnames(styles.nowIcon, styles.icon1)} aria-hidden="true">
-              <use xlinkHref="#icon-wenjian" />
+              <use xlinkHref="#iconwenjian" />
             </svg>
             <h5 className={styles.paperTitle}>Restore Wallet</h5>
             <p className={styles.paperDesc}>If you have an account, please restore your wallet</p>
           </Paper>
           <Paper className={styles.paper}>
             <svg className={classnames(styles.nowIcon, styles.icon2)} aria-hidden="true">
-              <use xlinkHref="#icon-xinjian" />
+              <use xlinkHref="#iconxinjian" />
             </svg>
             <h5 className={styles.paperTitle}>Create Wallet</h5>
             <p className={styles.paperDesc}>If you have no account, please create wall</p>

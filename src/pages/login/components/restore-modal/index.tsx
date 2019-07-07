@@ -6,8 +6,6 @@ import Modal from '@material-ui/core/Modal'
 import Container from '@material-ui/core/Container'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import IconButton from '@material-ui/core/IconButton'
-import InputAdornment from '@material-ui/core/InputAdornment'
 
 const Mycontainer = styled(Container)({
   display: 'flex',
@@ -31,9 +29,9 @@ const RestoreModal = ({ open, onClose }) => {
     setValues({ ...values, [prop]: event.target.value })
   }
 
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword })
-  }
+  // const handleClickShowPassword = () => {
+  //   setValues({ ...values, showPassword: !values.showPassword })
+  // }
   return (
     <Modal open={open} onClose={onClose} className={styles.restoreModal}>
       <Mycontainer>
@@ -45,7 +43,7 @@ const RestoreModal = ({ open, onClose }) => {
           <div className={styles.container1}>
             <div className={styles.uploadBox}>
               <svg className={styles.uploadIc} aria-hidden="true">
-                <use xlinkHref="#icon-wenjian" />
+                <use xlinkHref="#iconwenjian-" />
               </svg>
             </div>
             <p className={styles.tips}>Hello, you should upload keystore file firstly.</p>
@@ -56,23 +54,12 @@ const RestoreModal = ({ open, onClose }) => {
           <div className={styles.container2}>
             <TextField
               id="input-adornment-password"
-              // className={clsx(classes.margin, classes.textField)}
               variant="standard"
-              type={values.showPassword ? 'text' : 'password'}
+              type="password"
               label="Password"
               value={values.password}
               onChange={handleChange('password')}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      edge="end"
-                      aria-label="Toggle password visibility"
-                      onClick={handleClickShowPassword}
-                    />
-                  </InputAdornment>
-                ),
-              }}
+              error
             />
             <Button variant="contained" className={styles.button}>
               Continue
