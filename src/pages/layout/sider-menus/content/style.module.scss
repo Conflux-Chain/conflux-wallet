@@ -2,6 +2,12 @@
 .siderMenusWrap {
   padding-top: 72px;
   width: 200px;
+  min-height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
   @media screen and (max-width: 600px) {
     padding-top: 56px;
   }
@@ -38,4 +44,19 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+.siderMenusBottom {
+  padding-bottom: 32px;
+  text-align: center;
+  .official {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    margin-bottom: 8px;
+  }
+  .copyText {
+    margin: 16px auto 0;
+    width: 120px;
+    font-size: 10px;
+  }
 }

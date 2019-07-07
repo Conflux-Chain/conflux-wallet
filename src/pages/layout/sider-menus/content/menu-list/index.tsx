@@ -31,10 +31,15 @@ class SiderContent extends Component<{}, IState> {
             selected={currentActive === 'Wallet'}
             onClick={() => this.handleListItemClick()}
           >
-            <span className={styles.listItemText}>Wallet</span>
+            <p className={styles.listItemText}>Wallet</p>
           </ListItem>
           <ListItem button onClick={() => this.handleClose()} className={styles.listItem}>
-            <span className={styles.listItemText}>Close Wallet</span>
+            <p className={styles.listItemText}>
+              {/* <svg className={styles.icon} aria-hidden="true">
+                <use xlinkHref="#iconzhuyi" />
+              </svg>{' '} */}
+              Close Wallet
+            </p>
           </ListItem>
         </List>
       </div>
