@@ -1,48 +1,77 @@
-import React from 'react'
-import IconButton from '@material-ui/core/IconButton'
-import MenuItem from '@material-ui/core/MenuItem'
-import Menu from '@material-ui/core/Menu'
-export default function MenuAppBar() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
-
-  function handleMenu(event: React.MouseEvent<HTMLElement>) {
-    setAnchorEl(event.currentTarget)
-  }
-
-  function handleClose() {
-    setAnchorEl(null)
-  }
-
-  return (
-    <div>
-      <IconButton
-        aria-label="Account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
-        onClick={handleMenu}
-        color="inherit"
-      >
-        acc
-      </IconButton>
-      <Menu
-        id="menu-appbar"
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={open}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-      </Menu>
-    </div>
-  )
+import React, { Component } from 'react'
+// import styles from './style.module.scss'
+// import Images from '@/assets/images/index'
+import Hidden from '@material-ui/core/Hidden'
+import Drawer from '@material-ui/core/Drawer'
+import Divider from '@material-ui/core/Divider'
+import InboxIcon from '@material-ui/icons/MoveToInbox'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import MailIcon from '@material-ui/icons/Mail'
+interface IProps {
+  isLogin: boolean
+  mobileOpen: boolean
+  onToggleMenus?: () => void
 }
+const drawer = (
+  <div>
+    <div />
+    <Divider />
+    <List>
+      {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        <ListItem button key={text}>
+          <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+          <ListItemText primary={text} />
+        </ListItem>
+      ))}
+    </List>
+    <Divider />
+    <List>
+      {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        <ListItem button key={text}>
+          <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+          <ListItemText primary={text} />
+        </ListItem>
+      ))}
+    </List>
+  </div>
+)
+class OperateList extends Component<IProps> {
+  static defaultProps = { isLogin: false }
+  handleDrawerToggle() {
+    this.props.onToggleMenus()
+  }
+  render() {
+    const { isLogin, mobileOpen } = this.props
+    return (
+      <div>
+        {isLogin ? (
+          <React.Fragment>
+            <Hidden smUp implementation="css">
+              <Drawer
+                variant="temporary"
+                open={mobileOpen}
+                onClose={() => {
+                  this.handleDrawerToggle()
+                }}
+                ModalProps={{
+                  keepMounted: true,
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Drawer variant="permanent" open>
+                {drawer}
+              </Drawer>
+            </Hidden>
+          </React.Fragment>
+        ) : null}
+      </div>
+    )
+  }
+}
+export default OperateList
