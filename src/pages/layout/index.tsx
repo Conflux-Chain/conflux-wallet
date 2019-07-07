@@ -12,6 +12,8 @@ type IProps = RouteComponentProps & {
 interface IState {
   // 临时作为登录标准
   isLogin?: boolean
+  // 侧边导航标志
+  mobileOpen?: boolean
 }
 /**
  * Layout组件
@@ -19,6 +21,7 @@ interface IState {
 class BasicLayout extends Component<IProps, IState> {
   state = {
     isLogin: true,
+    mobileOpen: false,
   }
   onSelect = ({ selectedKeys }) => {
     this.props.dispatch({
@@ -36,13 +39,28 @@ class BasicLayout extends Component<IProps, IState> {
       },
     })
   }
-
+  onToggleMenus() {
+    this.setState({
+      mobileOpen: !this.state.mobileOpen,
+    })
+  }
   render() {
-    const { isLogin } = this.state
+    const { isLogin, mobileOpen } = this.state
     return (
       <div>
-        <TopHeader isLogin={isLogin} />
-        <SiderMenus mobileOpen isLogin={isLogin} />
+        <TopHeader
+          isLogin={isLogin}
+          onToggleMenus={() => {
+            this.onToggleMenus()
+          }}
+        />
+        <SiderMenus
+          mobileOpen={mobileOpen}
+          isLogin={isLogin}
+          onToggleMenus={() => {
+            this.onToggleMenus()
+          }}
+        />
       </div>
     )
   }

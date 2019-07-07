@@ -13,6 +13,7 @@ import MailIcon from '@material-ui/icons/Mail'
 interface IProps {
   isLogin: boolean
   mobileOpen: boolean
+  onToggleMenus?: () => void
 }
 const drawer = (
   <div>
@@ -39,7 +40,9 @@ const drawer = (
 )
 class OperateList extends Component<IProps> {
   static defaultProps = { isLogin: false }
-  handleDrawerToggle() {}
+  handleDrawerToggle() {
+    this.props.onToggleMenus()
+  }
   render() {
     const { isLogin, mobileOpen } = this.props
     return (
@@ -50,7 +53,9 @@ class OperateList extends Component<IProps> {
               <Drawer
                 variant="temporary"
                 open={mobileOpen}
-                onClose={this.handleDrawerToggle}
+                onClose={() => {
+                  this.handleDrawerToggle()
+                }}
                 ModalProps={{
                   keepMounted: true,
                 }}
