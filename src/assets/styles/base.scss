@@ -50,7 +50,14 @@ img {
   margin-right: 8px;
   vertical-align: middle;
   height: auto;
-  @media screen and (max-width: 600px) {
+  @include respond-to(sm) {
     display: none;
+  }
+}
+.operationWrap {
+  margin: 0 12px 24px;
+  .icon {
+    cursor: pointer;
+    opacity: 0.55;
   }
 }

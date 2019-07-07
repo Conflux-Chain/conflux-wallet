@@ -1,0 +1,19 @@
+@import 'assets/styles/index.scss';
+.listWrap {
+  .listItem {
+    height: 56px;
+    justify-content: center;
+    .listItemText {
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    &:hover {
+      background-color: #1e3de4;
+    }
+  }
+  .listItemActive {
+    @extend .listItem;
+    background-color: #1e3de4 !important;
+  }
+}

@@ -1,0 +1,41 @@
+@import 'assets/styles/index.scss';
+.siderMenusWrap {
+  padding-top: 72px;
+  width: 200px;
+  @media screen and (max-width: 600px) {
+    padding-top: 56px;
+  }
+}
+
+.userInfo {
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  .userPicWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    .userPic {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  .userCode {
+    margin-top: 8px;
+    width: 134px;
+    @include no-wrap();
+  }
+}
+.operationWrap {
+  width: 100px;
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

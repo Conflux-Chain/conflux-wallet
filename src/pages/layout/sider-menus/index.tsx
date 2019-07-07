@@ -3,39 +3,13 @@ import styles from './style.module.scss'
 // import Images from '@/assets/images/index'
 import Hidden from '@material-ui/core/Hidden'
 import Drawer from '@material-ui/core/Drawer'
-import Divider from '@material-ui/core/Divider'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
-import MailIcon from '@material-ui/icons/Mail'
+import SiderContent from './content/index'
 interface IProps {
   isLogin: boolean
   mobileOpen: boolean
   onToggleMenus?: () => void
 }
-const drawer = (
-  <div className={styles.siderMenusWrap}>
-    <List>
-      {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-        <ListItem button key={text}>
-          <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItem>
-      ))}
-    </List>
-    <Divider />
-    <List>
-      {['All mail', 'Trash', 'Spam'].map((text, index) => (
-        <ListItem button key={text}>
-          <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItem>
-      ))}
-    </List>
-  </div>
-)
+
 class OperateList extends Component<IProps> {
   static defaultProps = { isLogin: false }
   handleDrawerToggle() {
@@ -58,12 +32,12 @@ class OperateList extends Component<IProps> {
                   keepMounted: true,
                 }}
               >
-                {drawer}
+                <SiderContent />
               </Drawer>
             </Hidden>
             <Hidden xsDown>
               <Drawer variant="permanent" open>
-                {drawer}
+                <SiderContent />
               </Drawer>
             </Hidden>
           </React.Fragment>
