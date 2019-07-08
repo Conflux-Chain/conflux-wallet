@@ -98,7 +98,7 @@ class OperateList extends Component<IProps, IState> {
   langSelectContent(menuLang, menuLangOpen, menuLangSelected) {
     return (
       <div>
-        <span
+        <div
           aria-label="Account of current user"
           aria-controls="menuLang"
           aria-haspopup="true"
@@ -109,7 +109,7 @@ class OperateList extends Component<IProps, IState> {
           <img src={LangList[menuLangSelected].img} alt="" className={styles.countryIcon} />
           {LangList[menuLangSelected].field}
           <img src={Images.down} alt="" className={styles.triangleIcon} />
-        </span>
+        </div>
         <Popper open={menuLangOpen} anchorEl={menuLang} transition disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow

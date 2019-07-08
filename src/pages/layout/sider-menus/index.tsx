@@ -18,7 +18,7 @@ class OperateList extends Component<IProps> {
   render() {
     const { isLogin, mobileOpen } = this.props
     return (
-      <div className={styles.siderMenusWrap}>
+      <>
         {isLogin ? (
           <React.Fragment>
             <Hidden smUp>
@@ -28,6 +28,7 @@ class OperateList extends Component<IProps> {
                 onClose={() => {
                   this.handleDrawerToggle()
                 }}
+                className={styles.siderMenusWrap}
                 ModalProps={{
                   keepMounted: true,
                 }}
@@ -36,13 +37,13 @@ class OperateList extends Component<IProps> {
               </Drawer>
             </Hidden>
             <Hidden xsDown>
-              <Drawer variant="permanent" open>
+              <Drawer variant="permanent" open className={styles.siderMenusWrap}>
                 <SiderContent />
               </Drawer>
             </Hidden>
           </React.Fragment>
         ) : null}
-      </div>
+      </>
     )
   }
 }

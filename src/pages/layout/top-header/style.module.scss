@@ -1,20 +1,20 @@
 @import 'assets/styles/index.scss';
 .walletHeaderWrap {
-  background-color: transparent !important;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.19) !important;
   position: relative;
   z-index: 1301 !important;
+  background-color: transparent !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.19) !important;
 }
 .walletHeader {
-  background: #fff;
-  padding: 0 25px;
-  height: 72px;
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.19);
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 25px;
   color: #000;
+  background: #fff;
+
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.19);
   .headerLogo {
     width: 130px;
     height: 24px;
@@ -31,6 +31,6 @@
 }
 .operateWrap {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
 }

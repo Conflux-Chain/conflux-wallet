@@ -41,17 +41,18 @@ h6,
 p,
 div,
 img {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 .countryIcon {
+  display: none;
   width: 18px;
+  height: auto;
   margin-right: 8px;
   vertical-align: middle;
-  height: auto;
   @include respond-to(sm) {
-    display: none;
+    display: inline-block;
   }
 }
 .operationWrap {
