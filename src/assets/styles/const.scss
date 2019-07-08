@@ -1,1 +1,7 @@
 $primary-color: #fff; // 全局颜色
+$breakpoints: (
+  'xs': 'only screen and ( min-width: 480px)',
+  'sm': 'only screen and ( min-width: 600px)',
+  'md': 'only screen and ( min-width: 960px)',
+  'lg': 'only screen and ( min-width: 1280px)',
+) !default;

@@ -1,0 +1,62 @@
+@import 'assets/styles/index.scss';
+.siderMenusWrap {
+  padding-top: 72px;
+  width: 200px;
+  min-height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  @media screen and (max-width: 600px) {
+    padding-top: 56px;
+  }
+}
+
+.userInfo {
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  .userPicWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    .userPic {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  .userCode {
+    margin-top: 8px;
+    width: 134px;
+    @include no-wrap();
+  }
+}
+.operationWrap {
+  width: 100px;
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.siderMenusBottom {
+  padding-bottom: 32px;
+  text-align: center;
+  .official {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    margin-bottom: 8px;
+  }
+  .copyText {
+    margin: 16px auto 0;
+    width: 120px;
+    font-size: 10px;
+  }
+}

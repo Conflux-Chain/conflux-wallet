@@ -66,8 +66,7 @@ class BasicLayout extends Component<IProps, IState> {
           }}
         />
         <main className={isWidthUp('sm', this.props.width) ? styles.content : styles.contentM}>
-          123
-          {isWidthUp('sm', this.props.width) ? '22222222' : '4444444444444'}
+          {this.props.children}
         </main>
       </div>
     )

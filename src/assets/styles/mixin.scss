@@ -35,3 +35,17 @@
   align-items: center;
   justify-content: space-between;
 }
+@mixin respond-to($breakpoint) {
+  $query: map-get($breakpoints, $breakpoint);
+
+  // 这里是scss error提示估计大部分人（包括我）都没怎么使用过
+  @if not $query {
+    /* stylelint-disable-next-line */
+    @error 'No value found for `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map.';
+  }
+
+  /* stylelint-disable-next-line */
+  @media #{ unquote($query), inspect($query)} {
+    @content;
+  }
+}
