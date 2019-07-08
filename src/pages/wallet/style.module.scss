@@ -1,0 +1,52 @@
+@import 'assets/styles/index.scss';
+.pageTitle {
+  margin-top: 48px;
+  margin-bottom: 6px;
+  font-family: 'ProximaNova-Bold';
+  font-size: 34px;
+  font-weight: bold;
+  line-height: 48px;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+  @include respond-to(sm) {
+    margin-bottom: 8px;
+  }
+}
+.pageTips {
+  margin: 0 36px;
+  font-family: 'ProximaNova-Regular';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+  @include respond-to(sm) {
+    line-height: 20px;
+  }
+}
+
+.cardWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 16px;
+  @include respond-to(md) {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 38px;
+  }
+}
+.pageCard {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  @include respond-to(md) {
+    width: 300px;
+    height: 444px;
+    margin: 0 16px;
+    &.cardFC {
+      height: 485px;
+    }
+  }
+}
