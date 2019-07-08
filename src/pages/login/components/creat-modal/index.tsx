@@ -18,16 +18,16 @@ interface IState {
   showPassword: boolean
 }
 
-const RestoreModal = ({ open, onClose }) => {
+const CreatModal = ({ open, onClose }) => {
   const [values, setValues] = useState<IState>({
     password: '',
     showPassword: false,
   }) // 密码输入框
 
   const [stepIndex, setStepIndex] = useState(0) // 当前是第几步
-  const [isRight, setIsRight] = useState(false)
+  // const [isRight, setIsRight] = useState(false)
   const checkStatus = true // 文件验证是否通过
-  const [isPass, setIsPass] = useState(true) // 密码验证是否通过
+  // const [isPass, setIsPass] = useState(true) // 密码验证是否通过
 
   // 密码输入框改变
   const handleChange = (prop: keyof IState) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,26 +44,21 @@ const RestoreModal = ({ open, onClose }) => {
       // 文件验证通过
       setStepIndex(1)
     } else {
-      setIsRight(false)
+      // setIsRight(false)
     }
-  }
-
-  // 关闭错误信息提示
-  const closeErroe = () => {
-    setIsRight(true)
   }
 
   // 密码验证
-  const checkPassword = () => {
-    const result = false
-    if (result) {
-      // 验证通过
-    } else {
-      setIsPass(false)
-    }
-  }
+  // const checkPassword = () => {
+  //   const result = false
+  //   if (result) {
+  //     // 验证通过
+  //   } else {
+  //     setIsPass(false)
+  //   }
+  // }
   return (
-    <Modal open={open} onClose={onClose} className={styles.restoreModal}>
+    <Modal open={open} onClose={onClose} className={styles.creatModal}>
       <Mycontainer>
         <div className={styles.container}>
           <div className={styles.dotBox}>
@@ -76,29 +71,28 @@ const RestoreModal = ({ open, onClose }) => {
           </div>
           {!stepIndex ? (
             <div className={styles.container1}>
-              <div className={styles.uploadBox}>
-                <svg className={styles.uploadIc} aria-hidden="true">
-                  <use xlinkHref="#iconwenjian-" />
+              <div className={styles.passWordLine}>
+                <TextField
+                  id="input-adornment-password"
+                  className={styles.txt}
+                  variant="standard"
+                  type="password"
+                  label="Your Password"
+                  value={values.password}
+                  onChange={handleChange('password')}
+                  placeholder="Please Enter At Least 9 Characters"
+                />
+                <svg className={styles.qsIc} aria-hidden="true">
+                  <use xlinkHref="#iconjieshi" />
                 </svg>
               </div>
-              <p className={styles.tips}>Hello, you should upload keystore file firstly.</p>
               <Button variant="contained" className={styles.button} onClick={nextStep}>
                 Continue
               </Button>
             </div>
           ) : (
             <div className={styles.container2}>
-              <TextField
-                id="input-adornment-password"
-                variant="standard"
-                type="password"
-                label="Password"
-                value={values.password}
-                onChange={handleChange('password')}
-                error={!isPass}
-              />
-              {!isPass && <p className={styles.errorTxt}>Please enter the right password!</p>}
-              <Button variant="contained" className={styles.button} onClick={checkPassword}>
+              <Button variant="contained" className={styles.button}>
                 Access Wallet
               </Button>
             </div>
@@ -106,22 +100,11 @@ const RestoreModal = ({ open, onClose }) => {
         </div>
         <div className={styles.bottomInfo}>
           <p className={styles.words}>
-            If you have no account, please<span className={styles.linkName}>Create Wallet</span>>>
+            If you have an account, please<span className={styles.linkName}>Restore Wallet</span>>>
           </p>
-          {!isRight && (
-            <div className={styles.errorBox}>
-              <svg className={styles.leftIc} aria-hidden="true" onClick={closeErroe}>
-                <use xlinkHref="#iconwrong" />
-              </svg>
-              <p className={styles.errorInfo}>JSON Parse error: “Unrecognize token”</p>
-              <svg className={styles.rightIc} aria-hidden="true" onClick={closeErroe}>
-                <use xlinkHref="#iconclose" />
-              </svg>
-            </div>
-          )}
         </div>
       </Mycontainer>
     </Modal>
   )
 }
-export default RestoreModal
+export default CreatModal

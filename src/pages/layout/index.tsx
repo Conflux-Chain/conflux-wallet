@@ -24,7 +24,7 @@ interface IState {
  */
 class BasicLayout extends Component<IProps, IState> {
   state = {
-    isLogin: true,
+    isLogin: false,
     mobileOpen: false,
   }
   onSelect = ({ selectedKeys }) => {

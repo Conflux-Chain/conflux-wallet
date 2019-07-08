@@ -8,7 +8,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 350px;
+    width: 312px;
     background-color: #fff;
     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
@@ -91,30 +91,13 @@
     width: 100%;
     margin-top: 39px;
 
-    .MuiFormControl-root {
-      margin-top: 39px;
-    }
-
-    .MuiFilledInput-root {
-      background-color: #fff;
-    }
-
-    .title1 {
+    .errorTxt {
       font-size: 14px;
       font-family: ProximaNova-Regular;
       font-weight: 400;
-      color: rgba(12, 34, 154, 1);
+      color: rgba(195, 18, 18, 1);
       line-height: 17px;
-      margin-top: 39px;
-    }
-
-    .title2 {
-      font-size: 16px;
-      font-family: ProximaNova-Regular;
-      font-weight: 400;
-      color: rgba(0, 0, 0, 0.56);
-      line-height: 19px;
-      margin-top: 16px;
+      margin-top: 8px;
     }
   }
 
@@ -123,6 +106,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 24px;
+    padding: 0 19px;
 
     .words {
       font-size: 16px;
@@ -134,21 +118,40 @@
       .linkName {
         margin: 0 6px;
         text-decoration: underline;
+        cursor: pointer;
       }
     }
 
     .errorBox {
+      display: flex;
+      align-items: center;
       width: 239px;
       height: 64px;
       background: rgba(232, 114, 114, 1);
       border-radius: 4px;
       margin-top: 21px;
+      color: #fff;
+
+      .leftIc {
+        width: 32px;
+        height: 16px;
+        fill: #fff;
+        margin: -14px 8px 0;
+        cursor: pointer;
+      }
+
+      .rightIc {
+        width: 23px;
+        height: 12px;
+        fill: #fff;
+        margin: 0 16px 0 20px;
+        cursor: pointer;
+      }
 
       .errorInfo {
         font-size: 16px;
         font-family: ProximaNova-Regular;
         font-weight: 400;
-        color: rgba(255, 255, 255, 0.87);
         line-height: 24px;
       }
     }
