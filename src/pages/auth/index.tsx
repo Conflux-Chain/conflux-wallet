@@ -9,7 +9,7 @@ class Auth extends Component<IProps> {
     const isLogin = true
     if (isLogin) {
       if (this.props.isNeedReplace) {
-        this.props.history.replace('/')
+        this.props.history.replace('/wallet')
       }
     } else {
       this.props.history.replace('/login')

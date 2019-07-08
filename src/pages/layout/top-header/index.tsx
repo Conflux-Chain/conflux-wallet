@@ -41,11 +41,15 @@ class TopHeader extends Component<IProps> {
                 </IconButton>
               </Hidden>
               <Hidden xsDown>
-                <img src={Images.logo} alt="" className={styles.headerLogo} />
+                <svg className={styles.headerLogo} aria-hidden="true">
+                  <use xlinkHref="#iconlogo_hengban" />
+                </svg>
               </Hidden>
             </React.Fragment>
           ) : (
-            <img src={Images.logo} alt="" className={styles.headerLogo} />
+            <svg className={styles.headerLogo} aria-hidden="true">
+              <use xlinkHref="#iconlogo_hengban" />
+            </svg>
           )}
 
           <div className={styles.operateWrap}>

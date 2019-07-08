@@ -12,8 +12,8 @@ export const routes = [
     componentPath: '/about',
   },
   {
-    routePath: '/layout',
-    componentPath: '/layout',
+    routePath: '/wallet',
+    componentPath: '/wallet',
   },
   {
     routePath: '/login',
