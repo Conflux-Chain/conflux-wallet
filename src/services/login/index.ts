@@ -1,5 +1,5 @@
 import confluxWeb from '@/vendor/conflux-web'
-import { Account } from 'web3-eth-accounts/types'
+import { Account, EncryptedKeystoreV3Json } from 'web3-eth-accounts/types'
 /**
  * 创建账户
  * @param {*} password
@@ -15,7 +15,25 @@ export function create(password): Promise<Account> {
     }
   })
 }
+/**
+ * 加密生成keystore json 内容
+ * @param account 账户
+ * @param password 密码
+ */
+export function genKeyStore(account: Account, password: string): Promise<EncryptedKeystoreV3Json> {
+  return new Promise((resolve, reject) => {
+    try {
+      const v3Json: EncryptedKeystoreV3Json = account.encrypt(password)
+      return resolve(v3Json)
+    } catch (e) {
+      return reject(e)
+    }
+  })
+}
 
+export function createFile(fileName, content) {
+  //  TODO:创建文件
+}
 export function readFile(file): Promise<string> {
   return new Promise((reslove, reject) => {
     try {
