@@ -15,22 +15,8 @@
   background: #fff;
 
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.19);
-  .headerLogo {
-    width: 130px;
-    height: 24px;
-  }
-  .headerBtn {
-    height: 32px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
 }
 .walletHeaderM {
   @extend .walletHeader;
   height: 56px;
-}
-.operateWrap {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
 }
