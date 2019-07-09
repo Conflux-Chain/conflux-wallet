@@ -23,6 +23,7 @@
   width: 18px;
   height: 18px;
   margin-right: 8px;
+  fill: #9a9a9a;
 }
 
 .triangleIcon {
@@ -48,7 +49,7 @@ img {
 .countryIcon {
   display: none;
   width: 18px;
-  height: auto;
+  height: 18px;
   margin-right: 8px;
   vertical-align: middle;
   @include respond-to(sm) {
