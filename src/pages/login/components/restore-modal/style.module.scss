@@ -1,3 +1,5 @@
+@import 'assets/styles/index.scss';
+
 .restoreModal {
   display: flex;
   justify-content: center;
@@ -8,11 +10,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 312px;
     background-color: #fff;
     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
+    width: 312px;
     padding: 48px 19px 64px;
+
+    @include respond-to(md) {
+      padding: 48px 54px 64px;
+    }
 
     .dotBox {
       display: flex;

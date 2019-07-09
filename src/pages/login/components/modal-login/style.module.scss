@@ -1,0 +1,48 @@
+@import 'assets/styles/index.scss';
+
+.creatModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    width: 312px;
+    padding: 48px 19px 64px;
+
+    @include respond-to(md) {
+      padding: 48px 54px 64px;
+    }
+
+    .dotBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .dotItem {
+        width: 8px;
+        height: 8px;
+        background: rgba(0, 0, 0, 0.24);
+        border-radius: 50%;
+        margin-left: 16px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+
+      .dotItemAc {
+        width: 10px;
+        height: 10px;
+        background: rgba(30, 61, 228, 1);
+        border-radius: 50%;
+      }
+    }
+  }
+}

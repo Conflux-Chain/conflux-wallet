@@ -5,6 +5,7 @@ import styles from './style.module.scss'
 import Modal from '@material-ui/core/Modal'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import SnackbarContent from '@material-ui/core/SnackbarContent'
 
 const Mycontainer = styled('div')({
   display: 'flex',
@@ -28,6 +29,7 @@ const CreatModal = ({ open, onClose }) => {
   // const [isRight, setIsRight] = useState(false)
   const checkStatus = true // 文件验证是否通过
   // const [isPass, setIsPass] = useState(true) // 密码验证是否通过
+  const [tipsShow, setTipsShow] = useState(false) // tips是否显示
 
   // 密码输入框改变
   const handleChange = (prop: keyof IState) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +48,10 @@ const CreatModal = ({ open, onClose }) => {
     } else {
       // setIsRight(false)
     }
+  }
+
+  const toogleTips = () => {
+    setTipsShow(!tipsShow)
   }
 
   // 密码验证
@@ -82,18 +88,74 @@ const CreatModal = ({ open, onClose }) => {
                   onChange={handleChange('password')}
                   placeholder="Please Enter At Least 9 Characters"
                 />
-                <svg className={styles.qsIc} aria-hidden="true">
+                <svg className={styles.qsIc} aria-hidden="true" onClick={toogleTips}>
                   <use xlinkHref="#iconjieshi" />
                 </svg>
+                {tipsShow && (
+                  <SnackbarContent
+                    className={styles.snackBar}
+                    message={
+                      'This password encrypts your private key. \
+                    This does not act as a seed to generate your keys.'
+                    }
+                  />
+                )}
               </div>
-              <Button variant="contained" className={styles.button} onClick={nextStep}>
+              <Button
+                variant="contained"
+                disabled={!values.password.length}
+                className={styles.button}
+                style={{ backgroundColor: values.password.length ? '#1E3DE4' : 'rgba(0,0,0,0.38)' }}
+                onClick={nextStep}
+              >
                 Continue
               </Button>
             </div>
           ) : (
             <div className={styles.container2}>
-              <Button variant="contained" className={styles.button}>
-                Access Wallet
+              <div className={styles.conBox}>
+                <div className={styles.conItem}>
+                  <div className={styles.imgBox}>
+                    <svg className={styles.conIc} aria-hidden="true">
+                      <use xlinkHref="#iconfileprotectwenjianbaohu" />
+                    </svg>
+                  </div>
+                  <div className={styles.txtBox}>
+                    <p className={styles.txt1}>Don’t Lose It</p>
+                    <p className={styles.txt2}>
+                      Be careful, it can not be recovered if you lose it.
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.conItem}>
+                  <div className={styles.imgBox}>
+                    <svg className={styles.conIc} aria-hidden="true">
+                      <use xlinkHref="#iconicons-hacker" />
+                    </svg>
+                  </div>
+                  <div className={styles.txtBox}>
+                    <p className={styles.txt1}>Don’t Share It</p>
+                    <p className={styles.txt2}>
+                      Your funds will be stollen if you use this file on a malicious phishing site.
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.conItem}>
+                  <div className={styles.imgBox}>
+                    <svg className={styles.conIc} aria-hidden="true">
+                      <use xlinkHref="#iconbeifen" />
+                    </svg>
+                  </div>
+                  <div className={styles.txtBox}>
+                    <p className={styles.txt1}>Make a Backup</p>
+                    <p className={styles.txt2}>
+                      Secure it like the millions of dollars it may one day be worth.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <Button variant="contained" className={styles.button} style={{ width: '227px' }}>
+                Download Keystore File
               </Button>
             </div>
           )}

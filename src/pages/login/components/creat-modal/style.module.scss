@@ -1,3 +1,5 @@
+@import 'assets/styles/index.scss';
+
 .creatModal {
   display: flex;
   justify-content: center;
@@ -8,11 +10,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 312px;
     background-color: #fff;
     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
-    padding: 48px 54px 64px;
+    width: 312px;
+    padding: 48px 19px 64px;
+
+    @include respond-to(md) {
+      padding: 48px 54px 64px;
+    }
 
     .dotBox {
       display: flex;
@@ -46,6 +52,7 @@
       border-radius: 4px;
       color: #fff;
       margin: 25px auto 0;
+      padding: 0;
     }
   }
 
@@ -58,6 +65,7 @@
     width: 100%;
 
     .passWordLine {
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -72,6 +80,97 @@
         height: 16px;
         color: #1e3de4;
         fill: #1e3de4;
+        cursor: pointer;
+      }
+
+      .snackBar {
+        position: absolute;
+        right: -19px;
+        top: 40px;
+        width: 202px !important;
+        height: 96px;
+        padding: 12px;
+        min-width: 0;
+        background-color: #000;
+        z-index: 1;
+
+        @include respond-to(md) {
+          right: -140px;
+        }
+      }
+    }
+  }
+
+  .container2 {
+    display: flex;
+    flex-direction: column;
+
+    .conBox {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0 40px;
+
+      .conItem {
+        display: flex;
+        margin-top: 24px;
+
+        .imgBox {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 48px;
+          height: 48px;
+          margin-right: 24px;
+          background: rgba(0, 0, 0, 0.06);
+          border-radius: 50%;
+
+          .conIc {
+            width: 24px;
+            height: 24px;
+            color: #a4a4a4;
+            fill: #a4a4a4;
+          }
+        }
+
+        .txtBox {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          font-size: 16px;
+          color: rgba(0, 0, 0, 1);
+
+          .txt1 {
+            font-family: ProximaNova-Bold;
+            font-weight: bold;
+            line-height: 19px;
+            margin-bottom: 8px;
+          }
+
+          .txt2 {
+            font-family: ProximaNova-Regular;
+            font-weight: 400;
+            line-height: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  .bottomInfo {
+    padding: 0 16px;
+    margin-top: 24px;
+
+    .words {
+      font-size: 16px;
+      font-family: ProximaNova-Semibold;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 1);
+      line-height: 19px;
+
+      .linkName {
+        margin: 0 6px;
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
   }
