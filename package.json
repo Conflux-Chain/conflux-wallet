@@ -22,6 +22,7 @@
     "http-proxy-middleware": "^0.19.1",
     "kiwi-intl": "^1.2.4",
     "prettier": "^1.18.2",
+    "qrcode.react": "^0.9.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
