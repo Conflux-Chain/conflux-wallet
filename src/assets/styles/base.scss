@@ -53,6 +53,15 @@
 // 模态框公共
 .dialog {
   padding-top: 32px;
+  overflow: hidden;
+  .dialogTitle {
+    font-family: 'ProximaNova-Bold';
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 40px;
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+  }
   .dialogCloseBtn {
     position: absolute;
     top: 24px;
