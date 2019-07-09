@@ -27,22 +27,6 @@ class BasicLayout extends Component<IProps, IState> {
     isLogin: true,
     mobileOpen: false,
   }
-  onSelect = ({ selectedKeys }) => {
-    this.props.dispatch({
-      type: `${globalMenuNamespace}/setState`,
-      payload: {
-        selectedKeys,
-      },
-    })
-  }
-  onOpenChange = ({ openKeys }) => {
-    this.props.dispatch({
-      type: `${globalMenuNamespace}/setState`,
-      payload: {
-        openKeys,
-      },
-    })
-  }
   onToggleMenus() {
     this.setState({
       mobileOpen: !this.state.mobileOpen,

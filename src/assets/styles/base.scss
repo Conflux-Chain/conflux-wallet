@@ -23,6 +23,7 @@
   width: 18px;
   height: 18px;
   margin-right: 8px;
+  fill: #9a9a9a;
 }
 
 .triangleIcon {
@@ -32,23 +33,10 @@
   margin-left: 8px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-div,
-img {
-  padding: 0;
-  margin: 0;
-}
-
 .countryIcon {
   display: none;
   width: 18px;
-  height: auto;
+  height: 18px;
   margin-right: 8px;
   vertical-align: middle;
   @include respond-to(sm) {
@@ -60,5 +48,38 @@ img {
   .icon {
     cursor: pointer;
     opacity: 0.55;
+  }
+}
+// 模态框公共
+.dialog {
+  padding-top: 32px;
+  overflow: hidden;
+  .dialogTitle {
+    font-family: 'ProximaNova-Bold';
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 40px;
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+  }
+  .dialogCloseBtn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    padding: 0;
+  }
+}
+:global {
+  .MuiSnackbar-root {
+    .MuiTypography-root {
+      min-width: auto;
+      background-color: #000;
+    }
+    &.MuiSnackbar-anchorOriginTopLeft {
+      @include respond-to(sm) {
+        top: 270px;
+        left: 218px;
+      }
+    }
   }
 }
