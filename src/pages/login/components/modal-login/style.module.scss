@@ -17,7 +17,7 @@
     padding: 48px 19px 64px;
 
     @include respond-to(md) {
-      padding: 48px 54px 64px;
+      padding: 48px 40px 64px;
     }
 
     .dotBox {
@@ -42,6 +42,69 @@
         height: 10px;
         background: rgba(30, 61, 228, 1);
         border-radius: 50%;
+      }
+    }
+
+    .button {
+      width: 203px;
+      height: 48px;
+      background: rgba(30, 61, 228, 1);
+      border-radius: 4px;
+      color: #fff;
+      margin: 25px auto 0;
+    }
+  }
+
+  .bottomInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+    padding: 0 19px;
+
+    .words {
+      font-size: 16px;
+      font-family: ProximaNova-Semibold;
+      color: rgba(255, 255, 255, 1);
+      line-height: 19px;
+
+      .linkName {
+        margin: 0 6px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    .errorBox {
+      display: flex;
+      align-items: center;
+      width: 239px;
+      height: 64px;
+      background: rgba(232, 114, 114, 1);
+      border-radius: 4px;
+      margin-top: 21px;
+      color: #fff;
+
+      .leftIc {
+        width: 32px;
+        height: 16px;
+        fill: #fff;
+        margin: -14px 8px 0;
+        cursor: pointer;
+      }
+
+      .rightIc {
+        width: 23px;
+        height: 12px;
+        fill: #fff;
+        margin: 0 16px 0 20px;
+        cursor: pointer;
+      }
+
+      .errorInfo {
+        font-size: 16px;
+        font-family: ProximaNova-Regular;
+        line-height: 24px;
       }
     }
   }

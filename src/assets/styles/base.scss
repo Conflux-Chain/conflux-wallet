@@ -52,14 +52,27 @@ img {
   height: 18px;
   margin-right: 8px;
   vertical-align: middle;
+
   @include respond-to(sm) {
     display: inline-block;
   }
 }
+
 .operationWrap {
   margin: 0 12px 24px;
+
   .icon {
     cursor: pointer;
     opacity: 0.55;
   }
+}
+
+.loginButton {
+  width: 203px;
+  height: 48px;
+  background: rgba(30, 61, 228, 1);
+  border-radius: 4px;
+  color: #fff;
+  margin: 25px auto 0;
+  padding: 0;
 }
