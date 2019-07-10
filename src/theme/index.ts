@@ -13,6 +13,13 @@ const theme = createMuiTheme({
         boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.12)',
       },
     },
+    MuiTooltip: {
+      tooltip: {
+        backgroundColor: '#000',
+        fontSize: '14px',
+        padding: '8px 12px',
+      },
+    },
   },
 })
 export default theme
