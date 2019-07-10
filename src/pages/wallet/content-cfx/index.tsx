@@ -1,8 +1,21 @@
 import React, { Component } from 'react'
 import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
-class ContentCfx extends Component {
+import SendCfxModal from '../send-cfx-modal/index'
+interface IState {
+  showModal: boolean
+}
+class ContentCfx extends Component<{}, IState> {
+  state = {
+    showModal: false,
+  }
+  hideModal() {
+    this.setState({
+      showModal: false,
+    })
+  }
   render() {
+    const { showModal } = this.state
     return (
       <div className={styles.cardContent}>
         <div className={styles.infoBox}>
@@ -20,9 +33,24 @@ class ContentCfx extends Component {
           </div>
         </div>
         <div className={styles.btnBox}>
-          <Button variant="contained" color="primary" className={styles.btn}>
+          <Button
+            variant="contained"
+            color="primary"
+            className={styles.btn}
+            onClick={() => {
+              this.setState({
+                showModal: true,
+              })
+            }}
+          >
             Send
           </Button>
+          <SendCfxModal
+            isShow={showModal}
+            onClose={() => {
+              this.hideModal()
+            }}
+          />
           <Button variant="outlined" color="primary" className={styles.btn}>
             Receive
           </Button>

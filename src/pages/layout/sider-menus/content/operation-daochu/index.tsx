@@ -60,7 +60,7 @@ class Operation extends Component<{}, IState> {
             </IconButton>
           </MuiDialogTitle>
           <p className={styles.codeString}>
-            0xba5ea4f15137a9dde2d59d3c1afe0c5655ec8953f21032 5542fbd9b67f1755c0
+            0xba5ea4f15137a9dde2d59d3c1afe0c5655ec8953f210325542fbd9b67f1755c0
           </p>
           <div className={styles.warnFooter}>
             <svg className={styles.icon} aria-hidden="true">

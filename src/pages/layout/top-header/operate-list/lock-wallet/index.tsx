@@ -46,7 +46,7 @@ class LockWallet extends Component<IProps, IState> {
             <LockWalletModal
               isShow={showModal}
               onClose={() => {
-                this.showLockModal()
+                this.hideLockModal()
               }}
             />
           </React.Fragment>
