@@ -1,5 +1,9 @@
 import confluxWeb from '@/vendor/conflux-web'
 const namespace = 'cfx'
+const maxInterval = 1000 * 60 * 10
+/* Max gas for send transaction (not gas price) */
+export const maxGasForCfxSend = 25000
+const nonceLocalStoragePrefix = 'cfx_address_'
 export { namespace }
 export default {
   namespace,
@@ -10,6 +14,8 @@ export default {
     cfxAccountPrivateKey: '',
     /** cfx余额 */
     cfxBalance: '',
+    /**最新转账成功的hash */
+    lastSendSuccessHash: '',
     /** cfx开始send */
     sending: false,
     /** cfx send成功 */
@@ -43,20 +49,46 @@ export default {
           },
         })
         // TODO:完整参数
-        const config = payload || {
-          from: '',
-          to: '',
-          value: '',
-          gas: '',
-          gasPrice: '',
-          data: '',
-          nonce: 0,
+        const { cfxAccountAddress } = select(state => state[namespace])
+        const { toAddress, sendAmount, gasPrice } = payload
+        // ========nonce参数获取========
+
+        // 这个 nonce 应该在第一次获取后缓存起来，以后每次交易 +1
+        // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
+        // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
+        let nonce = yield call(getNoncePromise, cfxAccountAddress)
+        const localNonce = JSON.parse(
+          localStorage.getItem(`${nonceLocalStoragePrefix}${cfxAccountAddress}`) || null
+        )
+        // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
+        // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
+        if (
+          localNonce &&
+          +new Date() - +localNonce.updateTime < maxInterval &&
+          localNonce.nonce >= nonce
+        ) {
+          // tslint:disable-next-line: no-console
+          console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce)
+          nonce = localNonce.nonce
         }
-        yield call(sendTransactionPromise, config)
+        localStorage.setItem(
+          `${nonceLocalStoragePrefix}${cfxAccountAddress}`,
+          JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
+        )
+        const config = {
+          from: cfxAccountAddress,
+          to: toAddress,
+          value: sendAmount,
+          gas: maxGasForCfxSend,
+          gasPrice,
+          nonce,
+        }
+        const hash = yield call(sendTransactionPromise, config)
         yield put({
           type: 'setState',
           payload: {
             sendSuccessed: true,
+            lastSendSuccessHash: hash,
           },
         })
       } catch (e) {
@@ -84,13 +116,24 @@ export default {
 }
 
 function sendTransactionPromise(config) {
-  return new Promise((relsove, reject) => {
+  return new Promise((relsove: (value: string) => void, reject) => {
     confluxWeb.cfx.sendTransaction(config, (err, hash) => {
       if (err !== null) {
         return reject(err)
       } else {
         return relsove(hash)
       }
+    })
+  })
+}
+function getNoncePromise(fromAddress) {
+  // 获取最新的 nonce
+  return new Promise((resolve: (value: number) => void, reject) => {
+    confluxWeb.cfx.getTransactionCount(fromAddress, (err, count) => {
+      if (err !== null) {
+        return reject(err)
+      }
+      return resolve(count)
     })
   })
 }
