@@ -39,21 +39,36 @@
   height: 18px;
   margin-right: 8px;
   vertical-align: middle;
+
   @include respond-to(sm) {
     display: inline-block;
   }
 }
+
 .operationWrap {
   margin: 0 12px 24px;
+
   .icon {
     cursor: pointer;
     opacity: 0.55;
   }
 }
+
+.loginButton {
+  width: 203px;
+  height: 48px;
+  background: rgba(30, 61, 228, 1);
+  border-radius: 4px;
+  color: #fff;
+  margin: 25px auto 0;
+  padding: 0;
+}
+
 // 模态框公共
 .dialog {
   padding-top: 32px;
   overflow: hidden;
+
   .dialogTitle {
     font-family: 'ProximaNova-Bold';
     font-size: 24px;
@@ -62,6 +77,7 @@
     color: rgba(0, 0, 0, 1);
     text-align: center;
   }
+
   .dialogCloseBtn {
     position: absolute;
     top: 24px;
@@ -69,12 +85,14 @@
     padding: 0;
   }
 }
+
 :global {
   .MuiSnackbar-root {
     .MuiTypography-root {
       min-width: auto;
       background-color: #000;
     }
+
     &.MuiSnackbar-anchorOriginTopLeft {
       @include respond-to(sm) {
         top: 270px;

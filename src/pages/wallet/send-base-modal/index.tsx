@@ -17,7 +17,7 @@ interface IState {
   password?: string
   hasError?: boolean
 }
-class LockWalletModal extends Component<IProps, IState> {
+class SendBaseModal extends Component<IProps, IState> {
   state = {
     password: '',
     hasError: false,
@@ -95,4 +95,4 @@ class LockWalletModal extends Component<IProps, IState> {
     )
   }
 }
-export default LockWalletModal
+export default SendBaseModal

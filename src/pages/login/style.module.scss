@@ -1,14 +1,16 @@
 @import 'assets/styles/index.scss';
 
 .login {
-  min-height: 100vh;
+  min-height: calc(100vh - 72px);
   background-color: #f9f9f9;
-  padding-bottom: 60px;
+
+  @include respond-to(sm) {
+    padding-bottom: 60px;
+  }
 
   .title {
     font-size: 34px;
     font-family: ProximaNova-Bold;
-    font-weight: bold;
     color: rgba(0, 0, 0, 0.87);
     line-height: 64px;
     padding: 48px 49px 0;
@@ -66,7 +68,6 @@
       .paperTitle {
         font-size: 24px;
         font-family: ProximaNova-Bold;
-        font-weight: bold;
         line-height: 29px;
         margin-top: 56px;
       }
@@ -74,7 +75,6 @@
       .paperDesc {
         font-size: 16px;
         font-family: ProximaNova-Regular;
-        font-weight: 400;
         line-height: 24px;
         margin-top: 16px;
         padding: 0 39px;
