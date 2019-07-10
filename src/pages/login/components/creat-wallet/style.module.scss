@@ -1,0 +1,126 @@
+@import 'assets/styles/index.scss';
+
+.creatWallet {
+  width: 100%;
+
+  .sucBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .rightIc {
+      width: 96px;
+      height: 96px;
+      fill: rgba(0, 0, 0, 0.24);
+      color: rgba(0, 0, 0, 0.24);
+    }
+
+    .sucTxt {
+      font-size: 18px;
+      font-family: ProximaNova-Regular;
+      color: rgba(0, 0, 0, 1);
+      line-height: 40px;
+      margin-top: 16px;
+      margin-bottom: 23px;
+    }
+  }
+
+  .container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 39px;
+    width: 100%;
+
+    .passWordLine {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .txt {
+        flex: 1;
+      }
+
+      .qsIc {
+        width: 16px;
+        height: 16px;
+        color: #1e3de4;
+        fill: #1e3de4;
+        cursor: pointer;
+      }
+
+      .snackBar {
+        position: absolute;
+        right: -19px;
+        top: 40px;
+        width: 202px !important;
+        height: 96px;
+        padding: 12px;
+        min-width: 0;
+        background-color: #000;
+        z-index: 1;
+
+        @include respond-to(md) {
+          right: -140px;
+        }
+      }
+    }
+  }
+
+  .container2 {
+    display: flex;
+    flex-direction: column;
+
+    .conBox {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0 40px;
+
+      .conItem {
+        display: flex;
+        margin-top: 24px;
+
+        .imgBox {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 48px;
+          height: 48px;
+          margin-right: 24px;
+          background: rgba(0, 0, 0, 0.06);
+          border-radius: 50%;
+
+          .conIc {
+            width: 24px;
+            height: 24px;
+            color: #a4a4a4;
+            fill: #a4a4a4;
+          }
+        }
+
+        .txtBox {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          font-size: 16px;
+          color: rgba(0, 0, 0, 1);
+
+          .txt1 {
+            font-family: ProximaNova-Bold;
+            line-height: 19px;
+            margin-bottom: 8px;
+          }
+
+          .txt2 {
+            font-family: ProximaNova-Regular;
+            line-height: 24px;
+          }
+        }
+      }
+    }
+  }
+}
