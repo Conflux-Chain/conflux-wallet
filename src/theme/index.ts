@@ -20,6 +20,11 @@ const theme = createMuiTheme({
         padding: '8px 12px',
       },
     },
+    MuiButton: {
+      root: {
+        textTransform: 'none',
+      },
+    },
   },
 })
 export default theme
