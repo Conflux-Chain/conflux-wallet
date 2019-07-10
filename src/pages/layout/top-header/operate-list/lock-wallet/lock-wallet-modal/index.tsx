@@ -24,7 +24,9 @@ class LockWalletModal extends Component<IProps> {
         open={isShow}
       >
         <MuiDialogTitle>
-          <h1 className={styles.dialogTitle}>Lock Wallet</h1>
+          <div>
+            <h1 className={styles.dialogTitle}>Lock Wallet</h1>
+          </div>
           <IconButton
             aria-label="Close"
             className={styles.dialogCloseBtn}
