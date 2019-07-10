@@ -1,10 +1,96 @@
 @import 'assets/styles/index.scss';
 
-.testFin {
-  @include flex-center();
-  color: red;
-}
+.about {
+  min-height: calc(100vh - 72px);
+  background-color: #f9f9f9;
 
-.test {
-  color: green;
+  @include respond-to(sm) {
+    padding-bottom: 60px;
+  }
+
+  .h1 {
+    font-size: 48px;
+    font-family: ProximaNova-Bold;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 1);
+    line-height: 56px;
+    margin: 64px auto 40px;
+  }
+
+  .h2 {
+    font-size: 34px;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1);
+    line-height: 48px;
+    margin: 56px anto 40px;
+  }
+
+  .h3 {
+    font-size: 24px;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1);
+    line-height: 32px;
+    margin: 24px auto;
+  }
+
+  .container1 {
+    margin: 0 16px;
+    border-radius: 16px;
+
+    @include respond-to(md) {
+      position: relative;
+      width: 1200px;
+      height: 533px;
+      background: #fff url('../../assets/images/bg.png') no-repeat bottom;
+    }
+
+    .conBox {
+      display: flex;
+      flex-direction: column;
+
+      @include respond-to(md) {
+        margin: 96px 0 0 79px;
+      }
+
+      .title {
+        font-size: 34px;
+        font-family: PingFangSC-Semibold;
+        color: rgba(0, 0, 0, 1);
+        line-height: 48px;
+        margin-top: 96px;
+      }
+
+      .con {
+        font-size: 16px;
+        font-family: PingFangSC-Regular;
+        color: rgba(0, 0, 0, 1);
+        line-height: 28px;
+        margin-top: 30px;
+        width: 457px;
+        height: 196px;
+      }
+    }
+
+    .ballSmall {
+      position: absolute;
+      top: 122px;
+      right: 324px;
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(180deg, rgba(237, 237, 237, 1) 0%, rgba(187, 187, 187, 1) 100%);
+      border-radius: 50%;
+    }
+
+    .ballBig {
+      position: absolute;
+      top: 167px;
+      right: 73px;
+      width: 123px;
+      height: 123px;
+      background: linear-gradient(141deg, rgba(83, 172, 255, 1) 0%, rgba(5, 37, 210, 1) 100%);
+      border-radius: 50%;
+    }
+  }
 }

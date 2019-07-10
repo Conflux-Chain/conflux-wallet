@@ -1,9 +1,12 @@
 @import 'assets/styles/index.scss';
 
 .login {
-  min-height: 100vh;
+  min-height: calc(100vh - 72px);
   background-color: #f9f9f9;
-  padding-bottom: 60px;
+
+  @include respond-to(sm) {
+    padding-bottom: 60px;
+  }
 
   .title {
     font-size: 34px;
