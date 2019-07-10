@@ -67,6 +67,6 @@
     "no-var-requires": false
   },
   "linterOptions": {
-    "exclude": ["./src/serviceWorker.ts"]
+    "exclude": ["./src/serviceWorker.ts", "./src/docs/**/*.{js}"]
   }
 }
