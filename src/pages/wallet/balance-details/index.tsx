@@ -94,7 +94,12 @@ class BalanceDetails extends Component<IProps, IState> {
                   <svg className={styles.icon} aria-hidden="true">
                     <use xlinkHref="#iconiconfontlock" />
                   </svg>
-                  <span>View More >></span>
+                  <span>
+                    View More{' '}
+                    <svg className={styles.icon} aria-hidden="true">
+                      <use xlinkHref="#icongengduo1" />
+                    </svg>
+                  </span>
                 </div>
               </div>
             </div>
