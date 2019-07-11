@@ -4,11 +4,6 @@ import Layout from '@/pages/layout'
 import AuthComponent from '@/pages/auth'
 import { asyncComponent } from '@/utils/tools/react'
 import { routes } from '@/router-route-mapping'
-// import ConfluxWeb from '@/vendor/conflux-web'
-// const ConfluxWeb = require('conflux-web')
-// const a: any = ConfluxWeb
-// tslint:disable-next-line: no-console
-// console.log(new a('http://testnet-jsonrpc.conflux-chain.org:12537'))
 class Router extends Component {
   render() {
     const isLogin = true

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import { readFileContentByFileObj } from '@/utils/tools'
 
 interface IProps {
   stepIndex: number
@@ -24,6 +25,15 @@ export default class RestoreWallet extends PureComponent<IProps, IState> {
       password: e.target.value,
     })
   }
+  handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files
+    // 读取文件demo
+    const fileContent = await readFileContentByFileObj(file[0])
+    // tslint:disable-next-line: no-console
+    console.log(fileContent)
+    // TODO:读取成功后的操作,调用login models里面的login函数
+  }
+
   render() {
     const { stepIndex, uploadFile, checkFile, restorePasswordRight, checkPassword } = this.props
     const { password } = this.state
@@ -32,7 +42,12 @@ export default class RestoreWallet extends PureComponent<IProps, IState> {
         {!stepIndex ? (
           <div className={styles.container1}>
             <div className={styles.uploadBox} onClick={uploadFile}>
-              <input className={styles.input} id="fileUpload" type="file" />
+              <input
+                className={styles.input}
+                onChange={this.handleFileChange}
+                id="fileUpload"
+                type="file"
+              />
               <label htmlFor="fileUpload">
                 <svg className={styles.uploadIc} aria-hidden="true">
                   <use xlinkHref="#iconwenjian-" />

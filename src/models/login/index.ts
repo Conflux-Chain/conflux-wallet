@@ -1,14 +1,26 @@
 import confluxWeb, { abi } from '@/vendor/conflux-web'
 import { namespace as namespaceOfCfx } from '@/models/cfx'
 import { namespace as namespaceOfFc } from '@/models/fc'
-const namespace = 'login'
+const namespace = 'login-create'
 export { namespace }
 export default {
   namespace,
   state: {
-    testState: Math.random(),
+    // =====login=====
+    /**登陆成功标志 */
+    loginSuccess: false,
     /**登陆验证失败 */
     loginValidateError: false,
+
+    // =====create=====
+    /** keyStoreJson 文件内容*/
+    keyStoreJson: '',
+    /**
+     *- 创建账户是否成功，这里取决于UI是什么时候调用`create` effects，
+     *- 可以是输入密码后直接点击下一步的时候创建，可以是下载keystore文件的时候创建
+     *- 创建成功后，keyStoreJson已经出来，这是一个同步过程
+     *  */
+    createAccountIsSuccess: false,
   },
   effects: {
     *create({ payload }, { put }) {
@@ -18,6 +30,14 @@ export default {
         confluxWeb.cfx.accounts.wallet.add(account)
         const { privateKey, address } = account
         const FC = new confluxWeb.cfx.Contract(abi as any, address)
+        const keyStoreJson = confluxWeb.cfx.accounts.encrypt(privateKey, password)
+        yield put({
+          type: 'setState',
+          payload: {
+            keyStoreJson,
+            createAccountIsSuccess: true,
+          },
+        })
         yield put({
           type: 'getAccountAfterHandleAction',
           payload: {
@@ -34,6 +54,12 @@ export default {
         const account = confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
         const { privateKey, address } = account
         const FC = new confluxWeb.cfx.Contract(abi as any, address)
+        yield put({
+          type: 'setState',
+          payload: {
+            loginSuccess: true,
+          },
+        })
         yield put({
           type: 'getAccountAfterHandleAction',
           payload: {
