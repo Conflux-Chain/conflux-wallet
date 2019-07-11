@@ -55,7 +55,7 @@ class Operation extends Component<IProps, IState> {
           open={openDialog}
         >
           <MuiDialogTitle>
-            <h1 className={styles.dialogTitle}>Private Key</h1>
+            <div className={styles.dialogTitle}>Private Key</div>
             <IconButton
               aria-label="Close"
               className={styles.dialogCloseBtn}

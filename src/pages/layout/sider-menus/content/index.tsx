@@ -32,7 +32,7 @@ class SiderContent extends Component<IProps> {
             <OperationDaochu lockStatus={lockStatus} />
             <OperationRecord lockStatus={lockStatus} />
           </div>
-          <MenuList />
+          <MenuList lockStatus={lockStatus} />
         </div>
         <div className={styles.siderMenusBottom}>
           <p className={styles.official}>Official Website</p>
