@@ -3,7 +3,7 @@ export { namespace }
 export default {
   namespace,
   state: {
-    lockStatus: false,
+    lockStatus: true,
   },
   effects: {
     *test({ payload }, { call, put }) {},

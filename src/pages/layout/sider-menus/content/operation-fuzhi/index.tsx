@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -7,12 +8,14 @@ import copy from 'copy-to-clipboard'
 import styles from './style.module.scss'
 import Images from '@/assets/images/index'
 interface IProps {
+  lockStatus?: boolean
   width?: Breakpoint
 }
 interface IState {
   openMsg?: boolean
 }
 class Operation extends Component<IProps, IState> {
+  static defaultProps = { lockStatus: true }
   state = {
     openMsg: false,
   }
@@ -29,14 +32,17 @@ class Operation extends Component<IProps, IState> {
   }
   render() {
     const { openMsg } = this.state
+    const { lockStatus } = this.props
     const cWidth = this.props.width
     return (
       <>
         <Tooltip title="Copy address to clipboard">
           <div
-            className={styles.operationWrap}
+            className={classnames(styles.operationWrap, lockStatus ? styles.lockStatus : null)}
             onClick={() => {
-              this.clickHandle()
+              if (!lockStatus) {
+                this.clickHandle()
+              }
             }}
           >
             <img src={Images.fuzhi} alt="" className={styles.icon} />

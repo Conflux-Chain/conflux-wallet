@@ -6,17 +6,18 @@ import Drawer from '@material-ui/core/Drawer'
 import SiderContent from './content/index'
 interface IProps {
   isLogin: boolean
+  lockStatus: boolean
   mobileOpen: boolean
   onToggleMenus?: () => void
 }
 
 class OperateList extends Component<IProps> {
-  static defaultProps = { isLogin: false }
+  static defaultProps = { isLogin: false, lockStatus: true }
   handleDrawerToggle() {
     this.props.onToggleMenus()
   }
   render() {
-    const { isLogin, mobileOpen } = this.props
+    const { isLogin, lockStatus, mobileOpen } = this.props
     return (
       <>
         {isLogin ? (
@@ -33,12 +34,12 @@ class OperateList extends Component<IProps> {
                   keepMounted: true,
                 }}
               >
-                <SiderContent />
+                <SiderContent lockStatus={lockStatus} />
               </Drawer>
             </Hidden>
             <Hidden xsDown>
               <Drawer variant="permanent" open className={styles.siderMenusWrap}>
-                <SiderContent />
+                <SiderContent lockStatus={lockStatus} />
               </Drawer>
             </Hidden>
           </React.Fragment>

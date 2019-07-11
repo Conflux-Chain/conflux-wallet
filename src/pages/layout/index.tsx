@@ -47,6 +47,7 @@ class BasicLayout extends Component<IProps, IState> {
         <SiderMenus
           mobileOpen={mobileOpen}
           isLogin={isLogin}
+          lockStatus={lockStatus}
           onToggleMenus={() => {
             this.onToggleMenus()
           }}
