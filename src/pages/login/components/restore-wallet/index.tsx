@@ -32,9 +32,12 @@ export default class RestoreWallet extends PureComponent<IProps, IState> {
         {!stepIndex ? (
           <div className={styles.container1}>
             <div className={styles.uploadBox} onClick={uploadFile}>
-              <svg className={styles.uploadIc} aria-hidden="true">
-                <use xlinkHref="#iconwenjian-" />
-              </svg>
+              <input className={styles.input} id="fileUpload" type="file" />
+              <label htmlFor="fileUpload">
+                <svg className={styles.uploadIc} aria-hidden="true">
+                  <use xlinkHref="#iconwenjian-" />
+                </svg>
+              </label>
             </div>
             <p className={styles.tips}>
               Hello, you should upload your

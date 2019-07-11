@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
 import SendFcModal from '../send-fc-modal/index'
+import BalanceDetails from '../balance-details/index'
 interface IState {
   showModal: boolean
 }
@@ -35,9 +36,11 @@ class ContentCfx extends Component<{}, IState> {
             <p className={styles.balanceTitle}>Available Balance</p>
             <p className={styles.balanceNum}>
               10,000
-              <svg className={styles.questionIcon} aria-hidden="true">
-                <use xlinkHref="#iconjieshi" />
-              </svg>
+              <BalanceDetails>
+                <svg className={styles.questionIcon} aria-hidden="true">
+                  <use xlinkHref="#iconjieshi" />
+                </svg>
+              </BalanceDetails>
             </p>
           </div>
         </div>

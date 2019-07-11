@@ -8,6 +8,7 @@ import { I18NHOC } from '@/utils/tools/react'
 import { I18NProps } from '@/i18n/context'
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
+import Hidden from '@material-ui/core/Hidden'
 import ModalLogin from './components/modal-login'
 
 type IProps = IDispatch &
@@ -113,16 +114,20 @@ class Login extends Component<IProps, IState> {
           <h2 className={styles.title}>Welcome to Conflux Wallet</h2>
           <div className={styles.conBox}>
             <Paper className={styles.paper} onClick={() => this.toogleModal('restore')}>
-              <svg className={classnames(styles.nowIcon, styles.icon1)} aria-hidden="true">
-                <use xlinkHref="#iconwenjian" />
-              </svg>
+              <Hidden only={['xs', 'sm']}>
+                <svg className={classnames(styles.nowIcon, styles.icon1)} aria-hidden="true">
+                  <use xlinkHref="#iconwenjian" />
+                </svg>
+              </Hidden>
               <h5 className={styles.paperTitle}>Restore Wallet</h5>
               <p className={styles.paperDesc}>If you have an account, please restore your wallet</p>
             </Paper>
             <Paper className={styles.paper} onClick={() => this.toogleModal('creat')}>
-              <svg className={classnames(styles.nowIcon, styles.icon2)} aria-hidden="true">
-                <use xlinkHref="#iconxinjian" />
-              </svg>
+              <Hidden only={['xs', 'sm']}>
+                <svg className={classnames(styles.nowIcon, styles.icon2)} aria-hidden="true">
+                  <use xlinkHref="#iconxinjian" />
+                </svg>
+              </Hidden>
               <h5 className={styles.paperTitle}>Create Wallet</h5>
               <p className={styles.paperDesc}>If you have no account, please create wall</p>
             </Paper>
