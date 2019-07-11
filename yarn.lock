@@ -2973,7 +2973,6 @@ conflux-web@^0.1.3:
 confluxjs-transaction@*:
   version "0.0.1-alpha.2"
   resolved "https://registry.npm.taobao.org/confluxjs-transaction/download/confluxjs-transaction-0.0.1-alpha.2.tgz#c93ee829f85e6b03ff4ab93af54eec50d05b90cd"
-  integrity sha1-yT7oKfheawP/Srk69U7sUNBbkM0=
   dependencies:
     confluxjs-util "*"
     ethereumjs-common "^0.6.1"
@@ -2988,7 +2987,6 @@ confluxjs-unit@*:
 confluxjs-util@*:
   version "0.0.1-alpha.2"
   resolved "https://registry.npm.taobao.org/confluxjs-util/download/confluxjs-util-0.0.1-alpha.2.tgz#6e1bc95159f614fa3730ec51f75075258245002a"
-  integrity sha1-bhvJUVn2FPo3MOxR91B1JYJFACo=
   dependencies:
     bn.js "^4.11.0"
     create-hash "^1.1.2"
