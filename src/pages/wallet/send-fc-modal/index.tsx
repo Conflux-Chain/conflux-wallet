@@ -13,6 +13,7 @@ class SendCfxModal extends Component<IProps> {
     return (
       <>
         <BaseModal
+          unit={'FC'}
           isShow={isShow}
           onClose={() => {
             this.hideModal()

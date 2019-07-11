@@ -7,6 +7,7 @@
   font-weight: bold;
   line-height: 32px;
   color: rgba(0, 0, 0, 1);
+  word-break: break-all;
   @include respond-to(sm) {
     margin: 0 36px;
   }
