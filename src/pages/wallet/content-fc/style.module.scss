@@ -180,12 +180,11 @@
 
 .fcQuestionBtn {
   position: absolute;
-  top: 14px;
-  right: -44px;
-  display: none;
+  top: 0;
+  right: -16px;
   .fcQuestionIcon {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
     fill: #9e9e9e;
     &.fcQuestionIconActive {
@@ -193,6 +192,11 @@
     }
   }
   @include respond-to(md) {
-    display: block;
+    top: 14px;
+    right: -44px;
+    .fcQuestionIcon {
+      width: 24px;
+      height: 24px;
+    }
   }
 }
