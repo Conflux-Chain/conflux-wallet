@@ -14,7 +14,8 @@
     font-weight: bold;
     color: rgba(0, 0, 0, 1);
     line-height: 56px;
-    margin: 64px auto 40px;
+    padding: 64px 0 40px;
+    text-align: center;
   }
 
   .h2 {
@@ -23,7 +24,8 @@
     font-weight: 600;
     color: rgba(0, 0, 0, 1);
     line-height: 48px;
-    margin: 56px anto 40px;
+    margin: 56px auto 40px;
+    text-align: center;
   }
 
   .h3 {
@@ -35,15 +37,25 @@
     margin: 24px auto;
   }
 
+  .p {
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 28px;
+  }
+
   .container1 {
     margin: 0 16px;
     border-radius: 16px;
+    background: #fff url('../../assets/images/bg1.png') no-repeat bottom;
 
     @include respond-to(md) {
       position: relative;
       width: 1200px;
       height: 533px;
       background: #fff url('../../assets/images/bg.png') no-repeat bottom;
+      margin: 0 auto;
     }
 
     .conBox {
@@ -91,6 +103,107 @@
       height: 123px;
       background: linear-gradient(141deg, rgba(83, 172, 255, 1) 0%, rgba(5, 37, 210, 1) 100%);
       border-radius: 50%;
+    }
+  }
+
+  .container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .line1 {
+      display: flex;
+      flex-direction: column;
+
+      @include respond-to(md) {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 1200px;
+      }
+
+      .item1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 16px;
+
+        @include respond-to(md) {
+          width: 410px;
+          height: 415px;
+          padding: 0 79px;
+        }
+
+        .icon1 {
+          width: 86px;
+          height: 59px;
+        }
+
+        .icon2 {
+          width: 76px;
+          height: 76px;
+        }
+      }
+    }
+
+    .line2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+
+      @include respond-to(md) {
+        width: 1040px;
+        height: 402px;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 16px;
+        padding: 0 80px;
+      }
+
+      .titleBox {
+        display: flex;
+        align-items: center;
+
+        .icon3 {
+          width: 54px;
+          height: 54px;
+          margin-right: 32px;
+        }
+      }
+
+      .item2 {
+        display: flex;
+        flex-direction: column;
+        margin-top: 22px;
+
+        @include respond-to(md) {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        .p {
+          &:last-child {
+            margin-left: 69px;
+          }
+        }
+      }
+    }
+  }
+
+  .container3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 16px;
+
+    @include respond-to(md) {
+      width: 1040px;
+      height: 248px;
+      padding: 0 80px;
+      margin: 0 auto;
     }
   }
 }

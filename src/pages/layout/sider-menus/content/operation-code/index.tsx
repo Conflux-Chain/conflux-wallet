@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import Tooltip from '@material-ui/core/Tooltip'
 import Dialog from '@material-ui/core/Dialog'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
@@ -7,10 +8,14 @@ import CloseIcon from '@material-ui/icons/Close'
 import styles from './style.module.scss'
 import Images from '@/assets/images/index'
 import QRCode from 'qrcode.react'
+interface IProps {
+  lockStatus?: boolean
+}
 interface IState {
   openDialog?: boolean
 }
-class Operation extends Component<{}, IState> {
+class Operation extends Component<IProps, IState> {
+  static defaultProps = { lockStatus: true }
   state = {
     openDialog: false,
   }
@@ -25,17 +30,20 @@ class Operation extends Component<{}, IState> {
     })
   }
   render() {
+    const { lockStatus } = this.props
     const { openDialog } = this.state
     return (
       <>
         <Tooltip title="View address in QR code">
-          <div className={styles.operationWrap}>
+          <div className={classnames(styles.operationWrap, lockStatus ? styles.lockStatus : null)}>
             <img
               src={Images.code}
               alt=""
               className={styles.icon}
               onClick={() => {
-                this.clickHandle()
+                if (!lockStatus) {
+                  this.clickHandle()
+                }
               }}
             />
           </div>

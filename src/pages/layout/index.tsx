@@ -2,14 +2,13 @@ import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import React, { Component } from 'react'
 import styles from './style.module.scss'
-import { namespace as globalMenuNamespace } from '@/models/global/menu'
+import { namespace as globalCommonNamespace } from '@/models/global/common'
 import { connect } from 'react-redux'
 import TopHeader from './top-header'
 import SiderMenus from './sider-menus'
 import { RouteComponentProps, withRouter } from 'react-router'
 type IProps = RouteComponentProps & {
-  selectedKeys?: any[]
-  openKeys?: any[]
+  lockStatus?: boolean
   dispatch?: any
   width?: Breakpoint
 }
@@ -34,10 +33,13 @@ class BasicLayout extends Component<IProps, IState> {
   }
   render() {
     const { isLogin, mobileOpen } = this.state
+    const { lockStatus } = this.props
+
     return (
       <div className={styles.root}>
         <TopHeader
           isLogin={isLogin}
+          lockStatus={lockStatus}
           onToggleMenus={() => {
             this.onToggleMenus()
           }}
@@ -45,6 +47,7 @@ class BasicLayout extends Component<IProps, IState> {
         <SiderMenus
           mobileOpen={mobileOpen}
           isLogin={isLogin}
+          lockStatus={lockStatus}
           onToggleMenus={() => {
             this.onToggleMenus()
           }}
@@ -59,7 +62,7 @@ class BasicLayout extends Component<IProps, IState> {
 
 const mapStateToProps = models => {
   return {
-    ...models[globalMenuNamespace],
+    ...models[globalCommonNamespace],
   }
 }
 export default withRouter(connect(mapStateToProps)(withWidth()(BasicLayout)))

@@ -1,22 +1,38 @@
 import React, { Component } from 'react'
 import styles from './style.module.scss'
+import classnames from 'classnames'
 import Button from '@material-ui/core/Button'
 import SendFcModal from '../send-fc-modal/index'
 import BalanceDetails from '../balance-details/index'
+import FcDetails from '../fc-details/index'
 interface IState {
   showModal: boolean
+  balanceDetailsTips: null | HTMLElement
+  fcDetailsTips: null | HTMLElement
 }
 class ContentCfx extends Component<{}, IState> {
   state = {
     showModal: false,
+    balanceDetailsTips: null,
+    fcDetailsTips: null,
   }
   hideModal() {
     this.setState({
       showModal: false,
     })
   }
+  showBalanceDetailsTips(e) {
+    this.setState({
+      balanceDetailsTips: e.currentTarget,
+    })
+  }
+  showFcDetailsTipsTips(e) {
+    this.setState({
+      fcDetailsTips: e.currentTarget,
+    })
+  }
   render() {
-    const { showModal } = this.state
+    const { showModal, balanceDetailsTips, fcDetailsTips } = this.state
     return (
       <div className={styles.cardContent}>
         <div className={styles.infoBox}>
@@ -34,14 +50,30 @@ class ContentCfx extends Component<{}, IState> {
           </div>
           <div className={styles.balanceBox}>
             <p className={styles.balanceTitle}>Available Balance</p>
-            <p className={styles.balanceNum}>
+            <div className={styles.balanceNum}>
               10,000
-              <BalanceDetails>
-                <svg className={styles.questionIcon} aria-hidden="true">
+              <BalanceDetails
+                anchorEl={balanceDetailsTips}
+                onClose={() => {
+                  this.setState({
+                    balanceDetailsTips: null,
+                  })
+                }}
+              >
+                <svg
+                  className={classnames(
+                    styles.questionIcon,
+                    balanceDetailsTips ? styles.questionIconActive : null
+                  )}
+                  aria-hidden="true"
+                  onClick={e => {
+                    this.showBalanceDetailsTips(e)
+                  }}
+                >
                   <use xlinkHref="#iconjieshi" />
                 </svg>
               </BalanceDetails>
-            </p>
+            </div>
           </div>
         </div>
         <div>
@@ -78,9 +110,27 @@ class ContentCfx extends Component<{}, IState> {
           </div>
         </div>
         <div className={styles.fcQuestionBtn}>
-          <svg className={styles.fcQuestionIcon} aria-hidden="true">
-            <use xlinkHref="#iconjieshi" />
-          </svg>
+          <FcDetails
+            anchorEl={fcDetailsTips}
+            onClose={() => {
+              this.setState({
+                fcDetailsTips: null,
+              })
+            }}
+          >
+            <svg
+              className={classnames(
+                styles.fcQuestionIcon,
+                fcDetailsTips ? styles.fcQuestionIconActive : null
+              )}
+              aria-hidden="true"
+              onClick={e => {
+                this.showFcDetailsTipsTips(e)
+              }}
+            >
+              <use xlinkHref="#iconjieshi" />
+            </svg>
+          </FcDetails>
         </div>
       </div>
     )

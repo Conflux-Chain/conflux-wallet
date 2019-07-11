@@ -85,7 +85,14 @@
     padding: 0;
   }
 }
-
+// 上锁状态
+.lockStatus {
+  .icon {
+    cursor: not-allowed !important;
+  }
+  cursor: not-allowed !important;
+  opacity: 0.38;
+}
 :global {
   .MuiSnackbar-root {
     .MuiTypography-root {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import styles from './style.module.scss'
 import MenuItem from '@material-ui/core/MenuItem'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
@@ -11,7 +12,11 @@ interface IState {
   menuNet: null | HTMLElement
   menuNetSelected: string
 }
-class NetSelect extends Component<{}, IState> {
+interface IProps {
+  lockStatus?: boolean
+}
+class NetSelect extends Component<IProps, IState> {
+  static defaultProps = { lockStatus: true }
   state = {
     menuNet: null,
     menuNetSelected: 'Testnet',
@@ -34,15 +39,18 @@ class NetSelect extends Component<{}, IState> {
   }
   render() {
     const { menuNet, menuNetSelected } = this.state
+    const { lockStatus } = this.props
     const menuNetOpen = Boolean(menuNet)
     return (
-      <div className={styles.operateListItem}>
+      <div className={classnames(styles.operateListItem, lockStatus ? styles.lockStatus : null)}>
         <span
           aria-label="Account of current user"
           aria-controls="menuNet"
           aria-haspopup="true"
           onClick={e => {
-            this.handleMenu(e)
+            if (!lockStatus) {
+              this.handleMenu(e)
+            }
           }}
         >
           {menuNetSelected}

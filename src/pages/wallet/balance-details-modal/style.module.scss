@@ -1,0 +1,10 @@
+@import 'assets/styles/index.scss';
+
+.formContentText {
+  width: 320px;
+  margin: 0 12px 40px;
+  @include respond-to(sm) {
+    width: 630px;
+    margin: 0 40px 40px;
+  }
+}

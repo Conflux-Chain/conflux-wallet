@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import styles from './style.module.scss'
 import MenuItem from '@material-ui/core/MenuItem'
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
@@ -30,7 +31,11 @@ interface IState {
   menuLang: null | HTMLElement
   menuLangSelected: number
 }
-class NetSelect extends Component<{}, IState> {
+interface IProps {
+  lockStatus?: boolean
+}
+class NetSelect extends Component<IProps, IState> {
+  static defaultProps = { lockStatus: true }
   state = {
     menuLang: null,
     menuLangSelected: 0,
@@ -53,15 +58,18 @@ class NetSelect extends Component<{}, IState> {
   }
   render() {
     const { menuLang, menuLangSelected } = this.state
+    const { lockStatus } = this.props
     const menuLangOpen = Boolean(menuLang)
     return (
-      <div className={styles.operateListItem}>
+      <div className={classnames(styles.operateListItem, lockStatus ? styles.lockStatus : null)}>
         <div
           aria-label="Account of current user"
           aria-controls="menuLang"
           aria-haspopup="true"
           onClick={e => {
-            this.handleMenu(e)
+            if (!lockStatus) {
+              this.handleMenu(e)
+            }
           }}
         >
           {LangList[menuLangSelected].img}

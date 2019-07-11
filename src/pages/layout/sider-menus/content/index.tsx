@@ -7,14 +7,14 @@ import OperationFuzhi from './operation-fuzhi/index'
 import OperationRecord from './operation-record/index'
 import MenuList from './menu-list/index'
 
-// interface IProps {
-//   isLogin: boolean
-//   mobileOpen: boolean
-//   onToggleMenus?: () => void
-// }
+interface IProps {
+  lockStatus: boolean
+}
 
-class SiderContent extends Component {
+class SiderContent extends Component<IProps> {
+  static defaultProps = { lockStatus: true }
   render() {
+    const { lockStatus } = this.props
     return (
       <div className={styles.siderMenusWrap}>
         <div className={styles.siderMenusTop}>
@@ -27,10 +27,10 @@ class SiderContent extends Component {
             </p>
           </div>
           <div className={styles.operationWrap}>
-            <OperationFuzhi />
-            <OperationCode />
-            <OperationDaochu />
-            <OperationRecord />
+            <OperationFuzhi lockStatus={lockStatus} />
+            <OperationCode lockStatus={lockStatus} />
+            <OperationDaochu lockStatus={lockStatus} />
+            <OperationRecord lockStatus={lockStatus} />
           </div>
           <MenuList />
         </div>
