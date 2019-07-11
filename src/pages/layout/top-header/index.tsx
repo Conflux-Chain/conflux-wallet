@@ -8,16 +8,17 @@ import OperateList from './operate-list/index'
 import LogoBox from './logo-box/index'
 interface IProps {
   isLogin: boolean
+  lockStatus?: boolean
   onToggleMenus?: () => void
   width?: Breakpoint
 }
 class TopHeader extends Component<IProps> {
-  static defaultProps = { isLogin: false }
+  static defaultProps = { isLogin: false, lockStatus: true }
   onToggleMenus() {
     this.props.onToggleMenus()
   }
   render() {
-    const { isLogin } = this.props
+    const { isLogin, lockStatus } = this.props
     return (
       <AppBar position="fixed" className={styles.walletHeaderWrap}>
         <Toolbar
@@ -31,7 +32,7 @@ class TopHeader extends Component<IProps> {
             }}
           />
           {/* 右边操作项 */}
-          <OperateList isLogin={isLogin} />
+          <OperateList isLogin={isLogin} lockStatus={lockStatus} />
         </Toolbar>
       </AppBar>
     )

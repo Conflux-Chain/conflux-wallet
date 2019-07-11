@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import styles from './style.module.scss'
 interface IProps {
   isLogin?: boolean
+  lockStatus?: boolean
 }
 class DeployBtn extends Component<IProps> {
-  static defaultProps = { isLogin: true }
+  static defaultProps = { isLogin: false, lockStatus: true }
   render() {
     const { isLogin } = this.props
     return (
