@@ -22,12 +22,15 @@ export default {
      *- 可以是输入密码后直接点击下一步的时候创建，可以是下载keystore文件的时候创建
      *- 创建成功后，keyStoreJson已经出来，这是一个同步过程
      *  */
-    createAccountIsSuccess: false, // 创建账户是否成功
-    restorePasswordRight: true, // restore钱包时密码是否正确
+    createAccountIsSuccess: false,
+    /**是否解锁失败 */
+    lockError: false,
+    /**restore钱包时密码是否正确 */
+    restorePasswordRight: true,
   },
   effects: {
     // 根据密码创建账户
-    *create({ payload }, { put }) {
+    *create({ payload, callback, errCallback }, { put }) {
       try {
         const { password } = payload
         const account = confluxWeb.cfx.accounts.create(password)
@@ -48,9 +51,14 @@ export default {
             privateKey,
           },
         })
-      } catch (e) {}
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
+      } catch (e) {
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
+      }
     },
-    *login({ payload, callback }, { put }) {
+    *login({ payload, callback, errCallback }, { put }) {
       try {
         const { keystoreJson, password } = payload
         const account = confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
@@ -62,7 +70,6 @@ export default {
             loginSuccess: true,
           },
         })
-        callback()
         yield put({
           type: 'getAccountAfterHandleAction',
           payload: {
@@ -70,6 +77,8 @@ export default {
             privateKey,
           },
         })
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
       } catch (e) {
         // 验证失败
         yield put({
@@ -79,6 +88,8 @@ export default {
             restorePasswordRight: false,
           },
         })
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
       }
     },
     /**获取到用户信息后的action */
@@ -107,6 +118,51 @@ export default {
           isLogin: true,
         },
       })
+    },
+    *init(_, { put }) {
+      yield put({
+        type: 'setState',
+        payload: {
+          loginSuccess: false,
+          loginValidateError: false,
+          keystoreJson: false,
+          createAccountIsSuccess: '',
+          restorePasswordRight: true,
+        },
+      })
+    },
+    /**
+     * 解锁
+     */
+    *unLock({ payload, callback, errCallback }, { put, select }) {
+      try {
+        const { password } = payload
+        const { keystoreJson } = select(state => state[namespace])
+        confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
+        yield put({
+          type: 'setState',
+          payload: {
+            lockError: false,
+          },
+        })
+        yield put({
+          type: `${namespaceOfCommon}/setState`,
+          payload: {
+            lockStatus: false,
+          },
+        })
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
+      } catch (e) {
+        yield put({
+          type: 'setState',
+          payload: {
+            lockError: true,
+          },
+        })
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
+      }
     },
   },
   reducers: {

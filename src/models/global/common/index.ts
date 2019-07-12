@@ -1,13 +1,38 @@
+import { namespace as namespaceOfLogin } from '@/models/login'
+import { replace } from 'connected-react-router'
 const namespace = 'global-common'
 export { namespace }
 export default {
   namespace,
   state: {
-    lockStatus: true,
+    lockStatus: false,
     isLogin: false,
   },
   effects: {
-    *test({ payload }, { call, put }) {},
+    *close(_, { put }) {
+      try {
+        yield put({
+          type: `setState`,
+          payload: {
+            isLogin: false,
+          },
+        })
+        // 跳转
+        yield put(replace('/login'))
+        // 初始化login models的state
+        yield put({
+          type: `${namespaceOfLogin}/init`,
+        })
+      } catch (e) {}
+    },
+    *lock(_, { put }) {
+      yield put({
+        type: 'setState',
+        payload: {
+          lockStatus: true,
+        },
+      })
+    },
   },
   reducers: {
     setState(state, { payload }) {
