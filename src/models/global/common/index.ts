@@ -4,6 +4,7 @@ export default {
   namespace,
   state: {
     lockStatus: true,
+    isLogin: false,
   },
   effects: {
     *test({ payload }, { call, put }) {},

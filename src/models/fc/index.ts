@@ -1,6 +1,7 @@
-import { namespace as namespaceOfCfx } from '@/models/cfx'
+import { namespace as namespaceOfCfx, getActualNoncePromise } from '@/models/cfx'
 import confluxWeb from '@/vendor/conflux-web'
 export const maxGasForFCSend = 25000
+const nonceLocalStoragePrefix = 'fc_address_'
 const namespace = 'fc'
 export { namespace }
 export default {
@@ -18,17 +19,17 @@ export default {
     /** 个人锁定池的FC数量 通过stateOf函数直接获取 */
     fcPersonalLockBalance: 0,
     // ======send=======
-    /** cfx开始send */
-    cfxSending: false,
-    /** cfx send成功 */
-    cfxSendSuccessed: false,
-    /** cfx send失败 */
-    cfxSendFailed: false,
+    /** fc开始send */
+    fcSending: false,
+    /** fc send成功 */
+    fcSendSuccessed: false,
+    /** fc send失败 */
+    fcSendFailed: false,
     /**最新转账成功的hash */
     lastFCSendSuccessHash: '',
   },
   effects: {
-    *updateBalance(_, { call, put, select }) {
+    *updateFCBalance(_, { call, put, select }) {
       try {
         const { currentAccountAddress: address } = yield select(state => state[namespaceOfCfx])
         const { FC } = yield select(state => state[namespace])
@@ -59,16 +60,20 @@ export default {
         yield put({
           type: 'setState',
           payload: {
-            cfxSending: true,
+            fcSending: true,
           },
         })
         const { toAddress, value, gasPrice } = payload
         const { currentAccountAddress: fromAddress } = yield select(state => state[namespaceOfCfx])
         const { FC } = yield select(state => state[namespace])
-        // TODO:nonce提取
+        const params = {
+          currentAccountAddress: fromAddress,
+          localStorageKey: `${nonceLocalStoragePrefix}${fromAddress}`,
+        }
+        const nonce = yield call(getActualNoncePromise, params)
         const txParams = {
           from: fromAddress,
-          nonce: 0, // make nonce appropriate
+          nonce,
           gasPrice,
           gas: maxGasForFCSend,
           value,
@@ -82,7 +87,27 @@ export default {
             lastFCSendSuccessHash: hash,
           },
         })
-      } catch (e) {}
+        yield put({
+          type: 'setState',
+          payload: {
+            fcSendSuccessed: true,
+          },
+        })
+      } catch (e) {
+        yield put({
+          type: 'setState',
+          payload: {
+            fcSendSuccessed: false,
+          },
+        })
+      } finally {
+        yield put({
+          type: 'setState',
+          payload: {
+            fcSending: false,
+          },
+        })
+      }
     },
   },
   reducers: {

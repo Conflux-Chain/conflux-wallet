@@ -5,7 +5,8 @@ import Button from '@material-ui/core/Button'
 import SendFcModal from '../send-fc-modal/index'
 import BalanceDetails from '../balance-details/index'
 import FcDetails from '../fc-details/index'
-interface IProps {
+import { IFC } from '../typings'
+interface IProps extends IFC {
   lockStatus?: boolean
 }
 interface IState {
@@ -13,7 +14,7 @@ interface IState {
   balanceDetailsTips: null | HTMLElement
   fcDetailsTips: null | HTMLElement
 }
-class ContentCfx extends Component<IProps, IState> {
+class ContentFC extends Component<IProps, IState> {
   static defaultProps = { lockStatus: true }
   state = {
     showModal: false,
@@ -50,14 +51,15 @@ class ContentCfx extends Component<IProps, IState> {
             </div>
             <div className={styles.walletBalance}>
               <p className={styles.walletBalanceTitle}>Total Balance</p>
-              <p className={styles.walletBalanceTotal}>12,335.4</p>
+              <p className={styles.walletBalanceTotal}>{this.props.fcTotalBalance}</p>
             </div>
           </div>
           <div className={styles.balanceBox}>
             <p className={styles.balanceTitle}>Available Balance</p>
             <div className={styles.balanceNum}>
-              10,000
+              {this.props.fcAvailableBalance}
               <BalanceDetails
+                {...this.props}
                 anchorEl={balanceDetailsTips}
                 onClose={() => {
                   this.setState({
@@ -142,4 +144,4 @@ class ContentCfx extends Component<IProps, IState> {
     )
   }
 }
-export default ContentCfx
+export default ContentFC

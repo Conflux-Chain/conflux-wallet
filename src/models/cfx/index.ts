@@ -48,33 +48,15 @@ export default {
             cfxSending: true,
           },
         })
-        // TODO:完整参数
         const { currentAccountAddress } = select(state => state[namespace])
+        // view层传过来的数据
         const { toAddress, sendAmount, gasPrice } = payload
         // ========nonce参数获取========
-
-        // 这个 nonce 应该在第一次获取后缓存起来，以后每次交易 +1
-        // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
-        // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
-        let nonce = yield call(getNoncePromise, currentAccountAddress)
-        const localNonce = JSON.parse(
-          localStorage.getItem(`${nonceLocalStoragePrefix}${currentAccountAddress}`) || null
-        )
-        // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
-        // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
-        if (
-          localNonce &&
-          +new Date() - +localNonce.updateTime < maxInterval &&
-          localNonce.nonce >= nonce
-        ) {
-          // tslint:disable-next-line: no-console
-          console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce)
-          nonce = localNonce.nonce
+        const params = {
+          currentAccountAddress,
+          localStorageKey: `${nonceLocalStoragePrefix}${currentAccountAddress}`,
         }
-        localStorage.setItem(
-          `${nonceLocalStoragePrefix}${currentAccountAddress}`,
-          JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
-        )
+        const nonce = yield call(getActualNoncePromise, params)
         const config = {
           from: currentAccountAddress,
           to: toAddress,
@@ -136,4 +118,32 @@ function getNoncePromise(fromAddress) {
       return resolve(count)
     })
   })
+}
+
+export async function getActualNoncePromise({ currentAccountAddress, localStorageKey }) {
+  try {
+    // 这个 nonce 应该在第一次获取后缓存起来，以后每次交易 +1
+    // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
+    // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
+    let nonce = await getNoncePromise(currentAccountAddress)
+    const localNonce = JSON.parse(localStorage.getItem(localStorageKey) || null)
+    // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
+    // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
+    if (
+      localNonce &&
+      +new Date() - +localNonce.updateTime < maxInterval &&
+      localNonce.nonce >= nonce
+    ) {
+      // tslint:disable-next-line: no-console
+      console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce)
+      nonce = localNonce.nonce
+    }
+    localStorage.setItem(
+      localStorageKey,
+      JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
+    )
+    return nonce
+  } catch (e) {
+    throw new Error(e)
+  }
 }

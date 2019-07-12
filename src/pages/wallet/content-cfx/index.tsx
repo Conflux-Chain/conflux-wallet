@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import SendCfxModal from '../send-cfx-modal/index'
 interface IProps {
   lockStatus?: boolean
+  cfxBalance: string
 }
 interface IState {
   showModal: boolean
@@ -33,7 +34,7 @@ class ContentCfx extends Component<IProps, IState> {
             </div>
             <div className={styles.walletBalance}>
               <p className={styles.walletBalanceTitle}>Total Balance</p>
-              <p className={styles.walletBalanceTotal}>12,335.4</p>
+              <p className={styles.walletBalanceTotal}>{this.props.cfxBalance}</p>
             </div>
           </div>
         </div>

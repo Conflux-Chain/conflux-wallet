@@ -1,6 +1,8 @@
 import confluxWeb, { abi } from '@/vendor/conflux-web'
 import { namespace as namespaceOfCfx } from '@/models/cfx'
 import { namespace as namespaceOfFc } from '@/models/fc'
+import { namespace as namespaceOfCommon } from '@/models/global/common'
+import config from '@/config'
 const namespace = 'login-create'
 export { namespace }
 export default {
@@ -13,8 +15,8 @@ export default {
     loginValidateError: false,
 
     // =====create=====
-    /** keyStoreJson 文件内容*/
-    keyStoreJson: '',
+    /** keystoreJson 文件内容*/
+    keystoreJson: '',
     /**
      *- 创建账户是否成功，这里取决于UI是什么时候调用`create` effects，
      *- 可以是输入密码后直接点击下一步的时候创建，可以是下载keystore文件的时候创建
@@ -31,12 +33,11 @@ export default {
         const account = confluxWeb.cfx.accounts.create(password)
         confluxWeb.cfx.accounts.wallet.add(account)
         const { privateKey, address } = account
-        const FC = new confluxWeb.cfx.Contract(abi as any, address)
-        const keyStoreJson = confluxWeb.cfx.accounts.encrypt(privateKey, password)
+        const keystoreJson = confluxWeb.cfx.accounts.encrypt(privateKey, password)
         yield put({
           type: 'setState',
           payload: {
-            keyStoreJson,
+            keystoreJson,
             createAccountIsSuccess: true,
           },
         })
@@ -45,7 +46,6 @@ export default {
           payload: {
             address,
             privateKey,
-            FC,
           },
         })
       } catch (e) {}
@@ -55,7 +55,7 @@ export default {
         const { keystoreJson, password } = payload
         const account = confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
         const { privateKey, address } = account
-        const FC = new confluxWeb.cfx.Contract(abi as any, address)
+
         yield put({
           type: 'setState',
           payload: {
@@ -68,7 +68,6 @@ export default {
           payload: {
             address,
             privateKey,
-            FC,
           },
         })
       } catch (e) {
@@ -84,7 +83,8 @@ export default {
     },
     /**获取到用户信息后的action */
     *getAccountAfterHandleAction({ payload }, { put }) {
-      const { address, privateKey, FC } = payload
+      const FC = new confluxWeb.cfx.Contract(abi as any, config.FCContractAdress)
+      const { address, privateKey } = payload
       // 存储cfx address/privateKey
       yield put({
         type: `${namespaceOfCfx}/setState`,
@@ -100,7 +100,13 @@ export default {
           FC,
         },
       })
-      // TODO:操作成功后跳转
+      // 更新login状态
+      yield put({
+        type: `${namespaceOfCommon}/setState`,
+        payload: {
+          isLogin: true,
+        },
+      })
     },
   },
   reducers: {
