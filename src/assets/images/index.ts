@@ -13,6 +13,7 @@ import fuzhi from './fuzhi-2.png'
 import pathLeft from './path_left.png'
 import pathRight from './path_right.png'
 import record from './record.png'
+import personPng from './person.png'
 export default {
   pathLeft,
   pathRight,
@@ -29,4 +30,5 @@ export default {
   logo,
   suo,
   lock,
+  personPng,
 }

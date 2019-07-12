@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './style.module.scss'
 import Hidden from '@material-ui/core/Hidden'
 // import { Link } from 'react-router-dom'
+import imgs from '../../assets/images'
 export default class About extends Component {
   render() {
     return (
@@ -75,6 +76,7 @@ export default class About extends Component {
         </div>
         <h2 className={styles.h2}>感谢</h2>
         <div className={styles.container3}>
+          <img src={imgs.personPng} className={styles.person} alt="person" />
           <p className={styles.p}>
             特别致谢Conflux社区成员Justin，Justin从最早参与Conflux基金会对FC设计的探讨，一路与Conflux基金会同行，并最终实现FC智能合约，
             功不可没，感谢Justin!
