@@ -2,19 +2,28 @@ import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import React, { Component } from 'react'
 import styles from './style.module.scss'
-import { namespace as globalCommonNamespace } from '@/models/global/common'
+import { namespace } from '@/models/cfx'
+import { namespace as namespaceOfCommon } from '@/models/global/common'
 import { connect } from 'react-redux'
 import TopHeader from './top-header'
 import SiderMenus from './sider-menus'
 import { RouteComponentProps, withRouter } from 'react-router'
-type IProps = RouteComponentProps & {
-  lockStatus?: boolean
-  dispatch?: any
-  width?: Breakpoint
+import { IDispatch } from '@/typings'
+interface IDvaPropsOfCommon {
+  isLogin: boolean
+  lockStatus: boolean
 }
+interface IDvaPropsOfCfx {
+  /** 钱包地址 */
+  currentAccountAddress: string
+}
+type IProps = RouteComponentProps &
+  Partial<IDvaPropsOfCommon> &
+  Partial<IDvaPropsOfCfx> &
+  IDispatch & {
+    width?: Breakpoint
+  }
 interface IState {
-  // 临时作为登录标准
-  isLogin?: boolean
   // 侧边导航标志
   mobileOpen?: boolean
 }
@@ -22,8 +31,7 @@ interface IState {
  * Layout组件
  */
 class BasicLayout extends Component<IProps, IState> {
-  state = {
-    isLogin: false,
+  state: IState = {
     mobileOpen: false,
   }
   onToggleMenus() {
@@ -32,8 +40,8 @@ class BasicLayout extends Component<IProps, IState> {
     })
   }
   render() {
-    const { isLogin, mobileOpen } = this.state
-    const { lockStatus } = this.props
+    const { mobileOpen } = this.state
+    const { lockStatus, isLogin } = this.props
 
     return (
       <div className={styles.root}>
@@ -45,6 +53,7 @@ class BasicLayout extends Component<IProps, IState> {
           }}
         />
         <SiderMenus
+          currentAccountAddress={this.props.currentAccountAddress}
           mobileOpen={mobileOpen}
           isLogin={isLogin}
           lockStatus={lockStatus}
@@ -62,7 +71,8 @@ class BasicLayout extends Component<IProps, IState> {
 
 const mapStateToProps = models => {
   return {
-    ...models[globalCommonNamespace],
+    ...models[namespace],
+    ...models[namespaceOfCommon],
   }
 }
 export default withRouter(connect(mapStateToProps)(withWidth()(BasicLayout)))

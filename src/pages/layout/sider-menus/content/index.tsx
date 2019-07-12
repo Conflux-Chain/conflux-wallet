@@ -6,56 +6,11 @@ import OperationDaochu from './operation-daochu/index'
 import OperationFuzhi from './operation-fuzhi/index'
 import OperationRecord from './operation-record/index'
 import MenuList from './menu-list/index'
-import { namespace } from '@/models/cfx'
-import { namespace as namespaceOfFc } from '@/models/fc'
-import { IDispatch } from '@/models/connect'
-import { connect } from 'react-redux'
-/**
- * cfx相关props
- */
-interface ICFX {
-  /**当前登陆的账户地址 */
-  currentAccountAddress: ''
-  /**当前登陆的private key*/
-  currentAccountPrivateKey: ''
-  /** cfx余额 */
-  cfxBalance: ''
-  /**最新转账成功的hash */
-  lastCfxSendSuccessHash: ''
-  /** cfx开始send */
-  cfxSending: false
-  /** cfx send成功 */
-  cfxSendSuccessed: false
-  /** cfx send失败 */
-  cfxSendFailed: false
-}
-/**
- * fc相关props
- */
-interface IFC {
-  /** 总数 */
-  fcTotalBalance: 0
-  /** 可用数量 = fcPersonalFreeBalance+fcPersonalUnLockBalance */
-  fcAvailableBalance: 0
-  /** Conflux转账池可用balance*/
-  fcPersonalFreeBalance: 0
-  /** 个人转账池 = 通过fc数值计算得来 */
-  fcPersonalUnLockBalance: 0
-  /** 个人锁定池的FC数量 通过stateOf函数直接获取 */
-  fcPersonalLockBalance: 0
-  // ======send=======
-  /** fc 开始send */
-  fcSending: false
-  /** fc send成功 */
-  fcSendSuccessed: false
-  /** fc send失败 */
-  fcSendFailed: false
-  /**最新转账成功的hash */
-  lastFCSendSuccessHash: ''
-}
-type IDvaProps = IDispatch & ICFX & IFC
-interface IProps extends Partial<IDvaProps> {
+
+interface IProps {
   lockStatus: boolean
+  /** 钱包地址 */
+  currentAccountAddress: string
 }
 
 class SiderContent extends Component<IProps> {
@@ -69,9 +24,7 @@ class SiderContent extends Component<IProps> {
             <div className={styles.userPicWrap}>
               <img src={Images.user} alt="" className={styles.userPic} />
             </div>
-            <p className={styles.userCode}>
-              0x2aff3112ea17f39d0x2aff3112ea17f39d0x2aff3112ea17f39d
-            </p>
+            <p className={styles.userCode}>{this.props.currentAccountAddress}</p>
           </div>
           <div className={styles.operationWrap}>
             <OperationFuzhi lockStatus={lockStatus} />
@@ -91,11 +44,4 @@ class SiderContent extends Component<IProps> {
     )
   }
 }
-const mapStateToProps = models => {
-  return {
-    ...models[namespace],
-    ...models[namespaceOfFc],
-  }
-}
-
-export default connect(mapStateToProps)(SiderContent)
+export default SiderContent

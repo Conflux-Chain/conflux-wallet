@@ -5,6 +5,8 @@ import Hidden from '@material-ui/core/Hidden'
 import Drawer from '@material-ui/core/Drawer'
 import SiderContent from './content/index'
 interface IProps {
+  /** 钱包地址 */
+  currentAccountAddress: string
   isLogin: boolean
   lockStatus: boolean
   mobileOpen: boolean
@@ -34,12 +36,18 @@ class OperateList extends Component<IProps> {
                   keepMounted: true,
                 }}
               >
-                <SiderContent lockStatus={lockStatus} />
+                <SiderContent
+                  currentAccountAddress={this.props.currentAccountAddress}
+                  lockStatus={lockStatus}
+                />
               </Drawer>
             </Hidden>
             <Hidden xsDown>
               <Drawer variant="permanent" open className={styles.siderMenusWrap}>
-                <SiderContent lockStatus={lockStatus} />
+                <SiderContent
+                  currentAccountAddress={this.props.currentAccountAddress}
+                  lockStatus={lockStatus}
+                />
               </Drawer>
             </Hidden>
           </React.Fragment>

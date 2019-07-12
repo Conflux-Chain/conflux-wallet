@@ -1,6 +1,7 @@
 import confluxWeb, { abi } from '@/vendor/conflux-web'
 import { namespace as namespaceOfCfx } from '@/models/cfx'
 import { namespace as namespaceOfFc } from '@/models/fc'
+import { namespace as namespaceOfCommon } from '@/models/global/common'
 import config from '@/config'
 const namespace = 'login-create'
 export { namespace }
@@ -93,6 +94,13 @@ export default {
         type: `${namespaceOfFc}/setState`,
         payload: {
           FC,
+        },
+      })
+      // 更新login状态
+      yield put({
+        type: `${namespaceOfCommon}/setState`,
+        payload: {
+          isLogin: true,
         },
       })
     },
