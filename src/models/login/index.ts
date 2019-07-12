@@ -20,9 +20,11 @@ export default {
      *- 可以是输入密码后直接点击下一步的时候创建，可以是下载keystore文件的时候创建
      *- 创建成功后，keyStoreJson已经出来，这是一个同步过程
      *  */
-    createAccountIsSuccess: false,
+    createAccountIsSuccess: false, // 创建账户是否成功
+    restorePasswordRight: true, // restore钱包时密码是否正确
   },
   effects: {
+    // 根据密码创建账户
     *create({ payload }, { put }) {
       try {
         const { password } = payload
@@ -48,7 +50,7 @@ export default {
         })
       } catch (e) {}
     },
-    *login({ payload }, { put }) {
+    *login({ payload, callback }, { put }) {
       try {
         const { keystoreJson, password } = payload
         const account = confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
@@ -60,6 +62,7 @@ export default {
             loginSuccess: true,
           },
         })
+        callback()
         yield put({
           type: 'getAccountAfterHandleAction',
           payload: {
@@ -74,6 +77,7 @@ export default {
           type: 'setState',
           payload: {
             loginValidateError: true,
+            restorePasswordRight: false,
           },
         })
       }
