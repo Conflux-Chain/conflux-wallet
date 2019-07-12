@@ -1,3 +1,2 @@
-export default {
-  testField: 'test field',
-}
+import Login from './login/index'
+export default [...Login]

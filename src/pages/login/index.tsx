@@ -119,7 +119,8 @@ class Login extends Component<IProps, IState> {
 
   render() {
     const { open, type, stepIndex, restoreFileRight } = this.state
-    const { keystoreJson: keystoreJson, restorePasswordRight } = this.props
+    const { keystoreJson, restorePasswordRight } = this.props
+    // console.log(I18N)
     return (
       <div className={styles.login}>
         <Container>
