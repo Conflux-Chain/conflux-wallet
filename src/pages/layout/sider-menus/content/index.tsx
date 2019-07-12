@@ -44,12 +44,12 @@ interface IFC {
   /** 个人锁定池的FC数量 通过stateOf函数直接获取 */
   fcPersonalLockBalance: 0
   // ======send=======
-  /** cfx开始send */
-  cfxSending: false
-  /** cfx send成功 */
-  cfxSendSuccessed: false
-  /** cfx send失败 */
-  cfxSendFailed: false
+  /** fc 开始send */
+  fcSending: false
+  /** fc send成功 */
+  fcSendSuccessed: false
+  /** fc send失败 */
+  fcSendFailed: false
   /**最新转账成功的hash */
   lastFCSendSuccessHash: ''
 }
