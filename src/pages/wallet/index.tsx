@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './style.module.scss'
 import classnames from 'classnames'
 import { namespace } from '@/models/home'
+import { namespace as globalCommonNamespace } from '@/models/global/common'
 import { connect } from 'react-redux'
 import { IDispatch } from '@/typings'
 import { I18NHOC } from '@/utils/tools/react'
@@ -12,10 +13,13 @@ import ContentFc from './content-fc/index'
 
 type IProps = IDispatch &
   I18NProps & {
+    lockStatus?: boolean
     testState: number
   }
 class Home extends Component<IProps> {
   render() {
+    const { lockStatus } = this.props
+
     return (
       <div>
         <h2 className={styles.pageTitle}>Your Wallet</h2>
@@ -24,10 +28,10 @@ class Home extends Component<IProps> {
         </p>
         <div className={styles.cardWrap}>
           <Paper className={styles.pageCard}>
-            <ContentCfx />
+            <ContentCfx lockStatus={lockStatus} />
           </Paper>
           <Paper className={classnames(styles.pageCard, styles.cardFC)}>
-            <ContentFc />
+            <ContentFc lockStatus={lockStatus} />
           </Paper>
         </div>
       </div>
@@ -37,6 +41,7 @@ class Home extends Component<IProps> {
 const mapStateToProps = models => {
   return {
     ...models[namespace],
+    ...models[globalCommonNamespace],
   }
 }
 export default connect(mapStateToProps)(I18NHOC(Home))

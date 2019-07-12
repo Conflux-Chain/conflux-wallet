@@ -5,12 +5,16 @@ import Button from '@material-ui/core/Button'
 import SendFcModal from '../send-fc-modal/index'
 import BalanceDetails from '../balance-details/index'
 import FcDetails from '../fc-details/index'
+interface IProps {
+  lockStatus?: boolean
+}
 interface IState {
   showModal: boolean
   balanceDetailsTips: null | HTMLElement
   fcDetailsTips: null | HTMLElement
 }
-class ContentCfx extends Component<{}, IState> {
+class ContentCfx extends Component<IProps, IState> {
+  static defaultProps = { lockStatus: true }
   state = {
     showModal: false,
     balanceDetailsTips: null,
@@ -33,6 +37,7 @@ class ContentCfx extends Component<{}, IState> {
   }
   render() {
     const { showModal, balanceDetailsTips, fcDetailsTips } = this.state
+    const { lockStatus } = this.props
     return (
       <div className={styles.cardContent}>
         <div className={styles.infoBox}>
@@ -79,6 +84,7 @@ class ContentCfx extends Component<{}, IState> {
         <div>
           <div className={styles.btnBox}>
             <Button
+              disabled={lockStatus}
               variant="contained"
               color="primary"
               className={styles.btn}
@@ -96,7 +102,7 @@ class ContentCfx extends Component<{}, IState> {
                 this.hideModal()
               }}
             />
-            <Button variant="outlined" color="primary" className={styles.btn}>
+            <Button variant="outlined" color="primary" className={styles.btn} disabled={lockStatus}>
               Receive
             </Button>
           </div>
