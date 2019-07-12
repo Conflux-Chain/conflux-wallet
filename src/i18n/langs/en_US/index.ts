@@ -1,2 +1,4 @@
 import Login from './login/index'
-export default [...Login]
+export default {
+  Login,
+}

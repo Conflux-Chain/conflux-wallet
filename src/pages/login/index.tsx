@@ -119,12 +119,12 @@ class Login extends Component<IProps, IState> {
 
   render() {
     const { open, type, stepIndex, restoreFileRight } = this.state
-    const { keystoreJson, restorePasswordRight } = this.props
+    const { keystoreJson, restorePasswordRight, I18N } = this.props
     // console.log(I18N)
     return (
       <div className={styles.login}>
         <Container>
-          <h2 className={styles.title}>Welcome to Conflux Wallet</h2>
+          <h2 className={styles.title}>{I18N.Login.createWallet.titleH2}</h2>
           <div className={styles.conBox}>
             <Paper className={styles.paper} onClick={() => this.toogleModal('restore')}>
               <Hidden only={['xs', 'sm']}>

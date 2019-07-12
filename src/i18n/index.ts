@@ -4,7 +4,7 @@ import enUsLangs from './langs/en_US'
 import zhCNLangs from './langs/zh_CN'
 import { IAPI, LangEnum } from './typing'
 
-export type Langs = typeof zhCNLangs & IAPI
+export type Langs = typeof enUsLangs & IAPI
 
 export const langs = {
   [LangEnum.zh_CN]: zhCNLangs,
