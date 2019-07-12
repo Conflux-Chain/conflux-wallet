@@ -10,7 +10,7 @@ interface IProps {
   generateKeystore: (password: string) => void
   downloadFile: () => void // keystore文件下载
   downloadSuc: boolean // 下载是否成功
-  keyStoreJson?: ''
+  keystoreJson?: ''
 }
 
 interface IState {
@@ -35,7 +35,7 @@ export default class CreatWallet extends PureComponent<IProps, IState> {
   }
   downloadFile = () => {
     // 下载文件的demo，只需要传入keystore内容就行
-    createAndDownloadFile('keystore', JSON.stringify(this.props.keyStoreJson))
+    createAndDownloadFile('keystore', JSON.stringify(this.props.keystoreJson))
     // TODO:下载成功回调函数
   }
   render() {

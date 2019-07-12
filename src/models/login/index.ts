@@ -13,8 +13,8 @@ export default {
     loginValidateError: false,
 
     // =====create=====
-    /** keyStoreJson 文件内容*/
-    keyStoreJson: '',
+    /** keystoreJson 文件内容*/
+    keystoreJson: '',
     /**
      *- 创建账户是否成功，这里取决于UI是什么时候调用`create` effects，
      *- 可以是输入密码后直接点击下一步的时候创建，可以是下载keystore文件的时候创建
@@ -30,11 +30,11 @@ export default {
         confluxWeb.cfx.accounts.wallet.add(account)
         const { privateKey, address } = account
         const FC = new confluxWeb.cfx.Contract(abi as any, address)
-        const keyStoreJson = confluxWeb.cfx.accounts.encrypt(privateKey, password)
+        const keystoreJson = confluxWeb.cfx.accounts.encrypt(privateKey, password)
         yield put({
           type: 'setState',
           payload: {
-            keyStoreJson,
+            keystoreJson,
             createAccountIsSuccess: true,
           },
         })
