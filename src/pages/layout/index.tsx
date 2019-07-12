@@ -10,7 +10,6 @@ import SiderMenus from './sider-menus'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { IDispatch } from '@/typings'
 interface IDvaPropsOfCommon {
-  isLogin: boolean
   lockStatus: boolean
 }
 interface IDvaPropsOfCfx {
@@ -21,6 +20,7 @@ type IProps = RouteComponentProps &
   Partial<IDvaPropsOfCommon> &
   Partial<IDvaPropsOfCfx> &
   IDispatch & {
+    isShowLeftMenu?: boolean
     width?: Breakpoint
   }
 interface IState {
@@ -41,12 +41,11 @@ class BasicLayout extends Component<IProps, IState> {
   }
   render() {
     const { mobileOpen } = this.state
-    const { lockStatus, isLogin } = this.props
-
+    const { lockStatus, isShowLeftMenu } = this.props
     return (
       <div className={styles.root}>
         <TopHeader
-          isLogin={isLogin}
+          isLogin={isShowLeftMenu}
           lockStatus={lockStatus}
           onToggleMenus={() => {
             this.onToggleMenus()
@@ -55,7 +54,7 @@ class BasicLayout extends Component<IProps, IState> {
         <SiderMenus
           currentAccountAddress={this.props.currentAccountAddress}
           mobileOpen={mobileOpen}
-          isLogin={isLogin}
+          isLogin={isShowLeftMenu}
           lockStatus={lockStatus}
           onToggleMenus={() => {
             this.onToggleMenus()

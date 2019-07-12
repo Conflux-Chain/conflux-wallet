@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 // import { judgeLoginStatus } from '@/utils/tools'
 type IProps = RouteComponentProps & {
+  isLogin?: boolean
   isNeedReplace?: boolean
 }
 class Auth extends Component<IProps> {
   componentDidMount() {
-    const isLogin = true
-    if (isLogin) {
+    if (this.props.isLogin) {
       if (this.props.isNeedReplace) {
         this.props.history.replace('/wallet')
       }

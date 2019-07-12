@@ -9,7 +9,7 @@ import { IDispatch } from '@/models/connect'
 
 interface ICreat {
   generateKeystore: (password: string) => void // 根据密码生成keystore文件
-  keyStoreJson: any
+  keystoreJson: any
 }
 
 interface IRestore {
@@ -59,7 +59,7 @@ export default class ModalLogin extends Component<IProps, IState> {
       colseError,
       checkPassword,
       generateKeystore,
-      keyStoreJson,
+      keystoreJson,
       setStep,
     } = this.props
     const { downloadSuc } = this.state
@@ -86,7 +86,7 @@ export default class ModalLogin extends Component<IProps, IState> {
               <CreatWallet
                 stepIndex={stepIndex}
                 generateKeystore={generateKeystore}
-                keyStoreJson={keyStoreJson}
+                keystoreJson={keystoreJson}
                 setDownload={this.setDownload}
               />
             ) : (

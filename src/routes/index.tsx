@@ -4,12 +4,15 @@ import Layout from '@/pages/layout'
 import AuthComponent from '@/pages/auth'
 import { asyncComponent } from '@/utils/tools/react'
 import { routes } from '@/router-route-mapping'
-class Router extends Component {
+import { namespace } from '@/models/global/common'
+import { connect } from 'react-redux'
+
+const LoginComponent = asyncComponent(() => import('@/pages/login'))
+class Router extends Component<{ isLogin?: boolean }> {
   render() {
-    const isLogin = true
+    const { isLogin } = this.props
     return (
       <>
-        <Route path="/" exact component={() => <AuthComponent isNeedReplace />} />
         {isLogin ? (
           routes.map((item, index) => {
             const ChildComponent = asyncComponent(() => import(`@/pages${item.componentPath}`))
@@ -20,8 +23,8 @@ class Router extends Component {
                 key={index}
                 path={item.routePath}
                 component={() => (
-                  <AuthComponent>
-                    <Layout>
+                  <AuthComponent isLogin={isLogin} isNeedReplace>
+                    <Layout isShowLeftMenu>
                       <ChildComponent />
                     </Layout>
                   </AuthComponent>
@@ -31,18 +34,29 @@ class Router extends Component {
           })
         ) : (
           <>
-            <Layout>
-              <Route
-                path="/login"
-                exact
-                component={asyncComponent(() => import('@/pages/login'))}
-              />
-              <Route component={AuthComponent} />
-            </Layout>
+            <Route
+              path="/login"
+              exact
+              component={() => {
+                return (
+                  <AuthComponent>
+                    <Layout>
+                      <LoginComponent />
+                    </Layout>
+                  </AuthComponent>
+                )
+              }}
+            />
           </>
         )}
+        <Route path="*" exact component={() => <AuthComponent isLogin={isLogin} isNeedReplace />} />
       </>
     )
   }
 }
-export default Router
+const mapStateToProps = models => {
+  return {
+    ...models[namespace],
+  }
+}
+export default connect(mapStateToProps)(Router)

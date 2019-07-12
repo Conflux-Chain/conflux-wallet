@@ -10,7 +10,7 @@ interface IProps {
   stepIndex: number
   generateKeystore: (password: string) => void
   setDownload: () => void
-  keyStoreJson?: any
+  keystoreJson?: any
 }
 
 interface IState {
@@ -67,7 +67,7 @@ export default class CreatWallet extends PureComponent<IProps, IState> {
   }
   downloadFile = () => {
     // 下载文件的demo，只需要传入keystore内容就行
-    createAndDownloadFile('keystore', JSON.stringify(this.props.keyStoreJson))
+    createAndDownloadFile('keystore', JSON.stringify(this.props.keystoreJson))
     // 下载成功回调函数
     this.setState({
       downloadSuc: true,

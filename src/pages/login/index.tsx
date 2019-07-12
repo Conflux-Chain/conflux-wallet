@@ -14,7 +14,7 @@ import ModalLogin from './components/modal-login'
 
 type IProps = IDispatch &
   I18NProps & {
-    keyStoreJson: any
+    keystoreJson: any
     restorePasswordRight: boolean
   }
 
@@ -119,7 +119,7 @@ class Login extends Component<IProps, IState> {
 
   render() {
     const { open, type, stepIndex, restoreFileRight } = this.state
-    const { keyStoreJson, restorePasswordRight } = this.props
+    const { keystoreJson: keystoreJson, restorePasswordRight } = this.props
     return (
       <div className={styles.login}>
         <Container>
@@ -156,7 +156,7 @@ class Login extends Component<IProps, IState> {
           colseError={this.colseError}
           checkPassword={this.checkPassword}
           generateKeystore={this.generateKeystore}
-          keyStoreJson={keyStoreJson}
+          keystoreJson={keystoreJson}
           setType={this.setType}
           setStep={this.setStep}
         />
