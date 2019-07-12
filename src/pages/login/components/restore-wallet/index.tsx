@@ -1,66 +1,57 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import { readFileContentByFileObj } from '@/utils/tools'
 
 interface IProps {
   stepIndex: number
-  uploadFile: () => void
-  checkFile: () => void
+  uploadFile: (e: React.ChangeEvent<HTMLInputElement>) => void
   restorePasswordRight: boolean
   checkPassword: (password: string) => void
+  setStep: (step: number) => void
 }
 
 interface IState {
   password: string | number
 }
-export default class RestoreWallet extends PureComponent<IProps, IState> {
+export default class RestoreWallet extends Component<IProps, IState> {
   state = {
     password: '',
   }
 
-  changePassword = (e: any) => {
+  changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       password: e.target.value,
     })
   }
-  handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files
-    // 读取文件demo
-    const fileContent = await readFileContentByFileObj(file[0])
-    // tslint:disable-next-line: no-console
-    console.log(fileContent)
-    // TODO:读取成功后的操作,调用login models里面的login函数
-  }
 
   render() {
-    const { stepIndex, uploadFile, checkFile, restorePasswordRight, checkPassword } = this.props
+    const { stepIndex, uploadFile, restorePasswordRight, checkPassword } = this.props
     const { password } = this.state
     return (
       <div className={styles.restoreWallet}>
         {!stepIndex ? (
           <div className={styles.container1}>
-            <div className={styles.uploadBox} onClick={uploadFile}>
-              <input
-                className={styles.input}
-                onChange={this.handleFileChange}
-                id="fileUpload"
-                type="file"
-              />
-              <label htmlFor="fileUpload">
-                <svg className={styles.uploadIc} aria-hidden="true">
-                  <use xlinkHref="#iconwenjian-" />
-                </svg>
-              </label>
+            <div className={styles.uploadBox}>
+              <svg className={styles.uploadIc} aria-hidden="true">
+                <use xlinkHref="#iconwenjian-" />
+              </svg>
             </div>
             <p className={styles.tips}>
               Hello, you should upload your
               <br /> keystore file firstly.
             </p>
-            <Button variant="contained" className={styles.loginButton} onClick={checkFile}>
-              Continue
-            </Button>
+            <input
+              className={styles.input}
+              onChange={(e: any) => uploadFile(e)}
+              id="fileUpload"
+              type="file"
+            />
+            <label htmlFor="fileUpload">
+              <Button variant="contained" component="span" className={styles.loginButton}>
+                Continue
+              </Button>
+            </label>
           </div>
         ) : (
           <div className={styles.container2}>

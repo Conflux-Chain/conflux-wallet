@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styles from './style.module.scss'
 import Hidden from '@material-ui/core/Hidden'
-// import { Link } from 'react-router-dom'
 import imgs from '../../assets/images'
 export default class About extends Component {
   render() {

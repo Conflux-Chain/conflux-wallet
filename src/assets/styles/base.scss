@@ -62,6 +62,10 @@
   color: #fff;
   margin: 25px auto 0;
   padding: 0;
+
+  &:focus {
+    background: rgba(30, 61, 228, 1);
+  }
 }
 
 // 模态框公共
@@ -85,14 +89,17 @@
     padding: 0;
   }
 }
+
 // 上锁状态
 .lockStatus {
   .icon {
     cursor: not-allowed !important;
   }
+
   cursor: not-allowed !important;
   opacity: 0.38;
 }
+
 :global {
   .MuiSnackbar-root {
     .MuiTypography-root {

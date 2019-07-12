@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './style.module.scss'
-import { namespace } from '@/models/home'
+import { namespace } from '@/models/login'
 import { connect } from 'react-redux'
 import { IDispatch } from '@/typings'
 import { I18NHOC } from '@/utils/tools/react'
@@ -9,11 +9,13 @@ import { I18NProps } from '@/i18n/context'
 import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
 import Hidden from '@material-ui/core/Hidden'
+import { readFileContentByFileObj } from '@/utils/tools'
 import ModalLogin from './components/modal-login'
 
 type IProps = IDispatch &
   I18NProps & {
-    testState: number
+    keyStoreJson: any
+    restorePasswordRight: boolean
   }
 
 interface IState {
@@ -21,8 +23,7 @@ interface IState {
   type: string
   stepIndex: number
   restoreFileRight: boolean
-  restorePasswordRight: boolean
-  downloadSuc: boolean
+  fileContent: any
 }
 
 class Login extends Component<IProps, IState> {
@@ -31,8 +32,7 @@ class Login extends Component<IProps, IState> {
     type: 'creat', // 显示类型
     stepIndex: 0, // 当前步骤
     restoreFileRight: true, // 密钥文件验证是否正确
-    restorePasswordRight: true, // 重置钱包密码是否正确
-    downloadSuc: false, // keystore文件下载是否成功
+    fileContent: '', // 上传密钥文件获取到的数据
   }
   // 模态框显隐
   toogleModal = (type: string = 'creat') => {
@@ -42,25 +42,27 @@ class Login extends Component<IProps, IState> {
       open: !open,
       stepIndex: 0,
       restoreFileRight: true,
-      restorePasswordRight: true,
-      downloadSuc: false,
     })
   }
   // 上传登录密钥文件
-  uploadFile = () => {}
-
-  // 密钥文件验证
-  checkFile = () => {
-    // 验证正确
-    this.setState({
-      stepIndex: 1,
-      restoreFileRight: true,
-    })
-
-    // 验证错误
-    // this.setState({
-    //   restoreFileRight: false,
-    // })
+  uploadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = e.target.files
+      // 读取文件demo
+      const fileContent = await readFileContentByFileObj(file[0])
+      // console.log(JSON.parse(fileContent))
+      // 读取成功后的操作
+      this.setState({
+        fileContent,
+        stepIndex: 1,
+        restoreFileRight: true,
+      })
+    } catch {
+      // 文件解析失败
+      this.setState({
+        restoreFileRight: false,
+      })
+    }
   }
 
   // 关闭错误信息提示框
@@ -72,42 +74,52 @@ class Login extends Component<IProps, IState> {
 
   // 密码验证
   checkPassword = (password: string) => {
-    // console.log(password)
-    // 验证通过,进入钱包，保存登录状态
-    // this.setState({
-    //   open: false,
-    // })
-    // 密码错误
-    this.setState({
-      restorePasswordRight: false,
+    const { fileContent } = this.state
+    this.props.dispatch({
+      type: `${namespace}/login`,
+      payload: {
+        password,
+        keystoreJson: fileContent,
+      },
+      callback: () => {
+        // 验证通过
+        this.setState({
+          open: false,
+        })
+      },
     })
   }
 
   // 根据密码生成keystore文件
   generateKeystore = (password: string) => {
+    this.props.dispatch({
+      type: `${namespace}/create`,
+      payload: {
+        password,
+      },
+    })
     // 生成成功
     this.setState({
       stepIndex: 1,
     })
   }
 
-  // 下载keystore文件
-  downloadFile = () => {
-    // 下载成功
+  setType = (type: string) => {
     this.setState({
-      downloadSuc: true,
+      type,
+      stepIndex: 0,
+    })
+  }
+
+  setStep = (step: number) => {
+    this.setState({
+      stepIndex: step,
     })
   }
 
   render() {
-    const {
-      open,
-      type,
-      stepIndex,
-      restoreFileRight,
-      restorePasswordRight,
-      downloadSuc,
-    } = this.state
+    const { open, type, stepIndex, restoreFileRight } = this.state
+    const { keyStoreJson, restorePasswordRight } = this.props
     return (
       <div className={styles.login}>
         <Container>
@@ -133,22 +145,20 @@ class Login extends Component<IProps, IState> {
             </Paper>
           </div>
         </Container>
-        {/* <RestoreModal open={restoreModal} onClose={this.toogleRestore} />
-        <CreatModal open={creatModal} onClose={this.toogleCreat} /> */}
         <ModalLogin
           open={open}
           type={type}
           onClose={this.toogleModal}
           stepIndex={stepIndex}
           uploadFile={this.uploadFile}
-          checkFile={this.checkFile}
           restoreFileRight={restoreFileRight}
           restorePasswordRight={restorePasswordRight}
           colseError={this.colseError}
           checkPassword={this.checkPassword}
           generateKeystore={this.generateKeystore}
-          downloadSuc={downloadSuc}
-          downloadFile={this.downloadFile}
+          keyStoreJson={keyStoreJson}
+          setType={this.setType}
+          setStep={this.setStep}
         />
       </div>
     )

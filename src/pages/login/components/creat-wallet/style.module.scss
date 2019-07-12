@@ -24,6 +24,10 @@
       margin-top: 16px;
       margin-bottom: 23px;
     }
+
+    a {
+      text-decoration: none;
+    }
   }
 
   .container1 {
@@ -68,6 +72,16 @@
           right: -140px;
         }
       }
+    }
+
+    .passStrength {
+      width: 100%;
+      font-size: 16px;
+      font-family: ProximaNova-Regular;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.56);
+      line-height: 19px;
+      margin-top: 5px;
     }
   }
 

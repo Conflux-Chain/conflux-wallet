@@ -25,8 +25,11 @@ export default {
     createAccountIsSuccess: false,
     /**是否解锁失败 */
     lockError: false,
+    /**restore钱包时密码是否正确 */
+    restorePasswordRight: true,
   },
   effects: {
+    // 根据密码创建账户
     *create({ payload, callback, errCallback }, { put }) {
       try {
         const { password } = payload
@@ -82,6 +85,7 @@ export default {
           type: 'setState',
           payload: {
             loginValidateError: true,
+            restorePasswordRight: false,
           },
         })
         // tslint:disable-next-line: no-unused-expression
@@ -123,6 +127,7 @@ export default {
           loginValidateError: false,
           keystoreJson: false,
           createAccountIsSuccess: '',
+          restorePasswordRight: true,
         },
       })
     },
