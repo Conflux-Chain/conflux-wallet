@@ -23,9 +23,11 @@ export default {
      *- 创建成功后，keyStoreJson已经出来，这是一个同步过程
      *  */
     createAccountIsSuccess: false,
+    /**是否解锁失败 */
+    lockError: false,
   },
   effects: {
-    *create({ payload }, { put }) {
+    *create({ payload, callback, errCallback }, { put }) {
       try {
         const { password } = payload
         const account = confluxWeb.cfx.accounts.create(password)
@@ -46,9 +48,14 @@ export default {
             privateKey,
           },
         })
-      } catch (e) {}
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
+      } catch (e) {
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
+      }
     },
-    *login({ payload }, { put }) {
+    *login({ payload, callback, errCallback }, { put }) {
       try {
         const { keystoreJson, password } = payload
         const account = confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
@@ -67,6 +74,8 @@ export default {
             privateKey,
           },
         })
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
       } catch (e) {
         // 验证失败
         yield put({
@@ -75,6 +84,8 @@ export default {
             loginValidateError: true,
           },
         })
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
       }
     },
     /**获取到用户信息后的action */
@@ -103,6 +114,50 @@ export default {
           isLogin: true,
         },
       })
+    },
+    *init(_, { put }) {
+      yield put({
+        type: 'setState',
+        payload: {
+          loginSuccess: false,
+          loginValidateError: false,
+          keystoreJson: false,
+          createAccountIsSuccess: '',
+        },
+      })
+    },
+    /**
+     * 解锁
+     */
+    *unLock({ payload, callback, errCallback }, { put, select }) {
+      try {
+        const { password } = payload
+        const { keystoreJson } = select(state => state[namespace])
+        confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
+        yield put({
+          type: 'setState',
+          payload: {
+            lockError: false,
+          },
+        })
+        yield put({
+          type: `${namespaceOfCommon}/setState`,
+          payload: {
+            lockStatus: false,
+          },
+        })
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
+      } catch (e) {
+        yield put({
+          type: 'setState',
+          payload: {
+            lockError: true,
+          },
+        })
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
+      }
     },
   },
   reducers: {
