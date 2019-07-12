@@ -6,7 +6,8 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import Images from '@/assets/images/index'
 import styles from './style.module.scss'
 import BalanceDetailsModal from '../balance-details-modal/index'
-interface IProps {
+import { IFC } from '../typings'
+interface IProps extends IFC {
   anchorEl: null | HTMLElement
   onClose?: () => void
   width?: Breakpoint
@@ -58,7 +59,7 @@ class BalanceDetails extends Component<IProps, IState> {
                 <div className={styles.pathLeftWrap}>
                   <div className={styles.balanceTotalBox}>
                     <p className={styles.balanceTotalTitle}>Total Balance</p>
-                    <p className={styles.balanceTotalNum}>12,335</p>
+                    <p className={styles.balanceTotalNum}>{this.props.fcTotalBalance}</p>
                   </div>
                   <img src={Images.pathLeft} alt="" className={styles.pathLeft} />
                 </div>
@@ -66,23 +67,23 @@ class BalanceDetails extends Component<IProps, IState> {
                   <div className={styles.balanceAvailableBox}>
                     <div className={styles.freeBalanceBox}>
                       <p className={styles.balanceValTitle}>Free Balance</p>
-                      <p className={styles.balanceValNum}>7,665</p>
+                      <p className={styles.balanceValNum}>{this.props.fcPersonalFreeBalance}</p>
                     </div>
                     <div className={styles.personalUnlockedBalanceBox}>
                       <p className={styles.balanceValTitle}>Personal Unlocked Balance</p>
-                      <p className={styles.balanceValNum}>2,335</p>
+                      <p className={styles.balanceValNum}>{this.props.fcPersonalUnLockBalance}</p>
                     </div>
                     <div className={styles.pathRightWrap}>
                       <img src={Images.pathRight} alt="" className={styles.pathRight} />
                       <div className={styles.balanceTotalBox}>
                         <p className={styles.balanceTotalTitle}>Available Balance</p>
-                        <p className={styles.balanceTotalNum}>10,000</p>
+                        <p className={styles.balanceTotalNum}>{this.props.fcAvailableBalance}</p>
                       </div>
                     </div>
                   </div>
                   <div className={styles.personalLockedBalanceBox}>
                     <p className={styles.balanceValTitle}>Personal Locked Balance</p>
-                    <p className={styles.balanceValNum}>2,335</p>
+                    <p className={styles.balanceValNum}>{this.props.fcPersonalLockBalance}</p>
                   </div>
                 </div>
                 <div
