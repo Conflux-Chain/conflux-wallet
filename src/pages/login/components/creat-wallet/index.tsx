@@ -3,12 +3,14 @@ import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
+import { createAndDownloadFile } from '@/utils/tools'
 
 interface IProps {
   stepIndex: number
   generateKeystore: (password: string) => void
   downloadFile: () => void // keystore文件下载
   downloadSuc: boolean // 下载是否成功
+  keyStoreJson?: ''
 }
 
 interface IState {
@@ -31,9 +33,14 @@ export default class CreatWallet extends PureComponent<IProps, IState> {
       tipsShow: !tipsShow,
     })
   }
+  downloadFile = () => {
+    // 下载文件的demo，只需要传入keystore内容就行
+    createAndDownloadFile('keystore', JSON.stringify(this.props.keyStoreJson))
+    // TODO:下载成功回调函数
+  }
   render() {
     const { password, tipsShow } = this.state
-    const { stepIndex, generateKeystore, downloadFile, downloadSuc } = this.props
+    const { stepIndex, generateKeystore, downloadSuc } = this.props
     const tipsArr = [
       {
         iconName: 'iconfileprotectwenjianbaohu',
@@ -125,7 +132,7 @@ export default class CreatWallet extends PureComponent<IProps, IState> {
               variant="contained"
               className={styles.loginButton}
               style={{ width: '227px' }}
-              onClick={downloadFile}
+              onClick={this.downloadFile}
             >
               Download Keystore File
             </Button>
