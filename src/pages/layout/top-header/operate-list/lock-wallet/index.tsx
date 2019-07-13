@@ -44,7 +44,7 @@ class LockWallet extends Component<IProps, IState> {
               <svg className={styles.icon} aria-hidden="true">
                 <use xlinkHref={lockStatus ? '#iconsuo1' : '#iconlock'} />
               </svg>
-              {lockStatus ? 'Unlock Wallet' : 'lock Wallet'}
+              {lockStatus ? 'Unlock Wallet' : 'Lock Wallet'}
             </Button>
             <LockWalletModal
               lockStatus={lockStatus}
