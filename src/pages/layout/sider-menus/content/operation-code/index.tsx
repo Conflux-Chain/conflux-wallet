@@ -10,6 +10,7 @@ import Images from '@/assets/images/index'
 import QRCode from 'qrcode.react'
 interface IProps {
   lockStatus?: boolean
+  currentAccountAddress?: string
 }
 interface IState {
   openDialog?: boolean
@@ -30,7 +31,7 @@ class Operation extends Component<IProps, IState> {
     })
   }
   render() {
-    const { lockStatus } = this.props
+    const { lockStatus, currentAccountAddress } = this.props
     const { openDialog } = this.state
     return (
       <>
@@ -66,12 +67,8 @@ class Operation extends Component<IProps, IState> {
               <CloseIcon />
             </IconButton>
           </MuiDialogTitle>
-          <p className={styles.codeString}>0xa70ddf9b9750c575db4 53eea6a041f4c8536785a</p>
-          <QRCode
-            value="0xa70ddf9b9750c575db4 53eea6a041f4c8536785a"
-            className={styles.codeImg}
-            size={170}
-          />
+          <p className={styles.codeString}>{currentAccountAddress}</p>
+          <QRCode value={currentAccountAddress} className={styles.codeImg} size={170} />
         </Dialog>
       </>
     )

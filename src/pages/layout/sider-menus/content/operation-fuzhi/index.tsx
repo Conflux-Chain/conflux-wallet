@@ -9,6 +9,7 @@ import styles from './style.module.scss'
 import Images from '@/assets/images/index'
 interface IProps {
   lockStatus?: boolean
+  currentAccountAddress?: string
   width?: Breakpoint
 }
 interface IState {
@@ -20,7 +21,7 @@ class Operation extends Component<IProps, IState> {
     openMsg: false,
   }
   clickHandle() {
-    copy('0x2aff3112ea17')
+    copy(this.props.currentAccountAddress)
     this.setState({
       openMsg: true,
     })
