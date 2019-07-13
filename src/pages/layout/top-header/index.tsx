@@ -9,10 +9,10 @@ import LogoBox from './logo-box/index'
 interface IProps {
   isLogin: boolean
   lockStatus?: boolean
-  hasError?: boolean
+  lockError?: boolean
   simpleLayout?: boolean
   width?: Breakpoint
-  lockAction?: (password) => void
+  lockAction?: (val) => void
   onToggleMenus?: () => void
 }
 class TopHeader extends Component<IProps> {
@@ -21,7 +21,7 @@ class TopHeader extends Component<IProps> {
     this.props.onToggleMenus()
   }
   render() {
-    const { isLogin, lockStatus, simpleLayout, hasError } = this.props
+    const { isLogin, lockStatus, simpleLayout, lockError } = this.props
 
     return (
       <AppBar position="fixed" className={styles.walletHeaderWrap}>
@@ -41,7 +41,7 @@ class TopHeader extends Component<IProps> {
             <OperateList
               isLogin={isLogin}
               lockStatus={lockStatus}
-              hasError={hasError}
+              lockError={lockError}
               lockAction={this.props.lockAction}
             />
           )}
