@@ -28,6 +28,7 @@ interface IProps {
   unit: string
   onClose?: () => void
   sendAction?: (data: ISubmitData) => void
+  updateAction?: () => void
 }
 interface IState {
   balanceVal?: number
@@ -52,7 +53,8 @@ class SendBaseModal extends Component<IProps, IState> {
       balanceVal: val,
     })
   }
-  transferAllAction() {
+  async transferAllAction() {
+    await this.props.updateAction()
     this.setState({
       balanceVal: this.props.modalData.availableBalance,
     })

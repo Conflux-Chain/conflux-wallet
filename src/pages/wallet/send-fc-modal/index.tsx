@@ -5,6 +5,7 @@ import { IFC } from '../typings'
 interface IProps extends IFC {
   isShow: boolean
   onClose?: () => void
+  updateAction?: () => void
   onSendFc?: (data) => void
 }
 class SendCfxModal extends Component<IProps> {
@@ -33,6 +34,9 @@ class SendCfxModal extends Component<IProps> {
           sending={fcSending}
           sendFailed={fcSendFailed}
           isShow={isShow}
+          updateAction={() => {
+            this.props.updateAction()
+          }}
           sendAction={submitData => {
             this.submitAciton(submitData)
           }}

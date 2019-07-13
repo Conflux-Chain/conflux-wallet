@@ -10,6 +10,7 @@ interface ISendCfxData {
 }
 interface IProps extends ICFX {
   lockStatus?: boolean
+  updateCfxAction?: () => void
   onSendCfx?: (data: ISendCfxData) => void
 }
 interface IState {
@@ -54,6 +55,7 @@ class ContentCfx extends Component<IProps, IState> {
             color="primary"
             className={styles.btn}
             onClick={() => {
+              this.props.updateCfxAction()
               this.setState({
                 showModal: true,
               })
@@ -66,6 +68,9 @@ class ContentCfx extends Component<IProps, IState> {
             isShow={showModal}
             onSendCfx={sendData => {
               this.onSendCfx(sendData)
+            }}
+            updateAction={() => {
+              this.props.updateCfxAction()
             }}
             onClose={() => {
               this.hideModal()

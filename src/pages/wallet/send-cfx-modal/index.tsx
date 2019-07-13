@@ -4,6 +4,7 @@ import { ICFX } from '../typings'
 interface IProps extends ICFX {
   isShow: boolean
   onClose?: () => void
+  updateAction?: () => void
   onSendCfx?: (data) => void
 }
 class SendCfxModal extends Component<IProps> {
@@ -32,6 +33,9 @@ class SendCfxModal extends Component<IProps> {
           sending={cfxSending}
           sendFailed={cfxSendFailed}
           unit={'CFX'}
+          updateAction={() => {
+            this.props.updateAction()
+          }}
           sendAction={submitData => {
             this.submitAciton(submitData)
           }}

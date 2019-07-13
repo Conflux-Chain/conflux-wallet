@@ -25,12 +25,22 @@ class Home extends Component<IProps> {
       },
     })
   }
+  updateCfxAction() {
+    this.props.dispatch({
+      type: `${namespace}/updateCfxBalance`,
+    })
+  }
   onSendFc(data) {
     this.props.dispatch({
       type: `${namespaceOfFc}/send`,
       payload: {
         payload: data,
       },
+    })
+  }
+  updateFcAction() {
+    this.props.dispatch({
+      type: `${namespaceOfFc}/updateFCBalance`,
     })
   }
   render() {
@@ -44,6 +54,9 @@ class Home extends Component<IProps> {
           <Paper className={styles.pageCard}>
             <ContentCfx
               {...this.props}
+              updateCfxAction={() => {
+                this.updateCfxAction()
+              }}
               onSendCfx={sendData => {
                 this.onSendCfx(sendData)
               }}
@@ -52,6 +65,9 @@ class Home extends Component<IProps> {
           <Paper className={classnames(styles.pageCard, styles.cardFC)}>
             <ContentFc
               {...this.props}
+              updateFcAction={() => {
+                this.updateFcAction()
+              }}
               onSendFc={sendData => {
                 this.onSendFc(sendData)
               }}
