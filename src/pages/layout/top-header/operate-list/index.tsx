@@ -39,8 +39,12 @@ class OperateList extends Component<IProps> {
         {/* 移动屏 */}
         <Hidden smUp>
           <div className={styles.operateListM}>
-            {isLogin ? <MobileMenu /> : <NetSelect />}
-            <LangSelect />
+            {isLogin ? (
+              <MobileMenu lockStatus={lockStatus} isLogin={isLogin} />
+            ) : (
+              <NetSelect lockStatus={lockStatus} />
+            )}
+            <LangSelect lockStatus={lockStatus} />
           </div>
         </Hidden>
       </div>

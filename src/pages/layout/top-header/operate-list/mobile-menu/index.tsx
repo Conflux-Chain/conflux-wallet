@@ -10,14 +10,18 @@ import IconButton from '@material-ui/core/IconButton'
 import Divider from '@material-ui/core/Divider'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
-import DeployBtn from '../deploy-btn/index'
+// import DeployBtn from '../deploy-btn/index'
 import RefreshBtn from '../refresh-btn/index'
 const netList = ['Testnet', 'Local RPC']
+interface IProps {
+  isLogin?: boolean
+  lockStatus?: boolean
+}
 interface IState {
   menuM: null | HTMLElement
   menuNetSelected: string
 }
-class NetSelect extends Component<{}, IState> {
+class NetSelect extends Component<IProps, IState> {
   state = {
     menuM: null,
     menuNetSelected: 'Testnet',
@@ -40,6 +44,7 @@ class NetSelect extends Component<{}, IState> {
   }
   render() {
     const { menuM, menuNetSelected } = this.state
+    const { lockStatus, isLogin } = this.props
     const menuMOpen = Boolean(menuM)
     return (
       <div className={styles.operateListItem}>
@@ -68,19 +73,19 @@ class NetSelect extends Component<{}, IState> {
                   }}
                 >
                   <MenuList className={styles.selectMenuList}>
+                    {/* <MenuItem
+                      onClick={() => {
+                        this.handleClose()
+                      }}
+                    >
+                      <DeployBtn lockStatus={lockStatus}/>
+                    </MenuItem> */}
                     <MenuItem
                       onClick={() => {
                         this.handleClose()
                       }}
                     >
-                      <DeployBtn />
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => {
-                        this.handleClose()
-                      }}
-                    >
-                      <RefreshBtn />
+                      <RefreshBtn lockStatus={lockStatus} isLogin={isLogin} />
                     </MenuItem>
                     <Divider />
                     {netList.map((v, i) => {
