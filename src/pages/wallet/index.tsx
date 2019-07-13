@@ -17,6 +17,8 @@ interface IProps extends IDvaProps, I18NProps, IDispatch {
   testState: number
 }
 class Home extends Component<IProps> {
+  // ******* cfx
+  // 发送cfx
   onSendCfx(data) {
     this.props.dispatch({
       type: `${namespace}/send`,
@@ -25,11 +27,32 @@ class Home extends Component<IProps> {
       },
     })
   }
+  // 更新cfx
   updateCfxAction() {
     this.props.dispatch({
       type: `${namespace}/updateCfxBalance`,
     })
   }
+  // 关闭cfx失败
+  closeCfxFailedModal() {
+    this.props.dispatch({
+      type: `${namespace}/setState`,
+      payload: {
+        payload: { cfxSendFailed: false },
+      },
+    })
+  }
+  // 关闭cfx成功模态框
+  closeCfxSuccessedModal() {
+    this.props.dispatch({
+      type: `${namespace}/setState`,
+      payload: {
+        payload: { cfxSendSuccessed: false },
+      },
+    })
+  }
+  // ******* fc
+  // 发送fc
   onSendFc(data) {
     this.props.dispatch({
       type: `${namespaceOfFc}/send`,
@@ -38,9 +61,28 @@ class Home extends Component<IProps> {
       },
     })
   }
+  // 更新fc
   updateFcAction() {
     this.props.dispatch({
       type: `${namespaceOfFc}/updateFCBalance`,
+    })
+  }
+  // 关闭fc失败
+  closeFcFailedModal() {
+    this.props.dispatch({
+      type: `${namespaceOfFc}/setState`,
+      payload: {
+        payload: { fcSendFailed: false },
+      },
+    })
+  }
+  // 关闭fc成功模态框
+  closeFcSuccessedModal() {
+    this.props.dispatch({
+      type: `${namespace}/setState`,
+      payload: {
+        payload: { fcSendSuccessed: false },
+      },
     })
   }
   render() {
@@ -57,6 +99,12 @@ class Home extends Component<IProps> {
               updateCfxAction={() => {
                 this.updateCfxAction()
               }}
+              closeFailedModal={() => {
+                this.closeCfxFailedModal()
+              }}
+              closeSuccessedModal={() => {
+                this.closeCfxSuccessedModal()
+              }}
               onSendCfx={sendData => {
                 this.onSendCfx(sendData)
               }}
@@ -67,6 +115,12 @@ class Home extends Component<IProps> {
               {...this.props}
               updateFcAction={() => {
                 this.updateFcAction()
+              }}
+              closeFailedModal={() => {
+                this.closeFcFailedModal()
+              }}
+              closeSuccessedModal={() => {
+                this.closeFcSuccessedModal()
               }}
               onSendFc={sendData => {
                 this.onSendFc(sendData)

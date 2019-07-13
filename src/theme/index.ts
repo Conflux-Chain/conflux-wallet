@@ -27,7 +27,7 @@ const theme = createMuiTheme({
     },
     MuiDialog: {
       paper: {
-        margin: '0px',
+        margin: '16px',
       },
     },
   },

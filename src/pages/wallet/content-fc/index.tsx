@@ -8,10 +8,14 @@ import Button from '@material-ui/core/Button'
 import SendFcModal from '../send-fc-modal/index'
 import BalanceDetails from '../balance-details/index'
 import FcDetails from '../fc-details/index'
+import SendFail from '../send-fail/index'
+import SendSuccess from '../send-success/index'
 import { IFC } from '../typings'
 interface IProps extends IFC {
   lockStatus?: boolean
   updateFcAction?: () => void
+  closeFailedModal?: () => void
+  closeSuccessedModal?: () => void
   onSendFc?: (data) => void
   width?: Breakpoint
 }
@@ -45,9 +49,17 @@ class ContentFC extends Component<IProps, IState> {
   onSendFc(data) {
     this.props.onSendFc(data)
   }
+  // 关闭send失败模态框
+  closeFailedModal() {
+    this.props.closeFailedModal()
+  }
+  // 关闭send成功模态框
+  closeSuccessedModal() {
+    this.props.closeSuccessedModal()
+  }
   render() {
     const { showModal, balanceDetailsTips, fcDetailsTips } = this.state
-    const { lockStatus } = this.props
+    const { lockStatus, fcSendFailed, fcSendSuccessed } = this.props
     return (
       <div className={styles.cardContent}>
         <div className={styles.infoBox}>
@@ -162,6 +174,18 @@ class ContentFC extends Component<IProps, IState> {
             )}
           </FcDetails>
         </div>
+        <SendFail
+          openDialog={fcSendFailed}
+          onClose={() => {
+            this.closeFailedModal()
+          }}
+        />
+        <SendSuccess
+          openDialog={fcSendSuccessed}
+          onClose={() => {
+            this.closeSuccessedModal()
+          }}
+        />
       </div>
     )
   }

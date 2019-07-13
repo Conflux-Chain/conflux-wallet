@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
 import SendCfxModal from '../send-cfx-modal/index'
+import SendFail from '../send-fail/index'
+import SendSuccess from '../send-success/index'
 import { ICFX } from '../typings'
 interface ISendCfxData {
   toAddress: string
@@ -11,6 +13,8 @@ interface ISendCfxData {
 interface IProps extends ICFX {
   lockStatus?: boolean
   updateCfxAction?: () => void
+  closeFailedModal?: () => void
+  closeSuccessedModal?: () => void
   onSendCfx?: (data: ISendCfxData) => void
 }
 interface IState {
@@ -29,9 +33,17 @@ class ContentCfx extends Component<IProps, IState> {
   onSendCfx(data) {
     this.props.onSendCfx(data)
   }
+  // 关闭send失败模态框
+  closeFailedModal() {
+    this.props.closeFailedModal()
+  }
+  // 关闭send成功模态框
+  closeSuccessedModal() {
+    this.props.closeSuccessedModal()
+  }
   render() {
     const { showModal } = this.state
-    const { lockStatus, cfxBalance } = this.props
+    const { lockStatus, cfxBalance, cfxSendFailed, cfxSendSuccessed } = this.props
     return (
       <div className={styles.cardContent}>
         <div className={styles.infoBox}>
@@ -80,6 +92,18 @@ class ContentCfx extends Component<IProps, IState> {
             Receive
           </Button>
         </div>
+        <SendFail
+          openDialog={cfxSendFailed}
+          onClose={() => {
+            this.closeFailedModal()
+          }}
+        />
+        <SendSuccess
+          openDialog={cfxSendSuccessed}
+          onClose={() => {
+            this.closeSuccessedModal()
+          }}
+        />
       </div>
     )
   }
