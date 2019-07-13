@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import { I18NProps } from '@/i18n/context'
 
-interface IProps {
+interface IProps extends Partial<I18NProps> {
   stepIndex: number
   uploadFile: (e: React.ChangeEvent<HTMLInputElement>) => void
   restorePasswordRight: boolean

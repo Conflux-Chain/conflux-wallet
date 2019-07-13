@@ -3,43 +3,50 @@
 .login {
   min-height: calc(100vh - 56px);
   background-color: #f9f9f9;
-
-  @include respond-to(sm) {
-    padding-bottom: 60px;
-  }
+  padding-bottom: 60px;
 
   .title {
     font-size: 34px;
     font-family: ProximaNova-Bold;
     color: rgba(0, 0, 0, 0.87);
     line-height: 64px;
-    padding: 48px 49px 0;
+    padding-top: 48px;
     margin: 0;
     text-align: center;
   }
 
   .conBox {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 580px;
-    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px 0;
+
+    @include respond-to(md) {
+      flex-direction: row;
+      justify-content: center;
+    }
 
     .paper {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 270px;
+      width: 100%;
       height: 157px;
       background: rgba(255, 255, 255, 1);
       box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
       border-radius: 8px;
-      margin: 32px auto 0;
+      margin: 32px 0 0;
       color: #000;
       cursor: pointer;
 
       @include respond-to(md) {
+        width: 270px;
         height: 357px;
+
+        &:last-child {
+          margin-left: 40px;
+        }
       }
 
       &:hover {
@@ -48,25 +55,10 @@
         color: #fff;
         background-color: #1e3de4;
 
-        .nowIcon {
-          fill: #fff;
-          color: #fff;
+        .cardIc {
+          width: 136px;
+          height: 136px;
         }
-      }
-
-      .nowIcon {
-        fill: #1e3de4;
-        color: #1e3de4;
-      }
-
-      .icon1 {
-        width: 64px;
-        height: 64px;
-      }
-
-      .icon2 {
-        width: 72px;
-        height: 72px;
       }
 
       .paperTitle {
@@ -75,7 +67,7 @@
         line-height: 29px;
 
         @include respond-to(md) {
-          margin-top: 56px;
+          margin-top: 24px;
         }
       }
 

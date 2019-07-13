@@ -1,3 +1,4 @@
 export default {
-  titleH1: 'Welcome to Conflux Wallet',
+  creat: 'If you have no account, please',
+  restore: 'If you already have an account, please',
 }
