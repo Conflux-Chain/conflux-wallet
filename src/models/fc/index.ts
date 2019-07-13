@@ -33,24 +33,31 @@ export default {
       try {
         const { currentAccountAddress: address } = yield select(state => state[namespaceOfCfx])
         const { FC } = yield select(state => state[namespace])
-        const ratio = yield call(getCirculationRatioPromise, { address, FC })
-        const [c2PBalance, p2PBalance, lockBalance] = yield call(getFCStateOfPromise, {
-          address,
-          FC,
-        })
+        const ratio = yield call(getCirculationRatioPromise, { FC })
+        const { '0': c2PBalance, '1': p2PBalance, '2': lockBalance } = yield call(
+          getFCStateOfPromise,
+          {
+            address,
+            FC,
+          }
+        )
         const fcPersonalFreeBalance = c2PBalance
-        const fcPersonalUnLockBalance = (p2PBalance * ratio) / (100 + ratio)
-        const fcPersonalLockBalance = lockBalance + (p2PBalance * 100) / (100 + ratio)
-        const fcAvailableBalance = fcPersonalFreeBalance + fcPersonalUnLockBalance
-        const fcTotalBalance = fcAvailableBalance + fcPersonalLockBalance
+        // const fcPersonalUnLockBalance = (p2PBalance * ratio) / (100 + ratio)
+        const fcPersonalUnLockBalance = p2PBalance.mul(ratio).div(100 + ratio)
+        // const fcPersonalLockBalance = lockBalance + (p2PBalance * 100) / (100 + ratio)
+        const fcPersonalLockBalance = lockBalance.add(p2PBalance.mul(100).div(100 + ratio))
+        // const fcAvailableBalance = fcPersonalFreeBalance + fcPersonalUnLockBalance
+        const fcAvailableBalance = fcPersonalFreeBalance.add(fcPersonalUnLockBalance)
+        // const fcTotalBalance = fcAvailableBalance + fcPersonalLockBalance
+        const fcTotalBalance = fcAvailableBalance.add(fcPersonalLockBalance)
         yield put({
           type: 'setState',
           payload: {
-            fcPersonalFreeBalance,
-            fcPersonalUnLockBalance,
-            fcPersonalLockBalance,
-            fcAvailableBalance,
-            fcTotalBalance,
+            fcPersonalFreeBalance: fcPersonalFreeBalance.toNumber(),
+            fcPersonalUnLockBalance: fcPersonalUnLockBalance.toNumber(),
+            fcPersonalLockBalance: fcPersonalLockBalance.toNumber(),
+            fcAvailableBalance: fcAvailableBalance.toNumber(),
+            fcTotalBalance: fcTotalBalance.toNumber(),
           },
         })
       } catch (e) {}
@@ -117,7 +124,7 @@ export default {
   },
 }
 
-function getCirculationRatioPromise({ address, FC }) {
+function getCirculationRatioPromise({ FC }) {
   return new Promise((resolve: (value: number) => void, reject) => {
     FC.methods
       .circulationRatio()

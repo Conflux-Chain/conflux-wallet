@@ -17,6 +17,11 @@ interface IProps extends IDvaProps, I18NProps, IDispatch {
   testState: number
 }
 class Home extends Component<IProps> {
+  componentDidMount() {
+    this.updateCfxAction()
+    this.updateFcAction()
+  }
+
   // ******* cfx
   // 发送cfx
   onSendCfx(data) {

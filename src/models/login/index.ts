@@ -103,7 +103,9 @@ export default {
     },
     /**获取到用户信息后的action */
     *getAccountAfterHandleAction({ payload }, { put }) {
-      const FC = new confluxWeb.cfx.Contract(abi as any, config.FCContractAdress)
+      const FC = new confluxWeb.cfx.Contract(abi as any, config.FCContractAdress, {
+        defaultGasPrice: '10', // default gas price
+      })
       const { address, privateKey } = payload
       // 存储cfx address/privateKey
       yield put({
