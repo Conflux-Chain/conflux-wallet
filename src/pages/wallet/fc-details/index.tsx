@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
+import { Link } from 'react-router-dom'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import styles from './style.module.scss'
 interface IProps {
@@ -28,12 +29,14 @@ class FcDetails extends Component<IProps> {
                 由衷感谢对其做出贡献的每一位社区成员。 Conflux基金会将以测试网FC的形式记录下
                 社区贡献，并承诺在主网上线后，与主网 CFX进行1:1承兑服务，保障所有社区成员的 劳动成果
               </p>
-              <p className={styles.fcDetailsLink}>
-                View More{' '}
-                <svg className={styles.icon} aria-hidden="true">
-                  <use xlinkHref="#icongengduo1" />
-                </svg>
-              </p>
+              <Link to="/about">
+                <p className={styles.fcDetailsLink}>
+                  View More{' '}
+                  <svg className={styles.icon} aria-hidden="true">
+                    <use xlinkHref="#icongengduo1" />
+                  </svg>
+                </p>
+              </Link>
             </div>
           ) : null}
         </div>

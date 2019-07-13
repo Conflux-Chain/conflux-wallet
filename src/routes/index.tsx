@@ -24,9 +24,15 @@ class Router extends Component<{ isLogin?: boolean }> {
                 path={item.routePath}
                 component={() => (
                   <AuthComponent isLogin={isLogin}>
-                    <Layout isShowLeftMenu>
-                      <ChildComponent />
-                    </Layout>
+                    {item.simpleLayout ? (
+                      <Layout simpleLayout>
+                        <ChildComponent />
+                      </Layout>
+                    ) : (
+                      <Layout isShowLeftMenu>
+                        <ChildComponent />
+                      </Layout>
+                    )}
                   </AuthComponent>
                 )}
               />
