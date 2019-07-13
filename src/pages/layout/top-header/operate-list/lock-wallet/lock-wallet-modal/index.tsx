@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button'
 import styles from './style.module.scss'
 interface IProps {
   isShow: boolean
+  lockStatus?: boolean
   onClose?: () => void
 }
 interface IState {
@@ -36,7 +37,7 @@ class LockWalletModal extends Component<IProps, IState> {
     })
   }
   render() {
-    const { isShow } = this.props
+    const { isShow, lockStatus } = this.props
     const { password, hasError } = this.state
     return (
       <Dialog
@@ -48,7 +49,7 @@ class LockWalletModal extends Component<IProps, IState> {
       >
         <MuiDialogTitle>
           <div>
-            <h1 className={styles.dialogTitle}>Lock Wallet</h1>
+            <h1 className={styles.dialogTitle}>{lockStatus ? 'Unlock Wallet' : 'Lock Wallet'}</h1>
           </div>
           <IconButton
             aria-label="Close"
@@ -86,9 +87,10 @@ class LockWalletModal extends Component<IProps, IState> {
             }}
           >
             <svg className={styles.icon} aria-hidden="true">
-              <use xlinkHref="#iconlock" />
+              <use xlinkHref={lockStatus ? '#iconsuo1' : '#iconlock'} />
             </svg>
-            Unlock
+
+            {lockStatus ? 'Unlock' : 'Lock'}
           </Button>
         </div>
       </Dialog>

@@ -5,6 +5,7 @@ import LockWalletModal from './lock-wallet-modal/index'
 
 interface IProps {
   isLogin: boolean
+  lockStatus?: boolean
 }
 interface IState {
   showModal: boolean
@@ -24,7 +25,7 @@ class LockWallet extends Component<IProps, IState> {
     })
   }
   render() {
-    const { isLogin } = this.props
+    const { isLogin, lockStatus } = this.props
     const { showModal } = this.state
     return (
       <>
@@ -39,11 +40,12 @@ class LockWallet extends Component<IProps, IState> {
               }}
             >
               <svg className={styles.icon} aria-hidden="true">
-                <use xlinkHref="#iconlock" />
+                <use xlinkHref={lockStatus ? '#iconsuo1' : '#iconlock'} />
               </svg>
-              Unlock Wallet
+              {lockStatus ? 'Unlock Wallet' : 'lock Wallet'}
             </Button>
             <LockWalletModal
+              lockStatus={lockStatus}
               isShow={showModal}
               onClose={() => {
                 this.hideLockModal()

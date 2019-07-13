@@ -19,7 +19,7 @@ class OperateList extends Component<IProps> {
 
     return (
       <div className={styles.operateWrap}>
-        <LockWallet isLogin={isLogin} />
+        <LockWallet isLogin={isLogin} lockStatus={lockStatus} />
         {/* 大屏 */}
         <Hidden xsDown>
           <div className={styles.operateListPc}>
