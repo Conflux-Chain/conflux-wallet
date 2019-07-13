@@ -6,6 +6,7 @@ import Drawer from '@material-ui/core/Drawer'
 import SiderContent from './content/index'
 interface IProps {
   /** 钱包地址 */
+  closeAction?: () => void
   currentAccountAddress: string
   isLogin: boolean
   lockStatus: boolean
@@ -37,6 +38,9 @@ class OperateList extends Component<IProps> {
                 }}
               >
                 <SiderContent
+                  closeAction={() => {
+                    this.props.closeAction()
+                  }}
                   currentAccountAddress={this.props.currentAccountAddress}
                   lockStatus={lockStatus}
                 />
@@ -45,6 +49,9 @@ class OperateList extends Component<IProps> {
             <Hidden xsDown>
               <Drawer variant="permanent" open className={styles.siderMenusWrap}>
                 <SiderContent
+                  closeAction={() => {
+                    this.props.closeAction()
+                  }}
                   currentAccountAddress={this.props.currentAccountAddress}
                   lockStatus={lockStatus}
                 />

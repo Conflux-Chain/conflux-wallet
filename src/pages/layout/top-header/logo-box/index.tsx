@@ -5,6 +5,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Hidden from '@material-ui/core/Hidden'
 interface IProps {
   isLogin: boolean
+  simpleLayout?: boolean
   onToggleMenus?: () => void
 }
 class Operation extends Component<IProps> {
@@ -12,10 +13,10 @@ class Operation extends Component<IProps> {
     this.props.onToggleMenus()
   }
   render() {
-    const { isLogin } = this.props
+    const { isLogin, simpleLayout } = this.props
     return (
       <>
-        {isLogin ? (
+        {isLogin && !simpleLayout ? (
           <React.Fragment>
             <Hidden smUp implementation="css">
               <IconButton

@@ -19,7 +19,7 @@ export default {
     /** cfx开始send */
     cfxSending: false,
     /** cfx send成功 */
-    cfxSendSuccessed: false,
+    cfxSendSuccessed: true,
     /** cfx send失败 */
     cfxSendFailed: false,
   },

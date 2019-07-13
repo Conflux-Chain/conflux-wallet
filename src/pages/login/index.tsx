@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import classnames from 'classnames'
 import styles from './style.module.scss'
 import { namespace } from '@/models/login'
+import { namespace as namespaceOfCommon } from '@/models/global/common'
 import { connect } from 'react-redux'
 import { IDispatch } from '@/typings'
 import { I18NHOC } from '@/utils/tools/react'
 import { I18NProps } from '@/i18n/context'
-import Container from '@material-ui/core/Container'
 import Paper from '@material-ui/core/Paper'
 import Hidden from '@material-ui/core/Hidden'
 import { readFileContentByFileObj } from '@/utils/tools'
 import ModalLogin from './components/modal-login'
+import imgs from '@/assets/images'
 
 type IProps = IDispatch &
   I18NProps & {
@@ -43,6 +43,14 @@ class Login extends Component<IProps, IState> {
       stepIndex: 0,
       restoreFileRight: true,
     })
+    if (type === 'restore') {
+      this.props.dispatch({
+        type: `${namespace}/setState`,
+        payload: {
+          restorePasswordRight: true,
+        },
+      })
+    }
   }
   // 上传登录密钥文件
   uploadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,10 +105,23 @@ class Login extends Component<IProps, IState> {
       payload: {
         password,
       },
+      callback: () => {
+        // 生成成功
+        this.setState({
+          stepIndex: 1,
+        })
+      },
     })
-    // 生成成功
-    this.setState({
-      stepIndex: 1,
+  }
+
+  // access wallt
+  goWallet = () => {
+    // 更新login状态
+    this.props.dispatch({
+      type: `${namespaceOfCommon}/setState`,
+      payload: {
+        isLogin: true,
+      },
     })
   }
 
@@ -120,32 +141,25 @@ class Login extends Component<IProps, IState> {
   render() {
     const { open, type, stepIndex, restoreFileRight } = this.state
     const { keystoreJson, restorePasswordRight, I18N } = this.props
-    // console.log(I18N)
     return (
       <div className={styles.login}>
-        <Container>
-          <h2 className={styles.title}>{I18N.Login.createWallet.titleH2}</h2>
-          <div className={styles.conBox}>
-            <Paper className={styles.paper} onClick={() => this.toogleModal('restore')}>
-              <Hidden only={['xs', 'sm']}>
-                <svg className={classnames(styles.nowIcon, styles.icon1)} aria-hidden="true">
-                  <use xlinkHref="#iconwenjian" />
-                </svg>
-              </Hidden>
-              <h5 className={styles.paperTitle}>Restore Wallet</h5>
-              <p className={styles.paperDesc}>If you have an account, please restore your wallet</p>
-            </Paper>
-            <Paper className={styles.paper} onClick={() => this.toogleModal('creat')}>
-              <Hidden only={['xs', 'sm']}>
-                <svg className={classnames(styles.nowIcon, styles.icon2)} aria-hidden="true">
-                  <use xlinkHref="#iconxinjian" />
-                </svg>
-              </Hidden>
-              <h5 className={styles.paperTitle}>Create Wallet</h5>
-              <p className={styles.paperDesc}>If you have no account, please create wall</p>
-            </Paper>
-          </div>
-        </Container>
+        <h2 className={styles.title}>{I18N.Login.LoginIndex.titleH1}</h2>
+        <div className={styles.conBox}>
+          <Paper className={styles.paper} onClick={() => this.toogleModal('restore')}>
+            <Hidden only={['xs', 'sm']}>
+              <img src={imgs.restorePng} className={styles.cardIc} />
+            </Hidden>
+            <h5 className={styles.paperTitle}>{I18N.Login.LoginIndex.titleRestore}</h5>
+            <p className={styles.paperDesc}>{I18N.Login.LoginIndex.conRestore}</p>
+          </Paper>
+          <Paper className={styles.paper} onClick={() => this.toogleModal('creat')}>
+            <Hidden only={['xs', 'sm']}>
+              <img src={imgs.creatPng} className={styles.cardIc} />
+            </Hidden>
+            <h5 className={styles.paperTitle}>{I18N.Login.LoginIndex.titleCreat}</h5>
+            <p className={styles.paperDesc}>{I18N.Login.LoginIndex.conCreat}</p>
+          </Paper>
+        </div>
         <ModalLogin
           open={open}
           type={type}
@@ -160,6 +174,8 @@ class Login extends Component<IProps, IState> {
           keystoreJson={keystoreJson}
           setType={this.setType}
           setStep={this.setStep}
+          I18N={I18N}
+          goWallet={this.goWallet}
         />
       </div>
     )
@@ -168,6 +184,7 @@ class Login extends Component<IProps, IState> {
 const mapStateToProps = models => {
   return {
     ...models[namespace],
+    ...models[namespaceOfCommon],
   }
 }
 export default connect(mapStateToProps)(I18NHOC(Login))

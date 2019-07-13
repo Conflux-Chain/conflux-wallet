@@ -79,6 +79,13 @@ export default {
             privateKey,
           },
         })
+        // 更新login状态
+        yield put({
+          type: `${namespaceOfCommon}/setState`,
+          payload: {
+            isLogin: true,
+          },
+        })
         // tslint:disable-next-line: no-unused-expression
         typeof callback === 'function' && callback()
       } catch (e) {
@@ -111,13 +118,6 @@ export default {
         type: `${namespaceOfFc}/setState`,
         payload: {
           FC,
-        },
-      })
-      // 更新login状态
-      yield put({
-        type: `${namespaceOfCommon}/setState`,
-        payload: {
-          isLogin: true,
         },
       })
     },

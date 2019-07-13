@@ -20,7 +20,7 @@ class Home extends Component<IProps> {
     return (
       <>
         <Logo />
-        <h1>{I18N.Login.createWallet.titleH2}</h1>
+        <h1>{I18N.Login.createWallet.creatSuc}</h1>
         <Button
           onClick={() => {
             setLangTriggerRender(LangEnum.zh_CN)

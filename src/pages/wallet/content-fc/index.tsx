@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
+import { Link } from 'react-router-dom'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import styles from './style.module.scss'
 import classnames from 'classnames'
 import Button from '@material-ui/core/Button'
 import SendFcModal from '../send-fc-modal/index'
 import BalanceDetails from '../balance-details/index'
 import FcDetails from '../fc-details/index'
+import SendFail from '../send-fail/index'
+import SendSuccess from '../send-success/index'
 import { IFC } from '../typings'
 interface IProps extends IFC {
   lockStatus?: boolean
+  updateFcAction?: () => void
+  closeFailedModal?: () => void
+  closeSuccessedModal?: () => void
+  onSendFc?: (data) => void
+  width?: Breakpoint
 }
 interface IState {
   showModal: boolean
@@ -36,9 +46,20 @@ class ContentFC extends Component<IProps, IState> {
       fcDetailsTips: e.currentTarget,
     })
   }
+  onSendFc(data) {
+    this.props.onSendFc(data)
+  }
+  // 关闭send失败模态框
+  closeFailedModal() {
+    this.props.closeFailedModal()
+  }
+  // 关闭send成功模态框
+  closeSuccessedModal() {
+    this.props.closeSuccessedModal()
+  }
   render() {
     const { showModal, balanceDetailsTips, fcDetailsTips } = this.state
-    const { lockStatus } = this.props
+    const { lockStatus, fcSendFailed, fcSendSuccessed } = this.props
     return (
       <div className={styles.cardContent}>
         <div className={styles.infoBox}>
@@ -72,10 +93,6 @@ class ContentFC extends Component<IProps, IState> {
                     styles.questionIcon,
                     balanceDetailsTips ? styles.questionIconActive : null
                   )}
-                  aria-hidden="true"
-                  onClick={e => {
-                    this.showBalanceDetailsTips(e)
-                  }}
                 >
                   <use xlinkHref="#iconjieshi" />
                 </svg>
@@ -91,6 +108,7 @@ class ContentFC extends Component<IProps, IState> {
               color="primary"
               className={styles.btn}
               onClick={() => {
+                this.props.updateFcAction()
                 this.setState({
                   showModal: true,
                 })
@@ -99,7 +117,14 @@ class ContentFC extends Component<IProps, IState> {
               Send
             </Button>
             <SendFcModal
+              {...this.props}
               isShow={showModal}
+              onSendFc={sendData => {
+                this.onSendFc(sendData)
+              }}
+              updateAction={() => {
+                this.props.updateFcAction()
+              }}
               onClose={() => {
                 this.hideModal()
               }}
@@ -126,22 +151,43 @@ class ContentFC extends Component<IProps, IState> {
               })
             }}
           >
-            <svg
-              className={classnames(
-                styles.fcQuestionIcon,
-                fcDetailsTips ? styles.fcQuestionIconActive : null
-              )}
-              aria-hidden="true"
-              onClick={e => {
-                this.showFcDetailsTipsTips(e)
-              }}
-            >
-              <use xlinkHref="#iconjieshi" />
-            </svg>
+            {isWidthUp('sm', this.props.width) ? (
+              <svg
+                className={classnames(
+                  styles.fcQuestionIcon,
+                  fcDetailsTips ? styles.fcQuestionIconActive : null
+                )}
+              >
+                <use xlinkHref="#iconjieshi" />
+              </svg>
+            ) : (
+              <Link to="/about">
+                <svg
+                  className={classnames(
+                    styles.fcQuestionIcon,
+                    fcDetailsTips ? styles.fcQuestionIconActive : null
+                  )}
+                >
+                  <use xlinkHref="#iconjieshi" />
+                </svg>
+              </Link>
+            )}
           </FcDetails>
         </div>
+        <SendFail
+          openDialog={fcSendFailed}
+          onClose={() => {
+            this.closeFailedModal()
+          }}
+        />
+        <SendSuccess
+          openDialog={fcSendSuccessed}
+          onClose={() => {
+            this.closeSuccessedModal()
+          }}
+        />
       </div>
     )
   }
 }
-export default ContentFC
+export default withWidth()(ContentFC)

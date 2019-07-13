@@ -1,6 +1,6 @@
 @import 'assets/styles/index.scss';
 .sendFormContent {
-  width: 302px;
+  width: auto;
   margin: 18px 24px 0;
   @include respond-to(sm) {
     width: 480px;
@@ -69,7 +69,7 @@
   .priceWrap {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-end;
     margin-bottom: 34px;
     @include respond-to(sm) {
       flex-direction: row;
@@ -78,11 +78,11 @@
     .priceInputWrap {
       display: flex;
       flex-grow: 1;
+      width: 100%;
     }
     .gdripInputWrap {
       width: 190px;
       margin-top: 16px;
-      margin-left: 90px;
       @include respond-to(sm) {
         margin-top: 0;
         margin-left: 15px;

@@ -25,6 +25,11 @@ const theme = createMuiTheme({
         textTransform: 'none',
       },
     },
+    MuiDialog: {
+      paper: {
+        margin: '16px',
+      },
+    },
   },
 })
 export default theme

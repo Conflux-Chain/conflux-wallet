@@ -8,6 +8,7 @@ import OperationRecord from './operation-record/index'
 import MenuList from './menu-list/index'
 
 interface IProps {
+  closeAction?: () => void
   lockStatus: boolean
   /** 钱包地址 */
   currentAccountAddress: string
@@ -35,7 +36,12 @@ class SiderContent extends Component<IProps> {
             />
             <OperationRecord lockStatus={lockStatus} />
           </div>
-          <MenuList lockStatus={lockStatus} />
+          <MenuList
+            lockStatus={lockStatus}
+            closeAction={() => {
+              this.props.closeAction()
+            }}
+          />
         </div>
         <div className={styles.siderMenusBottom}>
           <p className={styles.official}>Official Website</p>

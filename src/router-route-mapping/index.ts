@@ -10,6 +10,7 @@ export const routes = [
   {
     routePath: '/about',
     componentPath: '/about',
+    simpleLayout: true,
   },
   {
     routePath: '/wallet',

@@ -66,6 +66,10 @@
   &:focus {
     background: rgba(30, 61, 228, 1);
   }
+
+  &:disabled {
+    color: #fff;
+  }
 }
 
 // 模态框公共

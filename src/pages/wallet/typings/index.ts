@@ -9,7 +9,7 @@ export interface ICFX {
   /**当前登陆的private key*/
   currentAccountPrivateKey: ''
   /** cfx余额 */
-  cfxBalance: ''
+  cfxBalance: 0
   /**最新转账成功的hash */
   lastCfxSendSuccessHash: ''
   /** cfx开始send */
