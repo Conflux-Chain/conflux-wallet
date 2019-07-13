@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem'
 
 interface IProps {
   lockStatus: boolean
+  closeAction?: () => void
 }
 
 interface IState {
@@ -17,7 +18,9 @@ class SiderContent extends Component<IProps, IState> {
     currentActive: 'Wallet',
   }
   handleListItemClick() {}
-  handleClose() {}
+  handleClose() {
+    this.props.closeAction()
+  }
   render() {
     const { currentActive } = this.state
     const { lockStatus } = this.props
@@ -41,9 +44,9 @@ class SiderContent extends Component<IProps, IState> {
             disabled={lockStatus}
           >
             <p className={styles.listItemText}>
-              {/* <svg className={styles.icon} aria-hidden="true">
-                <use xlinkHref="#iconzhuyi" />
-              </svg>{' '} */}
+              <svg className={styles.icon} aria-hidden="true">
+                <use xlinkHref="#iconguanji" />
+              </svg>{' '}
               Close Wallet
             </p>
           </ListItem>

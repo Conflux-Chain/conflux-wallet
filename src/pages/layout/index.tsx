@@ -40,6 +40,11 @@ class BasicLayout extends Component<IProps, IState> {
       mobileOpen: !this.state.mobileOpen,
     })
   }
+  closeAction() {
+    this.props.dispatch({
+      type: `${namespaceOfCommon}/close`,
+    })
+  }
   render() {
     const { mobileOpen } = this.state
     const { lockStatus, isShowLeftMenu, simpleLayout } = this.props
@@ -58,6 +63,9 @@ class BasicLayout extends Component<IProps, IState> {
           mobileOpen={mobileOpen}
           isLogin={isShowLeftMenu}
           lockStatus={lockStatus}
+          closeAction={() => {
+            this.closeAction()
+          }}
           onToggleMenus={() => {
             this.onToggleMenus()
           }}
