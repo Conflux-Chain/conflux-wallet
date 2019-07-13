@@ -40,7 +40,7 @@ export default {
       }
     },
     /**send操作 */
-    *send({ payload }, { call, put, select }) {
+    *send({ payload, callback }, { call, put, select }) {
       try {
         yield put({
           type: 'setState',
@@ -73,6 +73,8 @@ export default {
             lastCfxSendSuccessHash: hash,
           },
         })
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
       } catch (e) {
         yield put({
           type: 'setState',

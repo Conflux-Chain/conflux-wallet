@@ -53,12 +53,14 @@ class BasicLayout extends Component<IProps, IState> {
     if (this.props.lockStatus) {
       this.props.dispatch({
         type: `${namespaceOfLogin}/unLock`,
-        payload: { callback, password },
+        payload: { password },
+        callback,
       })
     } else {
       this.props.dispatch({
         type: `${namespaceOfLogin}/lock`,
-        payload: { callback, password },
+        payload: { password },
+        callback,
       })
     }
   }

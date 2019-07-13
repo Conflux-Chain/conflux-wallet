@@ -25,9 +25,11 @@ class Home extends Component<IProps> {
   // ******* cfx
   // 发送cfx
   onSendCfx(data) {
+    const { toAddress, sendAmount, gasPrice, callback } = data
     this.props.dispatch({
       type: `${namespace}/send`,
-      payload: data,
+      payload: { toAddress, sendAmount, gasPrice },
+      callback,
     })
   }
   // 更新cfx
@@ -53,9 +55,11 @@ class Home extends Component<IProps> {
   // ******* fc
   // 发送fc
   onSendFc(data) {
+    const { toAddress, value, gasPrice, callback } = data
     this.props.dispatch({
       type: `${namespaceOfFc}/send`,
-      payload: data,
+      payload: { toAddress, value, gasPrice },
+      callback,
     })
   }
   // 更新fc
