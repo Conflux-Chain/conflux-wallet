@@ -37,18 +37,14 @@ class Home extends Component<IProps> {
   closeCfxFailedModal() {
     this.props.dispatch({
       type: `${namespace}/setState`,
-      payload: {
-        payload: { cfxSendFailed: false },
-      },
+      payload: { cfxSendFailed: false },
     })
   }
   // 关闭cfx成功模态框
   closeCfxSuccessedModal() {
     this.props.dispatch({
       type: `${namespace}/setState`,
-      payload: {
-        payload: { cfxSendSuccessed: false },
-      },
+      payload: { cfxSendSuccessed: false },
     })
   }
   // ******* fc
@@ -71,18 +67,15 @@ class Home extends Component<IProps> {
   closeFcFailedModal() {
     this.props.dispatch({
       type: `${namespaceOfFc}/setState`,
-      payload: {
-        payload: { fcSendFailed: false },
-      },
+
+      payload: { fcSendFailed: false },
     })
   }
   // 关闭fc成功模态框
   closeFcSuccessedModal() {
     this.props.dispatch({
       type: `${namespace}/setState`,
-      payload: {
-        payload: { fcSendSuccessed: false },
-      },
+      payload: { fcSendSuccessed: false },
     })
   }
   render() {
