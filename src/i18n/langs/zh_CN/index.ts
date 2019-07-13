@@ -1,3 +1,6 @@
+import Login from './login/index'
+import About from './about/index'
 export default {
-  testField: '测试字段',
+  Login,
+  About,
 }

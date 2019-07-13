@@ -147,14 +147,14 @@ class Login extends Component<IProps, IState> {
         <div className={styles.conBox}>
           <Paper className={styles.paper} onClick={() => this.toogleModal('restore')}>
             <Hidden only={['xs', 'sm']}>
-              <img src={imgs.restorePng} className={styles.cardIc} />
+              <img src={imgs.restorePng} className={styles.cardIc} alt="restore" />
             </Hidden>
             <h5 className={styles.paperTitle}>{I18N.Login.LoginIndex.titleRestore}</h5>
             <p className={styles.paperDesc}>{I18N.Login.LoginIndex.conRestore}</p>
           </Paper>
           <Paper className={styles.paper} onClick={() => this.toogleModal('creat')}>
             <Hidden only={['xs', 'sm']}>
-              <img src={imgs.creatPng} className={styles.cardIc} />
+              <img src={imgs.creatPng} className={styles.cardIc} alt="creat" />
             </Hidden>
             <h5 className={styles.paperTitle}>{I18N.Login.LoginIndex.titleCreat}</h5>
             <p className={styles.paperDesc}>{I18N.Login.LoginIndex.conCreat}</p>
