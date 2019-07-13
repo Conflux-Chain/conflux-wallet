@@ -27,9 +27,7 @@ class Home extends Component<IProps> {
   onSendCfx(data) {
     this.props.dispatch({
       type: `${namespace}/send`,
-      payload: {
-        payload: data,
-      },
+      payload: data,
     })
   }
   // 更新cfx
@@ -57,9 +55,7 @@ class Home extends Component<IProps> {
   onSendFc(data) {
     this.props.dispatch({
       type: `${namespaceOfFc}/send`,
-      payload: {
-        payload: data,
-      },
+      payload: data,
     })
   }
   // 更新fc
