@@ -2,18 +2,29 @@
 .tooltipWrap {
   display: inline;
 }
-.iconWrap {
-  display: inline;
-  vertical-align: middle;
-}
 .fcDetailsContent {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  display: none;
   width: 378px;
   padding: 24px;
+  margin-left: -189px;
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
   @include respond-to(sm) {
     margin-top: 6px;
+  }
+}
+.iconWrap {
+  position: relative;
+  display: inline;
+  vertical-align: middle;
+  &:hover {
+    .fcDetailsContent {
+      display: block;
+    }
   }
 }
 .fcDetailsLink {

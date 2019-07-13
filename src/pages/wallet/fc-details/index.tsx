@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
-import Popper from '@material-ui/core/Popper'
-import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import styles from './style.module.scss'
 interface IProps {
   anchorEl: null | HTMLElement
@@ -17,21 +15,11 @@ class FcDetails extends Component<IProps> {
     this.props.onClose()
   }
   render() {
-    const { anchorEl } = this.props
-    const open = Boolean(anchorEl)
     return (
       <div className={styles.tooltipWrap}>
-        <div className={styles.iconWrap}>{this.props.children}</div>
-        <ClickAwayListener
-          onClickAway={() => {
-            this.tipClose()
-          }}
-        >
-          <Popper
-            open={open}
-            anchorEl={anchorEl}
-            placement={isWidthUp('sm', this.props.width) ? 'bottom' : 'top'}
-          >
+        <div className={styles.iconWrap}>
+          {this.props.children}
+          {isWidthUp('sm', this.props.width) ? (
             <div className={styles.fcDetailsContent}>
               <p>
                 Fans Coin, 简称FC，由 Conflux基金会主导 设计，与社区成员合作研发，并基于Conflux
@@ -47,8 +35,8 @@ class FcDetails extends Component<IProps> {
                 </svg>
               </p>
             </div>
-          </Popper>
-        </ClickAwayListener>
+          ) : null}
+        </div>
       </div>
     )
   }
