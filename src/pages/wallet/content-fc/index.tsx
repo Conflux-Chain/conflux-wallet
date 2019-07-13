@@ -135,7 +135,7 @@ class ContentFC extends Component<IProps, IState> {
           </div>
           <div className={styles.seeContractBox}>
             <p>
-              See the Contract{' '}
+              View Contract{' '}
               <svg className={styles.moreIcon} aria-hidden="true">
                 <use xlinkHref="#icongengduo1" />
               </svg>

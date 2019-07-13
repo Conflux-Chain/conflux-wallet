@@ -1,6 +1,5 @@
 @import 'assets/styles/index.scss';
 .codeString {
-  width: 286px;
   margin: 0 30px;
   font-family: 'ProximaNova-Bold';
   font-size: 24px;
@@ -9,6 +8,7 @@
   color: rgba(0, 0, 0, 1);
   word-break: break-all;
   @include respond-to(sm) {
+    width: 286px;
     margin: 0 36px;
   }
 }

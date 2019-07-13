@@ -9,9 +9,11 @@ import LogoBox from './logo-box/index'
 interface IProps {
   isLogin: boolean
   lockStatus?: boolean
+  hasError?: boolean
   simpleLayout?: boolean
-  onToggleMenus?: () => void
   width?: Breakpoint
+  lockAction?: (password) => void
+  onToggleMenus?: () => void
 }
 class TopHeader extends Component<IProps> {
   static defaultProps = { isLogin: false, lockStatus: true }
@@ -19,7 +21,8 @@ class TopHeader extends Component<IProps> {
     this.props.onToggleMenus()
   }
   render() {
-    const { isLogin, lockStatus, simpleLayout } = this.props
+    const { isLogin, lockStatus, simpleLayout, hasError } = this.props
+
     return (
       <AppBar position="fixed" className={styles.walletHeaderWrap}>
         <Toolbar
@@ -34,7 +37,14 @@ class TopHeader extends Component<IProps> {
             }}
           />
           {/* 右边操作项 */}
-          {simpleLayout ? null : <OperateList isLogin={isLogin} lockStatus={lockStatus} />}
+          {simpleLayout ? null : (
+            <OperateList
+              isLogin={isLogin}
+              lockStatus={lockStatus}
+              hasError={hasError}
+              lockAction={this.props.lockAction}
+            />
+          )}
         </Toolbar>
       </AppBar>
     )

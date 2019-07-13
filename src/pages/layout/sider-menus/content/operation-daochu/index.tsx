@@ -72,7 +72,7 @@ class Operation extends Component<IProps, IState> {
             <svg className={styles.icon} aria-hidden="true">
               <use xlinkHref="#iconzhuyi" />
             </svg>
-            <p>Do not save the private key in screenshot!</p>
+            <p>Do not save private key in screenshot!</p>
           </div>
         </Dialog>
       </>
