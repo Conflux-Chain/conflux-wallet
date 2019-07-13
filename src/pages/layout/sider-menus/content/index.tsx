@@ -16,7 +16,7 @@ interface IProps {
 class SiderContent extends Component<IProps> {
   static defaultProps = { lockStatus: true }
   render() {
-    const { lockStatus } = this.props
+    const { lockStatus, currentAccountAddress } = this.props
     return (
       <div className={styles.siderMenusWrap}>
         <div className={styles.siderMenusTop}>
@@ -24,12 +24,15 @@ class SiderContent extends Component<IProps> {
             <div className={styles.userPicWrap}>
               <img src={Images.user} alt="" className={styles.userPic} />
             </div>
-            <p className={styles.userCode}>{this.props.currentAccountAddress}</p>
+            <p className={styles.userCode}>{currentAccountAddress}</p>
           </div>
           <div className={styles.operationWrap}>
-            <OperationFuzhi lockStatus={lockStatus} />
-            <OperationCode lockStatus={lockStatus} />
-            <OperationDaochu lockStatus={lockStatus} />
+            <OperationFuzhi lockStatus={lockStatus} currentAccountAddress={currentAccountAddress} />
+            <OperationCode lockStatus={lockStatus} currentAccountAddress={currentAccountAddress} />
+            <OperationDaochu
+              lockStatus={lockStatus}
+              currentAccountAddress={currentAccountAddress}
+            />
             <OperationRecord lockStatus={lockStatus} />
           </div>
           <MenuList lockStatus={lockStatus} />

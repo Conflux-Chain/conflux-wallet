@@ -8,6 +8,8 @@ import FcDetails from '../fc-details/index'
 import { IFC } from '../typings'
 interface IProps extends IFC {
   lockStatus?: boolean
+  updateFcAction?: () => void
+  onSendFc?: (data) => void
 }
 interface IState {
   showModal: boolean
@@ -35,6 +37,9 @@ class ContentFC extends Component<IProps, IState> {
     this.setState({
       fcDetailsTips: e.currentTarget,
     })
+  }
+  onSendFc(data) {
+    this.props.onSendFc(data)
   }
   render() {
     const { showModal, balanceDetailsTips, fcDetailsTips } = this.state
@@ -91,6 +96,7 @@ class ContentFC extends Component<IProps, IState> {
               color="primary"
               className={styles.btn}
               onClick={() => {
+                this.props.updateFcAction()
                 this.setState({
                   showModal: true,
                 })
@@ -99,7 +105,14 @@ class ContentFC extends Component<IProps, IState> {
               Send
             </Button>
             <SendFcModal
+              {...this.props}
               isShow={showModal}
+              onSendFc={sendData => {
+                this.onSendFc(sendData)
+              }}
+              updateAction={() => {
+                this.props.updateFcAction()
+              }}
               onClose={() => {
                 this.hideModal()
               }}

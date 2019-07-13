@@ -9,6 +9,7 @@ import styles from './style.module.scss'
 import Images from '@/assets/images/index'
 interface IProps {
   lockStatus?: boolean
+  currentAccountAddress?: string
 }
 interface IState {
   openDialog?: boolean
@@ -29,7 +30,7 @@ class Operation extends Component<IProps, IState> {
     })
   }
   render() {
-    const { lockStatus } = this.props
+    const { lockStatus, currentAccountAddress } = this.props
     const { openDialog } = this.state
     return (
       <>
@@ -66,9 +67,7 @@ class Operation extends Component<IProps, IState> {
               <CloseIcon />
             </IconButton>
           </MuiDialogTitle>
-          <p className={styles.codeString}>
-            0xba5ea4f15137a9dde2d59d3c1afe0c5655ec8953f210325542fbd9b67f1755c0
-          </p>
+          <p className={styles.codeString}>{currentAccountAddress}</p>
           <div className={styles.warnFooter}>
             <svg className={styles.icon} aria-hidden="true">
               <use xlinkHref="#iconzhuyi" />

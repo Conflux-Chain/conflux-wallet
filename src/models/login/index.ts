@@ -23,8 +23,10 @@ export default {
      *- 创建成功后，keyStoreJson已经出来，这是一个同步过程
      *  */
     createAccountIsSuccess: false,
-    /**是否解锁失败 */
+    /**lock失败 */
     lockError: false,
+    /**是否解锁失败 */
+    unlockError: false,
     /**restore钱包时密码是否正确 */
     restorePasswordRight: true,
   },
@@ -132,6 +134,35 @@ export default {
       })
     },
     /**
+     * 加锁
+     */
+    *lock({ payload, callback, errCallback }, { put, select }) {
+      try {
+        const { password } = payload
+        const { keystoreJson } = select(state => state[namespace])
+        confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
+        yield put({
+          type: 'setState',
+          payload: {
+            lockError: false,
+          },
+        })
+        yield put({
+          type: `${namespaceOfCommon}/setState`,
+          payload: {
+            lockStatus: true,
+          },
+        })
+      } catch (e) {
+        yield put({
+          type: 'setState',
+          payload: {
+            lockError: true,
+          },
+        })
+      }
+    },
+    /**
      * 解锁
      */
     *unLock({ payload, callback, errCallback }, { put, select }) {
@@ -142,7 +173,7 @@ export default {
         yield put({
           type: 'setState',
           payload: {
-            lockError: false,
+            unlockError: false,
           },
         })
         yield put({
@@ -157,7 +188,7 @@ export default {
         yield put({
           type: 'setState',
           payload: {
-            lockError: true,
+            unlockError: true,
           },
         })
         // tslint:disable-next-line: no-unused-expression

@@ -2,9 +2,16 @@ import React, { Component } from 'react'
 import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
 import SendCfxModal from '../send-cfx-modal/index'
-interface IProps {
+import { ICFX } from '../typings'
+interface ISendCfxData {
+  toAddress: string
+  sendAmount: string
+  gasPrice: string
+}
+interface IProps extends ICFX {
   lockStatus?: boolean
-  cfxBalance: string
+  updateCfxAction?: () => void
+  onSendCfx?: (data: ISendCfxData) => void
 }
 interface IState {
   showModal: boolean
@@ -19,9 +26,12 @@ class ContentCfx extends Component<IProps, IState> {
       showModal: false,
     })
   }
+  onSendCfx(data) {
+    this.props.onSendCfx(data)
+  }
   render() {
     const { showModal } = this.state
-    const { lockStatus } = this.props
+    const { lockStatus, cfxBalance } = this.props
     return (
       <div className={styles.cardContent}>
         <div className={styles.infoBox}>
@@ -34,7 +44,7 @@ class ContentCfx extends Component<IProps, IState> {
             </div>
             <div className={styles.walletBalance}>
               <p className={styles.walletBalanceTitle}>Total Balance</p>
-              <p className={styles.walletBalanceTotal}>{this.props.cfxBalance}</p>
+              <p className={styles.walletBalanceTotal}>{cfxBalance}</p>
             </div>
           </div>
         </div>
@@ -45,6 +55,7 @@ class ContentCfx extends Component<IProps, IState> {
             color="primary"
             className={styles.btn}
             onClick={() => {
+              this.props.updateCfxAction()
               this.setState({
                 showModal: true,
               })
@@ -53,7 +64,14 @@ class ContentCfx extends Component<IProps, IState> {
             Send
           </Button>
           <SendCfxModal
+            {...this.props}
             isShow={showModal}
+            onSendCfx={sendData => {
+              this.onSendCfx(sendData)
+            }}
+            updateAction={() => {
+              this.props.updateCfxAction()
+            }}
             onClose={() => {
               this.hideModal()
             }}
