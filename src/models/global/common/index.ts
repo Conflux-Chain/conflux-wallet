@@ -25,14 +25,6 @@ export default {
         })
       } catch (e) {}
     },
-    *lock(_, { put }) {
-      yield put({
-        type: 'setState',
-        payload: {
-          lockStatus: true,
-        },
-      })
-    },
   },
   reducers: {
     setState(state, { payload }) {
