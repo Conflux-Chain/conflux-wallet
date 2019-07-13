@@ -27,7 +27,7 @@ export default {
     /**更新cfx余额 */
     *updateCfxBalance(_, { call, put, select }) {
       try {
-        const { currentAccountAddress } = select(state => state[namespace])
+        const { currentAccountAddress } = yield select(state => state[namespace])
         const cfxBalance = yield call(confluxWeb.cfx.getBalance, currentAccountAddress)
         yield put({
           type: 'setState',
@@ -48,7 +48,7 @@ export default {
             cfxSending: true,
           },
         })
-        const { currentAccountAddress } = select(state => state[namespace])
+        const { currentAccountAddress } = yield select(state => state[namespace])
         // view层传过来的数据
         const { toAddress, sendAmount, gasPrice } = payload
         // ========nonce参数获取========
