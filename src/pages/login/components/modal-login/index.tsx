@@ -3,12 +3,14 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './style.module.scss'
 import Modal from '@material-ui/core/Modal'
+import { I18NProps } from '@/i18n/context'
 import RestoreWallet from '../restore-wallet'
 import CreatWallet from '../creat-wallet'
 import { IDispatch } from '@/models/connect'
 
 interface ICreat {
   generateKeystore: (password: string) => void // 根据密码生成keystore文件
+  goWallet: () => void
   keystoreJson: any
 }
 
@@ -20,7 +22,7 @@ interface IRestore {
   checkPassword: (password: string) => void // 验证密码是否正确
 }
 
-type IDvaProps = IDispatch & ICreat & IRestore
+type IDvaProps = IDispatch & I18NProps & ICreat & IRestore
 
 interface IProps extends Partial<IDvaProps> {
   open: boolean // 模态框是否开启
@@ -59,8 +61,10 @@ export default class ModalLogin extends Component<IProps, IState> {
       colseError,
       checkPassword,
       generateKeystore,
+      goWallet,
       keystoreJson,
       setStep,
+      I18N,
     } = this.props
     const { downloadSuc } = this.state
     const stepArr = [1, 2]
@@ -86,8 +90,10 @@ export default class ModalLogin extends Component<IProps, IState> {
               <CreatWallet
                 stepIndex={stepIndex}
                 generateKeystore={generateKeystore}
+                goWallet={goWallet}
                 keystoreJson={keystoreJson}
                 setDownload={this.setDownload}
+                I18N={I18N}
               />
             ) : (
               <RestoreWallet
@@ -96,6 +102,7 @@ export default class ModalLogin extends Component<IProps, IState> {
                 restorePasswordRight={restorePasswordRight}
                 checkPassword={checkPassword}
                 setStep={setStep}
+                I18N={I18N}
               />
             )}
           </div>
@@ -103,17 +110,17 @@ export default class ModalLogin extends Component<IProps, IState> {
             {!downloadSuc &&
               (type === 'restore' ? (
                 <p className={styles.words}>
-                  If you have no account, please
+                  {I18N.Login.modalLogin.creat}
                   <span className={styles.linkName} onClick={() => this.setType('creat')}>
-                    Creat Wallet
+                    {I18N.Login.LoginIndex.titleCreat}
                   </span>
                   >>
                 </p>
               ) : (
                 <p className={styles.words}>
-                  If you already have an account, please
+                  {I18N.Login.modalLogin.restore}
                   <span className={styles.linkName} onClick={() => this.setType('restore')}>
-                    Restore Wallet
+                    {I18N.Login.LoginIndex.titleRestore}
                   </span>
                   >>
                 </p>

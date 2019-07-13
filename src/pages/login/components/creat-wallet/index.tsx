@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react'
-import styles from './style.module.scss'
+import { I18NProps } from '@/i18n/context'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 import { createAndDownloadFile } from '@/utils/tools'
-import { Link } from 'react-router-dom'
+import styles from './style.module.scss'
 
-interface IProps {
+interface IProps extends Partial<I18NProps> {
   stepIndex: number
   generateKeystore: (password: string) => void
+  goWallet: () => void
   setDownload: () => void
   keystoreJson?: any
 }
@@ -76,24 +77,8 @@ export default class CreatWallet extends PureComponent<IProps, IState> {
   }
   render() {
     const { password, tipsShow, downloadSuc, passwordStrength } = this.state
-    const { stepIndex, generateKeystore } = this.props
-    const tipsArr = [
-      {
-        iconName: 'iconfileprotectwenjianbaohu',
-        title: 'Don’t Lose It',
-        content: 'Be careful, it can not be recovered if you lose it',
-      },
-      {
-        iconName: 'iconicons-hacker',
-        title: 'Don’t Share It',
-        content: 'Your funds will be stollen if you use this file on a malicious phishing site.',
-      },
-      {
-        iconName: 'iconbeifen',
-        title: 'Make a Backup',
-        content: 'Secure it like the millions of dollars it may one day be worth.',
-      },
-    ]
+    const { stepIndex, generateKeystore, goWallet, I18N } = this.props
+    const tipsArr = I18N.Login.createWallet.tipsArr
     return (
       <div className={styles.creatWallet}>
         {downloadSuc ? (
@@ -101,16 +86,17 @@ export default class CreatWallet extends PureComponent<IProps, IState> {
             <svg className={styles.rightIc} aria-hidden="true">
               <use xlinkHref="#iconchenggong1" />
             </svg>
-            <p className={styles.sucTxt}>You have created a wallet successfully!</p>
-            <Link to="/wallet">
-              <Button
-                variant="contained"
-                className={styles.loginButton}
-                style={{ width: '181px', height: '40px' }}
-              >
-                Access My Wallet
-              </Button>
-            </Link>
+            <p className={styles.sucTxt}>{I18N.Login.createWallet.creatSuc}</p>
+            {/* <Link to="/wallet"> */}
+            <Button
+              variant="contained"
+              className={styles.loginButton}
+              style={{ width: '181px', height: '40px' }}
+              onClick={goWallet}
+            >
+              Access My Wallet
+            </Button>
+            {/* </Link> */}
           </div>
         ) : !stepIndex ? (
           <div className={styles.container1}>
