@@ -1,3 +1,5 @@
+import { IDispatch } from '@/models/connect'
+
 /**
  * cfx相关props
  */
