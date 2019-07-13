@@ -12,16 +12,16 @@ import styles from './style.module.scss'
 interface IProps {
   isShow: boolean
   lockStatus?: boolean
+  hasError?: boolean
+  lockAction?: (password) => void
   onClose?: () => void
 }
 interface IState {
   password?: string
-  hasError?: boolean
 }
 class LockWalletModal extends Component<IProps, IState> {
   state = {
     password: '',
-    hasError: false,
   }
   handleClose() {
     this.props.onClose()
@@ -32,13 +32,11 @@ class LockWalletModal extends Component<IProps, IState> {
     })
   }
   submitForm() {
-    this.setState({
-      hasError: true,
-    })
+    this.props.lockAction(this.state.password)
   }
   render() {
-    const { isShow, lockStatus } = this.props
-    const { password, hasError } = this.state
+    const { isShow, lockStatus, hasError } = this.props
+    const { password } = this.state
     return (
       <Dialog
         onClose={() => {

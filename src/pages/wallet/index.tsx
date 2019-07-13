@@ -67,7 +67,6 @@ class Home extends Component<IProps> {
   closeFcFailedModal() {
     this.props.dispatch({
       type: `${namespaceOfFc}/setState`,
-
       payload: { fcSendFailed: false },
     })
   }

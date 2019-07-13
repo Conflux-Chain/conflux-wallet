@@ -11,15 +11,22 @@ import MobileMenu from './mobile-menu/index'
 interface IProps {
   isLogin: boolean
   lockStatus?: boolean
+  hasError?: boolean
+  lockAction?: (password) => void
 }
 class OperateList extends Component<IProps> {
   static defaultProps = { isLogin: false, lockStatus: true }
   render() {
-    const { isLogin, lockStatus } = this.props
+    const { isLogin, lockStatus, hasError } = this.props
 
     return (
       <div className={styles.operateWrap}>
-        <LockWallet isLogin={isLogin} lockStatus={lockStatus} />
+        <LockWallet
+          isLogin={isLogin}
+          lockStatus={lockStatus}
+          hasError={hasError}
+          lockAction={this.props.lockAction}
+        />
         {/* 大屏 */}
         <Hidden xsDown>
           <div className={styles.operateListPc}>

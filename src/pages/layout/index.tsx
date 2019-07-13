@@ -27,6 +27,8 @@ type IProps = RouteComponentProps &
 interface IState {
   // 侧边导航标志
   mobileOpen?: boolean
+  // 上锁表单状态
+  hasError?: boolean
 }
 /**
  * Layout组件
@@ -45,15 +47,35 @@ class BasicLayout extends Component<IProps, IState> {
       type: `${namespaceOfCommon}/close`,
     })
   }
+  lockAction(val) {
+    if (val === '') {
+      this.setState({
+        hasError: true,
+      })
+    } else {
+      this.setState({
+        hasError: false,
+      })
+      this.props.dispatch({
+        type: `${namespaceOfCommon}/setState`,
+        payload: { lockStatus: !this.props.lockStatus },
+      })
+    }
+  }
   render() {
-    const { mobileOpen } = this.state
+    const { mobileOpen, hasError } = this.state
     const { lockStatus, isShowLeftMenu, simpleLayout } = this.props
+
     return (
       <div className={styles.root}>
         <TopHeader
           simpleLayout={simpleLayout}
           isLogin={isShowLeftMenu}
           lockStatus={lockStatus}
+          hasError={hasError}
+          lockAction={val => {
+            this.lockAction(val)
+          }}
           onToggleMenus={() => {
             this.onToggleMenus()
           }}
