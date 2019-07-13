@@ -93,8 +93,7 @@
 .btnBox {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 80px;
+  justify-content: center;
   margin-top: 16px;
   margin-bottom: 24px;
   @include respond-to(md) {
@@ -111,8 +110,10 @@
     text-transform: Capitalize;
     &:not(:first-child) {
       margin-top: 0;
+      margin-left: 16px;
       @include respond-to(md) {
         margin-top: 8px;
+        margin-left: 0;
       }
     }
   }
