@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import styles from './style.module.scss'
 import Hidden from '@material-ui/core/Hidden'
 import imgs from '../../assets/images'
+
 export default class About extends Component {
   render() {
     return (
@@ -29,7 +31,7 @@ export default class About extends Component {
         <div className={styles.container2}>
           <div className={styles.line1}>
             <div className={styles.item1}>
-              <svg className={styles.icon1} aria-hidden="true">
+              <svg className={classnames(styles.icon, styles.icon1)} aria-hidden="true">
                 <use xlinkHref="#iconhuabanfuben" />
               </svg>
               <h3 className={styles.h3}>FC的分发原则</h3>
@@ -38,7 +40,7 @@ export default class About extends Component {
               </p>
             </div>
             <div className={styles.item1}>
-              <svg className={styles.icon2} aria-hidden="true">
+              <svg className={classnames(styles.icon, styles.icon2)} aria-hidden="true">
                 <use xlinkHref="#iconxianjinyuezhifu" />
               </svg>
               <h3 className={styles.h3}>FC的承兑原则</h3>
@@ -51,7 +53,7 @@ export default class About extends Component {
           </div>
           <div className={styles.line2}>
             <div className={styles.titleBox}>
-              <svg className={styles.icon3} aria-hidden="true">
+              <svg className={classnames(styles.iconSpe, styles.icon3)} aria-hidden="true">
                 <use xlinkHref="#iconsheji" />
               </svg>
               <h3 className={styles.h3}>FC的承兑原则</h3>
@@ -76,7 +78,7 @@ export default class About extends Component {
         <h2 className={styles.h2}>感谢</h2>
         <div className={styles.container3}>
           <img src={imgs.personPng} className={styles.person} alt="person" />
-          <p className={styles.p}>
+          <p className={styles.p} style={{ textAlign: 'center' }}>
             特别致谢Conflux社区成员Justin，Justin从最早参与Conflux基金会对FC设计的探讨，一路与Conflux基金会同行，并最终实现FC智能合约，
             功不可没，感谢Justin!
           </p>
