@@ -16,6 +16,6 @@ export default {
       content: 'Secure it like the millions of dollars it may one day be worth.',
     },
   ],
-  creatSuc: 'You have created a wallet successfully',
+  creatSuc: 'You have created a wallet successfully!',
   goWallet: 'Access My Wallet',
 }
