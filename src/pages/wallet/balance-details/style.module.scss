@@ -2,11 +2,12 @@
 .tooltipWrap {
   display: inline;
 }
-.iconWrap {
-  display: inline;
-  vertical-align: middle;
-}
 .modalContent {
+  position: absolute;
+  right: 10px;
+  bottom: -114px;
+  z-index: 10;
+  display: none;
   padding: 24px 8px 34px;
   margin-right: 0;
   margin-bottom: 6px;
@@ -25,6 +26,22 @@
     line-height: 19px;
     color: rgba(0, 0, 0, 1);
     text-align: center;
+  }
+}
+.modalContentM {
+  @extend .modalContent;
+  right: auto;
+  bottom: 16px;
+  left: -87px;
+}
+.iconWrap {
+  position: relative;
+  display: inline;
+  vertical-align: middle;
+  &:hover {
+    .modalContent {
+      display: block;
+    }
   }
 }
 // 数据框

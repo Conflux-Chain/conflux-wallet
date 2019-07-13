@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
+import { Link } from 'react-router-dom'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import styles from './style.module.scss'
 import classnames from 'classnames'
 import Button from '@material-ui/core/Button'
@@ -10,6 +13,7 @@ interface IProps extends IFC {
   lockStatus?: boolean
   updateFcAction?: () => void
   onSendFc?: (data) => void
+  width?: Breakpoint
 }
 interface IState {
   showModal: boolean
@@ -77,10 +81,6 @@ class ContentFC extends Component<IProps, IState> {
                     styles.questionIcon,
                     balanceDetailsTips ? styles.questionIconActive : null
                   )}
-                  aria-hidden="true"
-                  onClick={e => {
-                    this.showBalanceDetailsTips(e)
-                  }}
                 >
                   <use xlinkHref="#iconjieshi" />
                 </svg>
@@ -139,22 +139,31 @@ class ContentFC extends Component<IProps, IState> {
               })
             }}
           >
-            <svg
-              className={classnames(
-                styles.fcQuestionIcon,
-                fcDetailsTips ? styles.fcQuestionIconActive : null
-              )}
-              aria-hidden="true"
-              onClick={e => {
-                this.showFcDetailsTipsTips(e)
-              }}
-            >
-              <use xlinkHref="#iconjieshi" />
-            </svg>
+            {isWidthUp('sm', this.props.width) ? (
+              <svg
+                className={classnames(
+                  styles.fcQuestionIcon,
+                  fcDetailsTips ? styles.fcQuestionIconActive : null
+                )}
+              >
+                <use xlinkHref="#iconjieshi" />
+              </svg>
+            ) : (
+              <Link to="/about">
+                <svg
+                  className={classnames(
+                    styles.fcQuestionIcon,
+                    fcDetailsTips ? styles.fcQuestionIconActive : null
+                  )}
+                >
+                  <use xlinkHref="#iconjieshi" />
+                </svg>
+              </Link>
+            )}
           </FcDetails>
         </div>
       </div>
     )
   }
 }
-export default ContentFC
+export default withWidth()(ContentFC)

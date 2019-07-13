@@ -11,6 +11,7 @@ import { RouteComponentProps, withRouter } from 'react-router'
 import { IDispatch } from '@/typings'
 interface IDvaPropsOfCommon {
   lockStatus: boolean
+  simpleLayout?: boolean
 }
 interface IDvaPropsOfCfx {
   /** 钱包地址 */
@@ -41,10 +42,11 @@ class BasicLayout extends Component<IProps, IState> {
   }
   render() {
     const { mobileOpen } = this.state
-    const { lockStatus, isShowLeftMenu } = this.props
+    const { lockStatus, isShowLeftMenu, simpleLayout } = this.props
     return (
       <div className={styles.root}>
         <TopHeader
+          simpleLayout={simpleLayout}
           isLogin={isShowLeftMenu}
           lockStatus={lockStatus}
           onToggleMenus={() => {
