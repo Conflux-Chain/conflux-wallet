@@ -118,4 +118,12 @@
       }
     }
   }
+
+  .MuiDialog-paper {
+    width: 100%;
+
+    @include respond-to(md) {
+      width: auto;
+    }
+  }
 }
