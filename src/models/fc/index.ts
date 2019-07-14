@@ -53,11 +53,11 @@ export default {
         yield put({
           type: 'setState',
           payload: {
-            fcPersonalFreeBalance: fcPersonalFreeBalance.toNumber(),
-            fcPersonalUnLockBalance: fcPersonalUnLockBalance.toNumber(),
-            fcPersonalLockBalance: fcPersonalLockBalance.toNumber(),
-            fcAvailableBalance: fcAvailableBalance.toNumber(),
-            fcTotalBalance: fcTotalBalance.toNumber(),
+            fcPersonalFreeBalance: convertBigNumberToNumber(fcPersonalFreeBalance),
+            fcPersonalUnLockBalance: convertBigNumberToNumber(fcPersonalUnLockBalance),
+            fcPersonalLockBalance: convertBigNumberToNumber(fcPersonalLockBalance),
+            fcAvailableBalance: convertBigNumberToNumber(fcAvailableBalance),
+            fcTotalBalance: convertBigNumberToNumber(fcTotalBalance),
           },
         })
       } catch (e) {}
@@ -174,4 +174,8 @@ function sendSignedTransactionPromise(txParams) {
         return reject(err)
       })
   })
+}
+
+function convertBigNumberToNumber(amount) {
+  return amount.div(10 ** 18).toString()
 }

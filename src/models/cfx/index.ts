@@ -1,4 +1,5 @@
 import confluxWeb from '@/vendor/conflux-web'
+import BigNumber from 'bignumber.js'
 const namespace = 'cfx'
 const maxInterval = 1000 * 60 * 10
 /* Max gas for send transaction (not gas price) */
@@ -32,7 +33,7 @@ export default {
         yield put({
           type: 'setState',
           payload: {
-            cfxBalance,
+            cfxBalance: new BigNumber(cfxBalance).div(10 ** 18).toString(),
           },
         })
       } catch (e) {
@@ -60,7 +61,7 @@ export default {
         const config = {
           from: currentAccountAddress,
           to: toAddress,
-          value: sendAmount,
+          value: new BigNumber(sendAmount).multipliedBy(10 ** 18),
           gas: maxGasForCfxSend,
           gasPrice,
           nonce,
