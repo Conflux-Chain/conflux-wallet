@@ -18,4 +18,12 @@ export default {
   ],
   creatSuc: 'You have created a wallet successfully!',
   goWallet: 'Access My Wallet',
+  passLabel: 'Your Password',
+  passPlace: 'Please Enter At Least 9 Characters',
+  tips:
+    'This password encrypts your private key.  This does not act as a seed to generate your keys.',
+  good: 'good',
+  middle: 'middle',
+  weak: 'weak',
+  downloadFile: 'Download Keystore File',
 }

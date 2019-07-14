@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import styles from './style.module.scss'
 import { namespace } from '@/models/cfx'
 import { namespace as namespaceOfCommon } from '@/models/global/common'
+import { namespace as namespaceOfLogin } from '@/models/login/index'
 import { connect } from 'react-redux'
 import TopHeader from './top-header'
 import SiderMenus from './sider-menus'
@@ -21,14 +22,14 @@ type IProps = RouteComponentProps &
   Partial<IDvaPropsOfCommon> &
   Partial<IDvaPropsOfCfx> &
   IDispatch & {
+    lockError?: boolean
+    unlockError?: boolean
     isShowLeftMenu?: boolean
     width?: Breakpoint
   }
 interface IState {
   // 侧边导航标志
   mobileOpen?: boolean
-  // 上锁表单状态
-  hasError?: boolean
 }
 /**
  * Layout组件
@@ -48,31 +49,32 @@ class BasicLayout extends Component<IProps, IState> {
     })
   }
   lockAction(val) {
-    if (val === '') {
-      this.setState({
-        hasError: true,
+    const { callback, password } = val
+    if (this.props.lockStatus) {
+      this.props.dispatch({
+        type: `${namespaceOfLogin}/unLock`,
+        payload: { password },
+        callback,
       })
     } else {
-      this.setState({
-        hasError: false,
-      })
       this.props.dispatch({
-        type: `${namespaceOfCommon}/setState`,
-        payload: { lockStatus: !this.props.lockStatus },
+        type: `${namespaceOfLogin}/lock`,
+        payload: { password },
+        callback,
       })
     }
   }
   render() {
-    const { mobileOpen, hasError } = this.state
-    const { lockStatus, isShowLeftMenu, simpleLayout } = this.props
-
+    const { mobileOpen } = this.state
+    const { lockStatus, isShowLeftMenu, simpleLayout, lockError, unlockError } = this.props
+    const currentLockError = lockStatus ? unlockError : lockError
     return (
       <div className={styles.root}>
         <TopHeader
           simpleLayout={simpleLayout}
           isLogin={isShowLeftMenu}
           lockStatus={lockStatus}
-          hasError={hasError}
+          lockError={currentLockError}
           lockAction={val => {
             this.lockAction(val)
           }}
@@ -104,6 +106,7 @@ const mapStateToProps = models => {
   return {
     ...models[namespace],
     ...models[namespaceOfCommon],
+    ...models[namespaceOfLogin],
   }
 }
 export default withRouter(connect(mapStateToProps)(withWidth()(BasicLayout)))

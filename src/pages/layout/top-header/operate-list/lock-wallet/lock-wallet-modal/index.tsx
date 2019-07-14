@@ -13,7 +13,7 @@ interface IProps {
   isShow: boolean
   lockStatus?: boolean
   hasError?: boolean
-  lockAction?: (password) => void
+  lockAction?: (val) => void
   onClose?: () => void
 }
 interface IState {
@@ -32,7 +32,7 @@ class LockWalletModal extends Component<IProps, IState> {
     })
   }
   submitForm() {
-    this.props.lockAction(this.state.password)
+    this.props.lockAction({ password: this.state.password, callback: this.props.onClose })
   }
   render() {
     const { isShow, lockStatus, hasError } = this.props

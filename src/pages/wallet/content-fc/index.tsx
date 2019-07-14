@@ -120,7 +120,13 @@ class ContentFC extends Component<IProps, IState> {
               {...this.props}
               isShow={showModal}
               onSendFc={sendData => {
-                this.onSendFc(sendData)
+                this.onSendFc({
+                  ...sendData,
+                  callback: () =>
+                    this.setState({
+                      showModal: false,
+                    }),
+                })
               }}
               updateAction={() => {
                 this.props.updateFcAction()

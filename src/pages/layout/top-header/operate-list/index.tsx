@@ -11,20 +11,20 @@ import MobileMenu from './mobile-menu/index'
 interface IProps {
   isLogin: boolean
   lockStatus?: boolean
-  hasError?: boolean
-  lockAction?: (password) => void
+  lockError?: boolean
+  lockAction?: (val) => void
 }
 class OperateList extends Component<IProps> {
   static defaultProps = { isLogin: false, lockStatus: true }
   render() {
-    const { isLogin, lockStatus, hasError } = this.props
+    const { isLogin, lockStatus, lockError } = this.props
 
     return (
       <div className={styles.operateWrap}>
         <LockWallet
           isLogin={isLogin}
           lockStatus={lockStatus}
-          hasError={hasError}
+          lockError={lockError}
           lockAction={this.props.lockAction}
         />
         {/* 大屏 */}
@@ -39,8 +39,12 @@ class OperateList extends Component<IProps> {
         {/* 移动屏 */}
         <Hidden smUp>
           <div className={styles.operateListM}>
-            {isLogin ? <MobileMenu /> : <NetSelect />}
-            <LangSelect />
+            {isLogin ? (
+              <MobileMenu lockStatus={lockStatus} isLogin={isLogin} />
+            ) : (
+              <NetSelect lockStatus={lockStatus} />
+            )}
+            <LangSelect lockStatus={lockStatus} />
           </div>
         </Hidden>
       </div>

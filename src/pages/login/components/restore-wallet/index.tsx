@@ -27,7 +27,7 @@ export default class RestoreWallet extends Component<IProps, IState> {
   }
 
   render() {
-    const { stepIndex, uploadFile, restorePasswordRight, checkPassword } = this.props
+    const { stepIndex, uploadFile, restorePasswordRight, checkPassword, I18N } = this.props
     const { password } = this.state
     return (
       <div className={styles.restoreWallet}>
@@ -38,10 +38,7 @@ export default class RestoreWallet extends Component<IProps, IState> {
                 <use xlinkHref="#iconwenjian-" />
               </svg>
             </div>
-            <p className={styles.tips}>
-              Hello, you should upload your
-              <br /> keystore file firstly.
-            </p>
+            <p className={styles.tips}>{I18N.Login.restoreWallet.upload}</p>
             <input
               className={styles.input}
               onChange={(e: any) => uploadFile(e)}
@@ -50,7 +47,7 @@ export default class RestoreWallet extends Component<IProps, IState> {
             />
             <label htmlFor="fileUpload">
               <Button variant="contained" component="span" className={styles.loginButton}>
-                Continue
+                {I18N.Login.LoginIndex.continue}
               </Button>
             </label>
           </div>
@@ -60,13 +57,13 @@ export default class RestoreWallet extends Component<IProps, IState> {
               id="input-adornment-password"
               variant="standard"
               type="password"
-              label="Password"
+              label={I18N.Login.restoreWallet.passLabel}
               value={password}
               onChange={this.changePassword}
               error={!restorePasswordRight}
             />
             {!restorePasswordRight && (
-              <p className={styles.errorTxt}>Please enter the right password!</p>
+              <p className={styles.errorTxt}>{I18N.Login.restoreWallet.passTips}</p>
             )}
             <Button
               variant="contained"
@@ -74,7 +71,7 @@ export default class RestoreWallet extends Component<IProps, IState> {
               className={styles.loginButton}
               onClick={() => checkPassword(password)}
             >
-              Access Wallet
+              {I18N.Login.restoreWallet.accessWallet}
             </Button>
           </div>
         )}

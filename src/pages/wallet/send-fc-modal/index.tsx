@@ -19,7 +19,7 @@ class SendCfxModal extends Component<IProps> {
   submitAciton(data) {
     this.props.onSendFc({
       toAddress: data.addressVal,
-      sendAmount: data.balanceVal,
+      value: data.balanceVal,
       gasPrice: data.gasPriceVal,
     })
   }

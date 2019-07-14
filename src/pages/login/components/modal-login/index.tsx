@@ -130,7 +130,7 @@ export default class ModalLogin extends Component<IProps, IState> {
                 <svg className={styles.leftIc} aria-hidden="true" onClick={colseError}>
                   <use xlinkHref="#iconwrong" />
                 </svg>
-                <p className={styles.errorInfo}>JSON Parse error: “Unrecognize token”</p>
+                <p className={styles.errorInfo}>{I18N.Login.modalLogin.errorInfo}</p>
                 <svg className={styles.rightIc} aria-hidden="true" onClick={colseError}>
                   <use xlinkHref="#iconclose" />
                 </svg>

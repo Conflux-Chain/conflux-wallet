@@ -6,8 +6,8 @@ import LockWalletModal from './lock-wallet-modal/index'
 interface IProps {
   isLogin: boolean
   lockStatus?: boolean
-  hasError?: boolean
-  lockAction?: (password) => void
+  lockError?: boolean
+  lockAction?: (val) => void
 }
 interface IState {
   showModal: boolean
@@ -27,7 +27,7 @@ class LockWallet extends Component<IProps, IState> {
     })
   }
   render() {
-    const { isLogin, lockStatus, hasError } = this.props
+    const { isLogin, lockStatus, lockError } = this.props
     const { showModal } = this.state
     return (
       <>
@@ -49,7 +49,7 @@ class LockWallet extends Component<IProps, IState> {
             <LockWalletModal
               lockStatus={lockStatus}
               isShow={showModal}
-              hasError={hasError}
+              hasError={lockError}
               lockAction={this.props.lockAction}
               onClose={() => {
                 this.hideLockModal()

@@ -1,7 +1,9 @@
 @import 'assets/styles/index.scss';
+
 .formContent {
   .formBox {
-    width: 302px;
+    display: block;
+    width: 240px;
     margin: 0 24px 44px;
     @include respond-to(sm) {
       width: 420px;
