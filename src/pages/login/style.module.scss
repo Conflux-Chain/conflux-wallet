@@ -5,6 +5,10 @@
   background-color: #f9f9f9;
   padding-bottom: 60px;
 
+  @include respond-to(md) {
+    padding: 0;
+  }
+
   .title {
     font-size: 34px;
     font-family: ProximaNova-Bold;
