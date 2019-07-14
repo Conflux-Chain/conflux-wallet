@@ -24,26 +24,31 @@
   }
 
   .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: #fff;
     box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
     border-radius: 8px;
     width: 100%;
     padding: 48px 0 64px;
+    max-height: calc(100vh - 235px);
+    overflow-y: auto;
 
     @include respond-to(md) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       width: 340px;
       padding: 48px 40px 64px;
     }
+
     @media screen and (max-width: 375px) {
       padding: 30px 0 42px;
     }
+
     @media screen and (max-width: 320px) {
       padding: 24px 0 30px;
     }
+
     .dotBox {
       display: flex;
       justify-content: center;
