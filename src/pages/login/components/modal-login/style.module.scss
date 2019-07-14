@@ -37,7 +37,12 @@
       width: 340px;
       padding: 48px 40px 64px;
     }
-
+    @media screen and (max-width: 375px) {
+      padding: 30px 0 42px;
+    }
+    @media screen and (max-width: 320px) {
+      padding: 24px 0 30px;
+    }
     .dotBox {
       display: flex;
       justify-content: center;
