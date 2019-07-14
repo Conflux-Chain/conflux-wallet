@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
 import LockWalletModal from './lock-wallet-modal/index'
-
-interface IProps {
+import { I18NHOC } from '@/utils/tools/react'
+import { I18NProps } from '@/i18n/context'
+type IProps = I18NProps & {
   isLogin: boolean
   lockStatus?: boolean
   lockError?: boolean
@@ -27,7 +28,7 @@ class LockWallet extends Component<IProps, IState> {
     })
   }
   render() {
-    const { isLogin, lockStatus, lockError } = this.props
+    const { isLogin, lockStatus, lockError, I18N } = this.props
     const { showModal } = this.state
     return (
       <>
@@ -44,9 +45,10 @@ class LockWallet extends Component<IProps, IState> {
               <svg className={styles.icon} aria-hidden="true">
                 <use xlinkHref={lockStatus ? '#iconsuo1' : '#iconlock'} />
               </svg>
-              {lockStatus ? 'Unlock Wallet' : 'Lock Wallet'}
+              {lockStatus ? I18N.Layout.LockWallet.unlock : I18N.Layout.LockWallet.lock}
             </Button>
             <LockWalletModal
+              I18N={I18N}
               lockStatus={lockStatus}
               isShow={showModal}
               hasError={lockError}
@@ -61,4 +63,4 @@ class LockWallet extends Component<IProps, IState> {
     )
   }
 }
-export default LockWallet
+export default I18NHOC(LockWallet) as any

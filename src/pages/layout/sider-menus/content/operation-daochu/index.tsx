@@ -7,7 +7,8 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import styles from './style.module.scss'
 import Images from '@/assets/images/index'
-interface IProps {
+import { I18NProps } from '@/i18n/context'
+interface IProps extends Partial<I18NProps> {
   lockStatus?: boolean
   currentAccountAddress?: string
 }
@@ -30,11 +31,11 @@ class Operation extends Component<IProps, IState> {
     })
   }
   render() {
-    const { lockStatus, currentAccountAddress } = this.props
+    const { lockStatus, currentAccountAddress, I18N } = this.props
     const { openDialog } = this.state
     return (
       <>
-        <Tooltip title="Derive private key">
+        <Tooltip title={I18N.Layout.OperationDaochu.extractPrivateKey}>
           <div className={classnames(styles.operationWrap, lockStatus ? styles.lockStatus : null)}>
             <img
               src={Images.daochu}
@@ -56,7 +57,7 @@ class Operation extends Component<IProps, IState> {
           open={openDialog}
         >
           <MuiDialogTitle>
-            <div className={styles.dialogTitle}>Private Key</div>
+            <div className={styles.dialogTitle}>{I18N.Layout.OperationDaochu.privateKey}</div>
             <IconButton
               aria-label="Close"
               className={styles.dialogCloseBtn}
@@ -72,7 +73,7 @@ class Operation extends Component<IProps, IState> {
             <svg className={styles.icon} aria-hidden="true">
               <use xlinkHref="#iconzhuyi" />
             </svg>
-            <p>Do not save private key in screenshot!</p>
+            <p>{I18N.Layout.OperationDaochu.tips}</p>
           </div>
         </Dialog>
       </>

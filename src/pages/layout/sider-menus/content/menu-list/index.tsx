@@ -3,8 +3,8 @@ import styles from './style.module.scss'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 // import Images from '@/assets/images/index'
-
-interface IProps {
+import { I18NProps } from '@/i18n/context'
+interface IProps extends Partial<I18NProps> {
   lockStatus: boolean
   closeAction?: () => void
 }
@@ -23,7 +23,7 @@ class SiderContent extends Component<IProps, IState> {
   }
   render() {
     const { currentActive } = this.state
-    const { lockStatus } = this.props
+    const { lockStatus, I18N } = this.props
     return (
       <div className={styles.listWrap}>
         <List component="nav" aria-label="Secondary mailbox folder">
@@ -35,7 +35,7 @@ class SiderContent extends Component<IProps, IState> {
             selected={currentActive === 'Wallet'}
             onClick={() => this.handleListItemClick()}
           >
-            <p className={styles.listItemText}>Wallet</p>
+            <p className={styles.listItemText}>{I18N.Layout.MenuList.wallet}</p>
           </ListItem>
           <ListItem
             button
@@ -47,7 +47,7 @@ class SiderContent extends Component<IProps, IState> {
               <svg className={styles.icon} aria-hidden="true">
                 <use xlinkHref="#iconguanji" />
               </svg>{' '}
-              Close Wallet
+              {I18N.Layout.MenuList.closeWallet}
             </p>
           </ListItem>
         </List>
