@@ -155,6 +155,8 @@ export default {
             lockStatus: true,
           },
         })
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
       } catch (e) {
         yield put({
           type: 'setState',
@@ -162,6 +164,8 @@ export default {
             lockError: true,
           },
         })
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
       }
     },
     /**
