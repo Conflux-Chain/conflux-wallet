@@ -83,10 +83,11 @@ class Home extends Component<IProps> {
     })
   }
   render() {
+    const { I18N } = this.props
     return (
       <div>
-        <h2 className={styles.pageTitle}>My Wallet</h2>
-        <p className={styles.pageTips}>Explore, enjoy, embrace Conflux world</p>
+        <h2 className={styles.pageTitle}>{I18N.Wallet.MyWallet.title}</h2>
+        <p className={styles.pageTips}>{I18N.Wallet.MyWallet.pageTips}</p>
         <div className={styles.cardWrap}>
           <Paper className={styles.pageCard}>
             <ContentCfx

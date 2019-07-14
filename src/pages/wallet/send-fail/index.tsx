@@ -4,7 +4,8 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import styles from './style.module.scss'
-interface IProps {
+import { I18NProps } from '@/i18n/context'
+interface IProps extends Partial<I18NProps> {
   openDialog?: boolean
   onClose?: () => void
 }
@@ -15,7 +16,7 @@ class Operation extends Component<IProps> {
     this.props.onClose()
   }
   render() {
-    const { openDialog } = this.props
+    const { openDialog, I18N } = this.props
     return (
       <>
         <Dialog
@@ -40,7 +41,7 @@ class Operation extends Component<IProps> {
           <svg className={styles.statusIcon}>
             <use xlinkHref="#iconshibai" />
           </svg>
-          <p className={styles.tipString}>Sorry，there’s something wrong with your transaction!</p>
+          <p className={styles.tipString}>{I18N.Wallet.SendFail.errorTips}</p>
         </Dialog>
       </>
     )
