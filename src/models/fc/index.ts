@@ -74,6 +74,7 @@ export default {
         const { currentAccountAddress: fromAddress } = yield select(state => state[namespaceOfCfx])
         const { FC } = yield select(state => state[namespace])
         const params = {
+          initNonce: 1,
           currentAccountAddress: fromAddress,
           localStorageKey: `${nonceLocalStoragePrefix}${fromAddress}`,
         }
@@ -107,6 +108,7 @@ export default {
           type: 'setState',
           payload: {
             fcSendSuccessed: false,
+            fcSendFailed: true,
           },
         })
       } finally {
@@ -135,7 +137,7 @@ function getCirculationRatioPromise({ FC }) {
         return resolve(result)
       })
       .catch(err => {
-        return reject(err)
+        return reject(new Error(err))
       })
   })
 }
@@ -149,7 +151,7 @@ function getFCStateOfPromise({ address, FC }) {
         return resolve(result)
       })
       .catch(err => {
-        return reject(err)
+        return reject(new Error(err))
       })
   })
 }
@@ -165,7 +167,7 @@ function sendSignedTransactionPromise(txParams) {
             return resolve(transactionHash)
           })
           .catch(err => {
-            return reject(err)
+            return reject(new Error(err))
           })
       })
       .catch(err => {
