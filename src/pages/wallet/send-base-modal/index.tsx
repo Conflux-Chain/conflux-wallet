@@ -115,7 +115,7 @@ class SendBaseModal extends Component<IProps, IState> {
             <div className={styles.balanceInput}>
               <FormControl className={styles.formBox}>
                 <Input
-                  placeholder={`The available balance is ${modalData.availableBalance}`}
+                  placeholder={`${I18N.Wallet.SendModal.palceHolder1}${modalData.availableBalance}`}
                   value={balanceVal}
                   onChange={e => {
                     this.balanceChange(e)
@@ -140,7 +140,7 @@ class SendBaseModal extends Component<IProps, IState> {
             <FormControl className={styles.formBox} error={hasError}>
               <InputLabel>{I18N.Wallet.SendModal.toAddress}</InputLabel>
               <Input
-                placeholder="Address"
+                placeholder={I18N.Wallet.SendModal.palceHolder2}
                 value={addressVal}
                 onChange={e => {
                   this.addressChange(e)

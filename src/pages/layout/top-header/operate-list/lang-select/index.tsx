@@ -9,29 +9,7 @@ import Paper from '@material-ui/core/Paper'
 import Popper from '@material-ui/core/Popper'
 import { I18NHOC } from '@/utils/tools/react'
 import { I18NProps } from '@/i18n/context'
-import { LangEnum } from '@/i18n/typing'
-const LangList = [
-  {
-    img: (
-      <svg className={styles.countryIcon} aria-hidden="true">
-        <use xlinkHref="#iconyingyu" />
-      </svg>
-    ),
-    lang: LangEnum.en_US,
-    field: 'EN',
-    selectField: 'English',
-  },
-  {
-    img: (
-      <svg className={styles.countryIcon} aria-hidden="true">
-        <use xlinkHref="#iconchinese" />
-      </svg>
-    ),
-    lang: LangEnum.zh_CN,
-    field: 'CHS',
-    selectField: 'Chinese',
-  },
-]
+
 interface IState {
   menuLang: null | HTMLElement
   menuLangSelected: number
@@ -63,7 +41,7 @@ class NetSelect extends Component<IProps, IState> {
   }
   render() {
     const { menuLang, menuLangSelected } = this.state
-    const { lockStatus } = this.props
+    const { lockStatus, I18N } = this.props
     const menuLangOpen = Boolean(menuLang)
     return (
       <div className={classnames(styles.operateListItem, lockStatus ? styles.lockStatus : null)}>
@@ -77,8 +55,10 @@ class NetSelect extends Component<IProps, IState> {
             }
           }}
         >
-          {LangList[menuLangSelected].img}
-          {LangList[menuLangSelected].field}
+          <svg className={styles.countryIcon} aria-hidden="true">
+            <use xlinkHref={I18N.Layout.LangSelect.LangList[menuLangSelected].iconName} />
+          </svg>
+          {I18N.Layout.LangSelect.LangList[menuLangSelected].field}
           <svg className={styles.triangleIcon} aria-hidden="true">
             <use xlinkHref="#icondown" />
           </svg>
@@ -98,7 +78,7 @@ class NetSelect extends Component<IProps, IState> {
                   }}
                 >
                   <MenuList className={styles.selectMenuList}>
-                    {LangList.map((v, i) => {
+                    {I18N.Layout.LangSelect.LangList.map((v, i) => {
                       return (
                         <MenuItem
                           key={i}

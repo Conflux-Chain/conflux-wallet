@@ -7,6 +7,7 @@ import OperationFuzhi from './operation-fuzhi'
 import OperationRecord from './operation-record'
 import RefreshBtn from './refresh-btn'
 import SiderMenus from './sider-menus'
+import LangSelect from './lang-select'
 // 引进子模块
 export default {
   LockWallet,
@@ -18,4 +19,5 @@ export default {
   OperationRecord,
   RefreshBtn,
   SiderMenus,
+  LangSelect,
 }

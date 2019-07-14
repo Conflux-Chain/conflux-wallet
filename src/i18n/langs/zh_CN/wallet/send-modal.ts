@@ -6,4 +6,6 @@ export default {
   gasPrice: 'Gas Price',
   gdrip: 'Gdrip',
   send: '发送',
+  palceHolder1: '可用余额',
+  palceHolder2: '地址',
 }

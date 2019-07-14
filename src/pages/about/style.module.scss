@@ -153,8 +153,8 @@
 
         @include respond-to(md) {
           width: 410px;
-          height: 415px;
-          padding: 0 79px 0;
+          // height: 415px;
+          padding: 0 79px 56px;
 
           &:last-child {
             margin-top: 0;
@@ -186,8 +186,8 @@
       @include respond-to(md) {
         align-items: flex-start;
         width: 1040px;
-        height: 402px;
-        padding: 0 80px 0;
+        // height: 402px;
+        padding: 72px 80px 58px;
       }
 
       .titleBox {

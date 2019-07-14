@@ -6,4 +6,6 @@ export default {
   gasPrice: 'Gas Price',
   gdrip: 'Gdrip',
   send: 'Send',
+  palceHolder1: 'The available balance is ',
+  palceHolder2: 'Address',
 }
