@@ -67,7 +67,7 @@
     .conBox {
       display: flex;
       flex-direction: column;
-      padding: 0 40px 113px;
+      padding: 0 40px 180px;
 
       @include respond-to(md) {
         margin: 96px 0 0 79px;
