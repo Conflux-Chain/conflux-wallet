@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import Button from '@material-ui/core/Button'
 import styles from './style.module.scss'
+import { I18NProps } from '@/i18n/context'
 interface ISubmitData {
   balanceVal: number
   addressVal: string
@@ -20,7 +21,7 @@ interface IModalData {
   availableBalance: number
   successHash: string
 }
-interface IProps {
+interface IProps extends Partial<I18NProps> {
   modalData?: IModalData
   isShow: boolean
   sending?: boolean
@@ -81,7 +82,7 @@ class SendBaseModal extends Component<IProps, IState> {
     }
   }
   render() {
-    const { isShow, unit, modalData, sendFailed: hasError } = this.props
+    const { isShow, unit, modalData, sendFailed: hasError, I18N } = this.props
     const { balanceVal, addressVal, gasPriceVal } = this.state
     return (
       <Dialog
@@ -93,7 +94,7 @@ class SendBaseModal extends Component<IProps, IState> {
       >
         <MuiDialogTitle>
           <div>
-            <h1 className={styles.dialogTitle}>Send Transaction</h1>
+            <h1 className={styles.dialogTitle}>{I18N.Wallet.SendModal.sendTransaction}</h1>
           </div>
           <IconButton
             aria-label="Close"
@@ -107,14 +108,14 @@ class SendBaseModal extends Component<IProps, IState> {
         </MuiDialogTitle>
         <div className={styles.sendFormContent}>
           <div className={styles.fromCode}>
-            <label className={styles.fromLabel}>From</label>
+            <label className={styles.fromLabel}>{I18N.Wallet.SendModal.from}</label>
             <p>{modalData.successHash}</p>
           </div>
           <div className={styles.balanceWrap}>
             <div className={styles.balanceInput}>
               <FormControl className={styles.formBox}>
                 <Input
-                  placeholder={`The available balance is ${modalData.availableBalance}`}
+                  placeholder={`${I18N.Wallet.SendModal.palceHolder1}${modalData.availableBalance}`}
                   value={balanceVal}
                   onChange={e => {
                     this.balanceChange(e)
@@ -131,15 +132,15 @@ class SendBaseModal extends Component<IProps, IState> {
                   this.transferAllAction()
                 }}
               >
-                Transfer all the balance
+                {I18N.Wallet.SendModal.sendAll}
               </Button>
             </div>
           </div>
           <div className={styles.addressWrap}>
             <FormControl className={styles.formBox} error={hasError}>
-              <InputLabel>To Address</InputLabel>
+              <InputLabel>{I18N.Wallet.SendModal.toAddress}</InputLabel>
               <Input
-                placeholder="Address"
+                placeholder={I18N.Wallet.SendModal.palceHolder2}
                 value={addressVal}
                 onChange={e => {
                   this.addressChange(e)
@@ -154,7 +155,7 @@ class SendBaseModal extends Component<IProps, IState> {
           </div>
           <div className={styles.priceWrap}>
             <div className={styles.priceInputWrap}>
-              <label className={styles.fromLabel}>Gas Price</label>
+              <label className={styles.fromLabel}>{I18N.Wallet.SendModal.gasPrice}</label>
               <Slider
                 max={100}
                 value={parseInt(gasPriceVal, 10)}
@@ -167,12 +168,14 @@ class SendBaseModal extends Component<IProps, IState> {
             <div className={styles.gdripInputWrap}>
               <FormControl className={styles.formBox}>
                 <Input
-                  placeholder="Gas Price"
+                  placeholder={I18N.Wallet.SendModal.gasPrice}
                   value={gasPriceVal}
                   onChange={e => {
                     this.gasPriceChange(e)
                   }}
-                  endAdornment={<InputAdornment position="end">Gdrip</InputAdornment>}
+                  endAdornment={
+                    <InputAdornment position="end">{I18N.Wallet.SendModal.gdrip}</InputAdornment>
+                  }
                 />
               </FormControl>
             </div>
@@ -185,7 +188,7 @@ class SendBaseModal extends Component<IProps, IState> {
               this.submitForm()
             }}
           >
-            Send
+            {I18N.Wallet.SendModal.send}
           </Button>
         </div>
       </Dialog>

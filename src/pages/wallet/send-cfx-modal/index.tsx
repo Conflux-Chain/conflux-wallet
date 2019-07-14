@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import BaseModal from '../send-base-modal/index'
 import { ICFX } from '../typings'
-interface IProps extends ICFX {
+import { I18NProps } from '@/i18n/context'
+interface IProps extends ICFX, Partial<I18NProps> {
   isShow: boolean
   onClose?: () => void
   updateAction?: () => void
@@ -23,11 +24,12 @@ class SendCfxModal extends Component<IProps> {
     })
   }
   render() {
-    const { isShow, cfxSending, cfxSendFailed } = this.props
+    const { isShow, cfxSending, cfxSendFailed, I18N } = this.props
     const modalData = this.setModalData()
     return (
       <>
         <BaseModal
+          I18N={I18N}
           modalData={modalData}
           isShow={isShow}
           sending={cfxSending}

@@ -1,21 +1,21 @@
 export default {
   h1: 'About FC',
-  title: '什么是Fans Coin（FC）?',
+  title: 'About Fans Coin (FC)',
   conFC:
-    'Fans Coin, 简称FC，由 Conflux基金会主导设计，与社区成员合作研发，并基于Conflux测试网运行的社区贡献智能合约，旨在调动起强大的社区力量，详细记录社区成员每一份贡献，同时对测试网进行更加充分的测试。Conflux基金会在Conflux生态的建设过程中，由衷感谢对其做出贡献的每一位社区成员。Conflux基金会将以测试网FC的形式记录下社区贡献，并承诺在主网上线后，与主网CFX进行1:1承兑服务，保障所有社区成员的劳动成果。',
-  firstH2: '基金会与社区的约法三章',
-  secondH2: '感谢',
-  firstH3: 'FC的分发原则',
-  secondH3: 'FC的承兑原则',
-  thirdH3: 'FC的设计原则',
+    'Fans Coin (FC) is a smart contract designed and used solely on the Conflux blockchain. It currently serves for two major purposes,  a. Tokens to reward active contributors  b. A layer of functional testing for Conflux Testnet  The Conflux Foundation appreciates each and every contribution to the community. With FC tokens, the Foundation rewards for constructive efforts in the community, while guarantees a future 1:1 conversion ratio against CFX, the upcoming official cryptocurrency operating on the Conflux Blockchain.',
+  firstH2: 'The Three-Point Agreement',
+  secondH2: 'Special Thanks',
+  firstH3: 'Distribution Principle',
+  secondH3: 'Exchange Principle',
+  thirdH3: 'Liquidity Principle',
   contain1:
-    'FC的设计初衷是为社区的点滴贡献做好记录。作为Conflux社区成员，任何有效的贡献内容必须依据法律法规，尊重他人劳动成果，并对社区建设起到积极正面的影响。Conflux基金会尊重每一位社区成员的辛勤付出，每一个FC的发放都将以多渠道全透明的形式通告社区。',
+    'FC is primarily designed for recognizing community contribution. The Conflux Foundation respects every contribution and guarantees transparency on the distribution of every pennyworth of FC. Members of the Conflux community in return are obliged to make every contribution a legal and positive effort in building the community.',
   contain2:
-    'Conflux基金会承诺，Conflux基金会持有的生态基金解锁后将优先用于承兑服务。Conflux主网预计在2019.Q4末 - 2020.Q1上线，在主网上线后，将立刻启动测试网FC和主网CFX的1:1承兑服务，具体承兑流程细则将在主网上线前发布。',
+    'The Conflux Foundation issues FC on the promise of prioritizing the FC-CFX exchange services after the expiration of lock-up periods on Foundation’s ecosystem funds. Given that the current estimate launch day of Conflux main network is between 2019.Q4 – 2020.Q1, the FC-CFX exchange service will commence shortly after.',
   contain3:
-    '社区成员可以通过两个渠道获得FC：Conflux基金会发放和他人转账。为了倡导社区成员通过参与Conflux社区建设的方式获得FC，并强调FC并非正式流通数字货币，Conflux基金会对不同渠道所获得的FC的流动性进行了特别区分： 1. 由Conflux基金会直接发放的FC，可以自由进行二次分配  2. 从其他社区成员处获得的FC，进行二次分配时，此部分FC的流动性将受到限制，即在转账金额的基础上，需额外锁定一定数量的FC',
+    'Community members acquire FC from two sources, a. incentives from the Conflux Foundation and b. P2P Transaction. To motivate members to contribute more and obtain FC via the former, while to detain potentially malicious intents by the latter, Conflux Foundation makes special adjustment to the liquidity of FC so that FC obtained not directly from the Conflux Foundation is subject to a secondary allocation upon transfer, namely, a certain ratio of the transfer amount will be staked in order to initiate a transfer.',
   contain4:
-    '例如： A完成了一个Conflux生态建设赏金任务获得了10个FC，并从另一个Conflux社区成员通过转账的方式获得了10个FC，此时A总共拥有20个FC。但此时A无法完全转出这20个FC，通过赏金任务劳动所得的10个FC可以完全转出，通过交易获得的10FC中，假设当前流动性限制参数为100，那么意味着每转出5个FC就会有5个FC的流动性被锁定，因此最多只能转出15个FC。',
+    'Scenario 1:   Assume the current circulation ratio is 100, meaning for every 100 FCs transfer, an addition of 100 FCs will be permanently locked for transfer. Upon completing a Conflux bounty task, Alice receives 10 FCs from Conflux Foundation as our gratitude. Meanwhile, she also receives a transfer from Bob that worth of 10 FCs. At this point, Alice owns a total of 20 FCs, and she would like to transfer some FCs to Denise. Note that due to the Liquidity Principle, not all of the 20 FCs are available for her to transfer. To calculate the maximum available amount, Alice should first count all the FCs obtained directly from Conflux Foundation, which is 10 FCs, and next count only 100 / (100 + 100) = 50% of the rest of FCs, which is 5 FCs. As a result, Alice is able to transfer a maximum of 10 + 5 = 15 FCs to Denis.',
   contain5:
-    '特别致谢Conflux社区成员Justin，Justin从最早参与Conflux基金会对FC设计的探讨，一路与Conflux基金会同行，并最终实现FC智能合约，功不可没，感谢Justin!',
+    'Special shoutout to Justin. As a member of the Conflux community, Justin has actively participated in FC development from early-stage prototyping through the production and release of FC smart contract.',
 }

@@ -122,7 +122,7 @@ export default class CreatWallet extends PureComponent<IProps, IState> {
             </div>
             {password.length > 8 && (
               <p className={styles.passStrength}>
-                Password Strength:{' '}
+                {I18N.Login.createWallet.passwordStrength}
                 <span
                   style={{
                     color: passwordStrength === 0 || passwordStrength === 1 ? '#C31212' : '#10D182',

@@ -3,11 +3,8 @@
 .about {
   min-height: calc(100vh - 72px);
   background-color: #f9f9f9;
-  padding: 0 16px;
+  padding: 0 16px 60px;
 
-  @include respond-to(sm) {
-    padding-bottom: 60px;
-  }
 
   .h1 {
     font-size: 34px;
@@ -67,7 +64,7 @@
     .conBox {
       display: flex;
       flex-direction: column;
-      padding: 0 40px 113px;
+      padding: 0 40px 180px;
 
       @include respond-to(md) {
         margin: 96px 0 0 79px;
@@ -153,8 +150,8 @@
 
         @include respond-to(md) {
           width: 410px;
-          height: 415px;
-          padding: 0 79px 0;
+          // height: 415px;
+          padding: 0 79px 56px;
 
           &:last-child {
             margin-top: 0;
@@ -186,8 +183,8 @@
       @include respond-to(md) {
         align-items: flex-start;
         width: 1040px;
-        height: 402px;
-        padding: 0 80px 0;
+        // height: 402px;
+        padding: 72px 80px 58px;
       }
 
       .titleBox {

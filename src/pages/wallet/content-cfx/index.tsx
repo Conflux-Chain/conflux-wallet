@@ -5,12 +5,13 @@ import SendCfxModal from '../send-cfx-modal/index'
 import SendFail from '../send-fail/index'
 import SendSuccess from '../send-success/index'
 import { ICFX } from '../typings'
+import { I18NProps } from '@/i18n/context'
 interface ISendCfxData {
   toAddress: string
   sendAmount: string
   gasPrice: string
 }
-interface IProps extends ICFX {
+interface IProps extends ICFX, Partial<I18NProps> {
   lockStatus?: boolean
   updateCfxAction?: () => void
   closeFailedModal?: () => void
@@ -43,7 +44,7 @@ class ContentCfx extends Component<IProps, IState> {
   }
   render() {
     const { showModal } = this.state
-    const { lockStatus, cfxBalance, cfxSendFailed, cfxSendSuccessed } = this.props
+    const { lockStatus, cfxBalance, cfxSendFailed, cfxSendSuccessed, I18N } = this.props
     return (
       <div className={styles.cardContent}>
         <div className={styles.infoBox}>
@@ -55,7 +56,7 @@ class ContentCfx extends Component<IProps, IState> {
               <p className={styles.walletName}>CFX</p>
             </div>
             <div className={styles.walletBalance}>
-              <p className={styles.walletBalanceTitle}>Total Balance</p>
+              <p className={styles.walletBalanceTitle}>{I18N.Wallet.MyWallet.totalBalance}</p>
               <p className={styles.walletBalanceTotal}>{cfxBalance}</p>
             </div>
           </div>
@@ -73,7 +74,7 @@ class ContentCfx extends Component<IProps, IState> {
               })
             }}
           >
-            Send
+            {I18N.Wallet.MyWallet.sendBtn}
           </Button>
           <SendCfxModal
             {...this.props}
@@ -95,16 +96,18 @@ class ContentCfx extends Component<IProps, IState> {
             }}
           />
           <Button variant="outlined" color="primary" className={styles.btn} disabled={lockStatus}>
-            Receive
+            {I18N.Wallet.MyWallet.receiveBtn}
           </Button>
         </div>
         <SendFail
+          I18N={I18N}
           openDialog={cfxSendFailed}
           onClose={() => {
             this.closeFailedModal()
           }}
         />
         <SendSuccess
+          I18N={I18N}
           openDialog={cfxSendSuccessed}
           onClose={() => {
             this.closeSuccessedModal()
