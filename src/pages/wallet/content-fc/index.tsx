@@ -11,7 +11,8 @@ import FcDetails from '../fc-details/index'
 import SendFail from '../send-fail/index'
 import SendSuccess from '../send-success/index'
 import { IFC } from '../typings'
-interface IProps extends IFC {
+import { I18NProps } from '@/i18n/context'
+interface IProps extends IFC, Partial<I18NProps> {
   lockStatus?: boolean
   updateFcAction?: () => void
   closeFailedModal?: () => void
@@ -59,7 +60,7 @@ class ContentFC extends Component<IProps, IState> {
   }
   render() {
     const { showModal, balanceDetailsTips, fcDetailsTips } = this.state
-    const { lockStatus, fcSendFailed, fcSendSuccessed } = this.props
+    const { lockStatus, fcSendFailed, fcSendSuccessed, I18N } = this.props
     return (
       <div className={styles.cardContent}>
         <div className={styles.infoBox}>
@@ -71,12 +72,12 @@ class ContentFC extends Component<IProps, IState> {
               <p className={styles.walletName}>Fans Coin</p>
             </div>
             <div className={styles.walletBalance}>
-              <p className={styles.walletBalanceTitle}>Total Balance</p>
+              <p className={styles.walletBalanceTitle}>{I18N.Wallet.MyWallet.totalBalance}</p>
               <p className={styles.walletBalanceTotal}>{this.props.fcTotalBalance}</p>
             </div>
           </div>
           <div className={styles.balanceBox}>
-            <p className={styles.balanceTitle}>Available Balance</p>
+            <p className={styles.balanceTitle}>{I18N.Wallet.MyWallet.availableBalance}</p>
             <div className={styles.balanceNum}>
               {this.props.fcAvailableBalance}
               <BalanceDetails
@@ -114,7 +115,7 @@ class ContentFC extends Component<IProps, IState> {
                 })
               }}
             >
-              Send
+              {I18N.Wallet.MyWallet.sendBtn}
             </Button>
             <SendFcModal
               {...this.props}
@@ -136,12 +137,12 @@ class ContentFC extends Component<IProps, IState> {
               }}
             />
             <Button variant="outlined" color="primary" className={styles.btn} disabled={lockStatus}>
-              Receive
+              {I18N.Wallet.MyWallet.receiveBtn}
             </Button>
           </div>
           <div className={styles.seeContractBox}>
             <p>
-              View Contract{' '}
+              {I18N.Wallet.MyWallet.viewContract}{' '}
               <svg className={styles.moreIcon} aria-hidden="true">
                 <use xlinkHref="#icongengduo1" />
               </svg>
@@ -150,6 +151,7 @@ class ContentFC extends Component<IProps, IState> {
         </div>
         <div className={styles.fcQuestionBtn}>
           <FcDetails
+            I18N={I18N}
             anchorEl={fcDetailsTips}
             onClose={() => {
               this.setState({
@@ -181,12 +183,14 @@ class ContentFC extends Component<IProps, IState> {
           </FcDetails>
         </div>
         <SendFail
+          I18N={I18N}
           openDialog={fcSendFailed}
           onClose={() => {
             this.closeFailedModal()
           }}
         />
         <SendSuccess
+          I18N={I18N}
           openDialog={fcSendSuccessed}
           onClose={() => {
             this.closeSuccessedModal()

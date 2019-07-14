@@ -8,7 +8,8 @@ import CloseIcon from '@material-ui/icons/Close'
 import styles from './style.module.scss'
 import Images from '@/assets/images/index'
 import QRCode from 'qrcode.react'
-interface IProps {
+import { I18NProps } from '@/i18n/context'
+interface IProps extends Partial<I18NProps> {
   lockStatus?: boolean
   currentAccountAddress?: string
 }
@@ -31,11 +32,11 @@ class Operation extends Component<IProps, IState> {
     })
   }
   render() {
-    const { lockStatus, currentAccountAddress } = this.props
+    const { lockStatus, currentAccountAddress, I18N } = this.props
     const { openDialog } = this.state
     return (
       <>
-        <Tooltip title="View address in QR code">
+        <Tooltip title={I18N.Layout.OperationCode.viewCode}>
           <div className={classnames(styles.operationWrap, lockStatus ? styles.lockStatus : null)}>
             <img
               src={Images.code}
