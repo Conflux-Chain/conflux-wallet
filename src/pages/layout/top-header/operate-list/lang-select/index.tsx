@@ -19,6 +19,7 @@ const LangList = [
     ),
     lang: LangEnum.en_US,
     field: 'EN',
+    selectField: 'English',
   },
   {
     img: (
@@ -28,6 +29,7 @@ const LangList = [
     ),
     lang: LangEnum.zh_CN,
     field: 'CHS',
+    selectField: 'Chinese',
   },
 ]
 interface IState {
@@ -106,7 +108,7 @@ class NetSelect extends Component<IProps, IState> {
                             this.props.setLangTriggerRender(v.lang)
                           }}
                         >
-                          {v.lang}
+                          {v.selectField}
                         </MenuItem>
                       )
                     })}
