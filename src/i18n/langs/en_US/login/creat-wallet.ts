@@ -26,4 +26,5 @@ export default {
   middle: 'middle',
   weak: 'weak',
   downloadFile: 'Download Keystore File',
+  passwordStrength: 'Password Strength: ',
 }

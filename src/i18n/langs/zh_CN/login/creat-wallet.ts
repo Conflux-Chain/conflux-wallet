@@ -25,4 +25,5 @@ export default {
   middle: '中等',
   weak: '弱',
   downloadFile: '下载Keystore文件',
+  passwordStrength: '密码强度： ',
 }
