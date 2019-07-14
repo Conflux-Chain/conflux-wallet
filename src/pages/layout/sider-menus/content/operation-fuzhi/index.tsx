@@ -7,7 +7,8 @@ import Snackbar from '@material-ui/core/Snackbar'
 import copy from 'copy-to-clipboard'
 import styles from './style.module.scss'
 import Images from '@/assets/images/index'
-interface IProps {
+import { I18NProps } from '@/i18n/context'
+interface IProps extends Partial<I18NProps> {
   lockStatus?: boolean
   currentAccountAddress?: string
   width?: Breakpoint
@@ -33,11 +34,11 @@ class Operation extends Component<IProps, IState> {
   }
   render() {
     const { openMsg } = this.state
-    const { lockStatus } = this.props
+    const { lockStatus, I18N } = this.props
     const cWidth = this.props.width
     return (
       <>
-        <Tooltip title="Copy address to clipboard">
+        <Tooltip title={I18N.Layout.OperationFuzhi.text}>
           <div
             className={classnames(styles.operationWrap, lockStatus ? styles.lockStatus : null)}
             onClick={() => {
@@ -60,7 +61,7 @@ class Operation extends Component<IProps, IState> {
           onClose={() => {
             this.handleCloseMsg()
           }}
-          message={<span>Address Copied!</span>}
+          message={<span>{I18N.Layout.OperationFuzhi.copied}</span>}
         />
       </>
     )
