@@ -7,6 +7,9 @@ import MenuList from '@material-ui/core/MenuList'
 import Grow from '@material-ui/core/Grow'
 import Paper from '@material-ui/core/Paper'
 import Popper from '@material-ui/core/Popper'
+import { I18NHOC } from '@/utils/tools/react'
+import { I18NProps } from '@/i18n/context'
+import { LangEnum } from '@/i18n/typing'
 const LangList = [
   {
     img: (
@@ -14,7 +17,7 @@ const LangList = [
         <use xlinkHref="#iconyingyu" />
       </svg>
     ),
-    lang: 'English',
+    lang: LangEnum.en_US,
     field: 'EN',
   },
   {
@@ -23,7 +26,7 @@ const LangList = [
         <use xlinkHref="#iconchinese" />
       </svg>
     ),
-    lang: 'Chinese',
+    lang: LangEnum.zh_CN,
     field: 'CHS',
   },
 ]
@@ -31,7 +34,7 @@ interface IState {
   menuLang: null | HTMLElement
   menuLangSelected: number
 }
-interface IProps {
+interface IProps extends Partial<I18NProps> {
   lockStatus?: boolean
 }
 class NetSelect extends Component<IProps, IState> {
@@ -100,6 +103,7 @@ class NetSelect extends Component<IProps, IState> {
                           selected={i === menuLangSelected}
                           onClick={() => {
                             this.selectMenu(i)
+                            this.props.setLangTriggerRender(v.lang)
                           }}
                         >
                           {v.lang}
@@ -116,4 +120,4 @@ class NetSelect extends Component<IProps, IState> {
     )
   }
 }
-export default NetSelect
+export default I18NHOC(NetSelect) as any
