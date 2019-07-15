@@ -8,6 +8,7 @@ import { I18NProps } from '@/i18n/context'
 import Paper from '@material-ui/core/Paper'
 import ContentCfx from './content-cfx/index'
 import ContentFc from './content-fc/index'
+import ReceiveCodeModal from '@/components/receive-code-modal/index'
 import { IDispatch } from '@/typings'
 import { namespace } from '@/models/cfx'
 import { namespace as namespaceOfFc } from '@/models/fc'
@@ -16,7 +17,13 @@ interface IProps extends IDvaProps, I18NProps, IDispatch {
   lockStatus?: boolean
   testState: number
 }
-class Home extends Component<IProps> {
+interface IState {
+  openReceiveCodeModal?: boolean
+}
+class Home extends Component<IProps, IState> {
+  state = {
+    openReceiveCodeModal: false,
+  }
   componentDidMount() {
     this.updateCfxAction()
     this.updateFcAction()
@@ -82,8 +89,19 @@ class Home extends Component<IProps> {
       payload: { fcSendSuccessed: false },
     })
   }
+  receiveAction() {
+    this.setState({
+      openReceiveCodeModal: true,
+    })
+  }
+  closeReceiveCodeModal() {
+    this.setState({
+      openReceiveCodeModal: false,
+    })
+  }
   render() {
-    const { I18N } = this.props
+    const { I18N, currentAccountAddress } = this.props
+    const { openReceiveCodeModal } = this.state
     return (
       <div>
         <h2 className={styles.pageTitle}>{I18N.Wallet.MyWallet.title}</h2>
@@ -94,6 +112,9 @@ class Home extends Component<IProps> {
               {...this.props}
               updateCfxAction={() => {
                 this.updateCfxAction()
+              }}
+              receiveAction={() => {
+                this.receiveAction()
               }}
               closeFailedModal={() => {
                 this.closeCfxFailedModal()
@@ -112,6 +133,9 @@ class Home extends Component<IProps> {
               updateFcAction={() => {
                 this.updateFcAction()
               }}
+              receiveAction={() => {
+                this.receiveAction()
+              }}
               closeFailedModal={() => {
                 this.closeFcFailedModal()
               }}
@@ -124,6 +148,13 @@ class Home extends Component<IProps> {
             />
           </Paper>
         </div>
+        <ReceiveCodeModal
+          currentAccountAddress={currentAccountAddress}
+          openDialog={openReceiveCodeModal}
+          onClose={() => {
+            this.closeReceiveCodeModal()
+          }}
+        />
       </div>
     )
   }

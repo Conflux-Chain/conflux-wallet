@@ -17,6 +17,7 @@ interface IProps extends IFC, Partial<I18NProps> {
   updateFcAction?: () => void
   closeFailedModal?: () => void
   closeSuccessedModal?: () => void
+  receiveAction?: () => void
   onSendFc?: (data) => void
   width?: Breakpoint
 }
@@ -57,6 +58,10 @@ class ContentFC extends Component<IProps, IState> {
   // 关闭send成功模态框
   closeSuccessedModal() {
     this.props.closeSuccessedModal()
+  }
+  // 接受
+  receiveAction() {
+    this.props.receiveAction()
   }
   render() {
     const { showModal, balanceDetailsTips, fcDetailsTips } = this.state
@@ -136,7 +141,15 @@ class ContentFC extends Component<IProps, IState> {
                 this.hideModal()
               }}
             />
-            <Button variant="outlined" color="primary" className={styles.btn} disabled={lockStatus}>
+            <Button
+              variant="outlined"
+              color="primary"
+              className={styles.btn}
+              disabled={lockStatus}
+              onClick={() => {
+                this.receiveAction()
+              }}
+            >
               {I18N.Wallet.MyWallet.receiveBtn}
             </Button>
           </div>

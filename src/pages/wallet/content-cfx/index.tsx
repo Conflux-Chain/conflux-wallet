@@ -16,6 +16,7 @@ interface IProps extends ICFX, Partial<I18NProps> {
   updateCfxAction?: () => void
   closeFailedModal?: () => void
   closeSuccessedModal?: () => void
+  receiveAction?: () => void
   onSendCfx?: (data: ISendCfxData) => void
 }
 interface IState {
@@ -41,6 +42,10 @@ class ContentCfx extends Component<IProps, IState> {
   // 关闭send成功模态框
   closeSuccessedModal() {
     this.props.closeSuccessedModal()
+  }
+  // 接受
+  receiveAction() {
+    this.props.receiveAction()
   }
   render() {
     const { showModal } = this.state
@@ -95,7 +100,15 @@ class ContentCfx extends Component<IProps, IState> {
               this.hideModal()
             }}
           />
-          <Button variant="outlined" color="primary" className={styles.btn} disabled={lockStatus}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={styles.btn}
+            disabled={lockStatus}
+            onClick={() => {
+              this.receiveAction()
+            }}
+          >
             {I18N.Wallet.MyWallet.receiveBtn}
           </Button>
         </div>

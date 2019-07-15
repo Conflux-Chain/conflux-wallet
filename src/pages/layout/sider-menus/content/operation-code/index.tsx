@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import Tooltip from '@material-ui/core/Tooltip'
-import Dialog from '@material-ui/core/Dialog'
-import MuiDialogTitle from '@material-ui/core/DialogTitle'
-import IconButton from '@material-ui/core/IconButton'
-import CloseIcon from '@material-ui/icons/Close'
 import styles from './style.module.scss'
 import Images from '@/assets/images/index'
-import QRCode from 'qrcode.react'
 import { I18NProps } from '@/i18n/context'
+import ReceiveCodeModal from '@/components/receive-code-modal/index'
 interface IProps extends Partial<I18NProps> {
   lockStatus?: boolean
   currentAccountAddress?: string
@@ -50,27 +46,13 @@ class Operation extends Component<IProps, IState> {
             />
           </div>
         </Tooltip>
-        <Dialog
+        <ReceiveCodeModal
+          currentAccountAddress={currentAccountAddress}
+          openDialog={openDialog}
           onClose={() => {
             this.handleClose()
           }}
-          className={styles.dialog}
-          open={openDialog}
-        >
-          <MuiDialogTitle>
-            <IconButton
-              aria-label="Close"
-              className={styles.dialogCloseBtn}
-              onClick={() => {
-                this.handleClose()
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-          </MuiDialogTitle>
-          <p className={styles.codeString}>{currentAccountAddress}</p>
-          <QRCode value={currentAccountAddress} className={styles.codeImg} size={170} />
-        </Dialog>
+        />
       </>
     )
   }
