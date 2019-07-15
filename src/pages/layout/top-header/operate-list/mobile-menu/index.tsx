@@ -16,6 +16,7 @@ const netList = ['Testnet', 'Local RPC']
 interface IProps {
   isLogin?: boolean
   lockStatus?: boolean
+  refreshAction?: () => void
 }
 interface IState {
   menuM: null | HTMLElement
@@ -85,7 +86,11 @@ class NetSelect extends Component<IProps, IState> {
                         this.handleClose()
                       }}
                     >
-                      <RefreshBtn lockStatus={lockStatus} isLogin={isLogin} />
+                      <RefreshBtn
+                        lockStatus={lockStatus}
+                        isLogin={isLogin}
+                        refreshAction={this.props.refreshAction}
+                      />
                     </MenuItem>
                     <Divider />
                     {netList.map((v, i) => {

@@ -5,6 +5,8 @@ import styles from './style.module.scss'
 import { namespace } from '@/models/cfx'
 import { namespace as namespaceOfCommon } from '@/models/global/common'
 import { namespace as namespaceOfLogin } from '@/models/login/index'
+import { namespace as namespaceOfCfx } from '@/models/cfx'
+import { namespace as namespaceOfFc } from '@/models/fc'
 import { connect } from 'react-redux'
 import TopHeader from './top-header'
 import SiderMenus from './sider-menus'
@@ -65,6 +67,14 @@ class BasicLayout extends Component<IProps, IState> {
       })
     }
   }
+  refreshAction() {
+    this.props.dispatch({
+      type: `${namespaceOfCfx}/updateCfxBalance`,
+    })
+    this.props.dispatch({
+      type: `${namespaceOfFc}/updateFCBalance`,
+    })
+  }
   render() {
     const { mobileOpen } = this.state
     const { lockStatus, isShowLeftMenu, simpleLayout, lockError, unlockError } = this.props
@@ -78,6 +88,9 @@ class BasicLayout extends Component<IProps, IState> {
           lockError={currentLockError}
           lockAction={val => {
             this.lockAction(val)
+          }}
+          refreshAction={() => {
+            this.refreshAction()
           }}
           onToggleMenus={() => {
             this.onToggleMenus()
@@ -109,6 +122,8 @@ const mapStateToProps = models => {
     ...models[namespace],
     ...models[namespaceOfCommon],
     ...models[namespaceOfLogin],
+    ...models[namespaceOfCfx],
+    ...models[namespaceOfFc],
   }
 }
 export default withRouter(connect(mapStateToProps)(withWidth()(BasicLayout)))

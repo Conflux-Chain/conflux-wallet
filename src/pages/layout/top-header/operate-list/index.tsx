@@ -13,6 +13,7 @@ interface IProps {
   lockStatus?: boolean
   lockError?: boolean
   lockAction?: (val) => void
+  refreshAction?: () => void
 }
 class OperateList extends Component<IProps> {
   static defaultProps = { isLogin: false, lockStatus: true }
@@ -31,7 +32,11 @@ class OperateList extends Component<IProps> {
         <Hidden xsDown>
           <div className={styles.operateListPc}>
             {/* <DeployBtn isLogin={isLogin}  lockStatus={lockStatus}/> */}
-            <RefreshBtn isLogin={isLogin} lockStatus={lockStatus} />
+            <RefreshBtn
+              isLogin={isLogin}
+              lockStatus={lockStatus}
+              refreshAction={this.props.refreshAction}
+            />
             <NetSelect lockStatus={lockStatus} />
             <LangSelect lockStatus={lockStatus} />
           </div>

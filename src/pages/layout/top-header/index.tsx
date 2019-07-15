@@ -14,6 +14,7 @@ interface IProps {
   width?: Breakpoint
   lockAction?: (val) => void
   onToggleMenus?: () => void
+  refreshAction?: () => void
 }
 class TopHeader extends Component<IProps> {
   static defaultProps = { isLogin: false, lockStatus: true }
@@ -43,6 +44,7 @@ class TopHeader extends Component<IProps> {
               lockStatus={lockStatus}
               lockError={lockError}
               lockAction={this.props.lockAction}
+              refreshAction={this.props.refreshAction}
             />
           )}
         </Toolbar>
