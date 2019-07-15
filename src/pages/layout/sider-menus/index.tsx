@@ -12,6 +12,7 @@ interface IProps {
   lockStatus: boolean
   mobileOpen: boolean
   onToggleMenus?: () => void
+  currentAccountPrivateKey: string
 }
 
 class OperateList extends Component<IProps> {
@@ -20,7 +21,21 @@ class OperateList extends Component<IProps> {
     this.props.onToggleMenus()
   }
   render() {
-    const { isLogin, lockStatus, mobileOpen } = this.props
+    const {
+      isLogin,
+      lockStatus,
+      mobileOpen,
+      currentAccountPrivateKey,
+      currentAccountAddress,
+    } = this.props
+    const SiderContentProps = {
+      closeAction: () => {
+        this.props.closeAction()
+      },
+      currentAccountPrivateKey,
+      currentAccountAddress,
+      lockStatus,
+    }
     return (
       <>
         {isLogin ? (
@@ -37,24 +52,12 @@ class OperateList extends Component<IProps> {
                   keepMounted: true,
                 }}
               >
-                <SiderContent
-                  closeAction={() => {
-                    this.props.closeAction()
-                  }}
-                  currentAccountAddress={this.props.currentAccountAddress}
-                  lockStatus={lockStatus}
-                />
+                <SiderContent {...SiderContentProps} />
               </Drawer>
             </Hidden>
             <Hidden xsDown>
               <Drawer variant="permanent" open className={styles.siderMenusWrap}>
-                <SiderContent
-                  closeAction={() => {
-                    this.props.closeAction()
-                  }}
-                  currentAccountAddress={this.props.currentAccountAddress}
-                  lockStatus={lockStatus}
-                />
+                <SiderContent {...SiderContentProps} />
               </Drawer>
             </Hidden>
           </React.Fragment>

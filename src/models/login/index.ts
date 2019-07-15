@@ -129,7 +129,7 @@ export default {
         payload: {
           loginSuccess: false,
           loginValidateError: false,
-          keystoreJson: false,
+          keystoreJson: '',
           createAccountIsSuccess: '',
           restorePasswordRight: true,
         },
@@ -141,7 +141,8 @@ export default {
     *lock({ payload, callback, errCallback }, { put, select }) {
       try {
         const { password } = payload
-        const { keystoreJson } = select(state => state[namespace])
+        const { currentAccountPrivateKey } = yield select(state => state[namespaceOfCfx])
+        const keystoreJson = confluxWeb.cfx.accounts.encrypt(currentAccountPrivateKey, password)
         confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
         yield put({
           type: 'setState',
@@ -174,7 +175,8 @@ export default {
     *unLock({ payload, callback, errCallback }, { put, select }) {
       try {
         const { password } = payload
-        const { keystoreJson } = select(state => state[namespace])
+        const { currentAccountPrivateKey } = yield select(state => state[namespaceOfCfx])
+        const keystoreJson = confluxWeb.cfx.accounts.encrypt(currentAccountPrivateKey, password)
         confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
         yield put({
           type: 'setState',

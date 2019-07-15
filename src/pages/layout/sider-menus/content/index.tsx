@@ -13,12 +13,14 @@ type IProps = I18NProps & {
   lockStatus: boolean
   /** 钱包地址 */
   currentAccountAddress: string
+  /**privateKey */
+  currentAccountPrivateKey: string
 }
 
 class SiderContent extends Component<IProps> {
   static defaultProps = { lockStatus: true }
   render() {
-    const { lockStatus, currentAccountAddress, I18N } = this.props
+    const { lockStatus, currentAccountAddress, currentAccountPrivateKey, I18N } = this.props
     return (
       <div className={styles.siderMenusWrap}>
         <div className={styles.siderMenusTop}>
@@ -41,7 +43,7 @@ class SiderContent extends Component<IProps> {
             />
             <OperationDaochu
               lockStatus={lockStatus}
-              currentAccountAddress={currentAccountAddress}
+              currentAccountPrivateKey={currentAccountPrivateKey}
               I18N={I18N}
             />
             <OperationRecord lockStatus={lockStatus} I18N={I18N} />

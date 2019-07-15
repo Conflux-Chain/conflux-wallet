@@ -17,6 +17,7 @@ interface IDvaPropsOfCommon {
 interface IDvaPropsOfCfx {
   /** 钱包地址 */
   currentAccountAddress: string
+  currentAccountPrivateKey: string
 }
 type IProps = RouteComponentProps &
   Partial<IDvaPropsOfCommon> &
@@ -83,6 +84,7 @@ class BasicLayout extends Component<IProps, IState> {
           }}
         />
         <SiderMenus
+          currentAccountPrivateKey={this.props.currentAccountPrivateKey}
           currentAccountAddress={this.props.currentAccountAddress}
           mobileOpen={mobileOpen}
           isLogin={isShowLeftMenu}
