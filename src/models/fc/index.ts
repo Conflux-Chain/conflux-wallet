@@ -1,5 +1,10 @@
-import { namespace as namespaceOfCfx, getActualNoncePromise } from '@/models/cfx'
+import {
+  namespace as namespaceOfCfx,
+  getActualNoncePromise,
+  successedSendActionSetNonce,
+} from '@/models/cfx'
 import confluxWeb from '@/vendor/conflux-web'
+import BigNumber from 'bignumber.js'
 export const maxGasForFCSend = 25000
 const nonceLocalStoragePrefix = 'fc_address_'
 const namespace = 'fc'
@@ -74,21 +79,22 @@ export default {
         const { currentAccountAddress: fromAddress } = yield select(state => state[namespaceOfCfx])
         const { FC } = yield select(state => state[namespace])
         const params = {
-          initNonce: 1,
           currentAccountAddress: fromAddress,
           localStorageKey: `${nonceLocalStoragePrefix}${fromAddress}`,
         }
         const nonce = yield call(getActualNoncePromise, params)
+        const newValue = new BigNumber(value).multipliedBy(10 ** 18).toString()
         const txParams = {
-          from: fromAddress,
+          from: 0,
           nonce,
           gasPrice,
           gas: maxGasForFCSend,
-          value,
+          value: 0,
           to: toAddress,
-          data: FC.methods.transfer(toAddress, value).encodeABI(), // get data from ABI
+          data: FC.methods.transfer(toAddress, newValue).encodeABI(), // get data from ABI
         }
         const hash = yield call(sendSignedTransactionPromise, txParams)
+        successedSendActionSetNonce(params.localStorageKey, nonce)
         yield put({
           type: 'setState',
           payload: {
@@ -155,7 +161,7 @@ function getFCStateOfPromise({ address, FC }) {
       })
   })
 }
-function sendSignedTransactionPromise(txParams) {
+export function sendSignedTransactionPromise(txParams) {
   return new Promise((resolve, reject) => {
     confluxWeb.cfx
       .signTransaction(txParams)

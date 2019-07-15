@@ -65,7 +65,7 @@ export default {
         const { keystoreJson, password } = payload
         const account = confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
         const { privateKey, address } = account
-
+        confluxWeb.cfx.accounts.wallet.add(account)
         yield put({
           type: 'setState',
           payload: {
