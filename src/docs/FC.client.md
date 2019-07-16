@@ -1,138 +1,52 @@
-```javascript
-const ConfluxWeb = require('conflux-web')
-const fs = require('fs')
-const compiledContract = require('../build/contracts/FC.json')
+Web 端 API 使用手册
 
-const confluxWeb = new ConfluxWeb('http://testnet-jsonrpc.conflux-chain.org:12537')
-//const confluxWeb = new ConfluxWeb('http://127.0.0.1:8091');
+参考 FC.client.js 脚本
 
-const privateKey = '0x23b7f5c4d0cf061b26460e59e594352b4b8b604f3251f0cc19abdc54d12e7f78'
-confluxWeb.cfx.accounts.wallet.add(privateKey)
+Call
 
-const abi = compiledContract.abi
+    // using the promise
+    FC.methods.myFunc().call()
+        .then((result) => {
+    	// Do Something
+        }).catch(console.error);
 
-const contractAddress = '0x401a59465fe047e262c1f8708a6184fb65f85e6a'
-//const contractAddress = '0x637fafb666a6ca943e968dcf49f661ec5367c286';
+Note: 将 myFunc 替换成相应 function
 
-// Construct contract object
-const FC = new confluxWeb.cfx.Contract(abi, contractAddress, {
-  defaultGasPrice: '10', // default gas price
-})
+1. 读取全局常量
+   - name(): 读取合约全称
+   - symbol(): 读取合约缩写
+   - decimals(): 读取精度
+   - cap(): 读取发行总量上限
+2. 读取全局变量
+   - circulationRatio(): 读取当前流通比例
+   - totalSupply(): 读取当前发行总量
+   - isTransferPaused(): 读取当前转账功能是否已暂停
+   - isBurnPaused(): 读取当前销毁功能是否已暂停
+3. 读取个人变量
+   - balanceOf(account): 读取指定地址的余额
+   - stateOf(account): 读取指定地址的 Conflux 池，未锁定及锁定个人池的余额
 
-function info() {
-  FC.methods
-    .name()
-    .call()
-    .then(result => {
-      console.log('Name: ' + result)
-    })
-    .catch(console.error)
+Send
 
-  FC.methods
-    .symbol()
-    .call()
-    .then(result => {
-      console.log('Symbol: ' + result)
-    })
-    .catch(console.error)
+    const txParams = {
+            from: 0,
+            nonce: nonce, // make nonce appropriate
+            gasPrice: 10,
+            gas: 10000000,
+            value: 0,
+            to: contractAddress,
+            data: FC.methods.myFunc().encodeABI(), // get data from ABI
+        };
 
-  FC.methods
-    .decimals()
-    .call()
-    .then(result => {
-      console.log('Decimals: ' + result)
-    })
-    .catch(console.error)
+    confluxWeb.cfx.signTransaction(txParams)
+        .then((encodedTransaction) => {
+            const { rawTransaction } = encodedTransaction;
+            return confluxWeb.cfx.sendSignedTransaction(rawTransaction)
+            .then((transactionHash) => {
+                console.log('transaction hash from RPC: ',transactionHash);
+            });
+        }).catch(console.error);
 
-  FC.methods
-    .cap()
-    .call()
-    .then(result => {
-      console.log('Cap: ' + result)
-    })
-    .catch(console.error)
-
-  FC.methods
-    .circulationRatio()
-    .call()
-    .then(result => {
-      console.log('Circulation Ratio: ' + result)
-    })
-    .catch(console.error)
-}
-
-function totalSupply() {
-  FC.methods
-    .totalSupply()
-    .call()
-    .then(result => {
-      console.log('Total supply: ' + result)
-    })
-    .catch(console.error)
-}
-
-function balanceOf(account) {
-  FC.methods
-    .balanceOf(account)
-    .call()
-    .then(result => {
-      console.log(result)
-    })
-    .catch(console.error)
-}
-
-function stateOf(account) {
-  FC.methods
-    .stateOf(account)
-    .call()
-    .then(result => {
-      console.log('--------------------------')
-      console.log(account + ' Summary: ')
-      console.log('Conflux Pool: ' + result[0])
-      console.log('Personal Unlocked Pool: ' + result[1])
-      console.log('Personal Locked Pool: ' + result[2])
-      console.log('+------------------------+')
-    })
-    .catch(console.error)
-}
-
-function circulationRatio() {
-  FC.methods
-    .circulationRatio()
-    .call()
-    .then(result => {
-      console.log(result)
-    })
-    .catch(console.err)
-}
-
-function transfer(recipient, value, nonce) {
-  const txParams = {
-    from: 0,
-    nonce: nonce, // make nonce appropriate
-    gasPrice: 10,
-    gas: 10000000,
-    value: 0,
-    to: contractAddress,
-    data: FC.methods.transfer(recipient, value).encodeABI(), // get data from ABI
-  }
-  confluxWeb.cfx
-    .signTransaction(txParams)
-    .then(encodedTransaction => {
-      const { rawTransaction } = encodedTransaction
-      //console.log('raw transaction: ', rawTransaction);
-      return confluxWeb.cfx.sendSignedTransaction(rawTransaction).then(transactionHash => {
-        console.log('transaction hash from RPC: ', transactionHash)
-      })
-    })
-    .catch(console.error)
-}
-
-//transfer('0x8cd17f8297073eb55b1d0c678159db720324ed31', 1, 7);
-
-//totalSupply();
-stateOf('0x3f471bb67866841760f80c7c85d6c6f10b3a6787')
-//stateOf("0x08cb10c9c0bee791d32faeb3a7798067b6131e55");
-//stateOf("0xd9e0fcbf5ef7d6f74d28edecdafdf7c5bcea03d7");
-stateOf('0x8cd17f8297073eb55b1d0c678159db720324ed31')
-```
+1. 个人
+   - transfer(recipient, value, nonce): 当转账功能开启时，向指定地址转账
+   - burn(value, nonce): 当销毁功能开启时，销毁发起地址部分 FC
