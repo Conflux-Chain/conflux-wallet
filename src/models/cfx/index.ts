@@ -1,6 +1,7 @@
 import confluxWeb from '@/vendor/conflux-web'
 import BigNumber from 'bignumber.js'
 import { maxGasForFCSend, sendSignedTransactionPromise } from '../fc'
+import Axios from 'axios'
 const namespace = 'cfx'
 const maxInterval = 1000 * 60 * 10
 /* Max gas for send transaction (not gas price) */
@@ -24,6 +25,8 @@ export default {
     cfxSendSuccessed: false,
     /** cfx send失败 */
     cfxSendFailed: false,
+    /** 水龙头获取cfx失败*/
+    getCfxSuccess: false,
   },
   effects: {
     /**更新cfx余额 */
@@ -95,6 +98,30 @@ export default {
         })
       }
     },
+    /**水龙头获取cfx */
+    *getCfx({ payload, callback, errCallback }, { call, put }) {
+      try {
+        const { address } = payload
+        yield call(getCfx, address)
+        yield put({
+          type: 'setState',
+          payload: {
+            getCfxSuccess: true,
+          },
+        })
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
+      } catch (e) {
+        yield put({
+          type: 'setState',
+          payload: {
+            getCfxSuccess: false,
+          },
+        })
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
+      }
+    },
   },
   reducers: {
     setState(state, { payload }) {
@@ -145,4 +172,9 @@ export function successedSendActionSetNonce(localStorageKey, nonce) {
     localStorageKey,
     JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
   )
+}
+function getCfx(address: string) {
+  return Axios.request({
+    url: `/dev/ask?address=${address.toLocaleLowerCase()}`,
+  })
 }
