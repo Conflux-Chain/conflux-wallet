@@ -1,0 +1,13 @@
+@import 'assets/styles/index.scss';
+
+.root {
+  display: flex;
+}
+.content {
+  flex-grow: 1;
+  padding-top: 72px;
+}
+.contentM {
+  flex-grow: 1;
+  padding-top: 56px;
+}

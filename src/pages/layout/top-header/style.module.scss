@@ -1,0 +1,22 @@
+@import 'assets/styles/index.scss';
+.walletHeaderWrap {
+  position: relative;
+  z-index: 1301 !important;
+  background-color: transparent !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.19) !important;
+}
+.walletHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 25px;
+  color: #000;
+  background: #fff;
+
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.19);
+}
+.walletHeaderM {
+  @extend .walletHeader;
+  height: 56px;
+}

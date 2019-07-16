@@ -1,0 +1,51 @@
+// 单行文本超出显示省略号
+@mixin no-wrap() {
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行文本超出显示省略号
+@mixin no-wrap-multi($linNum) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $linNum;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// flex-水平垂直居中
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// flex-垂直不居中
+@mixin flex-align-center() {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+}
+
+// flex-垂直两端对齐
+@mixin flex-space-between() {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@mixin respond-to($breakpoint) {
+  $query: map-get($breakpoints, $breakpoint);
+
+  // 这里是scss error提示估计大部分人（包括我）都没怎么使用过
+  @if not $query {
+    /* stylelint-disable-next-line */
+    @error 'No value found for `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map.';
+  }
+
+  /* stylelint-disable-next-line */
+  @media #{ unquote($query), inspect($query)} {
+    @content;
+  }
+}

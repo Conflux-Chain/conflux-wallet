@@ -1,0 +1,152 @@
+@import 'assets/styles/index.scss';
+
+.creatWallet {
+  width: 100%;
+
+  .sucBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .rightIc {
+      width: 96px;
+      height: 96px;
+      fill: rgba(0, 0, 0, 0.24);
+      color: rgba(0, 0, 0, 0.24);
+    }
+
+    .sucTxt {
+      font-size: 18px;
+      font-family: ProximaNova-Regular;
+      color: rgba(0, 0, 0, 1);
+      line-height: 40px;
+      margin-top: 16px;
+      margin-bottom: 23px;
+      padding: 0 19px;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 39px;
+    padding: 0 19px;
+
+    .passWordLine {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .txt {
+        flex: 1;
+      }
+
+      .qsIc {
+        width: 16px;
+        height: 16px;
+        color: #1e3de4;
+        fill: #1e3de4;
+        cursor: pointer;
+      }
+
+      .snackBar {
+        position: absolute;
+        right: -19px;
+        top: 40px;
+        width: 202px !important;
+        height: 96px;
+        padding: 12px;
+        min-width: 0;
+        background-color: #000;
+        z-index: 1;
+
+        @include respond-to(md) {
+          right: -140px;
+        }
+      }
+    }
+
+    .passStrength {
+      width: 100%;
+      font-size: 16px;
+      font-family: ProximaNova-Regular;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.56);
+      line-height: 19px;
+      margin-top: 5px;
+    }
+  }
+
+  .container2 {
+    display: flex;
+    flex-direction: column;
+    padding: 0 8px 0 19px;
+
+    .conBox {
+      display: flex;
+      flex-direction: column;
+      margin: 15px 0 16px;
+      @media screen and (max-width: 375px) {
+        margin: 15px 0 0;
+      }
+      .conItem {
+        display: flex;
+        margin-top: 16px;
+
+        @include respond-to(md) {
+          margin-top: 24px;
+        }
+        @media screen and (max-width: 320px) {
+          margin-top: 10px;
+        }
+        .imgBox {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 48px;
+          height: 48px;
+          margin-right: 24px;
+          background: rgba(0, 0, 0, 0.06);
+          border-radius: 50%;
+
+          .conIc {
+            width: 24px;
+            height: 24px;
+            color: #a4a4a4;
+            fill: #a4a4a4;
+          }
+        }
+
+        .txtBox {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          font-size: 16px;
+          color: rgba(0, 0, 0, 1);
+
+          .txt1 {
+            font-family: ProximaNova-Bold;
+            font-weight: 600;
+            line-height: 19px;
+            margin-bottom: 8px;
+          }
+
+          .txt2 {
+            font-family: ProximaNova-Regular;
+            line-height: 24px;
+          }
+        }
+      }
+    }
+  }
+}

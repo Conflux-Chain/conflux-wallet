@@ -1,0 +1,21 @@
+@import 'assets/styles/index.scss';
+
+.formContent {
+  .formBox {
+    display: block;
+    width: 240px;
+    margin: 0 24px 44px;
+    @include respond-to(sm) {
+      width: 420px;
+      margin: 0 70px 44px;
+    }
+  }
+  .submitBtn {
+    display: flex;
+    width: 160px;
+    margin: 0 auto 40px;
+    .icon {
+      fill: #fff;
+    }
+  }
+}

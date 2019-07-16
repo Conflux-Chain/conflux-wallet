@@ -1,0 +1,146 @@
+@import 'assets/styles/index.scss';
+
+.creatModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .myContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+    width: 100%;
+
+    @include respond-to(md) {
+      position: relative;
+      width: auto;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .container {
+    background-color: #fff;
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    width: 100%;
+    padding: 48px 0 64px;
+
+    @include respond-to(md) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 340px;
+      padding: 48px 40px 64px;
+    }
+
+    @media screen and (max-width: 375px) {
+      padding: 30px 0 42px;
+    }
+
+    @media screen and (max-width: 320px) {
+      padding: 24px 0 30px;
+      max-height: calc(100vh - 235px);
+      overflow-y: auto;
+    }
+
+    .dotBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .dotItem {
+        width: 8px;
+        height: 8px;
+        background: rgba(0, 0, 0, 0.24);
+        border-radius: 50%;
+        margin-left: 16px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+
+      .dotItemAc {
+        width: 10px;
+        height: 10px;
+        background: rgba(30, 61, 228, 1);
+        border-radius: 50%;
+      }
+    }
+
+    .button {
+      width: 203px;
+      height: 48px;
+      background: rgba(30, 61, 228, 1);
+      border-radius: 4px;
+      color: #fff;
+      margin: 25px auto 0;
+    }
+  }
+
+  .bottomInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+
+    .words {
+      font-size: 16px;
+      font-family: ProximaNova-Semibold;
+      color: rgba(255, 255, 255, 1);
+      line-height: 19px;
+      text-align: center;
+
+      .linkName {
+        margin: 0 6px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    .errorBox {
+      display: flex;
+      align-items: center;
+      width: 239px;
+      height: 64px;
+      background: rgba(232, 114, 114, 1);
+      border-radius: 4px;
+      margin-top: 21px;
+      color: #fff;
+
+      @include respond-to(md) {
+        position: absolute;
+        right: -239px;
+        bottom: 61px;
+      }
+
+      .leftIc {
+        width: 32px;
+        height: 16px;
+        fill: #fff;
+        margin: -14px 8px 0;
+        cursor: pointer;
+      }
+
+      .rightIc {
+        width: 23px;
+        height: 12px;
+        fill: #fff;
+        margin: 0 16px 0 20px;
+        cursor: pointer;
+      }
+
+      .errorInfo {
+        font-size: 16px;
+        font-family: ProximaNova-Regular;
+        line-height: 24px;
+      }
+    }
+  }
+}

@@ -1,0 +1,284 @@
+@import 'assets/styles/index.scss';
+
+.about {
+  min-height: calc(100vh - 72px);
+  background-color: #f9f9f9;
+  padding: 0 16px 60px;
+
+
+  .h1 {
+    font-size: 34px;
+    font-family: ProximaNova-Bold;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 1);
+    line-height: 48px;
+    padding: 64px 0 40px;
+    text-align: center;
+
+    @include respond-to(md) {
+      font-size: 48px;
+      line-height: 56px;
+      padding: 56px 0 24px;
+    }
+  }
+
+  .h2 {
+    font-size: 34px;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1);
+    line-height: 48px;
+    margin: 56px auto 40px;
+    text-align: center;
+  }
+
+  .h3 {
+    font-size: 24px;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1);
+    line-height: 32px;
+    margin: 24px auto;
+  }
+
+  .p {
+    font-size: 16px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    line-height: 28px;
+  }
+
+  .container1 {
+    border-radius: 16px;
+    background: #fff url('../../assets/images/bg1.png') no-repeat bottom;
+
+    @include respond-to(md) {
+      position: relative;
+      width: 1200px;
+      height: 533px;
+      background: #fff url('../../assets/images/bg.png') no-repeat bottom;
+      margin: 0 auto;
+    }
+
+    .conBox {
+      display: flex;
+      flex-direction: column;
+      padding: 0 40px 180px;
+
+      @include respond-to(md) {
+        margin: 96px 0 0 79px;
+        padding: 0;
+      }
+
+      .title {
+        font-size: 24px;
+        font-family: PingFangSC-Semibold;
+        color: rgba(0, 0, 0, 1);
+        line-height: 40px;
+        margin-top: 80px;
+
+        @include respond-to(md) {
+          font-size: 34px;
+          line-height: 48px;
+          margin-top: 96px;
+        }
+      }
+
+      .con {
+        font-size: 16px;
+        font-family: PingFangSC-Regular;
+        color: rgba(0, 0, 0, 1);
+        line-height: 28px;
+        margin-top: 30px;
+
+        @include respond-to(md) {
+          width: 457px;
+          height: 196px;
+        }
+      }
+    }
+
+    .ballSmall {
+      position: absolute;
+      top: 122px;
+      right: 324px;
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(180deg, rgba(237, 237, 237, 1) 0%, rgba(187, 187, 187, 1) 100%);
+      border-radius: 50%;
+    }
+
+    .ballBig {
+      position: absolute;
+      top: 167px;
+      right: 73px;
+      width: 123px;
+      height: 123px;
+      background: linear-gradient(141deg, rgba(83, 172, 255, 1) 0%, rgba(5, 37, 210, 1) 100%);
+      border-radius: 50%;
+    }
+  }
+
+  .container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .line1 {
+      display: flex;
+      flex-direction: column;
+
+      @include respond-to(md) {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 1200px;
+      }
+
+      .item1 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 16px;
+        padding: 0 16px 64px;
+
+        &:last-child {
+          margin-top: 40px;
+        }
+
+        @include respond-to(md) {
+          width: 410px;
+          // height: 415px;
+          padding: 0 79px 56px;
+
+          &:last-child {
+            margin-top: 0;
+          }
+        }
+
+        .icon1 {
+          width: 86px;
+          height: 59px;
+        }
+
+        .icon2 {
+          width: 76px;
+          height: 76px;
+        }
+      }
+    }
+
+    .line2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 40px;
+      background-color: #fff;
+      border-radius: 16px;
+      padding-bottom: 64px;
+
+      @include respond-to(md) {
+        align-items: flex-start;
+        width: 1040px;
+        // height: 402px;
+        padding: 72px 80px 58px;
+      }
+
+      .titleBox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include respond-to(md) {
+          flex-direction: row;
+        }
+
+        .icon3 {
+          width: 54px;
+          height: 54px;
+
+          @include respond-to(md) {
+            margin-right: 32px;
+          }
+        }
+      }
+
+      .item2 {
+        display: flex;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 16px;
+        padding: 0 16px;
+
+        @include respond-to(md) {
+          flex-direction: row;
+          justify-content: space-between;
+          margin-top: 22px;
+          padding: 0;
+        }
+
+        .p {
+          &:last-child {
+            margin-top: 32px;
+          }
+
+          @include respond-to(md) {
+            margin-top: 0;
+
+            &:last-child {
+              margin-left: 69px;
+              margin-top: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .icon {
+      margin: 72px 0 16px;
+
+      @include respond-to(md) {
+        margin: 64px 0 0;
+      }
+    }
+
+    .iconSpe {
+      margin: 72px 0 16px;
+
+      @include respond-to(md) {
+        margin: 0;
+      }
+    }
+  }
+
+  .container3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 16px;
+    padding: 0 16px 42px;
+
+    @include respond-to(md) {
+      width: 1040px;
+      height: 248px;
+      padding: 0 80px;
+      margin: 0 auto;
+    }
+
+    .person {
+      width: 72px;
+      height: 72px;
+      margin-bottom: 24px;
+      margin-top: 46px;
+
+      @include respond-to(md) {
+        margin-top: 0;
+      }
+    }
+  }
+}

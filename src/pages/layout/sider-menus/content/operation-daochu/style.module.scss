@@ -1,0 +1,38 @@
+@import 'assets/styles/index.scss';
+.codeString {
+  margin: 16px 22px 24px;
+  font-family: 'ProximaNova-Regular';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+  word-break: break-all;
+
+  @include respond-to(sm) {
+    width: 408px;
+    margin: 16px 76px 24px;
+  }
+}
+.warnFooter {
+  .icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin-left: 24px;
+    fill: #c31212;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  background: rgba(255, 245, 215, 1);
+  p {
+    font-family: 'ProximaNova-Regular';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+
+    color: #c31212;
+  }
+}

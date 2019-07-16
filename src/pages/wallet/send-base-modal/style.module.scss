@@ -1,0 +1,103 @@
+@import 'assets/styles/index.scss';
+.sendFormContent {
+  width: auto;
+  margin: 18px 24px 0;
+  @include respond-to(sm) {
+    width: 480px;
+    margin: 26px 40px 0;
+  }
+  .submitBtn {
+    display: flex;
+    width: 160px;
+    margin: 0 auto 40px;
+    .icon {
+      fill: #fff;
+    }
+  }
+  // from
+  .fromLabel {
+    margin-right: 24px;
+    font-family: 'ProximaNova-Bold';
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 22px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .fromCode {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 36px;
+    @include respond-to(sm) {
+      margin-bottom: 50px;
+    }
+    p {
+      font-family: 'ProximaNova-Regular';
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 19px;
+      color: rgba(0, 0, 0, 0.87);
+      word-break: break-all;
+    }
+  }
+  // balance
+  .balanceWrap {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    @include respond-to(sm) {
+      flex-direction: row;
+    }
+    .balanceInput {
+      flex-grow: 1;
+      @include respond-to(sm) {
+        margin-right: 15px;
+      }
+    }
+    .balanceTransferAll {
+      .balanceTransferAllText {
+        padding: 0;
+        margin-top: 8px;
+        font-family: 'ProximaNova-Regular';
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+        color: rgba(23, 56, 237, 1);
+      }
+    }
+  }
+  .priceWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 34px;
+    @include respond-to(sm) {
+      flex-direction: row;
+      align-items: center;
+    }
+    .priceInputWrap {
+      display: flex;
+      flex-grow: 1;
+      width: 100%;
+    }
+    .gdripInputWrap {
+      width: 190px;
+      margin-top: 16px;
+      @include respond-to(sm) {
+        margin-top: 0;
+        margin-left: 15px;
+      }
+    }
+  }
+  .addressWrap {
+    margin-bottom: 36px;
+  }
+  .formErrorText {
+    position: absolute;
+    bottom: -24px;
+    left: 0;
+  }
+  .formBox {
+    width: 100%;
+  }
+}
