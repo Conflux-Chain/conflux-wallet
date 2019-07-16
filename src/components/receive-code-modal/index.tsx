@@ -27,7 +27,7 @@ class Operation extends Component<IProps> {
           className={styles.dialog}
           open={openDialog}
         >
-          <MuiDialogTitle>
+          <MuiDialogTitle className={styles.receiveModal}>
             <IconButton
               aria-label="Close"
               className={styles.dialogCloseBtn}

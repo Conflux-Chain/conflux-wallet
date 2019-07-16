@@ -1,21 +1,25 @@
 @import 'assets/styles/index.scss';
 .listWrap {
   .listItem {
-    height: 56px;
     justify-content: center;
+    height: 56px;
     .listItemText {
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: 'ProximaNova-Regular';
       font-size: 16px;
-      font-weight: bold;
     }
     &:hover {
+      font-family: 'ProximaNova-Bold';
+      font-weight: bold;
       background-color: #1e3de4;
     }
   }
   .listItemActive {
     @extend .listItem;
+    font-family: 'ProximaNova-Bold';
+    font-weight: bold;
     background-color: #1e3de4 !important;
   }
   .icon {

@@ -1,6 +1,6 @@
 @import 'assets/styles/index.scss';
 .codeString {
-  margin: 0 30px;
+  margin: 24px 30px 0;
   font-family: 'ProximaNova-Bold';
   font-size: 24px;
   font-weight: bold;
@@ -9,7 +9,7 @@
   word-break: break-all;
   @include respond-to(sm) {
     width: 286px;
-    margin: 0 36px;
+    margin: 24px 36px 0;
   }
 }
 .codeImg {

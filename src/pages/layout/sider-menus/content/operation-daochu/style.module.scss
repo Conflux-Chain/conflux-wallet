@@ -1,6 +1,14 @@
 @import 'assets/styles/index.scss';
+.dialogTitle {
+  padding-top: 16px;
+  font-family: 'ProximaNova-Bold';
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 40px;
+  color: rgba(0, 0, 0, 1);
+}
 .codeString {
-  margin: 16px 22px 24px;
+  margin: 0 22px 24px;
   font-family: 'ProximaNova-Regular';
   font-size: 16px;
   font-weight: 400;
@@ -11,7 +19,7 @@
 
   @include respond-to(sm) {
     width: 408px;
-    margin: 16px 76px 24px;
+    margin: 0 76px 24px;
   }
 }
 .warnFooter {
