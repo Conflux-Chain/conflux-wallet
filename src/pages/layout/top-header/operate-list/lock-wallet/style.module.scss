@@ -1,10 +1,14 @@
 @import 'assets/styles/index.scss';
-
-.headerBtn {
-  height: 32px;
-  padding-top: 0;
-  padding-bottom: 0;
-  .icon {
-    fill: #fff;
+.lockWrap {
+  .headerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    padding-top: 0;
+    padding-bottom: 0;
+    .icon {
+      fill: #fff;
+    }
   }
 }

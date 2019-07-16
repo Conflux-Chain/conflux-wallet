@@ -35,18 +35,19 @@
     justify-content: center;
     margin-top: 38px;
   }
-}
-.pageCard {
-  width: 100%;
-  margin: 0;
-  margin-bottom: 24px;
-  border-radius: 8px;
-  @include respond-to(md) {
-    width: 300px;
-    height: 444px;
-    margin: 0 16px;
-    &.cardFC {
-      height: 485px;
+  .pageCard {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
+    @include respond-to(md) {
+      width: 300px;
+      height: 444px;
+      margin: 0 16px;
+      &.cardFC {
+        height: 485px;
+      }
     }
   }
 }
