@@ -18,7 +18,7 @@
     B、未实现功能：
         a、细枝末节,更多是UI部分，诸如ETH的token名称应改为CFX之类的。
         b、充值水龙头。钱包这里应该接一个 水龙头的充值接口，为特定地址进行充值。现在钱包里，有这个入口，会在初次创建wallet时，右下角提示用户使用ETH的测试网Ropsten进行充值。这里等 水龙头API准备好后，改下API的充值地址即可。
-## 项目框架。
+## 项目框架
 
 该项目采用了[CRA](https://github.com/facebook/create-react-app)来搭建基础框架，主要包含以下技术和实现
 
@@ -43,7 +43,7 @@
 
 2. 关于CFX 相关的 api，可查看`src/models/cfx`中的代码
 
-3. 关于FC相关的api，可查看`src/models/fx`中的代码，结合`src/docs/FC.client.js和src/docs/FC.client.js FC.client.md`相关文档查看
+3. 关于FC相关的api，可查看`src/models/fx`中的代码，结合`src/docs/FC.client.js和FC.client.md`相关文档查看
 
 4. 关于FC balance相关的api，需要查看`src/docs/`,，其中`Web Wallet 数值计算公式.pdf`主要是用来计算FC balance的规则
 
@@ -72,9 +72,38 @@
    }
    ```
 
-   关于参数txParams的说明
+   关于参数txParams的说明和注意点
 
    > 使用confluxWeb.cfx.signTransaction之前，保证txParams里的from为0，而且使用confluxWeb.cfx.accounts.wallet.add(privKey)添加用于签名的私钥，如果from不为0或者wallet里下标0的位置没有对应私钥的话，confluxWeb.cfx.signTransaction这个接口还会去走rpc请求，就会出现method not found
+
+   cfx的send参数
+
+   ```javascript
+   const txParams = {
+     from: 0,
+     nonce,
+     gasPrice,
+     gas: maxGasForFCSend,
+     value: newValue,
+     to: toAddress,
+   }
+   ```
+
+   fc的send参数
+
+   ```javascript
+   const txParams = {
+     from: 0,
+     nonce,
+     gasPrice,
+     gas: maxGasForFCSend,
+     value: 0,
+     to: toAddress,
+     data: FC.methods.transfer(toAddress, newValue).encodeABI(), // get data from ABI
+   }
+   ```
+
+   ​
 
 ## 获取交易信息
 
