@@ -46,9 +46,11 @@ export default class RestoreWallet extends Component<IProps, IState> {
               type="file"
             />
             <label htmlFor="fileUpload">
-              <Button variant="contained" component="span" className={styles.loginButton}>
-                {I18N.Login.LoginIndex.continue}
-              </Button>
+              <div className={styles.loginButtonBox}>
+                <Button variant="contained" component="span" className={styles.loginButton}>
+                  {I18N.Login.LoginIndex.continue}
+                </Button>
+              </div>
             </label>
           </div>
         ) : (
@@ -65,14 +67,16 @@ export default class RestoreWallet extends Component<IProps, IState> {
             {!restorePasswordRight && (
               <p className={styles.errorTxt}>{I18N.Login.restoreWallet.passTips}</p>
             )}
-            <Button
-              variant="contained"
-              disabled={!password.length}
-              className={styles.loginButton}
-              onClick={() => checkPassword(password)}
-            >
-              {I18N.Login.restoreWallet.accessWallet}
-            </Button>
+            <div className={styles.loginButtonBox}>
+              <Button
+                variant="contained"
+                disabled={!password.length}
+                className={styles.loginButton}
+                onClick={() => checkPassword(password)}
+              >
+                {I18N.Login.restoreWallet.accessWallet}
+              </Button>
+            </div>
           </div>
         )}
       </div>

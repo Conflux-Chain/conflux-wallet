@@ -86,16 +86,11 @@ export default class CreatWallet extends Component<IProps, IState> {
               <use xlinkHref="#iconchenggong1" />
             </svg>
             <p className={styles.sucTxt}>{I18N.Login.createWallet.creatSuc}</p>
-            {/* <Link to="/wallet"> */}
-            <Button
-              variant="contained"
-              className={styles.loginButton}
-              style={{ width: '181px', height: '40px' }}
-              onClick={goWallet}
-            >
-              {I18N.Login.createWallet.goWallet}
-            </Button>
-            {/* </Link> */}
+            <div className={styles.loginButtonBox} style={{ width: '181px', height: '40px' }}>
+              <Button variant="contained" className={styles.loginButton} onClick={goWallet}>
+                {I18N.Login.createWallet.goWallet}
+              </Button>
+            </div>
           </div>
         ) : !stepIndex ? (
           <div className={styles.container1}>
@@ -136,15 +131,17 @@ export default class CreatWallet extends Component<IProps, IState> {
                 </span>
               </p>
             )}
-            <Button
-              variant="contained"
-              disabled={password.length < 9}
-              className={styles.loginButton}
-              style={{ backgroundColor: password.length < 9 ? 'rgba(0,0,0,0.38)' : '#1E3DE4' }}
-              onClick={() => generateKeystore(password)}
-            >
-              {I18N.Login.LoginIndex.continue}
-            </Button>
+            <div className={styles.loginButtonBox}>
+              <Button
+                variant="contained"
+                disabled={password.length < 9}
+                className={styles.loginButton}
+                style={{ backgroundColor: password.length < 9 ? 'rgba(0,0,0,0.38)' : '#1E3DE4' }}
+                onClick={() => generateKeystore(password)}
+              >
+                {I18N.Login.LoginIndex.continue}
+              </Button>
+            </div>
           </div>
         ) : (
           <div className={styles.container2}>
@@ -163,14 +160,15 @@ export default class CreatWallet extends Component<IProps, IState> {
                 </div>
               ))}
             </div>
-            <Button
-              variant="contained"
-              className={styles.loginButton}
-              style={{ width: '227px' }}
-              onClick={this.downloadFile}
-            >
-              {I18N.Login.createWallet.downloadFile}
-            </Button>
+            <div className={styles.loginButtonBox} style={{ width: '227px' }}>
+              <Button
+                variant="contained"
+                className={styles.loginButton}
+                onClick={this.downloadFile}
+              >
+                {I18N.Login.createWallet.downloadFile}
+              </Button>
+            </div>
           </div>
         )}
       </div>

@@ -54,21 +54,26 @@
   }
 }
 
-.loginButton {
+.loginButtonBox {
   width: 203px;
   height: 48px;
-  background: rgba(30, 61, 228, 1);
-  border-radius: 4px;
-  color: #fff;
   margin: 25px auto 0;
-  padding: 0;
 
-  &:focus {
+  .loginButton {
+    width: 100%;
+    height: 100%;
     background: rgba(30, 61, 228, 1);
-  }
-
-  &:disabled {
+    border-radius: 4px;
     color: #fff;
+    padding: 0;
+
+    &:focus {
+      background: rgba(30, 61, 228, 1);
+    }
+
+    &:disabled {
+      color: #fff;
+    }
   }
 }
 

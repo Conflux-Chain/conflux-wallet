@@ -144,24 +144,28 @@ class Login extends Component<IProps, IState> {
       <div className={styles.login}>
         <h2 className={styles.title}>{I18N.Login.LoginIndex.titleH1}</h2>
         <div className={styles.conBox}>
-          <Paper className={styles.paper} onClick={() => this.toogleModal('restore')}>
-            <Hidden only={['xs', 'sm']}>
-              <svg className={styles.cardIc} aria-hidden="true">
-                <use xlinkHref="#iconrestore--" />
-              </svg>
-            </Hidden>
-            <h5 className={styles.paperTitle}>{I18N.Login.LoginIndex.titleRestore}</h5>
-            <p className={styles.paperDesc}>{I18N.Login.LoginIndex.conRestore}</p>
-          </Paper>
-          <Paper className={styles.paper} onClick={() => this.toogleModal('creat')}>
-            <Hidden only={['xs', 'sm']}>
-              <svg className={styles.cardIc} aria-hidden="true">
-                <use xlinkHref="#iconcreate--" />
-              </svg>
-            </Hidden>
-            <h5 className={styles.paperTitle}>{I18N.Login.LoginIndex.titleCreat}</h5>
-            <p className={styles.paperDesc}>{I18N.Login.LoginIndex.conCreat}</p>
-          </Paper>
+          <div className={styles.paperBox}>
+            <Paper className={styles.paper} onClick={() => this.toogleModal('restore')}>
+              <Hidden only={['xs', 'sm']}>
+                <svg className={styles.cardIc} aria-hidden="true">
+                  <use xlinkHref="#iconrestore--" />
+                </svg>
+              </Hidden>
+              <h5 className={styles.paperTitle}>{I18N.Login.LoginIndex.titleRestore}</h5>
+              <p className={styles.paperDesc}>{I18N.Login.LoginIndex.conRestore}</p>
+            </Paper>
+          </div>
+          <div className={styles.paperBox}>
+            <Paper className={styles.paper} onClick={() => this.toogleModal('creat')}>
+              <Hidden only={['xs', 'sm']}>
+                <svg className={styles.cardIc} aria-hidden="true">
+                  <use xlinkHref="#iconcreate--" />
+                </svg>
+              </Hidden>
+              <h5 className={styles.paperTitle}>{I18N.Login.LoginIndex.titleCreat}</h5>
+              <p className={styles.paperDesc}>{I18N.Login.LoginIndex.conCreat}</p>
+            </Paper>
+          </div>
         </div>
         <ModalLogin
           open={open}
