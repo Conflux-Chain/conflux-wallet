@@ -60,6 +60,10 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "resolutions": {
+    "confluxjs-transaction": "0.0.1-alpha.2",
+    "confluxjs-util": "0.0.1-alpha.2"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
