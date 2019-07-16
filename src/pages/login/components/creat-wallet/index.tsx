@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { I18NProps } from '@/i18n/context'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -20,7 +20,7 @@ interface IState {
   downloadSuc: boolean // 下载是否成功
   passwordStrength: number // 密码强度
 }
-export default class CreatWallet extends PureComponent<IProps, IState> {
+export default class CreatWallet extends Component<IProps, IState> {
   state = {
     password: '',
     tipsShow: false,
