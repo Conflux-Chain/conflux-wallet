@@ -63,41 +63,43 @@ class NetSelect extends Component<IProps, IState> {
             <use xlinkHref="#icondown" />
           </svg>
         </div>
-        <Popper open={menuLangOpen} anchorEl={menuLang} transition disablePortal>
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
-              }}
-            >
-              <Paper id="menuLang">
-                <ClickAwayListener
-                  onClickAway={() => {
-                    this.handleClose()
-                  }}
-                >
-                  <MenuList className={styles.selectMenuList}>
-                    {I18N.Layout.LangSelect.LangList.map((v, i) => {
-                      return (
-                        <MenuItem
-                          key={i}
-                          selected={i === menuLangSelected}
-                          onClick={() => {
-                            this.selectMenu(i)
-                            this.props.setLangTriggerRender(v.lang)
-                          }}
-                        >
-                          {v.selectField}
-                        </MenuItem>
-                      )
-                    })}
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+        <div className={styles.popperWrap}>
+          <Popper open={menuLangOpen} anchorEl={menuLang} transition disablePortal>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                }}
+              >
+                <Paper id="menuLang">
+                  <ClickAwayListener
+                    onClickAway={() => {
+                      this.handleClose()
+                    }}
+                  >
+                    <MenuList className={styles.selectMenuList}>
+                      {I18N.Layout.LangSelect.LangList.map((v, i) => {
+                        return (
+                          <MenuItem
+                            key={i}
+                            selected={i === menuLangSelected}
+                            onClick={() => {
+                              this.selectMenu(i)
+                              this.props.setLangTriggerRender(v.lang)
+                            }}
+                          >
+                            {v.selectField}
+                          </MenuItem>
+                        )
+                      })}
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        </div>
       </div>
     )
   }
