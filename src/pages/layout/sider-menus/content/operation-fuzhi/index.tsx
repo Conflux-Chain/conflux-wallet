@@ -6,7 +6,6 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Snackbar from '@material-ui/core/Snackbar'
 import copy from 'copy-to-clipboard'
 import styles from './style.module.scss'
-import Images from '@/assets/images/index'
 import { I18NProps } from '@/i18n/context'
 interface IProps extends Partial<I18NProps> {
   lockStatus?: boolean
@@ -47,7 +46,17 @@ class Operation extends Component<IProps, IState> {
               }
             }}
           >
-            <img src={Images.fuzhi} alt="" className={styles.icon} />
+            <svg
+              className={styles.icon}
+              aria-hidden="true"
+              onClick={() => {
+                if (!lockStatus) {
+                  this.clickHandle()
+                }
+              }}
+            >
+              <use xlinkHref="#iconfuzhi-" />
+            </svg>
           </div>
         </Tooltip>
         <Snackbar

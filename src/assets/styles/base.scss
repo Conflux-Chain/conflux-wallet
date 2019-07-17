@@ -50,7 +50,11 @@
 
   .icon {
     cursor: pointer;
-    opacity: 0.55;
+    opacity: 0.7;
+    fill: #fff;
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 
