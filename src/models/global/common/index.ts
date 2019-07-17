@@ -1,4 +1,6 @@
 import { namespace as namespaceOfLogin } from '@/models/login'
+import { namespace as namespaceOfCfx } from '@/models/cfx'
+import { namespace as namespaceOfFc } from '@/models/fc'
 import { replace } from 'connected-react-router'
 const namespace = 'global-common'
 export { namespace }
@@ -9,6 +11,21 @@ export default {
     isLogin: false,
   },
   effects: {
+    *refresh({ callback, errCallback }, { call, put }) {
+      try {
+        yield put({
+          type: `${namespaceOfFc}/updateFCBalance`,
+        })
+        yield put({
+          type: `${namespaceOfCfx}/updateCfxBalance`,
+        })
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
+      } catch (e) {
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
+      }
+    },
     *close(_, { put }) {
       try {
         yield put({
