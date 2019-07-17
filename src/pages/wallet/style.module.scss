@@ -43,10 +43,10 @@
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
     @include respond-to(md) {
       width: 300px;
-      height: 444px;
+      height: 448px;
       margin: 0 16px;
       &.cardFC {
-        height: 485px;
+        height: 489px;
       }
     }
   }
