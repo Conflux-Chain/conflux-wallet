@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import Tooltip from '@material-ui/core/Tooltip'
 import styles from './style.module.scss'
-import Images from '@/assets/images/index'
 import { I18NProps } from '@/i18n/context'
 import ReceiveCodeModal from '@/components/receive-code-modal/index'
 interface IProps extends Partial<I18NProps> {
@@ -34,16 +33,17 @@ class Operation extends Component<IProps, IState> {
       <>
         <Tooltip title={I18N.Layout.OperationCode.viewCode}>
           <div className={classnames(styles.operationWrap, lockStatus ? styles.lockStatus : null)}>
-            <img
-              src={Images.code}
-              alt=""
+            <svg
               className={styles.icon}
+              aria-hidden="true"
               onClick={() => {
                 if (!lockStatus) {
                   this.clickHandle()
                 }
               }}
-            />
+            >
+              <use xlinkHref="#icontubiaokuwenjian-gengxin-1" />
+            </svg>
           </div>
         </Tooltip>
         <ReceiveCodeModal

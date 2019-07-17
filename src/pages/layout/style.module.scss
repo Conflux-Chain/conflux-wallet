@@ -2,12 +2,14 @@
 
 .root {
   display: flex;
+  min-height: 100vh;
 }
 .content {
   flex-grow: 1;
   padding-top: 72px;
+  background-color: #f9f9f9;
 }
 .contentM {
-  flex-grow: 1;
+  @extend .content;
   padding-top: 56px;
 }
