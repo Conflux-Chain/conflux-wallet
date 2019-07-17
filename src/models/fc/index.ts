@@ -5,6 +5,7 @@ import {
   maxGasForSend,
 } from '@/models/cfx'
 import confluxWeb from '@/vendor/conflux-web'
+import config from '@/config'
 const nonceLocalStoragePrefix = 'fc_address_'
 const namespace = 'fc'
 export { namespace }
@@ -93,10 +94,12 @@ export default {
           gasPrice,
           gas: maxGasForSend,
           value: 0,
-          to: toAddress,
+          to: config.FCContractAdress,
           data: FC.methods.transfer(toAddress, hexStr).encodeABI(), // get data from ABI
         }
         const hash = yield call(sendSignedTransactionPromise, txParams)
+        // tslint:disable-next-line: no-console
+        console.log('fc send hash:' + hash)
         successedSendActionSetNonce(params.localStorageKey, nonce)
         yield put({
           type: 'setState',
