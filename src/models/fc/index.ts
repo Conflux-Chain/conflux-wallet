@@ -38,7 +38,7 @@ export default {
       try {
         const { currentAccountAddress: address } = yield select(state => state[namespaceOfCfx])
         const { FC } = yield select(state => state[namespace])
-        const ratio = yield call(getCirculationRatioPromise, { FC })
+        const _ratio = yield call(getCirculationRatioPromise, { FC })
         const { '0': _c2PBalance, '1': _p2PBalance, '2': _lockBalance } = yield call(
           getFCStateOfPromise,
           {
@@ -49,6 +49,7 @@ export default {
         const c2PBalance = transformReturnBalanceToNumber(_c2PBalance)
         const p2PBalance = transformReturnBalanceToNumber(_p2PBalance)
         const lockBalance = transformReturnBalanceToNumber(_lockBalance)
+        const ratio = transformReturnBalanceToNumber(_ratio)
         const fcPersonalFreeBalance = c2PBalance
         const fcPersonalUnLockBalance = (p2PBalance * ratio) / (100 + ratio)
         // const fcPersonalUnLockBalance = p2PBalance.mul(ratio).div(100 + ratio)
