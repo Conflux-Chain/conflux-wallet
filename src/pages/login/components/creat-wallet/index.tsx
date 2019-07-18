@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import { I18NProps } from '@/i18n/context'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -65,6 +66,16 @@ export default class CreatWallet extends Component<IProps, IState> {
       tipsShow: !tipsShow,
     })
   }
+  openTips = () => {
+    this.setState({
+      tipsShow: true,
+    })
+  }
+  closeTips = () => {
+    this.setState({
+      tipsShow: false,
+    })
+  }
   downloadFile = () => {
     // 下载文件的demo，只需要传入keystore内容就行
     createAndDownloadFile('keystore', JSON.stringify(this.props.keystoreJson))
@@ -105,7 +116,14 @@ export default class CreatWallet extends Component<IProps, IState> {
                 onChange={this.changePassword}
                 placeholder={I18N.Login.createWallet.passPlace}
               />
-              <svg className={styles.qsIc} aria-hidden="true" onClick={this.toogleTips}>
+              <svg
+                className={tipsShow ? classnames(styles.qsIc, styles.qsIcAc) : styles.qsIc}
+                aria-hidden="true"
+                onTouchStart={this.toogleTips}
+                onTouchEnd={this.toogleTips}
+                onMouseOver={this.openTips}
+                onMouseLeave={this.closeTips}
+              >
                 <use xlinkHref="#iconjieshi" />
               </svg>
               {tipsShow && (

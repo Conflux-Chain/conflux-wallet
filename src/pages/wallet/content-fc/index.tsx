@@ -73,7 +73,7 @@ class ContentFC extends Component<IProps, IState> {
           <div className={styles.infoBoxTop}>
             <div className={styles.walletHeader}>
               <svg aria-hidden="true" className={styles.walletImg}>
-                <use xlinkHref="#iconFC-" />
+                <use xlinkHref="#iconfc-icon" />
               </svg>
               <p className={styles.walletName}>Fans Coin</p>
             </div>

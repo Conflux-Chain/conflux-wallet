@@ -56,7 +56,7 @@ class ContentCfx extends Component<IProps, IState> {
           <div className={styles.infoBoxTop}>
             <div className={styles.walletHeader}>
               <svg aria-hidden="true" className={styles.walletImg}>
-                <use xlinkHref="#iconCFX" />
+                <use xlinkHref="#iconcfx-icon" />
               </svg>
               <p className={styles.walletName}>CFX</p>
             </div>
