@@ -49,7 +49,8 @@ export default {
         const c2PBalance = transformReturnBalanceToNumber(_c2PBalance)
         const p2PBalance = transformReturnBalanceToNumber(_p2PBalance)
         const lockBalance = transformReturnBalanceToNumber(_lockBalance)
-        const ratio = transformReturnBalanceToNumber(_ratio)
+        // tslint:disable-next-line: radix
+        const ratio = parseInt(_ratio.toString())
         const fcPersonalFreeBalance = c2PBalance
         const fcPersonalUnLockBalance = (p2PBalance * ratio) / (100 + ratio)
         // const fcPersonalUnLockBalance = p2PBalance.mul(ratio).div(100 + ratio)
