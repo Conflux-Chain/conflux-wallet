@@ -22,16 +22,18 @@ class FcDetails extends Component<IProps> {
         <div className={styles.iconWrap}>
           {this.props.children}
           {isWidthUp('sm', this.props.width) ? (
-            <div className={styles.fcDetailsContent}>
-              <p>{I18N.Wallet.FansCoinDetails.detailText}</p>
-              <a href="/about" target="_blank">
-                <p className={styles.fcDetailsLink}>
-                  {I18N.Wallet.FansCoinDetails.viewMore}{' '}
-                  <svg className={styles.icon} aria-hidden="true">
-                    <use xlinkHref="#icongengduo1" />
-                  </svg>
-                </p>
-              </a>
+            <div className={styles.fcDetailsContentWrap}>
+              <div className={styles.fcDetailsContent}>
+                <p>{I18N.Wallet.FansCoinDetails.detailText}</p>
+                <a href="/about" target="_blank">
+                  <p className={styles.fcDetailsLink}>
+                    {I18N.Wallet.FansCoinDetails.viewMore}{' '}
+                    <svg className={styles.icon} aria-hidden="true">
+                      <use xlinkHref="#icongengduo1" />
+                    </svg>
+                  </p>
+                </a>
+              </div>
             </div>
           ) : null}
         </div>
