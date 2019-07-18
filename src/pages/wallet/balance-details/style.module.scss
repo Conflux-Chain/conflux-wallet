@@ -47,7 +47,21 @@
 // 数据框
 .balanceDataBox {
   position: relative;
-  margin: 0 120px;
+  margin: 0 140px 0 128px;
+  .balanceTotalTitle {
+    font-family: 'ProximaNova-Regular';
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .balanceTotalNum {
+    font-family: 'ProximaNova-Bold';
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 17px;
+    color: rgba(0, 0, 0, 1);
+  }
   .pathLeftWrap {
     position: absolute;
     top: 0;
@@ -63,6 +77,14 @@
     .pathLeft {
       align-self: stretch;
       width: 26px;
+      margin-right: 6px;
+      margin-left: 4px;
+    }
+    .balanceTotalTitle {
+      text-align: right;
+    }
+    .balanceTotalNum {
+      text-align: right;
     }
   }
   .balanceAvailableBox {
@@ -73,28 +95,23 @@
       left: 80px;
       display: flex;
       align-items: center;
-      width: 120px;
+      width: 140px;
       height: 100%;
     }
     .pathRight {
       align-self: stretch;
       width: 23px;
+      margin-right: 4px;
+      margin-left: 6px;
+    }
+    .balanceTotalTitle {
+      text-align: left;
+    }
+    .balanceTotalNum {
+      text-align: left;
     }
   }
-  .balanceTotalTitle {
-    font-family: 'ProximaNova-Regular';
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 14px;
-    color: rgba(0, 0, 0, 0.87);
-  }
-  .balanceTotalNum {
-    font-family: 'ProximaNova-Bold';
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 17px;
-    color: rgba(0, 0, 0, 1);
-  }
+
   .balanceInfoBox {
     display: flex;
     flex-direction: column;
