@@ -8,6 +8,7 @@ import { namespace } from '@/models/global/common'
 import { connect } from 'react-redux'
 
 const LoginComponent = asyncComponent(() => import('@/pages/login'))
+const AboutComponent = asyncComponent(() => import('@/pages/about'))
 class Router extends Component<{ isLogin?: boolean }> {
   render() {
     const { isLogin } = this.props
@@ -40,6 +41,13 @@ class Router extends Component<{ isLogin?: boolean }> {
           })
         ) : (
           <>
+            <Route
+              path="/about"
+              exact
+              component={() => {
+                return <AboutComponent />
+              }}
+            />
             <Route
               path="/login"
               exact
