@@ -113,7 +113,7 @@ class ContentFC extends Component<IProps, IState> {
               disabled={lockStatus}
               variant="contained"
               color="primary"
-              className={styles.btn}
+              className={lockStatus ? styles.btnLock : styles.btn}
               onClick={() => {
                 this.props.updateFcAction()
                 this.setState({
@@ -155,14 +155,23 @@ class ContentFC extends Component<IProps, IState> {
               {I18N.Wallet.MyWallet.receiveBtn}
             </Button>
           </div>
-          <div className={styles.seeContractBox}>
+          <div className={lockStatus ? styles.seeContractBoxLock : styles.seeContractBox}>
             <p>
-              <a href="http://confluxscan.io/" target="_blank" rel="noopener noreferrer">
-                {I18N.Wallet.MyWallet.viewContract}{' '}
-                <svg className={styles.moreIcon} aria-hidden="true">
-                  <use xlinkHref="#icongengduo1" />
-                </svg>
-              </a>
+              {lockStatus ? (
+                <>
+                  {I18N.Wallet.MyWallet.viewContract}{' '}
+                  <svg className={styles.moreIcon} aria-hidden="true">
+                    <use xlinkHref="#icongengduo1" />
+                  </svg>
+                </>
+              ) : (
+                <a href="http://confluxscan.io/" target="_blank" rel="noopener noreferrer">
+                  {I18N.Wallet.MyWallet.viewContract}{' '}
+                  <svg className={styles.moreIcon} aria-hidden="true">
+                    <use xlinkHref="#icongengduo1" />
+                  </svg>
+                </a>
+              )}
             </p>
           </div>
         </div>
