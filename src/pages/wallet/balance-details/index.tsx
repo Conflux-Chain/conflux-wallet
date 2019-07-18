@@ -91,19 +91,21 @@ class BalanceDetails extends Component<IProps, IState> {
               </div>
               <div
                 className={styles.viewMoreBox}
-                onClick={() => {
-                  this.showViewBox()
-                }}
+                // onClick={() => {
+                //   this.showViewBox()
+                // }}
               >
-                <svg className={styles.icon} aria-hidden="true">
-                  <use xlinkHref="#iconiconfontlock" />
-                </svg>
-                <span>
-                  {I18N.Wallet.BalanceDetails.viewMore}{' '}
+                <a href="/about" target="_blank">
                   <svg className={styles.icon} aria-hidden="true">
-                    <use xlinkHref="#icongengduo1" />
+                    <use xlinkHref="#iconiconfontlock" />
                   </svg>
-                </span>
+                  <span>
+                    {I18N.Wallet.BalanceDetails.viewMore}{' '}
+                    <svg className={styles.icon} aria-hidden="true">
+                      <use xlinkHref="#icongengduo1" />
+                    </svg>
+                  </span>
+                </a>
               </div>
             </div>
           </div>
