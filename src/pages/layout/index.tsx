@@ -67,12 +67,17 @@ class BasicLayout extends Component<IProps, IState> {
       })
     }
   }
-  refreshAction() {
+  refreshAction(callback, errCallback) {
+    // this.props.dispatch({
+    //   type: `${namespaceOfCfx}/updateCfxBalance`,
+    // })
+    // this.props.dispatch({
+    //   type: `${namespaceOfFc}/updateFCBalance`,
+    // })
     this.props.dispatch({
-      type: `${namespaceOfCfx}/updateCfxBalance`,
-    })
-    this.props.dispatch({
-      type: `${namespaceOfFc}/updateFCBalance`,
+      type: `${namespaceOfCommon}/refresh`,
+      callback,
+      errCallback,
     })
   }
   render() {
@@ -89,8 +94,8 @@ class BasicLayout extends Component<IProps, IState> {
           lockAction={val => {
             this.lockAction(val)
           }}
-          refreshAction={() => {
-            this.refreshAction()
+          refreshAction={(callback, errCallback) => {
+            this.refreshAction(callback, errCallback)
           }}
           onToggleMenus={() => {
             this.onToggleMenus()

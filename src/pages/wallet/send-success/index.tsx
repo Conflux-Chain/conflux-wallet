@@ -61,10 +61,12 @@ class Operation extends Component<IProps> {
             <p>
               {I18N.Wallet.SendSuccess.footerTips}
               <strong>
-                {I18N.Wallet.SendSuccess.clickHere}
-                <svg className={styles.moreIcon} aria-hidden="true">
-                  <use xlinkHref="#icongengduo1" />
-                </svg>
+                <a href="http://confluxscan.io/" target="_blank" rel="noopener noreferrer">
+                  {I18N.Wallet.SendSuccess.clickHere}
+                  <svg className={styles.moreIcon} aria-hidden="true">
+                    <use xlinkHref="#icongengduo1" />
+                  </svg>
+                </a>
               </strong>
             </p>
           </div>

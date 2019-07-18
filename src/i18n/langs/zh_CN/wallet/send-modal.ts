@@ -8,4 +8,5 @@ export default {
   send: '发送',
   palceHolder1: '可用余额',
   palceHolder2: '地址',
+  formErrorText: '请输入正确的地址!',
 }

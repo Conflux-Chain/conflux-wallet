@@ -12,47 +12,64 @@ interface IProps {
   isLogin: boolean
   lockStatus?: boolean
   lockError?: boolean
+  simpleLayout?: boolean
   lockAction?: (val) => void
-  refreshAction?: () => void
+  refreshAction?: (callback, errCallback) => void
 }
 class OperateList extends Component<IProps> {
   static defaultProps = { isLogin: false, lockStatus: true }
+  refreshBtnCallback = () => {
+    // TODO: success callback
+  }
+  refreshBtnErrCallback = () => {
+    // TODO: err callback
+  }
   render() {
-    const { isLogin, lockStatus, lockError } = this.props
+    const { isLogin, lockStatus, lockError, simpleLayout } = this.props
 
     return (
-      <div className={styles.operateWrap}>
-        <LockWallet
-          isLogin={isLogin}
-          lockStatus={lockStatus}
-          lockError={lockError}
-          lockAction={this.props.lockAction}
-        />
-        {/* 大屏 */}
-        <Hidden xsDown>
-          <div className={styles.operateListPc}>
-            {/* <DeployBtn isLogin={isLogin}  lockStatus={lockStatus}/> */}
-            <RefreshBtn
+      <>
+        {simpleLayout ? (
+          <div className={styles.operateWrap}>
+            <LangSelect lockStatus={lockStatus} />
+          </div>
+        ) : (
+          <div className={styles.operateWrap}>
+            <LockWallet
               isLogin={isLogin}
               lockStatus={lockStatus}
-              refreshAction={this.props.refreshAction}
+              lockError={lockError}
+              lockAction={this.props.lockAction}
             />
-            <NetSelect lockStatus={lockStatus} />
-            <LangSelect lockStatus={lockStatus} />
+            {/* 大屏 */}
+            <Hidden xsDown>
+              <div className={styles.operateListPc}>
+                {/* <DeployBtn isLogin={isLogin}  lockStatus={lockStatus}/> */}
+                <RefreshBtn
+                  isLogin={isLogin}
+                  lockStatus={lockStatus}
+                  refreshAction={() => {
+                    this.props.refreshAction(this.refreshBtnCallback, this.refreshBtnErrCallback)
+                  }}
+                />
+                <NetSelect lockStatus={lockStatus} />
+                <LangSelect lockStatus={lockStatus} />
+              </div>
+            </Hidden>
+            {/* 移动屏 */}
+            <Hidden smUp>
+              <div className={styles.operateListM}>
+                {isLogin ? (
+                  <MobileMenu lockStatus={lockStatus} isLogin={isLogin} />
+                ) : (
+                  <NetSelect lockStatus={lockStatus} />
+                )}
+                <LangSelect lockStatus={lockStatus} />
+              </div>
+            </Hidden>
           </div>
-        </Hidden>
-        {/* 移动屏 */}
-        <Hidden smUp>
-          <div className={styles.operateListM}>
-            {isLogin ? (
-              <MobileMenu lockStatus={lockStatus} isLogin={isLogin} />
-            ) : (
-              <NetSelect lockStatus={lockStatus} />
-            )}
-            <LangSelect lockStatus={lockStatus} />
-          </div>
-        </Hidden>
-      </div>
+        )}
+      </>
     )
   }
 }

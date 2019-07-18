@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import Slider from '@material-ui/core/Slider'
+import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
-import InputAdornment from '@material-ui/core/InputAdornment'
 import Dialog from '@material-ui/core/Dialog'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
@@ -36,12 +36,14 @@ interface IState {
   balanceVal?: number
   addressVal?: string
   gasPriceVal?: string
+  hasError?: boolean
 }
 class SendBaseModal extends Component<IProps, IState> {
   state = {
     balanceVal: 0,
     addressVal: '',
     gasPriceVal: '',
+    hasError: false,
   }
   handleClose() {
     this.props.onClose()
@@ -77,14 +79,18 @@ class SendBaseModal extends Component<IProps, IState> {
     })
   }
   submitForm() {
+    const { balanceVal, addressVal, gasPriceVal } = this.state
+    if (addressVal === '') {
+      this.setState({ hasError: true })
+      return false
+    }
     if (!this.props.sending) {
-      const { balanceVal, addressVal, gasPriceVal } = this.state
       this.props.sendAction({ balanceVal, addressVal, gasPriceVal })
     }
   }
   render() {
-    const { isShow, unit, modalData, sendFailed: hasError, I18N } = this.props
-    const { balanceVal, addressVal, gasPriceVal } = this.state
+    const { isShow, unit, modalData, I18N } = this.props
+    const { balanceVal, addressVal, gasPriceVal, hasError } = this.state
     return (
       <Dialog
         onClose={() => {
@@ -114,16 +120,15 @@ class SendBaseModal extends Component<IProps, IState> {
           </div>
           <div className={styles.balanceWrap}>
             <div className={styles.balanceInput}>
-              <FormControl className={styles.formBox}>
-                <Input
-                  placeholder={`${I18N.Wallet.SendModal.palceHolder1}${modalData.availableBalance}`}
-                  value={balanceVal}
-                  onChange={e => {
-                    this.balanceChange(e)
-                  }}
-                  endAdornment={<InputAdornment position="end">{unit}</InputAdornment>}
-                />
-              </FormControl>
+              <TextField
+                className={styles.inputText}
+                label={`${I18N.Wallet.SendModal.palceHolder1}${modalData.availableBalance}`}
+                value={balanceVal}
+                onChange={e => {
+                  this.balanceChange(e)
+                }}
+              />
+              <span className={styles.unit}>{unit}</span>
             </div>
             <div className={styles.balanceTransferAll}>
               <Button
@@ -149,7 +154,7 @@ class SendBaseModal extends Component<IProps, IState> {
               />
               {hasError ? (
                 <FormHelperText className={styles.formErrorText}>
-                  Please enter the right address!
+                  {I18N.Wallet.SendModal.formErrorText}
                 </FormHelperText>
               ) : null}
             </FormControl>
@@ -167,18 +172,15 @@ class SendBaseModal extends Component<IProps, IState> {
               />
             </div>
             <div className={styles.gdripInputWrap}>
-              <FormControl className={styles.formBox}>
-                <Input
-                  placeholder={I18N.Wallet.SendModal.gasPrice}
-                  value={gasPriceVal}
-                  onChange={e => {
-                    this.gasPriceChange(e)
-                  }}
-                  endAdornment={
-                    <InputAdornment position="end">{I18N.Wallet.SendModal.gdrip}</InputAdornment>
-                  }
-                />
-              </FormControl>
+              <TextField
+                className={styles.inputText}
+                label={I18N.Wallet.SendModal.gasPrice}
+                value={gasPriceVal}
+                onChange={e => {
+                  this.gasPriceChange(e)
+                }}
+              />
+              <span className={styles.unit}>{I18N.Wallet.SendModal.gdrip}</span>
             </div>
           </div>
           <Button
