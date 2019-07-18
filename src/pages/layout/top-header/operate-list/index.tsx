@@ -13,10 +13,16 @@ interface IProps {
   lockStatus?: boolean
   lockError?: boolean
   lockAction?: (val) => void
-  refreshAction?: () => void
+  refreshAction?: (callback, errCallback) => void
 }
 class OperateList extends Component<IProps> {
   static defaultProps = { isLogin: false, lockStatus: true }
+  refreshBtnCallback = () => {
+    // TODO: success callback
+  }
+  refreshBtnErrCallback = () => {
+    // TODO: err callback
+  }
   render() {
     const { isLogin, lockStatus, lockError } = this.props
 
@@ -35,7 +41,9 @@ class OperateList extends Component<IProps> {
             <RefreshBtn
               isLogin={isLogin}
               lockStatus={lockStatus}
-              refreshAction={this.props.refreshAction}
+              refreshAction={() => {
+                this.props.refreshAction(this.refreshBtnCallback, this.refreshBtnErrCallback)
+              }}
             />
             <NetSelect lockStatus={lockStatus} />
             <LangSelect lockStatus={lockStatus} />

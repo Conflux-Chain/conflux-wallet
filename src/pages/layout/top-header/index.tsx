@@ -14,7 +14,7 @@ interface IProps {
   width?: Breakpoint
   lockAction?: (val) => void
   onToggleMenus?: () => void
-  refreshAction?: () => void
+  refreshAction?: (callback, errCallback) => void
 }
 class TopHeader extends Component<IProps> {
   static defaultProps = { isLogin: false, lockStatus: true }
