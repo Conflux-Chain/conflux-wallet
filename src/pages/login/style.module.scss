@@ -1,11 +1,15 @@
 @import 'assets/styles/index.scss';
 
 .login {
+  display: flex;
+  flex-direction: column;
   min-height: calc(100vh - 56px);
   background-color: #f9f9f9;
   padding-bottom: 60px;
 
   @include respond-to(md) {
+    justify-content: center;
+    margin-top: -80px;
     padding: 0;
   }
 
@@ -85,6 +89,10 @@
           margin-top: 16px;
           padding: 0 39px;
           text-align: center;
+
+          @include respond-to(md) {
+            padding: 0;
+          }
         }
       }
     }

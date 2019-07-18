@@ -13,7 +13,7 @@ export default {
     {
       iconName: 'iconbeifen',
       title: 'Make a Backup',
-      content: 'Secure it like the millions of dollars it may one day be worth.',
+      content: 'Secure it like millions dollars worth.',
     },
   ],
   creatSuc: 'You have created a wallet successfully!',

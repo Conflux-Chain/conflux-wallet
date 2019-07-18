@@ -37,19 +37,33 @@ class About extends Component<I18NProps> {
                 <use xlinkHref="#iconxianjinyuezhifu" />
               </svg>
               <h3 className={styles.h3}>{I18N.About.secondH3}</h3>
-              <p className={styles.p}>{I18N.About.contain3}</p>
+              <p className={styles.p}>{I18N.About.contain2}</p>
             </div>
           </div>
           <div className={styles.line2}>
-            <div className={styles.titleBox}>
-              <svg className={classnames(styles.iconSpe, styles.icon3)} aria-hidden="true">
-                <use xlinkHref="#iconsheji" />
-              </svg>
-              <h3 className={styles.h3}>{I18N.About.thirdH3}</h3>
+            <div className={styles.leftBox}>
+              <div className={styles.titleBox}>
+                <svg className={classnames(styles.iconSpe, styles.icon3)} aria-hidden="true">
+                  <use xlinkHref="#iconsheji" />
+                </svg>
+                <h3 className={styles.h3}>{I18N.About.thirdH3}</h3>
+              </div>
+              <div className={styles.item2}>
+                <p className={styles.p}>{I18N.About.contain3}</p>
+              </div>
             </div>
-            <div className={styles.item2}>
-              <p className={styles.p}>{I18N.About.contain3}</p>
-              <p className={styles.p}>{I18N.About.contain4}</p>
+            <div className={styles.imgBox}>
+              <img className={styles.rightImg1} alt="" src={imgs.about1} />
+            </div>
+          </div>
+          <div className={classnames(styles.line2, styles.line3)}>
+            <div className={styles.leftBox}>
+              <div className={styles.item2}>
+                <p className={styles.p}>{I18N.About.contain4}</p>
+              </div>
+            </div>
+            <div className={styles.imgBox}>
+              <img className={styles.rightImg2} alt="" src={imgs.about2} />
             </div>
           </div>
         </div>

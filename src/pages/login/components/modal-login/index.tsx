@@ -114,7 +114,9 @@ export default class ModalLogin extends Component<IProps, IState> {
                   <span className={styles.linkName} onClick={() => this.setType('creat')}>
                     {I18N.Login.LoginIndex.titleCreat}
                   </span>
-                  >>
+                  <svg className={styles.moreIc} aria-hidden="true">
+                    <use xlinkHref="#icongengduo1" />
+                  </svg>
                 </p>
               ) : (
                 <p className={styles.words}>
@@ -122,7 +124,9 @@ export default class ModalLogin extends Component<IProps, IState> {
                   <span className={styles.linkName} onClick={() => this.setType('restore')}>
                     {I18N.Login.LoginIndex.titleRestore}
                   </span>
-                  >>
+                  <svg className={styles.moreIc} aria-hidden="true">
+                    <use xlinkHref="#icongengduo1" />
+                  </svg>
                 </p>
               ))}
             {!restoreFileRight && (

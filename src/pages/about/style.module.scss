@@ -5,7 +5,6 @@
   background-color: #f9f9f9;
   padding: 0 16px 60px;
 
-
   .h1 {
     font-size: 34px;
     font-family: ProximaNova-Bold;
@@ -18,7 +17,7 @@
     @include respond-to(md) {
       font-size: 48px;
       line-height: 56px;
-      padding: 56px 0 24px;
+      padding: 56px 0 45px;
     }
   }
 
@@ -67,7 +66,7 @@
       padding: 0 40px 180px;
 
       @include respond-to(md) {
-        margin: 96px 0 0 79px;
+        margin: 0 0 0 79px;
         padding: 0;
       }
 
@@ -173,66 +172,101 @@
     .line2 {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
       margin-top: 40px;
       background-color: #fff;
       border-radius: 16px;
-      padding-bottom: 64px;
+      padding-bottom: 40px;
 
       @include respond-to(md) {
-        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         width: 1040px;
-        // height: 402px;
-        padding: 72px 80px 58px;
+        padding: 56px 80px 58px;
       }
 
-      .titleBox {
+      .leftBox {
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
 
-        @include respond-to(md) {
-          flex-direction: row;
-        }
-
-        .icon3 {
-          width: 54px;
-          height: 54px;
+        .titleBox {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
 
           @include respond-to(md) {
-            margin-right: 32px;
+            flex-direction: row;
+          }
+
+          .icon3 {
+            width: 54px;
+            height: 54px;
+
+            @include respond-to(md) {
+              margin-right: 32px;
+            }
+          }
+        }
+
+        .item2 {
+          display: flex;
+          flex-direction: column;
+          background: rgba(255, 255, 255, 1);
+          border-radius: 16px;
+          padding: 0 16px;
+
+          @include respond-to(md) {
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 22px;
+            padding: 0;
           }
         }
       }
 
-      .item2 {
-        display: flex;
-        flex-direction: column;
-        background: rgba(255, 255, 255, 1);
-        border-radius: 16px;
+      .imgBox {
         padding: 0 16px;
 
-        @include respond-to(md) {
-          flex-direction: row;
-          justify-content: space-between;
-          margin-top: 22px;
-          padding: 0;
-        }
-
-        .p {
-          &:last-child {
-            margin-top: 32px;
-          }
+        .rightImg1 {
+          width: 100%;
+          height: auto;
+          margin: 16px 0 0;
 
           @include respond-to(md) {
-            margin-top: 0;
-
-            &:last-child {
-              margin-left: 69px;
-              margin-top: 0;
-            }
+            width: 443px;
+            height: 322px;
+            margin: 0 0 0 86px;
           }
+        }
+
+        .rightImg2 {
+          width: 100%;
+          height: auto;
+          margin: 12px 0 0;
+
+          @include respond-to(md) {
+            width: 545px;
+            height: 271px;
+            margin: 0 0 0 42px;
+          }
+        }
+      }
+    }
+
+    .line3 {
+      padding-top: 40px;
+
+      @include respond-to(md) {
+        padding: 41px 80px 35px;
+      }
+
+      .item2 {
+        @include respond-to(md) {
+          padding: 41px 80px 35px;
         }
       }
     }
@@ -241,7 +275,7 @@
       margin: 72px 0 16px;
 
       @include respond-to(md) {
-        margin: 64px 0 0;
+        margin-top: 0;
       }
     }
 

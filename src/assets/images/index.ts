@@ -14,6 +14,8 @@ import pathLeft from './path_left.png'
 import pathRight from './path_right.png'
 import record from './record.png'
 import personPng from './person.png'
+import about1 from './about1.png'
+import about2 from './about2.png'
 export default {
   pathLeft,
   pathRight,
@@ -31,4 +33,6 @@ export default {
   suo,
   lock,
   personPng,
+  about1,
+  about2,
 }
