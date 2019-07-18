@@ -59,59 +59,61 @@ class NetSelect extends Component<IProps, IState> {
         >
           <MoreVertIcon />
         </IconButton>
-        <Popper open={menuMOpen} anchorEl={menuM} transition disablePortal>
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
-              }}
-            >
-              <Paper id="menuM">
-                <ClickAwayListener
-                  onClickAway={() => {
-                    this.handleClose()
-                  }}
-                >
-                  <MenuList className={styles.selectMenuList}>
-                    {/* <MenuItem
+        <div className={styles.popperWrap}>
+          <Popper open={menuMOpen} anchorEl={menuM} transition disablePortal>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                }}
+              >
+                <Paper id="menuM">
+                  <ClickAwayListener
+                    onClickAway={() => {
+                      this.handleClose()
+                    }}
+                  >
+                    <MenuList className={styles.selectMenuList}>
+                      {/* <MenuItem
                       onClick={() => {
                         this.handleClose()
                       }}
                     >
                       <DeployBtn lockStatus={lockStatus}/>
                     </MenuItem> */}
-                    <MenuItem
-                      onClick={() => {
-                        this.handleClose()
-                      }}
-                    >
-                      <RefreshBtn
-                        lockStatus={lockStatus}
-                        isLogin={isLogin}
-                        refreshAction={this.props.refreshAction}
-                      />
-                    </MenuItem>
-                    <Divider />
-                    {netList.map((v, i) => {
-                      return (
-                        <MenuItem
-                          key={i}
-                          selected={v === menuNetSelected}
-                          onClick={() => {
-                            this.selectMenu(v)
-                          }}
-                        >
-                          {v}
-                        </MenuItem>
-                      )
-                    })}
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+                      <MenuItem
+                        onClick={() => {
+                          this.handleClose()
+                        }}
+                      >
+                        <RefreshBtn
+                          lockStatus={lockStatus}
+                          isLogin={isLogin}
+                          refreshAction={this.props.refreshAction}
+                        />
+                      </MenuItem>
+                      <Divider />
+                      {netList.map((v, i) => {
+                        return (
+                          <MenuItem
+                            key={i}
+                            selected={v === menuNetSelected}
+                            onClick={() => {
+                              this.selectMenu(v)
+                            }}
+                          >
+                            {v}
+                          </MenuItem>
+                        )
+                      })}
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        </div>
       </div>
     )
   }

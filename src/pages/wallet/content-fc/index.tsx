@@ -20,6 +20,7 @@ interface IProps extends IFC, Partial<I18NProps> {
   receiveAction?: () => void
   onSendFc?: (data) => void
   width?: Breakpoint
+  currentAccountAddress: string
 }
 interface IState {
   showModal: boolean
@@ -82,9 +83,8 @@ class ContentFC extends Component<IProps, IState> {
             </div>
           </div>
           <div className={styles.balanceBox}>
-            <p className={styles.balanceTitle}>{I18N.Wallet.MyWallet.availableBalance}</p>
-            <div className={styles.balanceNum}>
-              {this.props.fcAvailableBalance}
+            <div className={styles.balanceTitle}>
+              {I18N.Wallet.MyWallet.availableBalance}
               <BalanceDetails
                 {...this.props}
                 anchorEl={balanceDetailsTips}
@@ -104,6 +104,7 @@ class ContentFC extends Component<IProps, IState> {
                 </svg>
               </BalanceDetails>
             </div>
+            <div className={styles.balanceNum}>{this.props.fcAvailableBalance}</div>
           </div>
         </div>
         <div>
@@ -124,6 +125,7 @@ class ContentFC extends Component<IProps, IState> {
             </Button>
             <SendFcModal
               {...this.props}
+              currentAccountAddress={this.props.currentAccountAddress}
               isShow={showModal}
               onSendFc={sendData => {
                 this.onSendFc({

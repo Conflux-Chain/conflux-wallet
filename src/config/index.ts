@@ -6,7 +6,7 @@ interface IConfig {
 const config: IConfig = {
   baseUrl: '/',
   authKey: 'Authorization',
-  FCContractAdress: '0xf2f4e0da85035cbe70b14a3df4fd7a1e0a82f9ab',
+  FCContractAdress: '0x93bc704ae360d271c77e3a4e10e8d9cdb52c8c07',
 }
 const env = process.env.REACT_APP_CONFIG_ENV || 'prod'
 // tslint:disable-next-line: no-var-requires

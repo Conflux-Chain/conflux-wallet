@@ -69,6 +69,7 @@ class LockWalletModal extends Component<IProps, IState> {
             </InputLabel>
             <Input
               id="component-helper"
+              className={styles.formInput}
               value={password}
               onChange={e => {
                 this.handleChange(e)

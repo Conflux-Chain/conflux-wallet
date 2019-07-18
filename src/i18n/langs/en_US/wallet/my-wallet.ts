@@ -1,6 +1,6 @@
 export default {
   title: 'My Wallet',
-  pageTips: 'Explore, enjoy, embrace Conflux world',
+  pageTips: 'Explore, Enjoy, Embrace Conflux World',
   totalBalance: 'Total Balance',
   sendBtn: 'Send',
   receiveBtn: 'Receive',

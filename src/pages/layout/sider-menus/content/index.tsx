@@ -57,9 +57,17 @@ class SiderContent extends Component<IProps> {
           />
         </div>
         <div className={styles.siderMenusBottom}>
-          <p className={styles.official}>Conflux</p>
-          <p className={styles.official}>Explorer</p>
-          <p className={styles.official}>Bounty</p>
+          <p className={styles.official}>
+            <a href="https://www.conflux-chain.org/" target="_blank">
+              Conflux
+            </a>
+          </p>
+          <p className={styles.official}>
+            <a href="http://www.confluxscan.io/" target="_blank">
+              Explorer
+            </a>
+          </p>
+          {/* <p className={styles.official}>Bounty</p> */}
           <p className={styles.copyText}>Copyright © 2019 Conflux. All Rights Reserved</p>
         </div>
       </div>

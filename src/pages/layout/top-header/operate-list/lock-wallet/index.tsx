@@ -33,7 +33,7 @@ class LockWallet extends Component<IProps, IState> {
     return (
       <>
         {isLogin ? (
-          <React.Fragment>
+          <div className={styles.lockWrap}>
             <Button
               variant="contained"
               color="primary"
@@ -57,7 +57,7 @@ class LockWallet extends Component<IProps, IState> {
                 this.hideLockModal()
               }}
             />
-          </React.Fragment>
+          </div>
         ) : null}
       </>
     )

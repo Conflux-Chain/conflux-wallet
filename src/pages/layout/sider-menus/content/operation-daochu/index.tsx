@@ -6,7 +6,6 @@ import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import styles from './style.module.scss'
-import Images from '@/assets/images/index'
 import { I18NProps } from '@/i18n/context'
 interface IProps extends Partial<I18NProps> {
   lockStatus?: boolean
@@ -37,16 +36,17 @@ class Operation extends Component<IProps, IState> {
       <>
         <Tooltip title={I18N.Layout.OperationDaochu.extractPrivateKey}>
           <div className={classnames(styles.operationWrap, lockStatus ? styles.lockStatus : null)}>
-            <img
-              src={Images.daochu}
-              alt=""
+            <svg
               className={styles.icon}
+              aria-hidden="true"
               onClick={() => {
                 if (!lockStatus) {
                   this.clickHandle()
                 }
               }}
-            />
+            >
+              <use xlinkHref="#icondaochu-1" />
+            </svg>
           </div>
         </Tooltip>
         <Dialog

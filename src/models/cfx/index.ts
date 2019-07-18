@@ -1,10 +1,10 @@
 import confluxWeb from '@/vendor/conflux-web'
-import BigNumber from 'bignumber.js'
-import { maxGasForFCSend, sendSignedTransactionPromise } from '../fc'
+import { sendSignedTransactionPromise, toFixedForDisplay } from '../fc'
+import Axios from 'axios'
 const namespace = 'cfx'
 const maxInterval = 1000 * 60 * 10
 /* Max gas for send transaction (not gas price) */
-export const maxGasForCfxSend = 25000
+export const maxGasForSend = 10000000
 const nonceLocalStoragePrefix = 'cfx_address_'
 export { namespace }
 export default {
@@ -24,6 +24,8 @@ export default {
     cfxSendSuccessed: false,
     /** cfx send失败 */
     cfxSendFailed: false,
+    /** 水龙头获取cfx失败*/
+    getCfxSuccess: false,
   },
   effects: {
     /**更新cfx余额 */
@@ -34,7 +36,7 @@ export default {
         yield put({
           type: 'setState',
           payload: {
-            cfxBalance: new BigNumber(cfxBalance).div(10 ** 18).toString(),
+            cfxBalance: toFixedForDisplay(cfxBalance / 10 ** 18),
           },
         })
       } catch (e) {
@@ -59,16 +61,19 @@ export default {
           localStorageKey: `${nonceLocalStoragePrefix}${currentAccountAddress}`,
         }
         const nonce = yield call(getActualNoncePromise, params)
-        const newValue = new BigNumber(sendAmount).multipliedBy(10 ** 18).toString()
+        const newValue = sendAmount * 10 ** 18
+        const hexStr = `0x${newValue.toString(16)}`
         const txParams = {
           from: 0,
           nonce,
           gasPrice,
-          gas: maxGasForFCSend,
-          value: newValue,
+          gas: maxGasForSend,
+          value: hexStr,
           to: toAddress,
         }
         const hash = yield call(sendSignedTransactionPromise, txParams)
+        // tslint:disable-next-line: no-console
+        console.log('hash: ' + hash)
         successedSendActionSetNonce(params.localStorageKey, nonce)
         yield put({
           type: 'setState',
@@ -93,6 +98,30 @@ export default {
             cfxSending: false,
           },
         })
+      }
+    },
+    /**水龙头获取cfx */
+    *getCfx({ payload, callback, errCallback }, { call, put }) {
+      try {
+        const { address } = payload
+        yield call(getCfx, address)
+        yield put({
+          type: 'setState',
+          payload: {
+            getCfxSuccess: true,
+          },
+        })
+        // tslint:disable-next-line: no-unused-expression
+        typeof callback === 'function' && callback()
+      } catch (e) {
+        yield put({
+          type: 'setState',
+          payload: {
+            getCfxSuccess: false,
+          },
+        })
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback()
       }
     },
   },
@@ -145,4 +174,9 @@ export function successedSendActionSetNonce(localStorageKey, nonce) {
     localStorageKey,
     JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
   )
+}
+function getCfx(address: string) {
+  return Axios.request({
+    url: `/dev/ask?address=${address.toLocaleLowerCase()}`,
+  })
 }

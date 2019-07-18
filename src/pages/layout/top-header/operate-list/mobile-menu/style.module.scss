@@ -8,8 +8,10 @@
   line-height: 19px;
   color: rgba(0, 0, 0, 0.87);
   cursor: pointer;
+
   @include respond-to(sm) {
     padding: 0 16px;
+
     &:not(:last-child)::after {
       position: absolute;
       top: 50%;
@@ -22,7 +24,12 @@
       background-color: rgba(0, 0, 0, 0.18);
     }
   }
+
   .selectMenuList {
     padding: 0;
+  }
+
+  .popperWrap {
+    width: 0;
   }
 }

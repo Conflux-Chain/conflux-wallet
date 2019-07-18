@@ -2,10 +2,10 @@ import {
   namespace as namespaceOfCfx,
   getActualNoncePromise,
   successedSendActionSetNonce,
+  maxGasForSend,
 } from '@/models/cfx'
 import confluxWeb from '@/vendor/conflux-web'
-import BigNumber from 'bignumber.js'
-export const maxGasForFCSend = 25000
+import config from '@/config'
 const nonceLocalStoragePrefix = 'fc_address_'
 const namespace = 'fc'
 export { namespace }
@@ -38,31 +38,36 @@ export default {
       try {
         const { currentAccountAddress: address } = yield select(state => state[namespaceOfCfx])
         const { FC } = yield select(state => state[namespace])
-        const ratio = yield call(getCirculationRatioPromise, { FC })
-        const { '0': c2PBalance, '1': p2PBalance, '2': lockBalance } = yield call(
+        const _ratio = yield call(getCirculationRatioPromise, { FC })
+        const { '0': _c2PBalance, '1': _p2PBalance, '2': _lockBalance } = yield call(
           getFCStateOfPromise,
           {
             address,
             FC,
           }
         )
+        const c2PBalance = transformReturnBalanceToNumber(_c2PBalance)
+        const p2PBalance = transformReturnBalanceToNumber(_p2PBalance)
+        const lockBalance = transformReturnBalanceToNumber(_lockBalance)
+        // tslint:disable-next-line: radix
+        const ratio = parseInt(_ratio.toString())
         const fcPersonalFreeBalance = c2PBalance
-        // const fcPersonalUnLockBalance = (p2PBalance * ratio) / (100 + ratio)
-        const fcPersonalUnLockBalance = p2PBalance.mul(ratio).div(100 + ratio)
-        // const fcPersonalLockBalance = lockBalance + (p2PBalance * 100) / (100 + ratio)
-        const fcPersonalLockBalance = lockBalance.add(p2PBalance.mul(100).div(100 + ratio))
-        // const fcAvailableBalance = fcPersonalFreeBalance + fcPersonalUnLockBalance
-        const fcAvailableBalance = fcPersonalFreeBalance.add(fcPersonalUnLockBalance)
-        // const fcTotalBalance = fcAvailableBalance + fcPersonalLockBalance
-        const fcTotalBalance = fcAvailableBalance.add(fcPersonalLockBalance)
+        const fcPersonalUnLockBalance = (p2PBalance * ratio) / (100 + ratio)
+        // const fcPersonalUnLockBalance = p2PBalance.mul(ratio).div(100 + ratio)
+        const fcPersonalLockBalance = lockBalance + (p2PBalance * 100) / (100 + ratio)
+        // const fcPersonalLockBalance = lockBalance.add(p2PBalance.mul(100).div(100 + ratio))
+        const fcAvailableBalance = fcPersonalFreeBalance + fcPersonalUnLockBalance
+        // const fcAvailableBalance = fcPersonalFreeBalance.add(fcPersonalUnLockBalance)
+        const fcTotalBalance = fcAvailableBalance + fcPersonalLockBalance
+        // const fcTotalBalance = fcAvailableBalance.add(fcPersonalLockBalance)
         yield put({
           type: 'setState',
           payload: {
-            fcPersonalFreeBalance: convertBigNumberToNumber(fcPersonalFreeBalance),
-            fcPersonalUnLockBalance: convertBigNumberToNumber(fcPersonalUnLockBalance),
-            fcPersonalLockBalance: convertBigNumberToNumber(fcPersonalLockBalance),
-            fcAvailableBalance: convertBigNumberToNumber(fcAvailableBalance),
-            fcTotalBalance: convertBigNumberToNumber(fcTotalBalance),
+            fcPersonalFreeBalance: toFixedForDisplay(fcPersonalFreeBalance),
+            fcPersonalUnLockBalance: toFixedForDisplay(fcPersonalUnLockBalance),
+            fcPersonalLockBalance: toFixedForDisplay(fcPersonalLockBalance),
+            fcAvailableBalance: toFixedForDisplay(fcAvailableBalance),
+            fcTotalBalance: toFixedForDisplay(fcTotalBalance),
           },
         })
       } catch (e) {}
@@ -83,17 +88,20 @@ export default {
           localStorageKey: `${nonceLocalStoragePrefix}${fromAddress}`,
         }
         const nonce = yield call(getActualNoncePromise, params)
-        const newValue = new BigNumber(value).multipliedBy(10 ** 18).toString()
+        const newValue = value * 10 ** 18
+        const hexStr = `0x${newValue.toString(16)}`
         const txParams = {
           from: 0,
           nonce,
           gasPrice,
-          gas: maxGasForFCSend,
+          gas: maxGasForSend,
           value: 0,
-          to: toAddress,
-          data: FC.methods.transfer(toAddress, newValue).encodeABI(), // get data from ABI
+          to: config.FCContractAdress,
+          data: FC.methods.transfer(toAddress, hexStr).encodeABI(), // get data from ABI
         }
         const hash = yield call(sendSignedTransactionPromise, txParams)
+        // tslint:disable-next-line: no-console
+        console.log('fc send hash:' + hash)
         successedSendActionSetNonce(params.localStorageKey, nonce)
         yield put({
           type: 'setState',
@@ -182,6 +190,12 @@ export function sendSignedTransactionPromise(txParams) {
   })
 }
 
-function convertBigNumberToNumber(amount) {
-  return amount.div(10 ** 18).toString()
+export function toFixedForDisplay(num) {
+  return num.toFixed(4)
+}
+function transformReturnBalanceToNumber(balance) {
+  const str = balance.toHexString().split('0x')[1]
+  const value = parseInt(str, 16)
+  const result = value / 10 ** 18
+  return result || 0
 }

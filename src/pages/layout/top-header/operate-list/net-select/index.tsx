@@ -58,40 +58,42 @@ class NetSelect extends Component<IProps, IState> {
             <use xlinkHref="#icondown" />
           </svg>
         </span>
-        <Popper open={menuNetOpen} anchorEl={menuNet} transition disablePortal>
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
-              }}
-            >
-              <Paper id="menuNet">
-                <ClickAwayListener
-                  onClickAway={() => {
-                    this.handleClose()
-                  }}
-                >
-                  <MenuList className={styles.selectMenuList}>
-                    {netList.map((v, i) => {
-                      return (
-                        <MenuItem
-                          key={i}
-                          selected={v === menuNetSelected}
-                          onClick={() => {
-                            this.selectMenu(v)
-                          }}
-                        >
-                          {v}
-                        </MenuItem>
-                      )
-                    })}
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
+        <div className={styles.popperWrap}>
+          <Popper open={menuNetOpen} anchorEl={menuNet} transition disablePortal>
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                }}
+              >
+                <Paper id="menuNet">
+                  <ClickAwayListener
+                    onClickAway={() => {
+                      this.handleClose()
+                    }}
+                  >
+                    <MenuList className={styles.selectMenuList}>
+                      {netList.map((v, i) => {
+                        return (
+                          <MenuItem
+                            key={i}
+                            selected={v === menuNetSelected}
+                            onClick={() => {
+                              this.selectMenu(v)
+                            }}
+                          >
+                            {v}
+                          </MenuItem>
+                        )
+                      })}
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+        </div>
       </div>
     )
   }
