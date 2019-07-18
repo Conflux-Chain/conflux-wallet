@@ -38,15 +38,14 @@ class TopHeader extends Component<IProps> {
             }}
           />
           {/* 右边操作项 */}
-          {simpleLayout ? null : (
-            <OperateList
-              isLogin={isLogin}
-              lockStatus={lockStatus}
-              lockError={lockError}
-              lockAction={this.props.lockAction}
-              refreshAction={this.props.refreshAction}
-            />
-          )}
+          <OperateList
+            isLogin={isLogin}
+            simpleLayout={simpleLayout}
+            lockStatus={lockStatus}
+            lockError={lockError}
+            lockAction={this.props.lockAction}
+            refreshAction={this.props.refreshAction}
+          />
         </Toolbar>
       </AppBar>
     )

@@ -45,7 +45,11 @@ class Router extends Component<{ isLogin?: boolean }> {
               path="/about"
               exact
               component={() => {
-                return <AboutComponent />
+                return (
+                  <Layout simpleLayout>
+                    <AboutComponent />
+                  </Layout>
+                )
               }}
             />
             <Route
