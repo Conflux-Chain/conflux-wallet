@@ -149,7 +149,6 @@
 
         @include respond-to(md) {
           width: 410px;
-          // height: 415px;
           padding: 0 79px 56px;
 
           &:last-child {
@@ -160,11 +159,27 @@
         .icon1 {
           width: 86px;
           height: 59px;
+          margin-top: 74px;
         }
 
         .icon2 {
           width: 76px;
           height: 76px;
+          margin-top: 59px;
+        }
+      }
+
+      .item0 {
+        @include respond-to(md) {
+          width: 298px;
+          padding: 0 62px 71px 52px;
+        }
+      }
+
+      .item2 {
+        @include respond-to(md) {
+          width: 654px;
+          padding: 0 55px 35px 47px;
         }
       }
     }
