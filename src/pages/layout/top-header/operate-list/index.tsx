@@ -87,7 +87,13 @@ class OperateList extends Component<IProps, IState> {
             <Hidden smUp>
               <div className={styles.operateListM}>
                 {isLogin ? (
-                  <MobileMenu lockStatus={lockStatus} isLogin={isLogin} />
+                  <MobileMenu
+                    lockStatus={lockStatus}
+                    isLogin={isLogin}
+                    refreshAction={() => {
+                      this.props.refreshAction(this.refreshBtnCallback, this.refreshBtnErrCallback)
+                    }}
+                  />
                 ) : (
                   <NetSelect lockStatus={lockStatus} />
                 )}
