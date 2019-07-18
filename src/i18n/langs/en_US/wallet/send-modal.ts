@@ -8,4 +8,5 @@ export default {
   send: 'Send',
   palceHolder1: 'The available balance is ',
   palceHolder2: 'Address',
+  formErrorText: 'Please enter the right address!',
 }

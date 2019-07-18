@@ -1,4 +1,7 @@
 @import 'assets/styles/index.scss';
+.dialogTitle {
+  margin-top: 16px;
+}
 .sendFormContent {
   width: auto;
   margin: 18px 24px 0;
@@ -10,6 +13,9 @@
     display: flex;
     width: 160px;
     margin: 0 auto 40px;
+    font-family: 'ProximaNova-Bold';
+    font-size: 16px;
+    font-weight: bold;
     .icon {
       fill: #fff;
     }

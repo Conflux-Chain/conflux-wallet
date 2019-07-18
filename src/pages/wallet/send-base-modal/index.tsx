@@ -36,12 +36,14 @@ interface IState {
   balanceVal?: number
   addressVal?: string
   gasPriceVal?: string
+  hasError?: boolean
 }
 class SendBaseModal extends Component<IProps, IState> {
   state = {
     balanceVal: 0,
     addressVal: '',
     gasPriceVal: '',
+    hasError: false,
   }
   handleClose() {
     this.props.onClose()
@@ -77,14 +79,18 @@ class SendBaseModal extends Component<IProps, IState> {
     })
   }
   submitForm() {
+    const { balanceVal, addressVal, gasPriceVal } = this.state
+    if (addressVal === '') {
+      this.setState({ hasError: true })
+      return false
+    }
     if (!this.props.sending) {
-      const { balanceVal, addressVal, gasPriceVal } = this.state
       this.props.sendAction({ balanceVal, addressVal, gasPriceVal })
     }
   }
   render() {
-    const { isShow, unit, modalData, sendFailed: hasError, I18N } = this.props
-    const { balanceVal, addressVal, gasPriceVal } = this.state
+    const { isShow, unit, modalData, I18N } = this.props
+    const { balanceVal, addressVal, gasPriceVal, hasError } = this.state
     return (
       <Dialog
         onClose={() => {
@@ -148,7 +154,7 @@ class SendBaseModal extends Component<IProps, IState> {
               />
               {hasError ? (
                 <FormHelperText className={styles.formErrorText}>
-                  Please enter the right address!
+                  {I18N.Wallet.SendModal.formErrorText}
                 </FormHelperText>
               ) : null}
             </FormControl>
