@@ -121,6 +121,7 @@ export default {
         yield put({
           type: 'setState',
           payload: {
+            cfxTx: '',
             getCfxSuccess: false,
           },
         })
