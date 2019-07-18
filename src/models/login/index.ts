@@ -111,7 +111,7 @@ export default {
       yield put({
         type: `${namespaceOfCfx}/setState`,
         payload: {
-          currentAccountAddress: address,
+          currentAccountAddress: address.toLocaleLowerCase(),
           currentAccountPrivateKey: privateKey,
         },
       })

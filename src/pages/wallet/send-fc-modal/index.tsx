@@ -7,14 +7,19 @@ interface IProps extends IFC, Partial<I18NProps> {
   onClose?: () => void
   updateAction?: () => void
   onSendFc?: (data) => void
+  currentAccountAddress: string
 }
 class SendCfxModal extends Component<IProps> {
   hideModal() {
     this.props.onClose()
   }
   setModalData() {
-    const { lastFCSendSuccessHash, fcAvailableBalance } = this.props
-    return { availableBalance: fcAvailableBalance, successHash: lastFCSendSuccessHash }
+    const { lastFCSendSuccessHash, fcAvailableBalance, currentAccountAddress } = this.props
+    return {
+      availableBalance: fcAvailableBalance,
+      successHash: lastFCSendSuccessHash,
+      currentAccountAddress,
+    }
   }
   submitAciton(data) {
     this.props.onSendFc({

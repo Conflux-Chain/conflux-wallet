@@ -130,6 +130,7 @@ class Home extends Component<IProps, IState> {
           <Paper className={classnames(styles.pageCard, styles.cardFC)}>
             <ContentFc
               {...this.props}
+              currentAccountAddress={this.props.currentAccountAddress}
               updateFcAction={() => {
                 this.updateFcAction()
               }}

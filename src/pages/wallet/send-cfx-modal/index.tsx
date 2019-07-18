@@ -13,8 +13,12 @@ class SendCfxModal extends Component<IProps> {
     this.props.onClose()
   }
   setModalData() {
-    const { cfxBalance, lastCfxSendSuccessHash } = this.props
-    return { availableBalance: cfxBalance, successHash: lastCfxSendSuccessHash }
+    const { cfxBalance, lastCfxSendSuccessHash, currentAccountAddress } = this.props
+    return {
+      availableBalance: cfxBalance,
+      successHash: lastCfxSendSuccessHash,
+      currentAccountAddress,
+    }
   }
   submitAciton(data) {
     this.props.onSendCfx({

@@ -20,6 +20,7 @@ interface ISubmitData {
 interface IModalData {
   availableBalance: number
   successHash: string
+  currentAccountAddress: string
 }
 interface IProps extends Partial<I18NProps> {
   modalData?: IModalData
@@ -62,7 +63,7 @@ class SendBaseModal extends Component<IProps, IState> {
   }
   addressChange(event) {
     this.setState({
-      addressVal: event.target.value,
+      addressVal: event.target.value.toLocaleLowerCase(),
     })
   }
   gasPriceChange(event) {
@@ -109,7 +110,7 @@ class SendBaseModal extends Component<IProps, IState> {
         <div className={styles.sendFormContent}>
           <div className={styles.fromCode}>
             <label className={styles.fromLabel}>{I18N.Wallet.SendModal.from}</label>
-            <p>{modalData.successHash}</p>
+            <p>{modalData.currentAccountAddress}</p>
           </div>
           <div className={styles.balanceWrap}>
             <div className={styles.balanceInput}>
