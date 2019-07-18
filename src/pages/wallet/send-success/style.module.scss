@@ -54,6 +54,9 @@
       text-align: center;
       text-decoration: underline;
       cursor: pointer;
+      a {
+        color: rgba(0, 0, 0, 0.87);
+      }
       @include respond-to(sm) {
         display: inline;
         width: auto;

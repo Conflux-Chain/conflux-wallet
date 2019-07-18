@@ -29,7 +29,7 @@
     justify-content: flex-start;
     margin-bottom: 36px;
     @include respond-to(sm) {
-      margin-bottom: 50px;
+      margin-bottom: 36px;
     }
     p {
       font-family: 'ProximaNova-Regular';
@@ -44,12 +44,17 @@
   .balanceWrap {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    align-items: stretch;
+    margin-bottom: 16px;
     @include respond-to(sm) {
       flex-direction: row;
+      align-items: flex-end;
+      margin-bottom: 20px;
     }
     .balanceInput {
+      display: flex;
       flex-grow: 1;
+      align-items: flex-end;
       @include respond-to(sm) {
         margin-right: 15px;
       }
@@ -58,6 +63,7 @@
       .balanceTransferAllText {
         padding: 0;
         margin-top: 8px;
+        margin-bottom: 6px;
         font-family: 'ProximaNova-Regular';
         font-size: 16px;
         font-weight: 400;
@@ -73,14 +79,21 @@
     margin-bottom: 34px;
     @include respond-to(sm) {
       flex-direction: row;
-      align-items: center;
+      align-items: flex-end;
     }
     .priceInputWrap {
       display: flex;
       flex-grow: 1;
       width: 100%;
+      .fromLabel {
+        flex-shrink: 0;
+        width: 90px;
+      }
     }
     .gdripInputWrap {
+      display: flex;
+      flex-shrink: 0;
+      align-items: flex-end;
       width: 190px;
       margin-top: 16px;
       @include respond-to(sm) {
@@ -91,6 +104,9 @@
   }
   .addressWrap {
     margin-bottom: 36px;
+    @include respond-to(sm) {
+      margin-bottom: 14px;
+    }
   }
   .formErrorText {
     position: absolute;
@@ -99,5 +115,18 @@
   }
   .formBox {
     width: 100%;
+  }
+  .unit {
+    flex-shrink: 0;
+    margin-bottom: 6px;
+    margin-left: 9px;
+    font-family: 'ProximaNova-Regular';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  .inputText {
+    flex-grow: 1;
   }
 }

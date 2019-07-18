@@ -58,12 +58,12 @@ class SiderContent extends Component<IProps> {
         </div>
         <div className={styles.siderMenusBottom}>
           <p className={styles.official}>
-            <a href="https://www.conflux-chain.org/" target="_blank">
+            <a href="https://www.conflux-chain.org/" target="_blank" rel="noopener noreferrer">
               Conflux
             </a>
           </p>
           <p className={styles.official}>
-            <a href="http://www.confluxscan.io/" target="_blank">
+            <a href="http://www.confluxscan.io/" target="_blank" rel="noopener noreferrer">
               Explorer
             </a>
           </p>
