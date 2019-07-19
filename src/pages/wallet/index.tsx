@@ -8,6 +8,7 @@ import { I18NProps } from '@/i18n/context'
 import Paper from '@material-ui/core/Paper'
 import ContentCfx from './content-cfx/index'
 import ContentFc from './content-fc/index'
+import WalletContributors from './wallet-contributors'
 import ReceiveCodeModal from '@/components/receive-code-modal/index'
 import { IDispatch } from '@/typings'
 import { namespace } from '@/models/cfx'
@@ -149,6 +150,7 @@ class Home extends Component<IProps, IState> {
             />
           </Paper>
         </div>
+        <WalletContributors I18N={I18N} />
         <ReceiveCodeModal
           currentAccountAddress={currentAccountAddress}
           openDialog={openReceiveCodeModal}
