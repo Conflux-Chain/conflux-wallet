@@ -1,7 +1,9 @@
 @import 'assets/styles/index.scss';
+
 .tooltipWrap {
   display: inline;
 }
+
 .modalContent {
   position: absolute;
   right: 10px;
@@ -11,16 +13,19 @@
   padding: 24px 8px 34px;
   margin-right: 0;
   margin-bottom: 6px;
+
   @include respond-to(sm) {
     margin-right: 6px;
     margin-bottom: 0;
   }
+
   background-color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
+
   .modalTitle {
     margin-bottom: 24px;
-    font-family: 'ProximaNova-Bold';
+    // font-family: 'ProximaNova-Bold';
     font-size: 16px;
     font-weight: bold;
     line-height: 19px;
@@ -28,40 +33,47 @@
     text-align: center;
   }
 }
+
 .modalContentM {
   @extend .modalContent;
   right: auto;
   bottom: 16px;
   left: -192px;
 }
+
 .iconWrap {
   position: relative;
   display: inline;
   vertical-align: middle;
+
   &:hover {
     .modalContent {
       display: block;
     }
   }
 }
+
 // 数据框
 .balanceDataBox {
   position: relative;
   margin: 0 140px 0 128px;
+
   .balanceTotalTitle {
-    font-family: 'ProximaNova-Regular';
+    // font-family: 'ProximaNova-Regular';
     font-size: 12px;
     font-weight: 400;
     line-height: 14px;
     color: rgba(0, 0, 0, 0.87);
   }
+
   .balanceTotalNum {
-    font-family: 'ProximaNova-Bold';
+    // font-family: 'ProximaNova-Bold';
     font-size: 14px;
     font-weight: bold;
     line-height: 17px;
     color: rgba(0, 0, 0, 1);
   }
+
   .pathLeftWrap {
     position: absolute;
     top: 0;
@@ -71,24 +83,30 @@
     justify-content: flex-end;
     width: 120px;
     height: 100%;
+
     .balanceTotalBox {
       text-align: right;
     }
+
     .pathLeft {
       align-self: stretch;
       width: 26px;
       margin-right: 6px;
       margin-left: 4px;
     }
+
     .balanceTotalTitle {
       text-align: right;
     }
+
     .balanceTotalNum {
       text-align: right;
     }
   }
+
   .balanceAvailableBox {
     position: relative;
+
     .pathRightWrap {
       position: absolute;
       top: 0;
@@ -98,15 +116,18 @@
       width: 140px;
       height: 100%;
     }
+
     .pathRight {
       align-self: stretch;
       width: 23px;
       margin-right: 4px;
       margin-left: 6px;
     }
+
     .balanceTotalTitle {
       text-align: left;
     }
+
     .balanceTotalNum {
       text-align: left;
     }
@@ -121,41 +142,49 @@
     height: 104px;
     text-align: center;
     border-radius: 4px;
+
     .balanceValTitle {
       padding: 0 12px;
-      font-family: 'ProximaNova-Regular';
+      // font-family: 'ProximaNova-Regular';
       font-size: 12px;
       font-weight: 400;
       line-height: 14px;
       color: rgba(255, 255, 255, 0.87);
     }
+
     .balanceValNum {
       padding: 0 12px;
-      font-family: 'ProximaNova-Bold';
+      // font-family: 'ProximaNova-Bold';
       font-size: 14px;
       font-weight: bold;
       line-height: 17px;
       color: rgba(255, 255, 255, 1);
     }
   }
+
   .freeBalanceBox {
     @extend .balanceInfoBox;
     background-color: #313b6e;
   }
+
   .personalUnlockedBalanceBox {
     @extend .balanceInfoBox;
     background-color: #374db9;
   }
+
   .personalLockedBalanceBox {
     @extend .balanceInfoBox;
     background-color: #d8d8d8;
+
     .balanceValTitle {
       color: #000;
     }
+
     .balanceValNum {
       color: #000;
     }
   }
+
   .viewMoreBox {
     position: absolute;
     bottom: 0;
@@ -165,20 +194,23 @@
     justify-content: flex-start;
     width: 120px;
     cursor: pointer;
+
     .icon {
       width: 14px;
       height: 14px;
       margin-right: 4px;
       margin-left: 6px;
     }
+
     span,
     a {
-      font-family: 'ProximaNova-Regular';
+      // font-family: 'ProximaNova-Regular';
       font-size: 12px;
       font-weight: 400;
       line-height: 14px;
       color: rgba(30, 61, 228, 1);
       text-decoration: none;
+
       .icon {
         width: 10px;
         height: 9px;
