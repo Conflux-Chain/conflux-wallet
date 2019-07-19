@@ -52,6 +52,12 @@ class ContentCfx extends Component<IProps, IState> {
   getCfx() {
     this.props.getCfx()
   }
+  sendSuccess() {
+    this.props.updateCfxAction()
+    this.setState({
+      showModal: false,
+    })
+  }
   render() {
     const { showModal } = this.state
     const { lockStatus, cfxBalance, cfxSendFailed, cfxSendSuccessed, I18N } = this.props
@@ -93,12 +99,7 @@ class ContentCfx extends Component<IProps, IState> {
               onSendCfx={sendData => {
                 this.onSendCfx({
                   ...sendData,
-                  callback: () => {
-                    this.props.updateCfxAction()
-                    this.setState({
-                      showModal: false,
-                    })
-                  },
+                  callback: this.sendSuccess.bind(this),
                   errCallback: e => {
                     alert(e)
                   },

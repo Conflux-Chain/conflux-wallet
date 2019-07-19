@@ -69,8 +69,8 @@ class Home extends Component<IProps, IState> {
   }
   // cfx水龙头
   getCfx() {
-    const callback = this.getCfxSuccess
-    const errCallback = this.getCfxFail
+    const callback = this.getCfxSuccess.bind(this)
+    const errCallback = this.getCfxFail.bind(this)
     this.props.dispatch({
       type: `${namespace}/getCfx`,
       payload: { address: this.props.currentAccountAddress },

@@ -64,6 +64,12 @@ class ContentFC extends Component<IProps, IState> {
   receiveAction() {
     this.props.receiveAction()
   }
+  sendSuccess() {
+    this.props.updateFcAction()
+    this.setState({
+      showModal: false,
+    })
+  }
   render() {
     const { showModal, balanceDetailsTips, fcDetailsTips } = this.state
     const { lockStatus, fcSendFailed, fcSendSuccessed, I18N } = this.props
@@ -130,12 +136,7 @@ class ContentFC extends Component<IProps, IState> {
               onSendFc={sendData => {
                 this.onSendFc({
                   ...sendData,
-                  callback: () => {
-                    this.props.updateFcAction()
-                    this.setState({
-                      showModal: false,
-                    })
-                  },
+                  callback: this.sendSuccess.bind(this),
                   errCallback: e => {
                     alert(e)
                   },
