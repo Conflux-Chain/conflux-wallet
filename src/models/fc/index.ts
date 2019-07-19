@@ -72,7 +72,7 @@ export default {
         })
       } catch (e) {}
     },
-    *send({ payload, callback }, { call, put, select }) {
+    *send({ payload, callback, errCallback }, { call, put, select }) {
       try {
         yield put({
           type: 'setState',
@@ -118,6 +118,8 @@ export default {
         // tslint:disable-next-line: no-unused-expression
         typeof callback === 'function' && callback()
       } catch (e) {
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback(e.message)
         yield put({
           type: 'setState',
           payload: {
@@ -181,7 +183,7 @@ export function sendSignedTransactionPromise(txParams) {
             return resolve(transactionHash)
           })
           .catch(err => {
-            return reject(new Error(err))
+            return reject(err)
           })
       })
       .catch(err => {

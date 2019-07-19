@@ -46,7 +46,7 @@ export default {
       }
     },
     /**send操作 */
-    *send({ payload, callback }, { call, put, select }) {
+    *send({ payload, callback, errCallback }, { call, put, select }) {
       try {
         yield put({
           type: 'setState',
@@ -67,7 +67,7 @@ export default {
         const hexStr = `0x${newValue.toString(16)}`
         const txParams = {
           from: 0,
-          nonce,
+          nonce: 0,
           gasPrice,
           gas: maxGasForSend,
           value: hexStr,
@@ -87,6 +87,8 @@ export default {
         // tslint:disable-next-line: no-unused-expression
         typeof callback === 'function' && callback()
       } catch (e) {
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback(e.message)
         yield put({
           type: 'setState',
           payload: {
