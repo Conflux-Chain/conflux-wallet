@@ -8,6 +8,17 @@ import Hidden from '@material-ui/core/Hidden'
 import imgs from '../../assets/images'
 
 class About extends Component<I18NProps> {
+  scrollToAnchor = anchorName => {
+    if (anchorName) {
+      const anchorElement = document.getElementById(anchorName)
+      if (anchorElement) {
+        anchorElement.scrollIntoView()
+      }
+    }
+  }
+  componentDidMount() {
+    this.scrollToAnchor(window.location.hash.slice(0))
+  }
   render() {
     const { I18N } = this.props
     const isEnglish = I18N.currentLang === LangEnum.en_US

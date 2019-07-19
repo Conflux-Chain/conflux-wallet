@@ -95,7 +95,7 @@ class BalanceDetails extends Component<IProps, IState> {
                 //   this.showViewBox()
                 // }}
               >
-                <a href="/about" target="_blank">
+                <a href="/about#principle" target="_blank">
                   <svg className={styles.icon} aria-hidden="true">
                     <use xlinkHref="#iconiconfontlock" />
                   </svg>
