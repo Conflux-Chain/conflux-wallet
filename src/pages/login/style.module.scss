@@ -43,6 +43,12 @@
         }
       }
 
+      @include respond-to(md) {
+        &:last-child {
+          margin-left: 40px;
+        }
+      }
+
       .paper {
         display: flex;
         flex-direction: column;
@@ -59,12 +65,8 @@
         transition: transform 0.3s;
 
         @include respond-to(md) {
-          width: 270px;
-          height: 357px;
-
-          &:last-child {
-            margin-left: 40px;
-          }
+          width: 302px;
+          height: 389px;
         }
 
         .cardIc {
@@ -89,7 +91,7 @@
           margin-top: 16px;
           padding: 0 39px;
           text-align: center;
-          word-break: break-all;
+          word-break: break-word;
 
           @include respond-to(md) {
             padding: 0 16px;
