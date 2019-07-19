@@ -93,10 +93,15 @@ class ContentCfx extends Component<IProps, IState> {
               onSendCfx={sendData => {
                 this.onSendCfx({
                   ...sendData,
-                  callback: () =>
+                  callback: () => {
+                    this.props.updateCfxAction()
                     this.setState({
                       showModal: false,
-                    }),
+                    })
+                  },
+                  errCallback: e => {
+                    alert(e)
+                  },
                 })
               }}
               updateAction={() => {

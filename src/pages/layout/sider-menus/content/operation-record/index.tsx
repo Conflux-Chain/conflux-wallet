@@ -8,23 +8,27 @@ interface IProps extends Partial<I18NProps> {
 }
 class Operation extends Component<IProps> {
   static defaultProps = { lockStatus: true }
-  clickHandle() {}
   render() {
     const { lockStatus, I18N } = this.props
     return (
       <Tooltip title={I18N.Layout.OperationRecord.text}>
         <div className={classnames(styles.operationWrap, lockStatus ? styles.lockStatus : null)}>
-          <svg
-            className={styles.icon}
-            aria-hidden="true"
-            onClick={() => {
-              if (!lockStatus) {
-                this.clickHandle()
-              }
-            }}
-          >
-            <use xlinkHref="#iconjiaoyijilu" />
-          </svg>
+          {lockStatus ? (
+            <svg className={styles.icon} aria-hidden="true">
+              <use xlinkHref="#iconjiaoyijilu" />
+            </svg>
+          ) : (
+            <a
+              href="http://confluxscan.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.scanLink}
+            >
+              <svg className={styles.icon} aria-hidden="true">
+                <use xlinkHref="#iconjiaoyijilu" />
+              </svg>
+            </a>
+          )}
         </div>
       </Tooltip>
     )

@@ -72,7 +72,7 @@ export default {
         })
       } catch (e) {}
     },
-    *send({ payload, callback }, { call, put, select }) {
+    *send({ payload, callback, errCallback }, { call, put, select }) {
       try {
         yield put({
           type: 'setState',
@@ -125,6 +125,8 @@ export default {
             fcSendFailed: true,
           },
         })
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback(e)
       } finally {
         yield put({
           type: 'setState',

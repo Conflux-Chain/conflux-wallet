@@ -130,10 +130,15 @@ class ContentFC extends Component<IProps, IState> {
               onSendFc={sendData => {
                 this.onSendFc({
                   ...sendData,
-                  callback: () =>
+                  callback: () => {
+                    this.props.updateFcAction()
                     this.setState({
                       showModal: false,
-                    }),
+                    })
+                  },
+                  errCallback: e => {
+                    alert(e)
+                  },
                 })
               }}
               updateAction={() => {

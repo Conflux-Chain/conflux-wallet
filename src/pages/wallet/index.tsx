@@ -39,11 +39,12 @@ class Home extends Component<IProps, IState> {
   // ******* cfx
   // 发送cfx
   onSendCfx(data) {
-    const { toAddress, sendAmount, gasPrice, callback } = data
+    const { toAddress, sendAmount, gasPrice, callback, errCallback } = data
     this.props.dispatch({
       type: `${namespace}/send`,
       payload: { toAddress, sendAmount, gasPrice },
       callback,
+      errCallback,
     })
   }
   // 更新cfx
@@ -78,6 +79,7 @@ class Home extends Component<IProps, IState> {
     })
   }
   getCfxSuccess() {
+    this.updateFcAction()
     this.setState({
       openFaucetSuccessModal: true,
     })
@@ -90,11 +92,12 @@ class Home extends Component<IProps, IState> {
   // ******* fc
   // 发送fc
   onSendFc(data) {
-    const { toAddress, value, gasPrice, callback } = data
+    const { toAddress, value, gasPrice, callback, errCallback } = data
     this.props.dispatch({
       type: `${namespaceOfFc}/send`,
       payload: { toAddress, value, gasPrice },
       callback,
+      errCallback,
     })
   }
   // 更新fc
