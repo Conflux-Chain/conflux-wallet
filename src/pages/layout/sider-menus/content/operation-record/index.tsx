@@ -19,7 +19,7 @@ class Operation extends Component<IProps> {
             </svg>
           ) : (
             <a
-              href="http://confluxscan.io/"
+              href="http://confluxscan.io/blocktxn"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.scanLink}

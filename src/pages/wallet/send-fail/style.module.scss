@@ -9,10 +9,16 @@
   color: rgba(0, 0, 0, 1);
   text-align: center;
   word-break: break-all;
-
   @include respond-to(sm) {
+    width: 460px;
+    padding: 15px 30px 48px;
+    margin: 0 auto;
+    line-height: 40px;
+  }
+  @include respond-to(md) {
     width: 420px;
-    margin: 15px 30px 48px;
+    padding: 15px 30px 48px;
+    margin: 0 auto;
     line-height: 40px;
   }
 }

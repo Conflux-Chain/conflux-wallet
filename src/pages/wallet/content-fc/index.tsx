@@ -170,7 +170,7 @@ class ContentFC extends Component<IProps, IState> {
                   </svg>
                 </>
               ) : (
-                <a href="http://confluxscan.io/" target="_blank" rel="noopener noreferrer">
+                <a href="http://confluxscan.io/blocktxn" target="_blank" rel="noopener noreferrer">
                   {I18N.Wallet.MyWallet.viewContract}{' '}
                   <svg className={styles.moreIcon} aria-hidden="true">
                     <use xlinkHref="#icongengduo1" />
