@@ -43,6 +43,12 @@
         }
       }
 
+      @include respond-to(md) {
+        &:last-child {
+          margin-left: 40px;
+        }
+      }
+
       .paper {
         display: flex;
         flex-direction: column;
@@ -61,10 +67,6 @@
         @include respond-to(md) {
           width: 270px;
           height: 357px;
-
-          &:last-child {
-            margin-left: 40px;
-          }
         }
 
         .cardIc {

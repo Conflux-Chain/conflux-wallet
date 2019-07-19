@@ -53,7 +53,7 @@ class About extends Component<I18NProps> {
               </div>
             </div>
             <div className={styles.imgBox}>
-              <img className={styles.rightImg1} alt="" src={imgs.about1} />
+              <img className={styles.rightImg1} alt="" src={imgs.about1EN} />
             </div>
           </div>
           <div className={classnames(styles.line2, styles.line3)}>
@@ -63,7 +63,7 @@ class About extends Component<I18NProps> {
               </div>
             </div>
             <div className={styles.imgBox}>
-              <img className={styles.rightImg2} alt="" src={imgs.about2} />
+              <img className={styles.rightImg2} alt="" src={imgs.about2EN} />
             </div>
           </div>
         </div>
