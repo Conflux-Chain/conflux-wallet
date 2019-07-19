@@ -57,7 +57,7 @@
   }
 
   .walletName {
-    // font-family: 'ProximaNova-Regular';
+    font-family: 'ProximaNova-Regular';
     font-size: 24px;
     font-weight: bold;
     line-height: 29px;
@@ -82,7 +82,7 @@
   .walletBalanceTitle {
     display: none;
     margin-bottom: 4px;
-    // font-family: 'ProximaNova-Regular';
+    font-family: 'ProximaNova-Regular';
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
@@ -94,7 +94,7 @@
   }
 
   .walletBalanceTotal {
-    // font-family: 'ProximaNova-Bold';
+    font-family: 'ProximaNova-Bold';
     font-size: 24px;
     font-weight: bold;
     line-height: 32px;
@@ -157,7 +157,7 @@
 
   .balanceTitle {
     margin-bottom: 6px;
-    // font-family: 'ProximaNova-Regular';
+    font-family: 'ProximaNova-Regular';
     font-size: 12px;
     font-weight: 400;
     line-height: 14px;
@@ -183,14 +183,14 @@
   }
 
   .balanceNum {
-    // font-family: 'ProximaNova-Regular';
+    font-family: 'ProximaNova-Regular';
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
     color: rgba(0, 0, 0, 1);
 
     @include respond-to(md) {
-      // font-family: 'ProximaNova-Bold';
+      font-family: 'ProximaNova-Bold';
       font-size: 16px;
       font-weight: bold;
       line-height: 24px;

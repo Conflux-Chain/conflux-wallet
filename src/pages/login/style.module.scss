@@ -15,7 +15,7 @@
 
   .title {
     font-size: 34px;
-    // font-family: 'ProximaNova-Bold';
+    font-family: 'ProximaNova-Bold';
     color: rgba(0, 0, 0, 0.87);
     line-height: 64px;
     padding: 48px 16px 0;
@@ -76,7 +76,7 @@
 
         .paperTitle {
           font-size: 24px;
-          // font-family: 'ProximaNova-Bold';
+          font-family: 'ProximaNova-Bold';
           line-height: 29px;
 
           @include respond-to(md) {
@@ -86,7 +86,7 @@
 
         .paperDesc {
           font-size: 16px;
-          // font-family: 'ProximaNova-Regular';
+          font-family: 'ProximaNova-Regular';
           line-height: 24px;
           margin-top: 16px;
           padding: 0 39px;
