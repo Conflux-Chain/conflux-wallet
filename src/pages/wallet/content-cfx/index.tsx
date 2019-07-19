@@ -77,7 +77,7 @@ class ContentCfx extends Component<IProps, IState> {
               disabled={lockStatus}
               variant="contained"
               color="primary"
-              className={styles.btn}
+              className={lockStatus ? styles.btnLock : styles.btn}
               onClick={() => {
                 this.props.updateCfxAction()
                 this.setState({
