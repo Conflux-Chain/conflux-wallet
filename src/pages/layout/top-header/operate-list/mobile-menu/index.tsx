@@ -12,7 +12,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 
 // import DeployBtn from '../deploy-btn/index'
 import RefreshBtn from '../refresh-btn/index'
-const netList = ['Testnet', 'Local RPC']
+const netList = ['Testnet']
+// const netList = ['Testnet', 'Local RPC']
 interface IProps {
   isLogin?: boolean
   lockStatus?: boolean

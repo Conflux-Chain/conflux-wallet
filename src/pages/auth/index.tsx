@@ -12,7 +12,9 @@ class Auth extends Component<IProps> {
         this.props.history.replace('/wallet')
       }
     } else {
-      this.props.history.replace('/login')
+      if (this.props.location.pathname !== '/about') {
+        this.props.history.replace('/login')
+      }
     }
   }
   render() {

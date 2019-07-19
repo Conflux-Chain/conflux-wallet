@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
-import { Link } from 'react-router-dom'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import styles from './style.module.scss'
 import { I18NProps } from '@/i18n/context'
@@ -23,16 +22,18 @@ class FcDetails extends Component<IProps> {
         <div className={styles.iconWrap}>
           {this.props.children}
           {isWidthUp('sm', this.props.width) ? (
-            <div className={styles.fcDetailsContent}>
-              <p>{I18N.Wallet.FansCoinDetails.detailText}</p>
-              <Link to="/about">
-                <p className={styles.fcDetailsLink}>
-                  {I18N.Wallet.FansCoinDetails.viewMore}{' '}
-                  <svg className={styles.icon} aria-hidden="true">
-                    <use xlinkHref="#icongengduo1" />
-                  </svg>
-                </p>
-              </Link>
+            <div className={styles.fcDetailsContentWrap}>
+              <div className={styles.fcDetailsContent}>
+                <p>{I18N.Wallet.FansCoinDetails.detailText}</p>
+                <a href="/about" target="_blank">
+                  <p className={styles.fcDetailsLink}>
+                    {I18N.Wallet.FansCoinDetails.viewMore}{' '}
+                    <svg className={styles.icon} aria-hidden="true">
+                      <use xlinkHref="#icongengduo1" />
+                    </svg>
+                  </p>
+                </a>
+              </div>
             </div>
           ) : null}
         </div>

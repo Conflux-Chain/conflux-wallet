@@ -85,7 +85,7 @@ class Home extends Component<IProps, IState> {
   // 关闭fc成功模态框
   closeFcSuccessedModal() {
     this.props.dispatch({
-      type: `${namespace}/setState`,
+      type: `${namespaceOfFc}/setState`,
       payload: { fcSendSuccessed: false },
     })
   }

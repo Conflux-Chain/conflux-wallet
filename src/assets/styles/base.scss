@@ -131,6 +131,12 @@
         left: 218px;
       }
     }
+    &.MuiSnackbar-anchorOriginTopRight {
+      @include respond-to(sm) {
+        top: 88px;
+        right: 160px;
+      }
+    }
   }
 
   .MuiDialog-paper {

@@ -26,6 +26,8 @@ export default {
     cfxSendFailed: false,
     /** 水龙头获取cfx失败*/
     getCfxSuccess: false,
+    /**获取水龙头成功后的tx */
+    cfxTx: '',
   },
   effects: {
     /**更新cfx余额 */
@@ -104,11 +106,13 @@ export default {
     *getCfx({ payload, callback, errCallback }, { call, put }) {
       try {
         const { address } = payload
-        yield call(getCfx, address)
+        const result = yield call(getCfx, address)
+        const cfxTx = result.message.tx
         yield put({
           type: 'setState',
           payload: {
             getCfxSuccess: true,
+            cfxTx,
           },
         })
         // tslint:disable-next-line: no-unused-expression
@@ -117,6 +121,7 @@ export default {
         yield put({
           type: 'setState',
           payload: {
+            cfxTx: '',
             getCfxSuccess: false,
           },
         })

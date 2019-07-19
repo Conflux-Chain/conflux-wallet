@@ -14,7 +14,7 @@ interface IProps {
   width?: Breakpoint
   lockAction?: (val) => void
   onToggleMenus?: () => void
-  refreshAction?: () => void
+  refreshAction?: (callback, errCallback) => void
 }
 class TopHeader extends Component<IProps> {
   static defaultProps = { isLogin: false, lockStatus: true }
@@ -38,15 +38,14 @@ class TopHeader extends Component<IProps> {
             }}
           />
           {/* 右边操作项 */}
-          {simpleLayout ? null : (
-            <OperateList
-              isLogin={isLogin}
-              lockStatus={lockStatus}
-              lockError={lockError}
-              lockAction={this.props.lockAction}
-              refreshAction={this.props.refreshAction}
-            />
-          )}
+          <OperateList
+            isLogin={isLogin}
+            simpleLayout={simpleLayout}
+            lockStatus={lockStatus}
+            lockError={lockError}
+            lockAction={this.props.lockAction}
+            refreshAction={this.props.refreshAction}
+          />
         </Toolbar>
       </AppBar>
     )

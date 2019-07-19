@@ -66,7 +66,7 @@ class Operation extends Component<IProps, IState> {
             horizontal: isWidthUp('sm', cWidth) ? 'left' : 'center',
           }}
           open={openMsg}
-          autoHideDuration={3000}
+          autoHideDuration={2000}
           onClose={() => {
             this.handleCloseMsg()
           }}

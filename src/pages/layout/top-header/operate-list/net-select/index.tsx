@@ -7,7 +7,8 @@ import MenuList from '@material-ui/core/MenuList'
 import Grow from '@material-ui/core/Grow'
 import Paper from '@material-ui/core/Paper'
 import Popper from '@material-ui/core/Popper'
-const netList = ['Testnet', 'Local RPC']
+const netList = ['Testnet']
+// const netList = ['Testnet', 'Local RPC']
 interface IState {
   menuNet: null | HTMLElement
   menuNetSelected: string
