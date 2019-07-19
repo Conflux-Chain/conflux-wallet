@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
-import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
+
 import styles from './style.module.scss'
 import Images from '@/assets/images/index'
 import OperationCode from './operation-code/index'
@@ -10,32 +9,20 @@ import OperationRecord from './operation-record/index'
 import MenuList from './menu-list/index'
 import { I18NHOC } from '@/utils/tools/react'
 import { I18NProps } from '@/i18n/context'
-import Snackbar from '@material-ui/core/Snackbar'
 type IProps = I18NProps & {
   closeAction?: () => void
+  copied?: () => void
   lockStatus: boolean
   /** 钱包地址 */
   currentAccountAddress: string
   /**privateKey */
   currentAccountPrivateKey: string
-  width?: Breakpoint
 }
-interface IState {
-  openFuzhiMsg?: boolean
-}
-class SiderContent extends Component<IProps, IState> {
+
+class SiderContent extends Component<IProps> {
   static defaultProps = { lockStatus: true }
-  state = {
-    openFuzhiMsg: false,
-  }
-  handleCloseFuzhiMsg() {
-    this.setState({
-      openFuzhiMsg: false,
-    })
-  }
+
   render() {
-    const cWidth = this.props.width
-    const { openFuzhiMsg } = this.state
     const { lockStatus, currentAccountAddress, currentAccountPrivateKey, I18N } = this.props
     return (
       <>
@@ -49,11 +36,7 @@ class SiderContent extends Component<IProps, IState> {
             </div>
             <div className={styles.operationWrap}>
               <OperationFuzhi
-                copied={() => {
-                  this.setState({
-                    openFuzhiMsg: true,
-                  })
-                }}
+                copied={this.props.copied}
                 lockStatus={lockStatus}
                 currentAccountAddress={currentAccountAddress}
                 I18N={I18N}
@@ -101,21 +84,8 @@ class SiderContent extends Component<IProps, IState> {
             <p className={styles.copyText}>Copyright © 2019 Conflux. All Rights Reserved</p>
           </div>
         </div>
-        <Snackbar
-          className={styles.snackbar}
-          anchorOrigin={{
-            vertical: isWidthUp('sm', cWidth) ? 'top' : 'bottom',
-            horizontal: isWidthUp('sm', cWidth) ? 'left' : 'center',
-          }}
-          open={openFuzhiMsg}
-          autoHideDuration={20000}
-          onClose={() => {
-            this.handleCloseFuzhiMsg()
-          }}
-          message={<span>{I18N.Layout.OperationFuzhi.copied}</span>}
-        />
       </>
     )
   }
 }
-export default I18NHOC(withWidth()(SiderContent)) as any
+export default I18NHOC(SiderContent) as any

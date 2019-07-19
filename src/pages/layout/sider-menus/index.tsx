@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
+import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import styles from './style.module.scss'
 // import Images from '@/assets/images/index'
 import Hidden from '@material-ui/core/Hidden'
 import Drawer from '@material-ui/core/Drawer'
 import SiderContent from './content/index'
-interface IProps {
+import Snackbar from '@material-ui/core/Snackbar'
+import { I18NProps } from '@/i18n/context'
+import { I18NHOC } from '@/utils/tools/react'
+type IProps = I18NProps & {
   /** 钱包地址 */
   closeAction?: () => void
   currentAccountAddress: string
@@ -13,10 +18,21 @@ interface IProps {
   mobileOpen: boolean
   onToggleMenus?: () => void
   currentAccountPrivateKey: string
+  width?: Breakpoint
 }
-
-class OperateList extends Component<IProps> {
+interface IState {
+  openFuzhiMsg?: boolean
+}
+class OperateList extends Component<IProps, IState> {
   static defaultProps = { isLogin: false, lockStatus: true }
+  state = {
+    openFuzhiMsg: false,
+  }
+  handleCloseFuzhiMsg() {
+    this.setState({
+      openFuzhiMsg: false,
+    })
+  }
   handleDrawerToggle() {
     this.props.onToggleMenus()
   }
@@ -27,8 +43,14 @@ class OperateList extends Component<IProps> {
       mobileOpen,
       currentAccountPrivateKey,
       currentAccountAddress,
+      I18N,
     } = this.props
     const SiderContentProps = {
+      copied: () => {
+        this.setState({
+          openFuzhiMsg: true,
+        })
+      },
       closeAction: () => {
         this.props.closeAction()
       },
@@ -36,6 +58,8 @@ class OperateList extends Component<IProps> {
       currentAccountAddress,
       lockStatus,
     }
+    const cWidth = this.props.width
+    const { openFuzhiMsg } = this.state
     return (
       <>
         {isLogin ? (
@@ -62,8 +86,21 @@ class OperateList extends Component<IProps> {
             </Hidden>
           </React.Fragment>
         ) : null}
+        <Snackbar
+          className={styles.snackbar}
+          anchorOrigin={{
+            vertical: isWidthUp('sm', cWidth) ? 'top' : 'bottom',
+            horizontal: isWidthUp('sm', cWidth) ? 'left' : 'center',
+          }}
+          open={openFuzhiMsg}
+          autoHideDuration={20000}
+          onClose={() => {
+            this.handleCloseFuzhiMsg()
+          }}
+          message={<span>{I18N.Layout.OperationFuzhi.copied}</span>}
+        />
       </>
     )
   }
 }
-export default OperateList
+export default I18NHOC(withWidth()(OperateList)) as any
