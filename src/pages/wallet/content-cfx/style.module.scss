@@ -140,3 +140,26 @@
     }
   }
 }
+.seeContractBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 41px;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(180deg, rgba(16, 11, 48, 1) 0%, rgba(59, 67, 118, 1) 100%);
+  border-radius: 0 0 8px 8px;
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .moreIcon {
+    width: 14px;
+    height: 12px;
+    fill: #fff;
+  }
+}
+.seeContractBoxLock {
+  @extend .seeContractBox;
+  background: rgba(0, 0, 0, 0.38);
+}

@@ -1,0 +1,25 @@
+@import 'assets/styles/index.scss';
+.tipString {
+  box-sizing: border-box;
+  width: auto;
+  margin: 15px 20px 40px;
+  font-family: 'ProximaNova-Regular';
+  font-size: 18px;
+  line-height: 28px;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+  word-break: keep-all;
+  @include respond-to(sm) {
+    width: 420px;
+    padding: 0 64px;
+    margin: 15px 30px 48px;
+    line-height: 40px;
+  }
+}
+.statusIcon {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto;
+  fill: #c2c2c2;
+}
