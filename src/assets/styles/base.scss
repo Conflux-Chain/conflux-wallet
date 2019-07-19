@@ -52,6 +52,7 @@
     cursor: pointer;
     opacity: 0.7;
     fill: #fff;
+
     &:hover {
       opacity: 1;
     }
@@ -92,7 +93,6 @@
   overflow: hidden;
 
   .dialogTitle {
-    font-family: 'ProximaNova-Bold';
     font-size: 24px;
     font-weight: bold;
     line-height: 40px;
@@ -131,6 +131,7 @@
         left: 218px;
       }
     }
+
     &.MuiSnackbar-anchorOriginTopRight {
       @include respond-to(sm) {
         top: 88px;
