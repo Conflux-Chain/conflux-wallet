@@ -46,6 +46,10 @@
     font-weight: 400;
     color: rgba(0, 0, 0, 1);
     line-height: 28px;
+    white-space: pre-line;
+    // text-align: justify;
+    // text-align-last: center;
+    // -moz-text-align-last: center;
   }
 
   .container1 {
@@ -90,6 +94,7 @@
         color: rgba(0, 0, 0, 1);
         line-height: 28px;
         margin-top: 30px;
+        white-space: pre-line;
 
         @include respond-to(md) {
           width: 457px;
@@ -148,7 +153,7 @@
         }
 
         @include respond-to(md) {
-          width: 410px;
+          width: 426px;
           padding: 0 79px 56px;
 
           &:last-child {
@@ -171,8 +176,8 @@
 
       .item0 {
         @include respond-to(md) {
-          width: 298px;
-          padding: 0 62px 71px 52px;
+          width: 305px;
+          padding: 0 55px 71px 52px;
         }
       }
 
