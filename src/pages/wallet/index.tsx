@@ -8,6 +8,9 @@ import { I18NProps } from '@/i18n/context'
 import Paper from '@material-ui/core/Paper'
 import ContentCfx from './content-cfx/index'
 import ContentFc from './content-fc/index'
+import FaucetFail from './faucet-fail/index'
+import FaucetSuccess from './faucet-success/index'
+import WalletContributors from './wallet-contributors'
 import ReceiveCodeModal from '@/components/receive-code-modal/index'
 import { IDispatch } from '@/typings'
 import { namespace } from '@/models/cfx'
@@ -19,10 +22,14 @@ interface IProps extends IDvaProps, I18NProps, IDispatch {
 }
 interface IState {
   openReceiveCodeModal?: boolean
+  openFaucetFailModal?: boolean
+  openFaucetSuccessModal?: boolean
 }
 class Home extends Component<IProps, IState> {
   state = {
     openReceiveCodeModal: false,
+    openFaucetFailModal: false,
+    openFaucetSuccessModal: false,
   }
   componentDidMount() {
     this.updateCfxAction()
@@ -32,11 +39,12 @@ class Home extends Component<IProps, IState> {
   // ******* cfx
   // 发送cfx
   onSendCfx(data) {
-    const { toAddress, sendAmount, gasPrice, callback } = data
+    const { toAddress, sendAmount, gasPrice, callback, errCallback } = data
     this.props.dispatch({
       type: `${namespace}/send`,
       payload: { toAddress, sendAmount, gasPrice },
       callback,
+      errCallback,
     })
   }
   // 更新cfx
@@ -59,14 +67,37 @@ class Home extends Component<IProps, IState> {
       payload: { cfxSendSuccessed: false },
     })
   }
+  // cfx水龙头
+  getCfx() {
+    const callback = this.getCfxSuccess.bind(this)
+    const errCallback = this.getCfxFail.bind(this)
+    this.props.dispatch({
+      type: `${namespace}/getCfx`,
+      payload: { address: this.props.currentAccountAddress },
+      callback,
+      errCallback,
+    })
+  }
+  getCfxSuccess() {
+    this.updateFcAction()
+    this.setState({
+      openFaucetSuccessModal: true,
+    })
+  }
+  getCfxFail() {
+    this.setState({
+      openFaucetFailModal: true,
+    })
+  }
   // ******* fc
   // 发送fc
   onSendFc(data) {
-    const { toAddress, value, gasPrice, callback } = data
+    const { toAddress, value, gasPrice, callback, errCallback } = data
     this.props.dispatch({
       type: `${namespaceOfFc}/send`,
       payload: { toAddress, value, gasPrice },
       callback,
+      errCallback,
     })
   }
   // 更新fc
@@ -99,9 +130,10 @@ class Home extends Component<IProps, IState> {
       openReceiveCodeModal: false,
     })
   }
+
   render() {
-    const { I18N, currentAccountAddress } = this.props
-    const { openReceiveCodeModal } = this.state
+    const { I18N, currentAccountAddress, cfxTx } = this.props
+    const { openReceiveCodeModal, openFaucetFailModal, openFaucetSuccessModal } = this.state
     return (
       <div>
         <h2 className={styles.pageTitle}>{I18N.Wallet.MyWallet.title}</h2>
@@ -124,6 +156,9 @@ class Home extends Component<IProps, IState> {
               }}
               onSendCfx={sendData => {
                 this.onSendCfx(sendData)
+              }}
+              getCfx={() => {
+                this.getCfx()
               }}
             />
           </Paper>
@@ -149,11 +184,27 @@ class Home extends Component<IProps, IState> {
             />
           </Paper>
         </div>
+        <WalletContributors I18N={I18N} />
         <ReceiveCodeModal
           currentAccountAddress={currentAccountAddress}
           openDialog={openReceiveCodeModal}
           onClose={() => {
             this.closeReceiveCodeModal()
+          }}
+        />
+        <FaucetFail
+          I18N={I18N}
+          openDialog={openFaucetFailModal}
+          onClose={() => {
+            this.setState({ openFaucetFailModal: false })
+          }}
+        />
+        <FaucetSuccess
+          I18N={I18N}
+          openDialog={openFaucetSuccessModal}
+          cfxTx={cfxTx}
+          onClose={() => {
+            this.setState({ openFaucetSuccessModal: false })
           }}
         />
       </div>

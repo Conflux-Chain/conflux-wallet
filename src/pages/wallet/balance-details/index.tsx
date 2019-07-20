@@ -95,10 +95,10 @@ class BalanceDetails extends Component<IProps, IState> {
                 //   this.showViewBox()
                 // }}
               >
-                <a href="/about" target="_blank">
-                  <svg className={styles.icon} aria-hidden="true">
-                    <use xlinkHref="#iconiconfontlock" />
-                  </svg>
+                <svg className={styles.icon} aria-hidden="true">
+                  <use xlinkHref="#iconiconfontlock" />
+                </svg>
+                <a href="/about#principle" target="_blank">
                   <span>
                     {I18N.Wallet.BalanceDetails.viewMore}{' '}
                     <svg className={styles.icon} aria-hidden="true">

@@ -1,40 +1,27 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
-import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
+
 import Tooltip from '@material-ui/core/Tooltip'
-import Snackbar from '@material-ui/core/Snackbar'
+
 import copy from 'copy-to-clipboard'
 import styles from './style.module.scss'
 import { I18NProps } from '@/i18n/context'
 interface IProps extends Partial<I18NProps> {
   lockStatus?: boolean
   currentAccountAddress?: string
-  width?: Breakpoint
+  copied?: () => void
 }
-interface IState {
-  openMsg?: boolean
-}
-class Operation extends Component<IProps, IState> {
+
+class Operation extends Component<IProps> {
   static defaultProps = { lockStatus: true }
-  state = {
-    openMsg: false,
-  }
+
   clickHandle() {
     copy(this.props.currentAccountAddress)
-    this.setState({
-      openMsg: true,
-    })
+    this.props.copied()
   }
-  handleCloseMsg() {
-    this.setState({
-      openMsg: false,
-    })
-  }
+
   render() {
-    const { openMsg } = this.state
     const { lockStatus, I18N } = this.props
-    const cWidth = this.props.width
     return (
       <>
         <Tooltip title={I18N.Layout.OperationFuzhi.text}>
@@ -59,21 +46,8 @@ class Operation extends Component<IProps, IState> {
             </svg>
           </div>
         </Tooltip>
-        <Snackbar
-          className={styles.snackbar}
-          anchorOrigin={{
-            vertical: isWidthUp('sm', cWidth) ? 'top' : 'bottom',
-            horizontal: isWidthUp('sm', cWidth) ? 'left' : 'center',
-          }}
-          open={openMsg}
-          autoHideDuration={2000}
-          onClose={() => {
-            this.handleCloseMsg()
-          }}
-          message={<span>{I18N.Layout.OperationFuzhi.copied}</span>}
-        />
       </>
     )
   }
 }
-export default withWidth()(Operation)
+export default Operation

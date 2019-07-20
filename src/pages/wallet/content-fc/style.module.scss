@@ -1,43 +1,53 @@
 @import 'assets/styles/index.scss';
+
 .cardContent {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
   @include respond-to(md) {
     justify-content: space-between;
     height: 100%;
   }
 }
+
 .infoBox {
   padding: 16px 16px 0;
+
   @include respond-to(md) {
     justify-content: space-between;
     height: 100%;
     padding: 40px 16px 0;
   }
+
   .infoBoxTop {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
     @include respond-to(md) {
       flex-direction: column;
       justify-content: flex-start;
     }
   }
 }
+
 .walletHeader {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+
   @include respond-to(md) {
     flex-direction: column;
   }
+
   .walletImg {
     width: 48px;
     height: 48px;
     margin-right: 16px;
+
     @include respond-to(md) {
       width: 64px;
       height: 64px;
@@ -45,12 +55,14 @@
       margin-bottom: 8px;
     }
   }
+
   .walletName {
     font-family: 'ProximaNova-Regular';
     font-size: 24px;
     font-weight: bold;
     line-height: 29px;
     color: rgba(0, 0, 0, 1);
+
     @include respond-to(md) {
       font-weight: 400;
     }
@@ -61,10 +73,12 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
   @include respond-to(md) {
     flex-direction: column;
     margin-top: 33px;
   }
+
   .walletBalanceTitle {
     display: none;
     margin-bottom: 4px;
@@ -73,16 +87,19 @@
     font-weight: 400;
     line-height: 19px;
     color: rgba(0, 0, 0, 1);
+
     @include respond-to(md) {
       display: block;
     }
   }
+
   .walletBalanceTotal {
     font-family: 'ProximaNova-Bold';
     font-size: 24px;
     font-weight: bold;
     line-height: 32px;
     color: rgba(0, 0, 0, 1);
+
     @include respond-to(md) {
       font-size: 34px;
       line-height: 48px;
@@ -96,6 +113,7 @@
   justify-content: center;
   margin-top: 16px;
   margin-bottom: 24px;
+
   @include respond-to(md) {
     flex-direction: column;
     align-items: stretch;
@@ -103,33 +121,40 @@
     margin-top: 0;
     margin-bottom: 40px;
   }
+
   .btn {
     height: 40px;
     font-size: 16px;
     font-weight: bold;
     text-transform: Capitalize;
+
     &:not(:first-child) {
       margin-top: 0;
       margin-left: 16px;
+
       @include respond-to(md) {
         margin-top: 8px;
         margin-left: 0;
       }
     }
   }
+
   .btnLock {
     @extend .btn;
     color: #fff !important;
     background-color: rgba(0, 0, 0, 0.38) !important;
   }
 }
+
 .balanceBox {
   padding-left: 64px;
+
   @include respond-to(md) {
     padding-left: 0;
     margin-top: 12px;
     text-align: center;
   }
+
   .balanceTitle {
     margin-bottom: 6px;
     font-family: 'ProximaNova-Regular';
@@ -137,28 +162,33 @@
     font-weight: 400;
     line-height: 14px;
     color: rgba(0, 0, 0, 1);
+
     @include respond-to(md) {
       margin-bottom: 4px;
       font-size: 16px;
       line-height: 19px;
     }
+
     .questionIcon {
       width: 16px;
       height: 16px;
       margin-left: 6px;
       fill: #9e9e9e;
+
       &:hover,
       &.questionIconActive {
         fill: #1e3de4;
       }
     }
   }
+
   .balanceNum {
     font-family: 'ProximaNova-Regular';
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
     color: rgba(0, 0, 0, 1);
+
     @include respond-to(md) {
       font-family: 'ProximaNova-Bold';
       font-size: 16px;
@@ -168,6 +198,7 @@
     }
   }
 }
+
 .seeContractBox {
   display: flex;
   align-items: center;
@@ -177,24 +208,29 @@
   cursor: pointer;
   background: linear-gradient(180deg, rgba(16, 11, 48, 1) 0%, rgba(59, 67, 118, 1) 100%);
   border-radius: 0 0 8px 8px;
+
   a {
     color: #fff;
     text-decoration: none;
   }
+
   .moreIcon {
     width: 14px;
     height: 12px;
     fill: #fff;
   }
 }
+
 .seeContractBoxLock {
   @extend .seeContractBox;
   background: rgba(0, 0, 0, 0.38);
 }
+
 .fcQuestionBtn {
   position: absolute;
   top: 0;
   right: -16px;
+
   .fcQuestionIcon {
     width: 16px;
     height: 16px;
@@ -206,9 +242,11 @@
       fill: #1e3de4;
     }
   }
+
   @include respond-to(md) {
     top: 14px;
     right: -44px;
+
     .fcQuestionIcon {
       width: 24px;
       height: 24px;

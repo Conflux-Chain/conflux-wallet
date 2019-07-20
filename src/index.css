@@ -1,11 +1,32 @@
+@font-face {
+  font-family: 'ProximaNova-Bold';
+  font-display: auto;
+  font-weight: bold;
+  src: url('../src/assets/fonts/ProximaNova-Bold.otf');
+}
+
+@font-face {
+  font-family: 'ProximaNova-Regular';
+  font-display: auto;
+  font-weight: 400;
+  src: url('../src/assets/fonts/ProximaNova-Regular.otf');
+}
+
+@font-face {
+  font-family: 'ProximaNova-Semibold';
+  font-display: auto;
+  font-weight: 600;
+  src: url('../src/assets/fonts/ProximaNova-Semibold.otf');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+  font-family: 'ProximaNova-Bold', 'ProximaNova-Regular', 'ProximaNova-Semibold', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: 'ProximaNova-Bold', 'ProximaNova-Regular', 'ProximaNova-Semibold', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

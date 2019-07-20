@@ -127,6 +127,8 @@ export default {
             fcSendFailed: true,
           },
         })
+        // tslint:disable-next-line: no-unused-expression
+        typeof errCallback === 'function' && errCallback(e)
       } finally {
         yield put({
           type: 'setState',

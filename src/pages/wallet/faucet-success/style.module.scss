@@ -1,46 +1,61 @@
 @import 'assets/styles/index.scss';
-
 .modalContent {
-  margin: 0 38px 0;
+  margin: 0 16px 0;
 }
-
 .tipString {
   width: auto;
-  margin: 20px 38px 50px;
-  font-family: 'ProximaNova-Regular';
-  font-size: 18px;
-  line-height: 28px;
+  margin: 16px 0 8px;
+  font-family: 'ProximaNova-Bold';
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 40px;
   color: rgba(0, 0, 0, 1);
   text-align: center;
-  word-break: break-all;
-
+  word-break: keep-all;
   @include respond-to(sm) {
     width: 380px;
-    margin: 15px auto 48px;
+    margin: 15px auto 8px;
     line-height: 40px;
   }
 }
-
+.subTipTime {
+  margin-bottom: 11px;
+  font-family: 'ProximaNova-Regular';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  color: rgba(0, 0, 0, 0.87);
+  text-align: center;
+  word-break: keep-all;
+}
+.scanLink {
+  display: block;
+  font-family: 'ProximaNova-Semibold';
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  color: rgba(23, 56, 237, 1);
+  text-align: center;
+  text-decoration: none;
+  word-break: break-all;
+}
 .statusIcon {
   display: block;
   width: 96px;
   height: 96px;
-  margin: 0 auto;
+  margin: 12px auto 0;
   fill: #c2c2c2;
 }
-
 .modalBtnWrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 48px 0;
-
+  margin: 40px 0;
   .btn {
     width: 160px;
     height: 40px;
   }
 }
-
 .modalFooter {
   display: flex;
   align-items: center;
@@ -48,14 +63,12 @@
   height: 40px;
   background: rgba(232, 242, 255, 1);
   border-radius: 0 0 8px 8px;
-
   p {
     font-family: 'ProximaNova-Regular';
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
     color: rgba(0, 0, 0, 0.87);
-
     strong {
       display: block;
       width: 100%;
@@ -63,18 +76,15 @@
       text-align: center;
       text-decoration: underline;
       cursor: pointer;
-
       a {
         color: rgba(0, 0, 0, 0.87);
       }
-
       @include respond-to(sm) {
         display: inline;
         width: auto;
       }
     }
   }
-
   .moreIcon {
     width: 14px;
     height: 12px;

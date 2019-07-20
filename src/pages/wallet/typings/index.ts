@@ -18,6 +18,10 @@ export interface ICFX {
   cfxSendSuccessed: false
   /** cfx send失败 */
   cfxSendFailed: false
+  /** 水龙头获取cfx失败*/
+  getCfxSuccess: false
+  /**获取水龙头成功后的tx */
+  cfxTx: ''
 }
 /**
  * fc相关props

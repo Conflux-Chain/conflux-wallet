@@ -42,7 +42,7 @@ class SendBaseModal extends Component<IProps, IState> {
   state = {
     balanceVal: 0,
     addressVal: '',
-    gasPriceVal: '',
+    gasPriceVal: '10',
     hasError: false,
   }
   handleClose() {
@@ -80,7 +80,8 @@ class SendBaseModal extends Component<IProps, IState> {
   }
   submitForm() {
     const { balanceVal, addressVal, gasPriceVal } = this.state
-    if (addressVal === '') {
+    const reg = /^0x[0-9a-fA-F]{40}$/
+    if (!reg.test(addressVal)) {
       this.setState({ hasError: true })
       return false
     }

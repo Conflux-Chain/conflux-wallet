@@ -18,6 +18,7 @@ interface IProps extends ICFX, Partial<I18NProps> {
   closeSuccessedModal?: () => void
   receiveAction?: () => void
   onSendCfx?: (data: ISendCfxData) => void
+  getCfx?: () => void
 }
 interface IState {
   showModal: boolean
@@ -47,6 +48,16 @@ class ContentCfx extends Component<IProps, IState> {
   receiveAction() {
     this.props.receiveAction()
   }
+  // 水龙头
+  getCfx() {
+    this.props.getCfx()
+  }
+  sendSuccess() {
+    this.props.updateCfxAction()
+    this.setState({
+      showModal: false,
+    })
+  }
   render() {
     const { showModal } = this.state
     const { lockStatus, cfxBalance, cfxSendFailed, cfxSendSuccessed, I18N } = this.props
@@ -66,51 +77,67 @@ class ContentCfx extends Component<IProps, IState> {
             </div>
           </div>
         </div>
-        <div className={styles.btnBox}>
-          <Button
-            disabled={lockStatus}
-            variant="contained"
-            color="primary"
-            className={styles.btn}
-            onClick={() => {
-              this.props.updateCfxAction()
-              this.setState({
-                showModal: true,
-              })
-            }}
-          >
-            {I18N.Wallet.MyWallet.sendBtn}
-          </Button>
-          <SendCfxModal
-            {...this.props}
-            isShow={showModal}
-            onSendCfx={sendData => {
-              this.onSendCfx({
-                ...sendData,
-                callback: () =>
-                  this.setState({
-                    showModal: false,
-                  }),
-              })
-            }}
-            updateAction={() => {
-              this.props.updateCfxAction()
-            }}
-            onClose={() => {
-              this.hideModal()
-            }}
-          />
-          <Button
-            variant="outlined"
-            color="primary"
-            className={styles.btn}
-            disabled={lockStatus}
-            onClick={() => {
-              this.receiveAction()
-            }}
-          >
-            {I18N.Wallet.MyWallet.receiveBtn}
-          </Button>
+        <div>
+          <div className={styles.btnBox}>
+            <Button
+              disabled={lockStatus}
+              variant="contained"
+              color="primary"
+              className={lockStatus ? styles.btnLock : styles.btn}
+              onClick={() => {
+                this.props.updateCfxAction()
+                this.setState({
+                  showModal: true,
+                })
+              }}
+            >
+              {I18N.Wallet.MyWallet.sendBtn}
+            </Button>
+            <SendCfxModal
+              {...this.props}
+              isShow={showModal}
+              onSendCfx={sendData => {
+                this.onSendCfx({
+                  ...sendData,
+                  callback: this.sendSuccess.bind(this),
+                  errCallback: e => {
+                    alert(e)
+                  },
+                })
+              }}
+              updateAction={() => {
+                this.props.updateCfxAction()
+              }}
+              onClose={() => {
+                this.hideModal()
+              }}
+            />
+            <Button
+              variant="outlined"
+              color="primary"
+              className={styles.btn}
+              disabled={lockStatus}
+              onClick={() => {
+                this.receiveAction()
+              }}
+            >
+              {I18N.Wallet.MyWallet.receiveBtn}
+            </Button>
+          </div>
+          <div className={lockStatus ? styles.seeContractBoxLock : styles.seeContractBox}>
+            <p
+              onClick={() => {
+                if (!lockStatus) {
+                  this.getCfx()
+                }
+              }}
+            >
+              Claim CFX
+              <svg className={styles.moreIcon} aria-hidden="true">
+                <use xlinkHref="#icongengduo1" />
+              </svg>
+            </p>
+          </div>
         </div>
         <SendFail
           I18N={I18N}
