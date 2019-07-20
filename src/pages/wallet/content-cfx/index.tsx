@@ -132,7 +132,7 @@ class ContentCfx extends Component<IProps, IState> {
                 }
               }}
             >
-              Claim CFX
+              Claim CFX{' '}
               <svg className={styles.moreIcon} aria-hidden="true">
                 <use xlinkHref="#icongengduo1" />
               </svg>
