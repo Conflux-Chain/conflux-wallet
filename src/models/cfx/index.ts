@@ -67,7 +67,7 @@ export default {
         const hexStr = `0x${newValue.toString(16)}`
         const txParams = {
           from: 0,
-          nonce: 0,
+          nonce,
           gasPrice,
           gas: maxGasForSend,
           value: hexStr,
