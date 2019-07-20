@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import styles from './style.module.scss'
 import { I18NProps } from '@/i18n/context'
+import config from '@/config'
 interface IProps extends Partial<I18NProps> {
   openDialog?: boolean
   cfxTx?: string
@@ -48,7 +49,7 @@ class Operation extends Component<IProps> {
             <p className={styles.tipString}>Faucet Request Successful!</p>
             <p className={styles.subTipTime}>Check balance in 30 seconds. TX:</p>
             <a
-              href="http://confluxscan.io/"
+              href={`${config.scanHost}/transactionsdetail/${cfxTx}`}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.scanLink}

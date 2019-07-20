@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import styles from './style.module.scss'
 import { I18NProps } from '@/i18n/context'
+import config from '@/config'
 interface IProps extends Partial<I18NProps> {
   openDialog?: boolean
   onClose?: () => void
@@ -61,7 +62,7 @@ class Operation extends Component<IProps> {
             <p>
               {I18N.Wallet.SendSuccess.footerTips}
               <strong>
-                <a href="http://confluxscan.io/" target="_blank" rel="noopener noreferrer">
+                <a href={config.scanHost} target="_blank" rel="noopener noreferrer">
                   {I18N.Wallet.SendSuccess.clickHere}
                   <svg className={styles.moreIcon} aria-hidden="true">
                     <use xlinkHref="#icongengduo1" />

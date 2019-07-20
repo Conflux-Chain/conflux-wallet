@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import Tooltip from '@material-ui/core/Tooltip'
 import styles from './style.module.scss'
 import { I18NProps } from '@/i18n/context'
+import config from '@/config'
 interface IProps extends Partial<I18NProps> {
   lockStatus?: boolean
 }
@@ -19,7 +20,7 @@ class Operation extends Component<IProps> {
             </svg>
           ) : (
             <a
-              href="http://confluxscan.io/blocktxn"
+              href={`${config.scanHost}/blocktxn`}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.scanLink}

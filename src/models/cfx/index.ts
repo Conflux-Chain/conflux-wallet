@@ -111,7 +111,8 @@ export default {
       try {
         const { address } = payload
         const result = yield call(getCfx, address)
-        const cfxTx = result.message.tx
+        const cfxTx = result.data.message.tx
+
         yield put({
           type: 'setState',
           payload: {

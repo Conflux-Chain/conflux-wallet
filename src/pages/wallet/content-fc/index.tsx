@@ -12,6 +12,7 @@ import SendFail from '../send-fail/index'
 import SendSuccess from '../send-success/index'
 import { IFC } from '../typings'
 import { I18NProps } from '@/i18n/context'
+import config from '@/config'
 interface IProps extends IFC, Partial<I18NProps> {
   lockStatus?: boolean
   updateFcAction?: () => void
@@ -171,7 +172,7 @@ class ContentFC extends Component<IProps, IState> {
                   </svg>
                 </>
               ) : (
-                <a href="http://confluxscan.io/blocktxn" target="_blank" rel="noopener noreferrer">
+                <a href={`${config.scanHost}/blocktxn`} target="_blank" rel="noopener noreferrer">
                   {I18N.Wallet.MyWallet.viewContract}{' '}
                   <svg className={styles.moreIcon} aria-hidden="true">
                     <use xlinkHref="#icongengduo1" />
