@@ -11,7 +11,7 @@ export interface ICFX {
   /** cfx余额 */
   cfxBalance: 0
   /**最新转账成功的hash */
-  lastCfxSendSuccessHash: ''
+  lastCfxSendSuccessHash: string
   /** cfx开始send */
   cfxSending: false
   /** cfx send成功 */

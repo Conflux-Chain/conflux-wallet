@@ -19,6 +19,7 @@ interface IProps extends ICFX, Partial<I18NProps> {
   receiveAction?: () => void
   onSendCfx?: (data: ISendCfxData) => void
   getCfx?: () => void
+  lastCfxSendSuccessHash: string
 }
 interface IState {
   showModal: boolean
@@ -147,6 +148,7 @@ class ContentCfx extends Component<IProps, IState> {
           }}
         />
         <SendSuccess
+          lastSendSuccessHash={this.props.lastCfxSendSuccessHash}
           I18N={I18N}
           openDialog={cfxSendSuccessed}
           onClose={() => {

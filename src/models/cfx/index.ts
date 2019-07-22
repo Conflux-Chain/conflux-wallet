@@ -112,7 +112,9 @@ export default {
         const { address } = payload
         const result = yield call(getCfx, address)
         const cfxTx = result.data.message.tx
-
+        if (!cfxTx) {
+          throw result.data.message
+        }
         yield put({
           type: 'setState',
           payload: {
@@ -131,7 +133,7 @@ export default {
           },
         })
         // tslint:disable-next-line: no-unused-expression
-        typeof errCallback === 'function' && errCallback()
+        typeof errCallback === 'function' && errCallback(e)
       }
     },
   },

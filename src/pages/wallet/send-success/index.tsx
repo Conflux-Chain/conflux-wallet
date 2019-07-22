@@ -8,6 +8,7 @@ import styles from './style.module.scss'
 import { I18NProps } from '@/i18n/context'
 import config from '@/config'
 interface IProps extends Partial<I18NProps> {
+  lastSendSuccessHash: string
   openDialog?: boolean
   onClose?: () => void
 }
@@ -62,7 +63,11 @@ class Operation extends Component<IProps> {
             <p>
               {I18N.Wallet.SendSuccess.footerTips}
               <strong>
-                <a href={config.scanHost} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={`${config.scanHost}/transactionsdetail/${this.props.lastSendSuccessHash}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {I18N.Wallet.SendSuccess.clickHere}
                   <svg className={styles.moreIcon} aria-hidden="true">
                     <use xlinkHref="#icongengduo1" />

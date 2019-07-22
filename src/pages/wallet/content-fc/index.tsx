@@ -223,6 +223,7 @@ class ContentFC extends Component<IProps, IState> {
           }}
         />
         <SendSuccess
+          lastSendSuccessHash={this.props.lastFCSendSuccessHash}
           I18N={I18N}
           openDialog={fcSendSuccessed}
           onClose={() => {

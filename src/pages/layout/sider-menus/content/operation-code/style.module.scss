@@ -10,7 +10,7 @@
   word-break: break-all;
 
   @include respond-to(sm) {
-    width: 286px;
+    // width: 286px;
     margin: 0 36px;
   }
 }

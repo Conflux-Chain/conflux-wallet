@@ -51,7 +51,11 @@ class SiderContent extends Component<IProps> {
                 currentAccountPrivateKey={currentAccountPrivateKey}
                 I18N={I18N}
               />
-              <OperationRecord lockStatus={lockStatus} I18N={I18N} />
+              <OperationRecord
+                currentAccountAddress={currentAccountAddress}
+                lockStatus={lockStatus}
+                I18N={I18N}
+              />
             </div>
             <MenuList
               I18N={I18N}

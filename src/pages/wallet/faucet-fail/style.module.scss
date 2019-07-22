@@ -1,4 +1,5 @@
 @import 'assets/styles/index.scss';
+
 .tipString {
   box-sizing: border-box;
   width: auto;
@@ -9,13 +10,15 @@
   color: rgba(0, 0, 0, 1);
   text-align: center;
   word-break: keep-all;
+
   @include respond-to(sm) {
-    width: 420px;
+    // width: 420px;
     padding: 0 64px;
     margin: 15px 30px 48px;
     line-height: 40px;
   }
 }
+
 .statusIcon {
   display: block;
   width: 96px;
