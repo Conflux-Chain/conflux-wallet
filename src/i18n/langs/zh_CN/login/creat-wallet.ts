@@ -25,5 +25,7 @@ export default {
   middle: '中等',
   weak: '弱',
   downloadFile: '下载Keystore文件',
+  copyKeystore: '复制您的Keystore',
   passwordStrength: '密码强度： ',
+  copy: '复制成功！',
 }

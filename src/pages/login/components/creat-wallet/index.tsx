@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
+import copy from 'copy-to-clipboard'
 import { I18NProps } from '@/i18n/context'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -20,12 +21,14 @@ interface IState {
   tipsShow: boolean
   downloadSuc: boolean // 下载是否成功
   passwordStrength: number // 密码强度
+  copySuc: boolean // 秘钥复制是否成功
 }
 export default class CreatWallet extends Component<IProps, IState> {
   state = {
     password: '',
     tipsShow: false,
     downloadSuc: false,
+    copySuc: false,
     passwordStrength: 0, // 小写字母、数字、大写字母、特殊符号包含一种为'weak'，两种为‘middle‘，三种及以上为‘good'
   }
   changePassword = (e: any) => {
@@ -85,14 +88,34 @@ export default class CreatWallet extends Component<IProps, IState> {
     })
     this.props.setDownload()
   }
+  copyKeystore = () => {
+    const res = copy(JSON.stringify(this.props.keystoreJson))
+    if (res) {
+      this.setState(
+        {
+          downloadSuc: true,
+          copySuc: true,
+        },
+        () => {
+          setTimeout(() => {
+            this.setState({
+              copySuc: false,
+            })
+          }, 3000)
+        }
+      )
+      this.props.setDownload()
+    }
+  }
   render() {
-    const { password, tipsShow, downloadSuc, passwordStrength } = this.state
-    const { stepIndex, generateKeystore, goWallet, I18N } = this.props
+    const { password, tipsShow, downloadSuc, copySuc, passwordStrength } = this.state
+    const { stepIndex, generateKeystore, goWallet, I18N, keystoreJson } = this.props
     const tipsArr = I18N.Login.createWallet.tipsArr
     return (
       <div className={styles.creatWallet}>
         {downloadSuc ? (
           <div className={styles.sucBox}>
+            {copySuc && <div className={styles.copySuc}>{I18N.Login.createWallet.copy}</div>}
             <svg className={styles.rightIc} aria-hidden="true">
               <use xlinkHref="#iconchenggong1" />
             </svg>
@@ -178,7 +201,22 @@ export default class CreatWallet extends Component<IProps, IState> {
                 </div>
               ))}
             </div>
-            <div className={styles.loginButtonBox} style={{ width: '227px' }}>
+            <div className={styles.mobileBox}>
+              <div className={styles.keystoreBox}>{JSON.stringify(keystoreJson)}</div>
+              <div className={styles.loginButtonBox} style={{ width: '227px' }}>
+                <Button
+                  variant="contained"
+                  className={styles.loginButton}
+                  onClick={this.copyKeystore}
+                >
+                  {I18N.Login.createWallet.copyKeystore}
+                </Button>
+              </div>
+            </div>
+            <div
+              className={classnames(styles.loginButtonBox, styles.PCBox)}
+              style={{ width: '227px' }}
+            >
               <Button
                 variant="contained"
                 className={styles.loginButton}

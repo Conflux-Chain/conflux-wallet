@@ -72,6 +72,15 @@ class Login extends Component<IProps, IState> {
     }
   }
 
+  // 粘贴密钥
+  pasteKeystore = (keyStore: string) => {
+    this.setState({
+      fileContent: JSON.parse(keyStore),
+      stepIndex: 1,
+      restoreFileRight: true,
+    })
+  }
+
   // 关闭错误信息提示框
   colseError = () => {
     this.setState({
@@ -183,6 +192,7 @@ class Login extends Component<IProps, IState> {
           setStep={this.setStep}
           I18N={I18N}
           goWallet={this.goWallet}
+          pasteKeystore={this.pasteKeystore}
         />
       </div>
     )

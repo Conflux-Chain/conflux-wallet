@@ -10,14 +10,17 @@ interface IProps extends Partial<I18NProps> {
   restorePasswordRight: boolean
   checkPassword: (password: string) => void
   setStep: (step: number) => void
+  pasteKeystore: (keystore: string) => void
 }
 
 interface IState {
   password: string | number
+  keystore: string
 }
 export default class RestoreWallet extends Component<IProps, IState> {
   state = {
     password: '',
+    keystore: '',
   }
 
   changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,10 +28,22 @@ export default class RestoreWallet extends Component<IProps, IState> {
       password: e.target.value,
     })
   }
+  changeKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      keystore: e.target.value,
+    })
+  }
 
   render() {
-    const { stepIndex, uploadFile, restorePasswordRight, checkPassword, I18N } = this.props
-    const { password } = this.state
+    const {
+      stepIndex,
+      uploadFile,
+      restorePasswordRight,
+      checkPassword,
+      pasteKeystore,
+      I18N,
+    } = this.props
+    const { password, keystore } = this.state
     return (
       <div className={styles.restoreWallet}>
         {!stepIndex ? (
@@ -39,19 +54,38 @@ export default class RestoreWallet extends Component<IProps, IState> {
               </svg>
             </div>
             <p className={styles.tips}>{I18N.Login.restoreWallet.upload}</p>
-            <input
-              className={styles.input}
-              onChange={(e: any) => uploadFile(e)}
-              id="fileUpload"
-              type="file"
-            />
-            <label htmlFor="fileUpload">
+            <div className={styles.PCBox}>
+              <input
+                className={styles.input}
+                onChange={(e: any) => uploadFile(e)}
+                id="fileUpload"
+                type="file"
+              />
+              <label htmlFor="fileUpload">
+                <div className={styles.loginButtonBox}>
+                  <Button variant="contained" component="span" className={styles.loginButton}>
+                    {I18N.Login.LoginIndex.continue}
+                  </Button>
+                </div>
+              </label>
+            </div>
+            <div className={styles.mobileBox}>
+              <textarea
+                rows={4}
+                className={styles.text}
+                onChange={(e: any) => this.changeKeyword(e)}
+              />
               <div className={styles.loginButtonBox}>
-                <Button variant="contained" component="span" className={styles.loginButton}>
+                <Button
+                  variant="contained"
+                  component="span"
+                  className={styles.loginButton}
+                  onClick={() => pasteKeystore(keystore)}
+                >
                   {I18N.Login.LoginIndex.continue}
                 </Button>
               </div>
-            </label>
+            </div>
           </div>
         ) : (
           <div className={styles.container2}>

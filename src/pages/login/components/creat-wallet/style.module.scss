@@ -9,6 +9,19 @@
     justify-content: center;
     align-items: center;
 
+    .copySuc {
+      position: absolute;
+      top: 88px;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 1);
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: 'ProximaNova-Regular';
+      font-weight: 400;
+      color: rgba(255, 255, 255, 1);
+      line-height: 17px;
+    }
+
     .rightIc {
       width: 96px;
       height: 96px;
@@ -156,6 +169,40 @@
             line-height: 24px;
           }
         }
+      }
+    }
+
+    .mobileBox {
+      display: flex;
+      flex-direction: column;
+
+      @include respond-to(md) {
+        display: none;
+      }
+
+      .keystoreBox {
+        margin: 24px 16px 0 5px;
+        padding: 10px;
+        font-size: 14px;
+        font-family: 'ProximaNova-Regular';
+        font-weight: 400;
+        color: rgba(0, 0, 0, 1);
+        line-height: 23px;
+        border-radius: 4px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        word-break: break-all;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+      }
+    }
+
+    .PCBox {
+      display: none;
+
+      @include respond-to(md) {
+        display: block;
       }
     }
   }

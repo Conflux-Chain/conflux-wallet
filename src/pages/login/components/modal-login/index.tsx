@@ -20,6 +20,7 @@ interface IRestore {
   restorePasswordRight: boolean // 密码是否正确
   colseError: () => void // 关闭错误提示框
   checkPassword: (password: string) => void // 验证密码是否正确
+  pasteKeystore: (keystore: string) => void
 }
 
 type IDvaProps = IDispatch & I18NProps & ICreat & IRestore
@@ -64,6 +65,7 @@ export default class ModalLogin extends Component<IProps, IState> {
       goWallet,
       keystoreJson,
       setStep,
+      pasteKeystore,
       I18N,
     } = this.props
     const { downloadSuc } = this.state
@@ -102,6 +104,7 @@ export default class ModalLogin extends Component<IProps, IState> {
                 restorePasswordRight={restorePasswordRight}
                 checkPassword={checkPassword}
                 setStep={setStep}
+                pasteKeystore={pasteKeystore}
                 I18N={I18N}
               />
             )}

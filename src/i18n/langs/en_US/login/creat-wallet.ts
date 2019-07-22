@@ -26,5 +26,7 @@ export default {
   middle: 'middle',
   weak: 'weak',
   downloadFile: 'Download Keystore File',
+  copyKeystore: 'Copy Your Keystore',
   passwordStrength: 'Password Strength: ',
+  copy: 'Copied!',
 }
