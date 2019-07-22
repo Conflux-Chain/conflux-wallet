@@ -172,7 +172,11 @@ class ContentFC extends Component<IProps, IState> {
                   </svg>
                 </>
               ) : (
-                <a href={`${config.scanHost}/blocktxn`} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={`${config.scanHost}/accountdetail/${config.FCContractAdress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   {I18N.Wallet.MyWallet.viewContract}{' '}
                   <svg className={styles.moreIcon} aria-hidden="true">
                     <use xlinkHref="#icongengduo1" />
