@@ -8,7 +8,9 @@ export function createAndDownloadFile(fileName, content) {
   const blob: any = new Blob([content])
   aTag.download = fileName
   aTag.href = URL.createObjectURL(blob)
+  document.body.appendChild(aTag)
   aTag.click()
+  document.body.removeChild(aTag)
   URL.revokeObjectURL(blob)
 }
 
