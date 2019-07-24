@@ -133,7 +133,7 @@ class ContentCfx extends Component<IProps, IState> {
                 }
               }}
             >
-              Claim CFX{' '}
+              {I18N.Wallet.MyWallet.climeCfx}{' '}
               <svg className={styles.moreIcon} aria-hidden="true">
                 <use xlinkHref="#icongengduo1" />
               </svg>

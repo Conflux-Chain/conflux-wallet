@@ -6,4 +6,5 @@ export default {
   receiveBtn: 'Receive',
   viewContract: 'View Contract',
   availableBalance: 'Available Balance',
+  climeCfx: 'Claim CFX',
 }

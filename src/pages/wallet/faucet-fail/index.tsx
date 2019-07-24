@@ -16,8 +16,7 @@ class Operation extends Component<IProps> {
     this.props.onClose()
   }
   render() {
-    // const { openDialog, I18N } = this.props
-    const { openDialog } = this.props
+    const { openDialog, I18N } = this.props
     return (
       <>
         <Dialog
@@ -43,7 +42,8 @@ class Operation extends Component<IProps> {
             <use xlinkHref="#iconshibai" />
           </svg>
           <p className={styles.tipString}>
-            Sorry,you should wait for <strong>an hour</strong> to claim CFX again!
+            {I18N.Wallet.FaucetModal.fail1} <strong>{I18N.Wallet.FaucetModal.fail2}</strong>{' '}
+            {I18N.Wallet.FaucetModal.fail3}
           </p>
         </Dialog>
       </>

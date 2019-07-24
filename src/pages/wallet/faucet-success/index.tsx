@@ -19,8 +19,7 @@ class Operation extends Component<IProps> {
     this.props.onClose()
   }
   render() {
-    // const { openDialog, I18N, cfxTx } = this.props
-    const { openDialog, cfxTx } = this.props
+    const { openDialog, I18N, cfxTx } = this.props
     return (
       <>
         <Dialog
@@ -46,8 +45,8 @@ class Operation extends Component<IProps> {
             <svg className={styles.statusIcon}>
               <use xlinkHref="#iconchenggong1" />
             </svg>
-            <p className={styles.tipString}>Faucet Request Successful!</p>
-            <p className={styles.subTipTime}>Check balance in 30 seconds. TX:</p>
+            <p className={styles.tipString}>{I18N.Wallet.FaucetModal.requestSuc}</p>
+            <p className={styles.subTipTime}>{I18N.Wallet.FaucetModal.waitSeconds}</p>
             <a
               href={`${config.scanHost}/transactionsdetail/${cfxTx}`}
               target="_blank"
@@ -65,7 +64,7 @@ class Operation extends Component<IProps> {
                   this.handleClose()
                 }}
               >
-                Confirm
+                {I18N.Wallet.FaucetModal.confirm}
               </Button>
             </div>
           </div>

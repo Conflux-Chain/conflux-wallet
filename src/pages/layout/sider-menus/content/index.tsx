@@ -71,7 +71,7 @@ class SiderContent extends Component<IProps> {
                 'Conflux'
               ) : (
                 <a href="https://www.conflux-chain.org/" target="_blank" rel="noopener noreferrer">
-                  Conflux
+                  {I18N.Layout.SiderMenus.conflux}
                 </a>
               )}
             </p>
@@ -80,7 +80,7 @@ class SiderContent extends Component<IProps> {
                 'Explorer'
               ) : (
                 <a href="http://www.confluxscan.io/" target="_blank" rel="noopener noreferrer">
-                  Explorer
+                  {I18N.Layout.SiderMenus.confluxScan}
                 </a>
               )}
             </p>

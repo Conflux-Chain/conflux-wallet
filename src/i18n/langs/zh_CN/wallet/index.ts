@@ -6,6 +6,7 @@ import SendSuccess from './send-success'
 import SendFail from './send-fail'
 import BalanceDetailModal from './balance-detail-modal'
 import WalletContributors from './wallet-contributors'
+import FaucetModal from './faucet-modal'
 
 // 引进子模块
 export default {
@@ -17,4 +18,5 @@ export default {
   SendFail,
   BalanceDetailModal,
   WalletContributors,
+  FaucetModal,
 }

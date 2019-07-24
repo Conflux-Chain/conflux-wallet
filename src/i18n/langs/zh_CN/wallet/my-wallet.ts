@@ -6,4 +6,5 @@ export default {
   receiveBtn: '接收',
   viewContract: '查看交易',
   availableBalance: '可用余额',
+  climeCfx: '申领测试币',
 }
