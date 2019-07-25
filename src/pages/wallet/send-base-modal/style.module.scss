@@ -164,5 +164,11 @@
   .inputText {
     flex-grow: 1;
     height: 64px;
+    :global {
+      .MuiInputBase-root {
+        height: 100%;
+        margin-bottom: 6px;
+      }
+    }
   }
 }
