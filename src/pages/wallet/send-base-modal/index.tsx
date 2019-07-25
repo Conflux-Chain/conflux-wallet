@@ -50,7 +50,7 @@ class SendBaseModal extends Component<IProps, IState> {
   }
   balanceChange(event) {
     const val =
-      event.target.value > this.props.modalData.availableBalance
+      parseFloat(event.target.value) > this.props.modalData.availableBalance
         ? this.props.modalData.availableBalance
         : event.target.value
     this.setState({
