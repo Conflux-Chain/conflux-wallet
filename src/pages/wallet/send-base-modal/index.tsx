@@ -90,7 +90,7 @@ class SendBaseModal extends Component<IProps, IState> {
     }
   }
   render() {
-    const { isShow, unit, modalData, I18N } = this.props
+    const { isShow, unit, modalData, I18N, sending } = this.props
     const { balanceVal, addressVal, gasPriceVal, hasError } = this.state
     return (
       <Dialog
@@ -186,6 +186,7 @@ class SendBaseModal extends Component<IProps, IState> {
           </div>
           <Button
             variant="contained"
+            disabled={sending}
             color="primary"
             className={styles.submitBtn}
             onClick={() => {
