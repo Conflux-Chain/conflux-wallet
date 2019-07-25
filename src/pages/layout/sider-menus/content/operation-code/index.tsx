@@ -42,7 +42,7 @@ class Operation extends Component<IProps, IState> {
                 }
               }}
             >
-              <use xlinkHref="#erweima-xiao" />
+              <use xlinkHref="#iconerweima-xiao" />
             </svg>
           </div>
         </Tooltip>
