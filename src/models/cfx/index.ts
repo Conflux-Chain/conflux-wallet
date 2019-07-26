@@ -5,7 +5,7 @@ const namespace = 'cfx'
 const maxInterval = 1000 * 60 * 10
 /* Max gas for send transaction (not gas price) */
 export const maxGasForSend = 10000000
-const nonceLocalStoragePrefix = 'cfx_address_'
+export const nonceLocalStoragePrefix = 'cfx_address_'
 export { namespace }
 export default {
   namespace,

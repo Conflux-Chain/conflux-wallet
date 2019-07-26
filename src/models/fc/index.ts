@@ -3,10 +3,11 @@ import {
   getActualNoncePromise,
   successedSendActionSetNonce,
   maxGasForSend,
+  nonceLocalStoragePrefix,
 } from '@/models/cfx'
 import confluxWeb from '@/vendor/conflux-web'
 import config from '@/config'
-const nonceLocalStoragePrefix = 'fc_address_'
+// const nonceLocalStoragePrefix = 'fc_address_'
 const namespace = 'fc'
 export { namespace }
 export default {
