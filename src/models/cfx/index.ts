@@ -189,6 +189,6 @@ export function successedSendActionSetNonce(localStorageKey, nonce) {
 }
 function getCfx(address: string) {
   return Axios.request({
-    url: `http://testnet-jsonrpc.conflux-chain.org:18082/dev/ask?address=${address.toLocaleLowerCase()}`,
+    url: `/faucet/dev/ask?address=${address.toLocaleLowerCase()}`,
   })
 }
