@@ -97,7 +97,7 @@ export default {
           gasPrice,
           gas: maxGasForSend,
           value: 0,
-          to: config.FCContractAdress,
+          to: config.FCContractAddress,
           data: FC.methods.transfer(toAddress, hexStr).encodeABI(), // get data from ABI
         }
         const hash = yield call(sendSignedTransactionPromise, txParams)

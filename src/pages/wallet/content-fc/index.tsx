@@ -173,7 +173,7 @@ class ContentFC extends Component<IProps, IState> {
                 </>
               ) : (
                 <a
-                  href={`${config.scanHost}/accountdetail/${config.FCContractAdress}`}
+                  href={`${config.scanHost}/accountdetail/${config.FCContractAddress}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

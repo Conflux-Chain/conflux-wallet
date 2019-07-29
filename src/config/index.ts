@@ -1,13 +1,13 @@
 interface IConfig {
   authKey: string
   baseUrl: string
-  FCContractAdress: string
+  FCContractAddress: string
   scanHost: string
 }
 const config: IConfig = {
   baseUrl: '/',
   authKey: 'Authorization',
-  FCContractAdress: '0xd29c3302edff23bf425ba6e0ba6e17da16fb287c',
+  FCContractAddress: '0xd29c3302edff23bf425ba6e0ba6e17da16fb287c',
   scanHost: 'http://confluxscan.io',
 }
 const env = process.env.REACT_APP_CONFIG_ENV || 'prod'
