@@ -2,7 +2,7 @@ const ConfluxWeb = require('conflux-web')
 const fs = require('fs')
 const compiledContract = require('../build/contracts/FC.json')
 
-const confluxWeb = new ConfluxWeb('/api')
+const confluxWeb = new ConfluxWeb('https://wallet.confluxscan.io/api/')
 //const confluxWeb = new ConfluxWeb('http://127.0.0.1:8091');
 
 const privateKey = '0x23b7f5c4d0cf061b26460e59e594352b4b8b604f3251f0cc19abdc54d12e7f78'
