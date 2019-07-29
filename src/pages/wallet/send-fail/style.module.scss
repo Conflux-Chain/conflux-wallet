@@ -1,0 +1,32 @@
+@import 'assets/styles/index.scss';
+
+.tipString {
+  width: auto;
+  margin: 20px 38px 50px;
+  font-family: 'ProximaNova-Regular';
+  font-size: 18px;
+  line-height: 28px;
+  color: rgba(0, 0, 0, 1);
+  text-align: center;
+  word-break: break-all;
+  @include respond-to(sm) {
+    width: 460px;
+    padding: 15px 30px 48px;
+    margin: 0 auto;
+    line-height: 40px;
+  }
+  @include respond-to(md) {
+    width: 420px;
+    padding: 15px 30px 48px;
+    margin: 0 auto;
+    line-height: 40px;
+  }
+}
+
+.statusIcon {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto;
+  fill: #c2c2c2;
+}

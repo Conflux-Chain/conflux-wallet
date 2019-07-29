@@ -1,0 +1,18 @@
+@import 'assets/styles/index.scss';
+.operateWrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.operateListPc {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 10px;
+}
+.operateListM {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}

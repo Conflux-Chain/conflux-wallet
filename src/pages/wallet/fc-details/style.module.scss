@@ -1,0 +1,61 @@
+@import 'assets/styles/index.scss';
+
+.tooltipWrap {
+  display: inline;
+}
+
+.fcDetailsContentWrap {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  display: none;
+  width: 378px;
+  padding-top: 8px;
+  margin-left: -189px;
+}
+
+.fcDetailsContent {
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+
+  p {
+    line-height: 28px;
+  }
+
+  @include respond-to(sm) {
+    margin-top: 6px;
+  }
+}
+
+.iconWrap {
+  position: relative;
+  display: inline;
+  vertical-align: middle;
+
+  &:hover {
+    .fcDetailsContentWrap {
+      display: block;
+    }
+  }
+}
+
+.fcDetailsLink {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  font-family: 'ProximaNova-Regular';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  color: rgba(30, 61, 228, 1);
+  cursor: pointer;
+
+  .icon {
+    width: 10px;
+    height: 9px;
+    margin-left: 3px;
+    fill: rgba(30, 61, 228, 1);
+  }
+}

@@ -1,14 +1,8 @@
-项目仓库：https://phabricator.conflux-chain.org/source/conflux-wallet
+## 项目说明
 
-原开源仓库：https://github.com/PaulLaux/eth-hot-wallet
+需要熟悉 React 全家桶(涉及 React 生态多个框架) → 熟悉区块链知识，核心API主要参考[web3](https://github.com/ethereum/web3.js)和[conflux-web]([https://www.npmjs.com/package/conflux-web](https://www.npmjs.com/package/conflux-web))这2个库
 
-为理解该项目，大致路线为：
-
-熟悉 React 全家桶(涉及 React 生态多个框架) → 熟悉区块链知识，尤其是 keystore 以及 eth 交易签名这块
-
-项目概况：
-
-一、
+## 项目概况
 
     A、已实现功能：Sub Plan 1 -- sendTransaction。核心功能已跑通。
         a、Account相关
@@ -20,312 +14,98 @@
             1)、add address
             2)、check balance
             3)、send Transaction
-
+    
     B、未实现功能：
         a、细枝末节,更多是UI部分，诸如ETH的token名称应改为CFX之类的。
         b、充值水龙头。钱包这里应该接一个 水龙头的充值接口，为特定地址进行充值。现在钱包里，有这个入口，会在初次创建wallet时，右下角提示用户使用ETH的测试网Ropsten进行充值。这里等 水龙头API准备好后，改下API的充值地址即可。
+## 项目框架
 
-二、项目框架。
+该项目采用了[CRA](https://github.com/facebook/create-react-app)来搭建基础框架，主要包含以下技术和实现
 
-A、该项目采用了[React 全家桶框架](https://github.com/react-boilerplate/react-boilerplate), 需要对其中用到的技术非常熟悉。比较好的 [Guide](https://github.com/react-boilerplate/react-boilerplate/blob/master/docs/general/introduction.md)：
+- 环境变量+config
+- sass
+- tslint+prettier
+- husky+lint-stage
+- request+axios
+- import alias 别名配置
+- dev-server+proxy
+- react-app-rewired+customize-cra
+- import alias 别名
+- HMR 支持
+- react-router+dva-core
+- css-modules
 
-核心技术框架为：
+具体配置和说明可参照[这里](https://github.com/yzStrive/react-template/issues/1)
 
-- [React](https://facebook.github.io/react/)
-- [React Router](https://github.com/ReactTraining/react-router)
-- [Redux](http://redux.js.org/)
-- [Redux Saga](https://redux-saga.github.io/redux-saga/)
-- [Reselect](https://github.com/reactjs/reselect)
-- [ImmutableJS](https://facebook.github.io/immutable-js/)
-- [Styled Components](https://github.com/styled-components/styled-components)
+## 核心代码说明
 
-B、React 领域比较好的学习文档
+1. 关于 accounts 相关的 api,可查看`src/models/login`中的代码
 
-- [React-howto](https://github.com/petehunt/react-howto)
-- [React Tutorial](https://reactjs.org/tutorial/tutorial.html)
+2. 关于CFX 相关的 api，可查看`src/models/cfx`中的代码
 
-三、核心代码
+3. 关于FC相关的api，可查看`src/models/fx`中的代码，结合`src/docs/FC.client.js和FC.client.md`相关文档查看
 
-1、先直观感受下 sendTransaction。 最简化的代码(Node.js 环境下) 如下：
+4. 关于FC balance相关的api，需要查看`src/docs/`,，其中`Web Wallet 数值计算公式.pdf`主要是用来计算FC balance的规则
 
-    步骤：
-        1. 组装rawTransaction 即 rawTx
-        2. 使用 ethereumjs-tx 开源库，用privateKey对rawTx进行签名
-        3. 签名后的交易信息rawTransaction，调用web3发送交易
+5. 关于send这块，目前conflux-web的npm`0.1.9`还存在一些问题，CFX和FC的send使用同一个api，CFX不能调用`sendTransaction`api,因为conflux-web没有实现，目前解决方式是调用同一个api
 
-```
-var Web3 = require("./lib/web3.js");//web3.js要加载我们自己的web3 lib
-var Tx = require("./lib/ethereumjs-tx");//ethereumjs-tx需要修改源码，具体修改在下边
-var web3 = new Web3();
-web3.setProvider(new web3.providers.HttpProvider("http://127.0.0.1:8545"));
-var privateKey = Buffer.from(
-"e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109",
-"hex"
-);
-var rawTx = {
-nonce: "0x00",
-gasPrice: "0x09184e72a000",
-gasLimit: "0x2710",
-to: "0x0000000000000000000000000000000000000000",
-value: "0x00",
-data:
-"0x7f7465737432000000000000000000000000000000000000000000000000000000600057"
-};
-var tx = new Tx(rawTx);
-tx.sign(privateKey);
-let transactionHash=web3.cfx.sendRawTransaction('0x' + serializedTx.toString('hex'));
-console.log('0x' + serializedTx.toString('hex'))
-console.log('Transaction Hash: '+transactionHash)
+   ```typescript
+   export function sendSignedTransactionPromise(txParams) {
+     return new Promise((resolve, reject) => {
+       confluxWeb.cfx
+         .signTransaction(txParams)
+         .then((encodedTransaction: any) => {
+           const { rawTransaction } = encodedTransaction
+           confluxWeb.cfx
+             .sendSignedTransaction(rawTransaction)
+             .then(transactionHash => {
+               return resolve(transactionHash)
+             })
+             .catch(err => {
+               return reject(new Error(err))
+             })
+         })
+         .catch(err => {
+           return reject(err)
+         })
+     })
+   }
+   ```
 
-```
+   关于参数txParams的说明和注意点
 
-注解： ethereumjs-tx 具体修改的部分在： ethereumjs-tx/index.js 中
+   > 使用confluxWeb.cfx.signTransaction之前，保证txParams里的from为0，而且使用confluxWeb.cfx.accounts.wallet.add(privKey)添加用于签名的私钥，如果from不为0或者wallet里下标0的位置没有对应私钥的话，confluxWeb.cfx.signTransaction这个接口还会去走rpc请求，就会出现method not found
 
-```
-  /**
-   * sign a transaction with a given private key
-   * @param {Buffer} privateKey Must be 32 bytes in length
-   */
-  sign (privateKey) {
-    const msgHash = this.hash(false)
-    const sig = ethUtil.ecsign(msgHash, privateKey)
-    if (this._chainId > 0) {
-      sig.v += this._chainId * 2 + 8
-    }
-    sig.v-=27 //新增的代码
-    Object.assign(this, sig)
-  }
+   cfx的send参数
 
-```
+   ```javascript
+   const txParams = {
+     from: 0,
+     nonce,
+     gasPrice,
+     gas: maxGasForFCSend,
+     value: newValue,
+     to: toAddress,
+   }
+   ```
 
-2、针对 Conflux Wallet 的说明
+   fc的send参数
 
-A、Eth-hot-wallet 在关于 keystore 以及 signTransaction 核心功能上采用了多个开源库，核心库为：
+   ```javascript
+   const txParams = {
+     from: 0,
+     nonce,
+     gasPrice,
+     gas: maxGasForFCSend,
+     value: 0,
+     to: toAddress,
+     data: FC.methods.transfer(toAddress, newValue).encodeABI(), // get data from ABI
+   }
+   ```
 
-- [eth-lightwallet](https://github.com/ConsenSys/eth-lightwallet) : A minimal ethereum javascript wallet. 该库用于 keystore 的管理以及提供私钥签名的功能
+   ​
 
-* [ethjs-provider-signer](https://github.com/ethjs/ethjs-provider-signer) : A simple web3 standard provider that signs sendTransaction payload. 该库提供了 sign Transaction 的 provider
-
-* [ethereumjs-tx](https://github.com/ethereumjs/ethereumjs-tx) : A simple module for creating, manipulating and signing ethereum transactions. 该库主要用于对交易进行签名
-
-B、核心代码
-
-1. app/containers/Header/saga.js - loadNetwork 方法里
-
-```
-import SignerProvider from "vendor/ethjs-provider-signer/ethjs-provider-signer";
-const provider = new SignerProvider("http://localhost:8091", {
-        signTransaction: keystore.signTransaction.bind(keystore),
-        accounts: cb => cb(null, keystore.getAddresses())
-      });
-web3.setProvider(provider);//
-
-```
-
-注解： 最传统的方式是 web3.setProvider(new web3.providers.HttpProvider()),直接设置一个新的 HttpProvider 实例。但 Wallet 这边，是直接在 new Provider 时，hook 了一个 signProvider().来直接看 ethjs-provider-signer 的部分核心代码：
-
-```
-if (payload.method === "cfx_sendTransaction") {
-            // get the nonce, if any
-            self.rpc.sendAsync(
-              {
-                method: "cfx_getTransactionCount",
-                params: [payload.params[0].from, "latest"]
-              },
-              function(nonceError, nonce) {
-                // eslint-disable-line
-                if (nonceError) {
-                  return callback(
-                    new Error(
-                      "[ethjs-provider-signer] while getting nonce: " +
-                        nonceError
-                    ),
-                    null
-                  );
-                }
-
-                // get the gas price, if any
-                self.rpc.sendAsync({ method: "cfx_gasPrice" }, function(
-                  gasPriceError,
-                  gasPrice
-                ) {
-                  // eslint-disable-line
-                  if (gasPriceError) {
-                    return callback(
-                      new Error(
-                        "[ethjs-provider-signer] while getting gasPrice: " +
-                          gasPriceError
-                      ),
-                      null
-                    );
-                  }
-
-                  // build raw tx payload with nonce and gasprice as defaults to be overriden
-                  var rawTxPayload = Object.assign(
-                    {
-                      nonce: nonce,
-                      gasPrice: gasPrice
-                    },
-                    payload.params[0]
-                  );
-
-                  // sign transaction with raw tx payload
-                  //这里是关键。这里的self.options.signTransaction其实调用的就是最初new SignerProvider时，传入的signTransaction方法。然后带着signTransaction callback回来的参数signedHexPayload，直接RPC发送签名过的交易信息
-                  self.options.signTransaction(rawTxPayload, function(
-                    keyError,
-                    signedHexPayload
-                  ) {
-                    // eslint-disable-line
-                    if (!keyError) {
-                      // create new output payload
-                      var outputPayload = Object.assign(
-                        {},
-                        {
-                          id: payload.id,
-                          jsonrpc: payload.jsonrpc,
-                          method: "cfx_sendRawTransaction",
-                          params: [signedHexPayload]
-                        }
-                      );
-
-                      // send payload
-                      self.provider.sendAsync(outputPayload, callback);
-                    } else {
-                      //callback(new Error('[ethjs-provider-signer] while signing your transaction payload: ' + JSON.stringify(keyError)), null);
-                      console.error(
-                        "[ethjs-provider-signer] while signing your transaction payload:",
-                        keyError
-                      );
-                      callback(keyError, null);
-                    }
-                  });
-                });
-              }
-            );
-          }
-```
-
-SignProvider 里的核心代码看过后，注意下最初 new SignProvider 实例时传入的 signTransaction 参数,这里传入的 keystore.signTransaction.bind(keystore)。keystore 其实是 lightwallet.keystore 的实例，即在改变 this 指向的情况下，调用了 keystore 里 signTransaction 方法。那么，来看下 eth-lightwallet 库下的 lib/keystore.js 源码：
-
-```
-KeyStore.prototype.signTransaction = function (txParams, callback) {
-  var _this = this
-
-  var ethjsTxParams = {};
-
-  // ethjsTxParams.from = add0x(txParams.from);
-  ethjsTxParams.to = add0x(txParams.to);
-  ethjsTxParams.gasLimit = add0x(txParams.gas);
-  ethjsTxParams.gasPrice = add0x(txParams.gasPrice);
-  ethjsTxParams.nonce = add0x(txParams.nonce);
-  ethjsTxParams.value = add0x(txParams.value);
-  ethjsTxParams.data = add0x(txParams.data);
-
-  // var txObj = new Transaction(ethjsTxParams);
-  // var rawTx = txObj.serialize().toString('hex');
-  var signingAddress = strip0x(txParams.from);
-  var salt = this.salt;
-  var self = this;
-  this.passwordProvider( function (err, password, salt) {
-    if (err) return callback(err);
-
-    if (!salt) {
-      salt = _this.salt
-    }
-
-    _this.keyFromPassword(password, function (err, pwDerivedKey) {
-      if (err) return callback(err);
-      var signedTx = signing.signTx(self, pwDerivedKey, ethjsTxParams, signingAddress, self.defaultHdPathString);//这里是核心逻辑
-      callback(null, '0x' + signedTx);
-    })
-  })
-
-};
-
-```
-
-注解：前边的逻辑是 获取一些 常用的 Transaction Params，signing.signTx 是核心逻辑，这里会调用必备的参数进行签名。来看下 signing.js 的核心代码：
-
-```
-var Transaction = require("ethereumjs-tx")
-var util = require("ethereumjs-util")
-//下边的signTx是核心
-var signTx = function (keystore, pwDerivedKey, rawTx, signingAddress) {
-  if(!keystore.isDerivedKeyCorrect(pwDerivedKey)) {
-    throw new Error("Incorrect derived key!");
-  }
-  // rawTx = util.stripHexPrefix(rawTx);
-  signingAddress = util.stripHexPrefix(signingAddress);
-  var tx = new Transaction(rawTx);
-  var privKey = keystore.exportPrivateKey(signingAddress, pwDerivedKey);
-  tx.sign(new Buffer(privKey, 'hex'));
-  console.log(tx);
-  var serializedTx = tx.serialize();
-  privKey = '';
-  return tx.serialize().toString('hex');
-};
-
-```
-
-其实这里就发现了 sendTransaction 的核心，eth-lightwallet 库 调用的其实也是 ethereumjs-tx 库 的签名逻辑。并返回 私钥对交易签名完成后的字符串
-
-3、其他重要的注意事项
-
-- ethereumjs-tx 源码对 sig.v 会 -27。 但这里需要注意一个问题，比如 eth-lightwallet 也会调用 ethereumjs-tx 库，这时应该修改 eth-lightwallet 这个工程 node-modules 下的 ethereumjs-tx。本地开发可以先这样改。 但正确的方式应该是： 以 ethereumjs-tx 为例，应该从 ethereumjs-tx 源仓库 fork 一份出来，然后 package.json 中 dependencies 添加依赖的时候，添加自己仓库下的 ethereumjs-tx 库即可。这样以后多端引用 ethereumjs-tx 时，就会统一，确保 ethereumjs-tx 只有一个入口。
-
-* 针对 Conflux 自己的 web3.js，正确的做法也如上所说，dependencies 添加依赖时，要使用 github 上的自己的开源仓库。本地开发可以先导入到 lib 中使用。
-
-* 关于跨域。2 种解决方式。1 种是，采用最新版本的 Fullnode, 已经支持跨域。但 web3.js 里需要修改一处代码，路径在 web3/httpprovider.js 里的，注释掉 第 66 行代码
-
-```
-  // request.withCredentials = true;
-```
-
-另一种是：web3.js -> server -> fullnode，中间架一层 server。 server 做 2 件事情，一个是 同意 前端 web3.js 来的所有请求跨域，另一个是，将所有请求 proxy 代理到 fullnode server 上。
-
-nginx 的配置如下：
-
-```
-     server {
-        listen       8091;
-        server_name  somename  alias  another.alias;
-
-        location / {
-            add_header 'Access-Control-Allow-Credentials' 'true';
-            add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
-            add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,PUT,DELETE,PATCH';
-
-            if ($request_method = 'OPTIONS') {
-                add_header 'Access-Control-Allow-Origin' 'http://localhost:3001';
-                add_header 'Access-Control-Allow-Credentials' 'true';
-                add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range';
-                add_header 'Access-Control-Allow-Methods' 'GET,POST,OPTIONS,PUT,DELETE,PATCH';
-                add_header 'Access-Control-Max-Age' 1728000;
-                add_header 'Content-Type' 'text/plain charset=UTF-8';
-                add_header 'Content-Length' 0;
-                return 204;
-        }
-
-        proxy_redirect off;
-        proxy_set_header host $host;
-        proxy_set_header X-real-ip $remote_addr;
-        proxy_set_header X-forward-for $proxy_add_x_forwarded_for;
-        proxy_pass http://127.0.0.1:8545;
-        }
-
-        error_page  405     =200 $uri;
-
-    }
-```
-
-注释： http://localhost:3001即为前端工程的origin, http://127.0.0.1:8545为fullnode server.
-
-# 补充注意
-
-1、原项目 build 有问题，eth-lightwallet 依赖的 ethereumjs-tx 本身为 es6，现有 build 脚本会报错，已经转成 es5 编译，使用 1.3.3 版本，ethereumjs-tx@https://github.com/jnoodle/ethereumjs-tx.git
-2、precommit 加了代码格式化和 lint，如果提交不了，请先看下是否lint出错，过了才能提交。
-
-# 获取交易信息
+## 获取交易信息
 
 ```bash
 curl -X POST --data '{"jsonrpc":"2.0","method":"cfx_getTransactionByHash","params":["0xa68f0d871cd7eea324029114d4fc8f784e0a3ebbef392d12b12bdd2e2a69fb03"],"id":1}' -H "Content-Type: application/json" http://testnet-jsonrpc.conflux-chain.org:12537
