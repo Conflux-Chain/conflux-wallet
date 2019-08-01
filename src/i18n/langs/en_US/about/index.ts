@@ -2,7 +2,7 @@ export default {
   h1: 'About FC',
   title: 'About Fans Coin (FC)',
   conFC:
-    'Community members acquire FC from two sources,\na. incentives from the Conflux Foundation\nb. P2P Transaction\nTo motivate members to contribute more and obtain FC via the former, Conflux Foundation makes special adjustment to the liquidity of FC so that FC obtained not directly from the Foundation is subject to a secondary allocation upon transfer; namely, a certain ratio of the transfer amount will be permanently locked for transfer in order to initiate a transfer.',
+    'Fans Coin (FC) is a smart contract designed and used solely on the Conflux Blockchain Testnet. It currently serves for two major purposes,\na. Tokens to reward active contributors\nb. A layer of functional testing for Conflux Testnet\nThe Conflux Foundation appreciates each and every contribution to the community. With FC tokens, the Foundation rewards for constructive efforts in the community, while guarantees a future 1:1 conversion ratio against CFX , the upcoming official cryptocurrency operating on the Conflux Blockchain Mainnet.',
   firstH2: 'Community Agreements',
   secondH2: 'Special Thanks',
   firstH3: 'Distribution Principle',
