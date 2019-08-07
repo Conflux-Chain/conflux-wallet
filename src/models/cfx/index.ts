@@ -76,7 +76,7 @@ export default {
         const hash = yield call(sendSignedTransactionPromise, txParams)
         // tslint:disable-next-line: no-console
         console.log('hash: ' + hash)
-        successedSendActionSetNonce(params.localStorageKey, nonce)
+        // successedSendActionSetNonce(params.localStorageKey, nonce)
         yield put({
           type: 'setState',
           payload: {
@@ -174,7 +174,7 @@ export async function getActualNoncePromise({ currentAccountAddress, localStorag
       console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce)
       nonce = localNonce.nonce
     }
-
+    successedSendActionSetNonce(localStorageKey, nonce)
     return nonce
   } catch (e) {
     throw new Error(e)
