@@ -1,7 +1,7 @@
 import {
   namespace as namespaceOfCfx,
   getActualNoncePromise,
-  successedSendActionSetNonce,
+  // successedSendActionSetNonce,
   maxGasForSend,
   nonceLocalStoragePrefix,
 } from '@/models/cfx'
@@ -103,7 +103,7 @@ export default {
         const hash = yield call(sendSignedTransactionPromise, txParams)
         // tslint:disable-next-line: no-console
         console.log('fc send hash:' + hash)
-        successedSendActionSetNonce(params.localStorageKey, nonce)
+        // successedSendActionSetNonce(params.localStorageKey, nonce)
         yield put({
           type: 'setState',
           payload: {
