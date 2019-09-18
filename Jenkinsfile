@@ -21,7 +21,7 @@ pipeline {
           sh (label: 'pre-build', script: "yarn")
         }
         script {
-          sh (label: 'lint', script: "yarn lint:ts .")
+          sh (label: 'lint', script: "yarn lint:ts")
         }
       }
     }
