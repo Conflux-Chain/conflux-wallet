@@ -53,13 +53,10 @@ Please use yarn instead of npm.
 # serve watch and auto re-build the site
 $ yarn dev
 
-# watch and auto re-run unit tests
-$ yarn test:watch
-
 # build the site
 $ yarn build
 
-# run the full test suite, including linting
+# run the full test suite
 $ yarn test
 ```
 
@@ -69,13 +66,21 @@ The default test script will do the following: lint with ESLint -> unit tests wi
 
 ## Project Structure
 
-- **`scripts`**: contains build-related scripts and configuration files. Usually, you don't need to touch them.
-
 - **`build`**: contains built files for deploy. Note this directory shouldn't be checked into version control.
 
 - **`static`**: contains static resource files, these files won't go through webpack.
 
 - **`src`**: contains the source code. The codebase is written in ES2015.
+
+    - **`docs`**: contains some design docs.
+
+    - **`models`**: contains api related files.
+
+        - **`login`**: accounts related api.
+
+        - **`cfx`**: cfx related api.
+
+        - **`fx`**: fc related api.
 
     - **`components`**: contains common ui components.
 
@@ -88,6 +93,11 @@ The default test script will do the following: lint with ESLint -> unit tests wi
 ## Project technologies
 
 Wallet uses react, redux, typescript, sass to build the frontend.
+You may need to be familiar with [web3](https://github.com/ethereum/web3.js) and
+[conflux-web]((https://www.npmjs.com/package/conflux-web) "conflux web npm package")
+to develop.
+
+Checkout [chinese readme](../README_zh.md "chinese readme") for more detail.
 
 ## Credits
 
