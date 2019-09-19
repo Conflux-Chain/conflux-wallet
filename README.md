@@ -1,4 +1,4 @@
-<h1 align="center">Conflux Bounty</h1>
+<h1 align="center">Conflux Wallet</h1>
 
 [![Build Status](https://travis-ci.com/Conflux-Chain/conflux-wallet.svg?branch=dev)](https://travis-ci.com/Conflux-Chain/conflux-wallet)
 
