@@ -25,14 +25,7 @@ module.exports = {
     ...addBabelPlugins('react-hot-loader/babel'),
     addWebpackResolve({
       alias: { '@': path.resolve(__dirname, 'src') },
-    }),
-    config => {
-      console.log(config)
-      console.log('--------------------')
-      console.log(config.plugins)
-      fs.writeFileSync('./debug-webpack', JSON.stringify(config))
-      return config
-    }
+    })
   ),
   devServer: overrideDevServer(devServerConfig()),
 }
