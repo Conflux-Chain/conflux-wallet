@@ -1,5 +1,6 @@
 /* config-overrides.js */
 
+require('dotenv').config()
 const path = require('path')
 const { override, addBabelPlugins, addWebpackResolve, overrideDevServer } = require('customize-cra')
 

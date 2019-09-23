@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "cross-env REACT_APP_CONFIG_ENV=prod react-app-rewired start",
-    "build": "cross-env REACT_APP_CONFIG_ENV=prod react-app-rewired build",
-    "dev": "cross-env REACT_APP_CONFIG_ENV=dev react-app-rewired start",
+    "start": "cross-env NODE_ENV=production REACT_APP_CONFIG_ENV=prod react-app-rewired start",
+    "build": "cross-env NODE_ENV=production REACT_APP_CONFIG_ENV=prod react-app-rewired build",
+    "dev": "cross-env NODE_ENV=development REACT_APP_CONFIG_ENV=dev react-app-rewired start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:ts": "tsc -p tsconfig.prod.json --noEmit && tslint -c tslint.json '@/**/*.{ts,tsx}' --fix --format verbose",
