@@ -11,7 +11,7 @@ export default {
       iconName: '#iconchinese',
       lang: LangEnum.zh_CN,
       field: '中文',
-      selectField: 'Chinese',
+      selectField: '中文',
     },
   ],
 }
