@@ -55,7 +55,7 @@ class Operation extends Component<IProps> {
                   this.handleClose()
                 }}
               >
-                Confirm
+                {I18N.Wallet.SendSuccess.Confirm}
               </Button>
             </div>
           </div>

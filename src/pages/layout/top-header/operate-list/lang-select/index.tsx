@@ -27,7 +27,7 @@ class NetSelect extends Component<IProps, IState> {
     }
     const { I18N } = this.props
     I18N.Layout.LangSelect.LangList.forEach((v, i) => {
-      if (v.lang.indexOf(navigator.language) !== -1) {
+      if (v.lang === I18N.currentLang) {
         initState.menuLangSelected = i
         this.props.setLangTriggerRender(v.lang)
       }
