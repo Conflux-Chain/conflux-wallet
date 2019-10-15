@@ -12,7 +12,13 @@ export const langs = {
 }
 // 初始化
 const I18N = (kiwiIntl.init(LangEnum.en_US, langs) as any) as Langs
-I18N.currentLang = LangEnum.en_US
+
+if (navigator.language.indexOf('zh') === 0) {
+  I18N.currentLang = LangEnum.zh_CN
+} else {
+  I18N.currentLang = LangEnum.en_US
+}
+
 // 重写setLang
 I18N.setLangHandle = (lang: LangEnum) => {
   I18N.currentLang = lang

@@ -53,7 +53,9 @@ export default class RestoreWallet extends Component<IProps, IState> {
                 <use xlinkHref="#iconwenjian-" />
               </svg>
             </div>
-            <p className={styles.tips}>{I18N.Login.restoreWallet.upload}</p>
+            <p className={styles.tipsPc}>{I18N.Login.restoreWallet.upload}</p>
+            <p className={styles.tipsMobile}>{I18N.Login.restoreWallet.uploadMobile}</p>
+
             <div className={styles.PCBox}>
               <input
                 className={styles.input}
