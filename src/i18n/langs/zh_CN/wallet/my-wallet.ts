@@ -4,7 +4,7 @@ export default {
   totalBalance: '全部余额 ',
   sendBtn: '发送',
   receiveBtn: '接收',
-  viewContract: '查看交易',
+  viewContract: '查看合约账户',
   availableBalance: '可用余额',
   climeCfx: '申领测试币',
 }

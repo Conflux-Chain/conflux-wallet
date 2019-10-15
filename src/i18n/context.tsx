@@ -1,6 +1,7 @@
 import React from 'react'
 import { LangEnum } from './typing'
 import I18N, { Langs } from './index'
+import { setLocalStorage } from '@/utils/storage'
 
 export interface I18NProps {
   I18N: Langs
@@ -26,10 +27,9 @@ export class I18NContextWrapper extends React.Component<
   }
 
   setLang = (lang: LangEnum) => {
-    if (lang === I18N.currentLang) {
-      return
-    }
     I18N.setLangHandle(lang)
+    setLocalStorage('currentLang', lang)
+
     this.setState((state: any) => ({
       I18N: state.I18N,
     }))

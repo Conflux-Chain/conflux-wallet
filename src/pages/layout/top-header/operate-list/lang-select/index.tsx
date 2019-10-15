@@ -19,9 +19,20 @@ interface IProps extends Partial<I18NProps> {
 }
 class NetSelect extends Component<IProps, IState> {
   static defaultProps = { lockStatus: true }
-  state = {
-    menuLang: null,
-    menuLangSelected: 0,
+  constructor(props) {
+    super(props)
+    const initState = {
+      menuLang: null,
+      menuLangSelected: 0,
+    }
+    const { I18N } = this.props
+    I18N.Layout.LangSelect.LangList.forEach((v, i) => {
+      if (v.lang === I18N.currentLang) {
+        initState.menuLangSelected = i
+        this.props.setLangTriggerRender(v.lang)
+      }
+    })
+    this.state = initState
   }
   handleMenu(event: React.MouseEvent<HTMLElement>) {
     this.setState({
