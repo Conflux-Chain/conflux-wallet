@@ -53,6 +53,7 @@ class Login extends Component<IProps, IState> {
   }
   // 上传登录密钥文件
   uploadFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { target } = e
     try {
       const file = e.target.files
       // 读取文件demo
@@ -64,11 +65,13 @@ class Login extends Component<IProps, IState> {
         stepIndex: 1,
         restoreFileRight: true,
       })
+      target.value = ''
     } catch {
       // 文件解析失败
       this.setState({
         restoreFileRight: false,
       })
+      target.value = ''
     }
   }
 
