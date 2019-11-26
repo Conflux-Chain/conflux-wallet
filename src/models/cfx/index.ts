@@ -1,10 +1,12 @@
 import confluxWeb from '@/vendor/conflux-web'
-import { sendSignedTransactionPromise, toFixedForDisplay } from '../fc'
+import { sendSignedTransactionPromise } from '../fc'
 import Axios from 'axios'
+import BigNumber from 'bignumber.js'
 const namespace = 'cfx'
 const maxInterval = 1000 * 60 * 10
 /* Max gas for send transaction (not gas price) */
 export const maxGasForSend = 10000000
+export const normalGasForSend = 21000
 export const nonceLocalStoragePrefix = 'cfx_address_'
 export { namespace }
 export default {
@@ -38,7 +40,7 @@ export default {
         yield put({
           type: 'setState',
           payload: {
-            cfxBalance: toFixedForDisplay(cfxBalance / 10 ** 18),
+            cfxBalance: new BigNumber(cfxBalance).dividedBy(10 ** 18).toFixed(4), // toFixedForDisplay(cfxBalance / 10 ** 18),
           },
         })
       } catch (e) {
@@ -63,13 +65,14 @@ export default {
           localStorageKey: `${nonceLocalStoragePrefix}${currentAccountAddress}`,
         }
         const nonce = yield call(getActualNoncePromise, params)
-        const newValue = sendAmount * 10 ** 18
+        const newValue = new BigNumber(sendAmount).multipliedBy(10 ** 18) // sendAmount * 10 ** 18
         const hexStr = `0x${newValue.toString(16)}`
+        const newGasPrice = new BigNumber(gasPrice).dividedBy(10 ** 9).toFixed()
         const txParams = {
           from: 0,
           nonce,
-          gasPrice,
-          gas: maxGasForSend,
+          gasPrice: newGasPrice,
+          gas: normalGasForSend,
           value: hexStr,
           to: toAddress,
         }
