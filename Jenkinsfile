@@ -62,10 +62,10 @@ sudo cp -r build /www/wallet/conflux-wallet/
           agent {label 'scan-wallet-prod-machine'}
           steps {
             script {
-              sh (label: 'pre-build', script: "yarn")
+              sh (label: 'pre-build', script: "sudo yarn")
             }
             script {
-              sh (label: 'build', script: "yarn build")
+              sh (label: 'build', script: "sudo yarn build")
             }
             script {
               sh (label: 'move to nginx www', script: """
@@ -76,6 +76,14 @@ sudo cp -r build  /www/wallet/conflux-wallet
           }
         }
       }
+    }
+  }
+  post {
+    regression {
+      slackSend channel: '#scan', color: 'danger', message: "FAILED ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", notifyCommitters: true
+    }
+    fixed {
+      slackSend channel: '#scan', color: 'good', message: "SUCCESS ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", notifyCommitters: true
     }
   }
 }
