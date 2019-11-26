@@ -67,7 +67,7 @@ export default {
         const nonce = yield call(getActualNoncePromise, params)
         const newValue = new BigNumber(sendAmount).multipliedBy(10 ** 18) // sendAmount * 10 ** 18
         const hexStr = `0x${newValue.toString(16)}`
-        const newGasPrice = new BigNumber(gasPrice).dividedBy(10 ** 9).toFixed()
+        const newGasPrice = new BigNumber(gasPrice).multipliedBy(10 ** 9).toFixed()
         const txParams = {
           from: 0,
           nonce,
