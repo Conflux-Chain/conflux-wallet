@@ -19,7 +19,7 @@
     "bignumber.js": "^9.0.0",
     "classnames": "^2.2.6",
     "copy-to-clipboard": "^3.2.0",
-    "conflux-web": "^0.1.9",
+    "conflux-web": "*",
     "dva-core": "^1.4.0",
     "http-proxy-middleware": "^0.19.1",
     "kiwi-intl": "^1.2.4",

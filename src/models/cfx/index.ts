@@ -193,6 +193,6 @@ export function successedSendActionSetNonce(localStorageKey, nonce) {
 }
 function getCfx(address: string) {
   return Axios.request({
-    url: `/faucet/dev/ask?address=${address.toLocaleLowerCase()}`,
+    url: `/dev/ask?address=${address.toLocaleLowerCase()}`,
   })
 }
