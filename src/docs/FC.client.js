@@ -10,12 +10,12 @@ const confluxWeb = new ConfluxWeb('http://139.224.196.246:12537')
 
 const decimals = new BN('10').pow(new BN('18'))
 
-const privateKey = '0xd29c3302edff23bf425ba6e0ba6e17da16fb287c'
+const privateKey = '0x23b7f5c4d0cf061b26460e59e594352b4b8b604f3251f0cc19abdc54d12e7f78'
 confluxWeb.cfx.accounts.wallet.add(privateKey)
 
 const abi = compiledContract.abi
 
-//const contractAddress = '0x717cbeaf7d4b784fe4747da7e3e278d53253eb16';
+//const contractAddress = '0x401a59465fe047e262c1f8708a6184fb65f85e6a';
 const contractAddress = '0xd29c3302edff23bf425ba6e0ba6e17da16fb287c'
 
 // Construct contract object
