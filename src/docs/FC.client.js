@@ -5,7 +5,7 @@ const ethers = require('ethers')
 const BN = web3.utils.BN
 const compiledContract = require('../build/contracts/FC.json')
 
-const confluxWeb = new ConfluxWeb('http://139.224.196.246:12537')
+const confluxWeb = new ConfluxWeb('https://wallet.confluxscan.io/api/')
 //const confluxWeb = new ConfluxWeb('http://127.0.0.1:8091');
 
 const decimals = new BN('10').pow(new BN('18'))
