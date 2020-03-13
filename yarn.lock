@@ -2783,6 +2783,15 @@ ccount@^1.0.0:
   version "1.0.4"
   resolved "https://registry.npm.taobao.org/ccount/download/ccount-1.0.4.tgz#9cf2de494ca84060a2a8d2854edd6dfb0445f386"
 
+cfx-lib@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npm.taobao.org/cfx-lib/download/cfx-lib-0.0.1.tgz#79cd6bfd3023f1692f25b15357a4c6d18d7f8361"
+  integrity sha1-ec1r/TAj8WkvJbFTV6TG0Y1/g2E=
+  dependencies:
+    bn.js "^4.11.6"
+    elliptic "^6.4.0"
+    xhr-request-promise "^0.1.2"
+
 chalk@2.4.2, chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.npm.taobao.org/chalk/download/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
@@ -3106,118 +3115,161 @@ concat-stream@^1.5.0, concat-stream@^1.6.0:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-conflux-web-cfx-abi@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-cfx-abi/download/conflux-web-cfx-abi-0.1.9.tgz#a8457ff8ddf7070c9648e6097843210381bae287"
+conflux-web-cfx-abi@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-cfx-abi/download/conflux-web-cfx-abi-1.35.1-alpha.0.tgz#66e41ed9c26e68df7fe2ba474e0f2ee0be85ef99"
+  integrity sha1-ZuQe2cJuaN9/4rpHTg8u4L6F75k=
   dependencies:
     "@babel/runtime" "^7.3.1"
-    conflux-web-utils "0.1.9"
+    conflux-web-utils "1.35.1-alpha.0"
     ethers "^4.0.27"
     lodash "^4.17.11"
 
-conflux-web-cfx-accounts@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-cfx-accounts/download/conflux-web-cfx-accounts-0.1.9.tgz#5df6ffdd165287f8e6e72863e270fe3ca1380215"
+conflux-web-cfx-accounts@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-cfx-accounts/download/conflux-web-cfx-accounts-1.35.1-alpha.0.tgz#5707d7714873ff2829c2b8f74ea791e2c2629345"
+  integrity sha1-VwfXcUhz/ygpwrj3TqeR4sJik0U=
   dependencies:
     "@babel/runtime" "^7.3.1"
-    conflux-web-core "0.1.9"
-    conflux-web-core-helpers "0.1.9"
-    conflux-web-core-method "0.1.9"
-    conflux-web-providers "0.1.9"
-    conflux-web-utils "0.1.9"
+    cfx-lib "0.0.1"
+    conflux-web-core "1.35.1-alpha.0"
+    conflux-web-core-helpers "1.35.1-alpha.0"
+    conflux-web-core-method "1.35.1-alpha.0"
+    conflux-web-providers "1.35.1-alpha.0"
+    conflux-web-utils "1.35.1-alpha.0"
     crypto-browserify "3.12.0"
-    eth-lib "0.2.8"
     lodash "^4.17.11"
-    scrypt.js "0.2.0"
+    scrypt.js "0.3.0"
     uuid "3.3.2"
 
-conflux-web-cfx-contract@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-cfx-contract/download/conflux-web-cfx-contract-0.1.9.tgz#b801e36cae936809739655a1ec1806116ebfa04c"
+conflux-web-cfx-contract@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-cfx-contract/download/conflux-web-cfx-contract-1.35.1-alpha.0.tgz#2f6c66e16b35c07adedd031ff7eca468689ed94f"
+  integrity sha1-L2xm4Ws1wHre3QMf9+ykaGie2U8=
   dependencies:
     "@babel/runtime" "^7.3.1"
     "@types/bn.js" "^4.11.4"
-    conflux-web-cfx-abi "0.1.9"
-    conflux-web-cfx-accounts "0.1.9"
-    conflux-web-core "0.1.9"
-    conflux-web-core-helpers "0.1.9"
-    conflux-web-core-method "0.1.9"
-    conflux-web-core-subscriptions "0.1.9"
-    conflux-web-providers "0.1.9"
-    conflux-web-utils "0.1.9"
+    conflux-web-cfx-abi "1.35.1-alpha.0"
+    conflux-web-cfx-accounts "1.35.1-alpha.0"
+    conflux-web-core "1.35.1-alpha.0"
+    conflux-web-core-helpers "1.35.1-alpha.0"
+    conflux-web-core-method "1.35.1-alpha.0"
+    conflux-web-core-subscriptions "1.35.1-alpha.0"
+    conflux-web-providers "1.35.1-alpha.0"
+    conflux-web-utils "1.35.1-alpha.0"
     lodash "^4.17.11"
 
-conflux-web-cfx@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-cfx/download/conflux-web-cfx-0.1.9.tgz#2ae2d5eacaaa5f6edae4cb550f05d9fec7aa593a"
+conflux-web-cfx@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-cfx/download/conflux-web-cfx-1.35.1-alpha.0.tgz#3542d044908d6934fc2bc9da25c9052866fcc19c"
+  integrity sha1-NULQRJCNaTT8K8naJckFKGb8wZw=
   dependencies:
     "@babel/runtime" "^7.3.1"
-    conflux-web-cfx-abi "0.1.9"
-    conflux-web-cfx-accounts "0.1.9"
-    conflux-web-cfx-contract "0.1.9"
-    conflux-web-core "0.1.9"
-    conflux-web-core-helpers "0.1.9"
-    conflux-web-core-method "0.1.9"
-    conflux-web-core-subscriptions "0.1.9"
-    conflux-web-net "0.1.9"
-    conflux-web-providers "0.1.9"
-    conflux-web-utils "0.1.9"
-    confluxjs-transaction "*"
+    conflux-web-cfx-abi "1.35.1-alpha.0"
+    conflux-web-cfx-accounts "1.35.1-alpha.0"
+    conflux-web-cfx-contract "1.35.1-alpha.0"
+    conflux-web-core "1.35.1-alpha.0"
+    conflux-web-core-helpers "1.35.1-alpha.0"
+    conflux-web-core-method "1.35.1-alpha.0"
+    conflux-web-core-subscriptions "1.35.1-alpha.0"
+    conflux-web-net "1.35.1-alpha.0"
+    conflux-web-providers "1.35.1-alpha.0"
+    conflux-web-utils "1.35.1-alpha.0"
+    confluxjs-transaction "0.0.1-alpha.3"
     rxjs "^6.4.0"
 
-conflux-web-core-helpers@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-core-helpers/download/conflux-web-core-helpers-0.1.9.tgz#bccdae6f927184e5e1d24c2afb5a36ba4199dc1e"
+conflux-web-core-helpers@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-core-helpers/download/conflux-web-core-helpers-1.35.1-alpha.0.tgz#cb0501517261eca2ebe8acfad9ca6e113fcdc378"
+  integrity sha1-ywUBUXJh7KLr6Kz62cpuET/Nw3g=
   dependencies:
     "@babel/runtime" "^7.3.1"
-    conflux-web-utils "0.1.9"
+    conflux-web-utils "1.35.1-alpha.0"
     lodash "^4.17.11"
 
-conflux-web-core-method@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-core-method/download/conflux-web-core-method-0.1.9.tgz#955cfdac8d9f97d539d9464adff4f9f907535a66"
+conflux-web-core-method@0.1.10-alpha.0:
+  version "0.1.10-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-core-method/download/conflux-web-core-method-0.1.10-alpha.0.tgz#8c63436c00de39920bbba3fa8702e967d65f932f"
+  integrity sha1-jGNDbADeOZILu6P6hwLpZ9Zfky8=
   dependencies:
     "@babel/runtime" "^7.3.1"
-    conflux-web-core-subscriptions "0.1.9"
+    conflux-web-core-subscriptions "0.1.10-alpha.0"
     eventemitter3 "3.1.0"
     lodash "^4.17.11"
     rxjs "^6.4.0"
 
-conflux-web-core-subscriptions@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-core-subscriptions/download/conflux-web-core-subscriptions-0.1.9.tgz#da1c85e746fa38d698728edbedbf442e059a3cf0"
+conflux-web-core-method@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-core-method/download/conflux-web-core-method-1.35.1-alpha.0.tgz#4abc9fea24afe665c6b221edc34f60b1f2653c4c"
+  integrity sha1-Sryf6iSv5mXGsiHtw09gsfJlPEw=
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    conflux-web-core-subscriptions "1.35.1-alpha.0"
+    eventemitter3 "3.1.0"
+    lodash "^4.17.11"
+    rxjs "^6.4.0"
+
+conflux-web-core-subscriptions@0.1.10-alpha.0:
+  version "0.1.10-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-core-subscriptions/download/conflux-web-core-subscriptions-0.1.10-alpha.0.tgz#599fd208bbe819a3172e1ce801f1d9eba29fcc16"
+  integrity sha1-WZ/SCLvoGaMXLhzoAfHZ66KfzBY=
   dependencies:
     "@babel/runtime" "^7.3.1"
     eventemitter3 "^3.1.0"
     lodash "^4.17.11"
 
-conflux-web-core@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-core/download/conflux-web-core-0.1.9.tgz#ecb52608312fbcc9d8434c65b556dcc9c6d15f14"
+conflux-web-core-subscriptions@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-core-subscriptions/download/conflux-web-core-subscriptions-1.35.1-alpha.0.tgz#db6fc85c26f5871d85eb3c6e62a492d7bcde4649"
+  integrity sha1-22/IXCb1hx2F6zxuYqSS17zeRkk=
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    eventemitter3 "^3.1.0"
+    lodash "^4.17.11"
+
+conflux-web-core@0.1.10-alpha.0:
+  version "0.1.10-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-core/download/conflux-web-core-0.1.10-alpha.0.tgz#ce8f95fd9fd9e05d21e6e79aa998369b9107c059"
+  integrity sha1-zo+V/Z/Z4F0h5ueaqZg2m5EHwFk=
   dependencies:
     "@babel/runtime" "^7.3.1"
     "@types/bn.js" "^4.11.4"
     "@types/node" "^10.12.18"
-    conflux-web-core-method "0.1.9"
-    conflux-web-providers "0.1.9"
-    conflux-web-utils "0.1.9"
+    conflux-web-core-method "0.1.10-alpha.0"
+    conflux-web-providers "0.1.10-alpha.0"
+    conflux-web-utils "0.1.10-alpha.0"
     lodash "^4.17.11"
 
-conflux-web-net@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-net/download/conflux-web-net-0.1.9.tgz#14f393fbbfa3caf307367e4788c4c16dd3499584"
+conflux-web-core@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-core/download/conflux-web-core-1.35.1-alpha.0.tgz#58c993619c504a1b240ff6e0e77420990bacf3b6"
+  integrity sha1-WMmTYZxQShskD/bg53QgmQus87Y=
   dependencies:
     "@babel/runtime" "^7.3.1"
-    conflux-web-core "0.1.9"
-    conflux-web-core-helpers "0.1.9"
-    conflux-web-core-method "0.1.9"
-    conflux-web-providers "0.1.9"
-    conflux-web-utils "0.1.9"
+    "@types/bn.js" "^4.11.4"
+    "@types/node" "^10.12.18"
+    conflux-web-core-method "1.35.1-alpha.0"
+    conflux-web-providers "1.35.1-alpha.0"
+    conflux-web-utils "1.35.1-alpha.0"
     lodash "^4.17.11"
 
-conflux-web-providers@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-providers/download/conflux-web-providers-0.1.9.tgz#4a9c606a3e3c10f1aaeaa07b1bab5b2e8e2ee776"
+conflux-web-net@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-net/download/conflux-web-net-1.35.1-alpha.0.tgz#d3f7e043f745e4964aca24b3c8388c5d71b7db2c"
+  integrity sha1-0/fgQ/dF5JZKyiSzyDiMXXG32yw=
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    conflux-web-core "0.1.10-alpha.0"
+    conflux-web-core-helpers "1.35.1-alpha.0"
+    conflux-web-core-method "0.1.10-alpha.0"
+    conflux-web-providers "1.35.1-alpha.0"
+    conflux-web-utils "1.35.1-alpha.0"
+    lodash "^4.17.11"
+
+conflux-web-providers@0.1.10-alpha.0:
+  version "0.1.10-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-providers/download/conflux-web-providers-0.1.10-alpha.0.tgz#c0583ec358513bad826213445a2356222ad038e1"
+  integrity sha1-wFg+w1hRO62CYhNEWiNWIirQOOE=
   dependencies:
     "@babel/runtime" "^7.3.1"
     "@types/node" "^10.12.18"
@@ -3227,9 +3279,23 @@ conflux-web-providers@0.1.9:
     websocket "^1.0.28"
     xhr2-cookies "1.1.0"
 
-conflux-web-utils@0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web-utils/download/conflux-web-utils-0.1.9.tgz#b7e4906ffba4abfd3fa36773596509649f9b0710"
+conflux-web-providers@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-providers/download/conflux-web-providers-1.35.1-alpha.0.tgz#e4be7b9bcc2608bc6cc6b4f8c751e7a9351d7d8b"
+  integrity sha1-5L57m8wmCLxsxrT4x1HnqTUdfYs=
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    "@types/node" "^10.12.18"
+    eventemitter3 "3.1.0"
+    lodash "^4.17.11"
+    url-parse "1.4.4"
+    websocket "^1.0.28"
+    xhr2-cookies "1.1.0"
+
+conflux-web-utils@0.1.10-alpha.0:
+  version "0.1.10-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-utils/download/conflux-web-utils-0.1.10-alpha.0.tgz#84fad68f810407abedb2dbc349a53ccafeda9eed"
+  integrity sha1-hPrWj4EEB6vtstvDSaU8yv7anu0=
   dependencies:
     "@babel/runtime" "^7.3.1"
     "@types/bn.js" "^4.11.4"
@@ -3242,27 +3308,46 @@ conflux-web-utils@0.1.9:
     randomhex "0.1.5"
     utf8 "2.1.1"
 
-conflux-web@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.npm.taobao.org/conflux-web/download/conflux-web-0.1.9.tgz#295137c8819fed435336c7c2d6656cdb85da7aac"
+conflux-web-utils@1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web-utils/download/conflux-web-utils-1.35.1-alpha.0.tgz#1e4905fffd9c5934ba34f9cf8a18a818cf86dc1a"
+  integrity sha1-HkkF//2cWTS6NPnPihioGM+G3Bo=
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    "@types/bn.js" "^4.11.4"
+    "@types/node" "^10.12.18"
+    bn.js "4.11.8"
+    cfx-lib "0.0.1"
+    confluxjs-unit "*"
+    lodash "^4.17.11"
+    number-to-bn "1.7.0"
+    randomhex "0.1.5"
+    utf8 "2.1.1"
+
+conflux-web@^1.35.1-alpha.0:
+  version "1.35.1-alpha.0"
+  resolved "https://registry.npm.taobao.org/conflux-web/download/conflux-web-1.35.1-alpha.0.tgz#db8532567f69d27fccf0c6385576eafcc88fe7af"
+  integrity sha1-24UyVn9p0n/M8MY4VXbq/MiP568=
   dependencies:
     "@babel/runtime" "^7.3.1"
     "@types/node" "^10.12.18"
-    conflux-web-cfx "0.1.9"
-    conflux-web-core "0.1.9"
-    conflux-web-core-helpers "0.1.9"
-    conflux-web-core-method "0.1.9"
-    conflux-web-net "0.1.9"
-    conflux-web-providers "0.1.9"
-    conflux-web-utils "0.1.9"
+    conflux-web-cfx "1.35.1-alpha.0"
+    conflux-web-core "1.35.1-alpha.0"
+    conflux-web-core-helpers "1.35.1-alpha.0"
+    conflux-web-core-method "1.35.1-alpha.0"
+    conflux-web-net "1.35.1-alpha.0"
+    conflux-web-providers "1.35.1-alpha.0"
+    conflux-web-utils "1.35.1-alpha.0"
+    jest "^24.8.0"
 
-confluxjs-transaction@*, confluxjs-transaction@0.0.1-alpha.2:
-  version "0.0.1-alpha.2"
-  resolved "https://registry.npm.taobao.org/confluxjs-transaction/download/confluxjs-transaction-0.0.1-alpha.2.tgz#c93ee829f85e6b03ff4ab93af54eec50d05b90cd"
-  integrity sha1-yT7oKfheawP/Srk69U7sUNBbkM0=
+confluxjs-transaction@0.0.1-alpha.3:
+  version "0.0.1-alpha.3"
+  resolved "https://registry.npm.taobao.org/confluxjs-transaction/download/confluxjs-transaction-0.0.1-alpha.3.tgz#799f98f0cce45577963fcc8719b87c068bb1c658"
+  integrity sha1-eZ+Y8MzkVXeWP8yHGbh8Bouxxlg=
   dependencies:
     confluxjs-util "*"
     ethereumjs-common "^0.6.1"
+    rlp "^2.0.0"
 
 confluxjs-unit@*:
   version "0.0.4"
@@ -6296,9 +6381,9 @@ jest-changed-files@^24.9.0:
     execa "^1.0.0"
     throat "^4.0.0"
 
-jest-cli@^24.8.0:
+jest-cli@^24.8.0, jest-cli@^24.9.0:
   version "24.9.0"
-  resolved "https://registry.npm.taobao.org/jest-cli/download/jest-cli-24.9.0.tgz?cache=0&sync_timestamp=1566444314158&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjest-cli%2Fdownload%2Fjest-cli-24.9.0.tgz#ad2de62d07472d419c6abc301fc432b98b10d2af"
+  resolved "https://registry.npm.taobao.org/jest-cli/download/jest-cli-24.9.0.tgz#ad2de62d07472d419c6abc301fc432b98b10d2af"
   integrity sha1-rS3mLQdHLUGcarwwH8QyuYsQ0q8=
   dependencies:
     "@jest/core" "^24.9.0"
@@ -6754,6 +6839,14 @@ jest@24.8.0:
   dependencies:
     import-local "^2.0.0"
     jest-cli "^24.8.0"
+
+jest@^24.8.0:
+  version "24.9.0"
+  resolved "https://registry.npm.taobao.org/jest/download/jest-24.9.0.tgz?cache=0&sync_timestamp=1579656101832&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjest%2Fdownload%2Fjest-24.9.0.tgz#987d290c05a08b52c56188c1002e368edb007171"
+  integrity sha1-mH0pDAWgi1LFYYjBAC42jtsAcXE=
+  dependencies:
+    import-local "^2.0.0"
+    jest-cli "^24.9.0"
 
 js-base64@^2.1.8:
   version "2.5.1"
@@ -10381,12 +10474,14 @@ scrypt-js@2.0.4:
   version "2.0.4"
   resolved "https://registry.npm.taobao.org/scrypt-js/download/scrypt-js-2.0.4.tgz#32f8c5149f0797672e551c07e230f834b6af5f16"
 
-scrypt.js@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npm.taobao.org/scrypt.js/download/scrypt.js-0.2.0.tgz#af8d1465b71e9990110bedfc593b9479e03a8ada"
+scrypt.js@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npm.taobao.org/scrypt.js/download/scrypt.js-0.3.0.tgz#6c62d61728ad533c8c376a2e5e3e86d41a95c4c0"
+  integrity sha1-bGLWFyitUzyMN2ouXj6G1BqVxMA=
   dependencies:
-    scrypt "^6.0.2"
     scryptsy "^1.2.1"
+  optionalDependencies:
+    scrypt "^6.0.2"
 
 scrypt@^6.0.2:
   version "6.0.3"
