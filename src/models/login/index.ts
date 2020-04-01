@@ -36,7 +36,9 @@ export default {
       try {
         const { password } = payload
         const account = confluxWeb.cfx.accounts.create(password)
+        confluxWeb.cfx.accounts.wallet.clear()
         confluxWeb.cfx.accounts.wallet.add(account)
+        // console.log(confluxWeb.cfx.accounts.wallet.accounts)
         const { privateKey, address } = account
         const keystoreJson = confluxWeb.cfx.accounts.encrypt(privateKey, password)
         yield put({
@@ -65,7 +67,9 @@ export default {
         const { keystoreJson, password } = payload
         const account = confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
         const { privateKey, address } = account
+        confluxWeb.cfx.accounts.wallet.clear()
         confluxWeb.cfx.accounts.wallet.add(account)
+        // console.log(confluxWeb.cfx.accounts.wallet.accounts)
         yield put({
           type: 'setState',
           payload: {
@@ -130,7 +134,7 @@ export default {
         payload: {
           loginSuccess: false,
           loginValidateError: false,
-          createAccountIsSuccess: '',
+          createAccountIsSuccess: false,
           restorePasswordRight: true,
         },
       })
