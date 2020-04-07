@@ -1,4 +1,4 @@
-import confluxWeb from '@/vendor/conflux-web'
+import { cfx } from '@/vendor/conflux-web'
 import { sendSignedTransactionPromise } from '../fc'
 import Axios from 'axios'
 import BigNumber from 'bignumber.js'
@@ -36,7 +36,7 @@ export default {
     *updateCfxBalance(_, { call, put, select }) {
       try {
         const { currentAccountAddress } = yield select(state => state[namespace])
-        const cfxBalance = yield call(confluxWeb.cfx.getBalance, currentAccountAddress)
+        const cfxBalance = yield call(getBalance, currentAccountAddress)
         yield put({
           type: 'setState',
           payload: {
@@ -56,7 +56,9 @@ export default {
             cfxSending: true,
           },
         })
-        const { currentAccountAddress } = yield select(state => state[namespace])
+        const { currentAccountAddress, currentAccountPrivateKey } = yield select(
+          state => state[namespace]
+        )
         // view层传过来的数据
         const { toAddress, sendAmount, gasPrice } = payload
         // ========nonce参数获取========
@@ -69,17 +71,19 @@ export default {
         const hexStr = `0x${newValue.toString(16)}`
         const newGasPrice = new BigNumber(gasPrice).multipliedBy(10 ** 9)
         const hexGasPrice = `0x${newGasPrice.toString(16)}`
+        // console.log('address:', currentAccountPrivateKey)
         const txParams = {
-          from: 0,
+          from: cfx.Account(currentAccountPrivateKey),
           nonce,
           gasPrice: hexGasPrice,
           gas: normalGasForSend,
           value: hexStr,
           to: toAddress,
         }
+        // console.log('parmas:', txParams)
         const hash = yield call(sendSignedTransactionPromise, txParams)
         // tslint:disable-next-line: no-console
-        console.log('hash: ' + hash)
+        // console.log('hash: ' + hash)
         // successedSendActionSetNonce(params.localStorageKey, nonce)
         yield put({
           type: 'setState',
@@ -148,24 +152,12 @@ export default {
   },
 }
 
-function getNoncePromise(fromAddress) {
-  // 获取最新的 nonce
-  return new Promise((resolve: (value: number) => void, reject) => {
-    confluxWeb.cfx.getTransactionCount(fromAddress, (err, count) => {
-      if (err) {
-        return reject(err)
-      }
-      return resolve(count)
-    })
-  })
-}
-
 export async function getActualNoncePromise({ currentAccountAddress, localStorageKey }) {
   try {
     // 这个 nonce 应该在第一次获取后缓存起来，以后每次交易 +1
     // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
     // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
-    let nonce = await getNoncePromise(currentAccountAddress)
+    let nonce = await cfx.getNextNonce(currentAccountAddress)
     const localNonce = JSON.parse(localStorage.getItem(localStorageKey) || null)
     // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
     // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
@@ -193,6 +185,20 @@ export function successedSendActionSetNonce(localStorageKey, nonce) {
 }
 function getCfx(address: string) {
   return Axios.request({
-    url: `/faucet/dev/ask?address=${address.toLocaleLowerCase()}`,
+    // url: `/faucet/dev/ask?address=${address.toLocaleLowerCase()}`,
+    url: `http://54.183.177.67:18088/dev/ask?address=${address.toLocaleLowerCase()}`,
+  })
+}
+
+export function getBalance(address) {
+  return new Promise((resolve, reject) => {
+    cfx
+      .getBalance(address)
+      .then(balance => {
+        return resolve(balance)
+      })
+      .catch(err => {
+        return reject(err)
+      })
   })
 }
