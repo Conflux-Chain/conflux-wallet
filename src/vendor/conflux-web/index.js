@@ -17,7 +17,6 @@ const cfx = new Conflux({
   defaultGas: 1000000,
   logger: console, // FIXME: add for debug
 })
-export { util, cfx }
 
-export { abi }
+export { abi, util, cfx }
 export default confluxWeb
