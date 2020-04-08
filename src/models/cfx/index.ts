@@ -2,6 +2,7 @@ import { cfx } from '@/vendor/conflux-web'
 import { sendSignedTransactionPromise } from '../fc'
 import Axios from 'axios'
 import BigNumber from 'bignumber.js'
+import JSBI from 'jsbi'
 const namespace = 'cfx'
 const maxInterval = 1000 * 60 * 10
 /* Max gas for send transaction (not gas price) */
@@ -158,6 +159,7 @@ export async function getActualNoncePromise({ currentAccountAddress, localStorag
     // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
     // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
     let nonce = await cfx.getNextNonce(currentAccountAddress)
+    nonce = JSBI.toNumber(nonce)
     const localNonce = JSON.parse(localStorage.getItem(localStorageKey) || null)
     // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
     // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
