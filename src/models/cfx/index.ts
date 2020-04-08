@@ -187,8 +187,8 @@ export function successedSendActionSetNonce(localStorageKey, nonce) {
 }
 function getCfx(address: string) {
   return Axios.request({
-    // url: `/faucet/dev/ask?address=${address.toLocaleLowerCase()}`,
-    url: `http://54.183.177.67:18088/dev/ask?address=${address.toLocaleLowerCase()}`,
+    url: `/faucet/dev/ask?address=${address.toLocaleLowerCase()}`,
+    // url: `http://54.183.177.67:18088/dev/ask?address=${address.toLocaleLowerCase()}`, //test faucet
   })
 }
 
