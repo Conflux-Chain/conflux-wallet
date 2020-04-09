@@ -1,4 +1,4 @@
-import confluxWeb, { abi } from '@/vendor/conflux-web'
+import confluxWeb, { abi, cfx } from '@/vendor/conflux-web'
 import { namespace as namespaceOfCfx } from '@/models/cfx'
 import { namespace as namespaceOfFc } from '@/models/fc'
 import { namespace as namespaceOfCommon } from '@/models/global/common'
@@ -36,10 +36,9 @@ export default {
       try {
         const { password } = payload
         const account = confluxWeb.cfx.accounts.create(password)
-        confluxWeb.cfx.accounts.wallet.clear()
-        confluxWeb.cfx.accounts.wallet.add(account)
         // console.log(confluxWeb.cfx.accounts.wallet.accounts)
-        const { privateKey, address } = account
+        const newAccount = cfx.Account(account.privateKey)
+        const { privateKey, address } = newAccount
         const keystoreJson = confluxWeb.cfx.accounts.encrypt(privateKey, password)
         yield put({
           type: 'setState',
@@ -66,9 +65,8 @@ export default {
       try {
         const { keystoreJson, password } = payload
         const account = confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
-        const { privateKey, address } = account
-        confluxWeb.cfx.accounts.wallet.clear()
-        confluxWeb.cfx.accounts.wallet.add(account)
+        const newAccount = cfx.Account(account.privateKey)
+        const { privateKey, address } = newAccount
         // console.log(confluxWeb.cfx.accounts.wallet.accounts)
         yield put({
           type: 'setState',
