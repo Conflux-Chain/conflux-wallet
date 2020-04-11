@@ -37,7 +37,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-
+  position: relative;
   @include respond-to(md) {
     flex-direction: column;
   }
@@ -64,6 +64,59 @@
 
     @include respond-to(md) {
       font-weight: 400;
+    }
+  }
+  .cfxQuestionBtn {
+    position: absolute;
+    top: 16px;
+    right: -20px;
+    .cfxQuestionIcon {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      fill: #9e9e9e;
+
+      &:hover {
+        fill: #1e3de4;
+        .cfxRemind {
+          display: block;
+        }
+      }
+    }
+    .cfxRemind {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      display: none;
+      width: 280px;
+      padding: 24px;
+      margin-left: -129px;
+      z-index: 100;
+      background-color: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
+      .cfxRemindContent {
+        line-height: 28px;
+      }
+      @include respond-to(md) {
+        margin-left: -189px;
+        width: 330px;
+      }
+    }
+    @include respond-to(md) {
+      top: 77px;
+      right: 90px;
+    }
+  }
+}
+.iconWrap {
+  position: relative;
+  display: inline;
+  vertical-align: middle;
+
+  &:hover {
+    .cfxRemind {
+      display: block;
     }
   }
 }
