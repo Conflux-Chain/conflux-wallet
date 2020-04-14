@@ -74,7 +74,7 @@ class ContentCfx extends Component<IProps, IState> {
               <div className={styles.cfxQuestionBtn}>
                 <div className={styles.iconWrap}>
                   <svg className={styles.cfxQuestionIcon}>
-                    <use xlinkHref="#iconremind" />
+                    <use xlinkHref="#iconattention" />
                   </svg>
                   <div className={styles.cfxRemind}>
                     <p className={styles.cfxRemindContent}>{I18N.Wallet.MyWallet.testCoin}</p>
