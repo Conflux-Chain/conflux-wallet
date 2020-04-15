@@ -13,6 +13,7 @@ import SendSuccess from '../send-success/index'
 import { IFC } from '../typings'
 import { I18NProps } from '@/i18n/context'
 import config from '@/config'
+import imgs from '../../../assets/images'
 interface IProps extends IFC, Partial<I18NProps> {
   lockStatus?: boolean
   updateFcAction?: () => void
@@ -79,10 +80,41 @@ class ContentFC extends Component<IProps, IState> {
         <div className={styles.infoBox}>
           <div className={styles.infoBoxTop}>
             <div className={styles.walletHeader}>
-              <svg aria-hidden="true" className={styles.walletImg}>
-                <use xlinkHref="#iconfc-icon" />
-              </svg>
+              <img src={imgs.fcLogo} className={styles.walletImg} alt="logo" />
               <p className={styles.walletName}>Fans Coin</p>
+              <div className={styles.fcQuestionBtn}>
+                <FcDetails
+                  I18N={I18N}
+                  anchorEl={fcDetailsTips}
+                  onClose={() => {
+                    this.setState({
+                      fcDetailsTips: null,
+                    })
+                  }}
+                >
+                  {isWidthUp('sm', this.props.width) ? (
+                    <svg
+                      className={classnames(
+                        styles.fcQuestionIcon,
+                        fcDetailsTips ? styles.fcQuestionIconActive : null
+                      )}
+                    >
+                      <use xlinkHref="#iconremind" />
+                    </svg>
+                  ) : (
+                    <Link to="/about">
+                      <svg
+                        className={classnames(
+                          styles.fcQuestionIcon,
+                          fcDetailsTips ? styles.fcQuestionIconActive : null
+                        )}
+                      >
+                        <use xlinkHref="#iconremind" />
+                      </svg>
+                    </Link>
+                  )}
+                </FcDetails>
+              </div>
             </div>
             <div className={styles.walletBalance}>
               <p className={styles.walletBalanceTitle}>{I18N.Wallet.MyWallet.totalBalance}</p>
@@ -107,7 +139,7 @@ class ContentFC extends Component<IProps, IState> {
                     balanceDetailsTips ? styles.questionIconActive : null
                   )}
                 >
-                  <use xlinkHref="#iconjieshi" />
+                  <use xlinkHref="#iconremind" />
                 </svg>
               </BalanceDetails>
             </div>
@@ -185,39 +217,6 @@ class ContentFC extends Component<IProps, IState> {
               )}
             </p>
           </div>
-        </div>
-        <div className={styles.fcQuestionBtn}>
-          <FcDetails
-            I18N={I18N}
-            anchorEl={fcDetailsTips}
-            onClose={() => {
-              this.setState({
-                fcDetailsTips: null,
-              })
-            }}
-          >
-            {isWidthUp('sm', this.props.width) ? (
-              <svg
-                className={classnames(
-                  styles.fcQuestionIcon,
-                  fcDetailsTips ? styles.fcQuestionIconActive : null
-                )}
-              >
-                <use xlinkHref="#iconjieshi" />
-              </svg>
-            ) : (
-              <Link to="/about">
-                <svg
-                  className={classnames(
-                    styles.fcQuestionIcon,
-                    fcDetailsTips ? styles.fcQuestionIconActive : null
-                  )}
-                >
-                  <use xlinkHref="#iconjieshi" />
-                </svg>
-              </Link>
-            )}
-          </FcDetails>
         </div>
         <SendFail
           I18N={I18N}

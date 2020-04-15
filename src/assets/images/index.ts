@@ -18,6 +18,7 @@ import about1ZH from './about1-zh.png'
 import about2ZH from './about2-zh.png'
 import about1EN from './about1-en.png'
 import about2EN from './about2-en.png'
+import fcLogo from './fc-logo.svg'
 export default {
   pathLeft,
   pathRight,
@@ -39,4 +40,5 @@ export default {
   about2ZH,
   about1EN,
   about2EN,
+  fcLogo,
 }
