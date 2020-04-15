@@ -176,14 +176,14 @@
 
       .item0 {
         @include respond-to(md) {
-          width: 305px;
+          width: 425px;
           padding: 0 55px 71px 52px;
         }
       }
 
       .item2 {
         @include respond-to(md) {
-          width: 654px;
+          width: 534px;
           padding: 0 55px 35px 47px;
         }
       }
