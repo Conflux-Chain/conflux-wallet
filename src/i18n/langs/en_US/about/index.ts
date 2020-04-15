@@ -17,5 +17,5 @@ export default {
   contain4:
     'Scenario:\nAssume the current circulation ratio is 100, meaning for every 100 FCs transfer, an addition of 100 FCs will be permanently locked for transfer. Upon completing a Conflux bounty task, Alice receives 10 FCs from Conflux Foundation as our gratitude. Meanwhile, she also receives a transfer from Bob that worth of 10 FCs. At this point, Alice owns a total of 20 FCs, and she would like to transfer some FCs to Denise.',
   contain5:
-    'Special shoutout to Justin. As a member of the Conflux community, Justin has actively participated in FC development from early-stage prototyping through the production and release of FC smart contract.',
+    'Special shoutout to Justin.\nAs a member of the Conflux community, Justin has actively participated in FC development from early-stage prototyping through the production and release of FC smart contract.',
 }
