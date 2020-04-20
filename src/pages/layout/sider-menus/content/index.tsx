@@ -85,7 +85,7 @@ class SiderContent extends Component<IProps> {
               )}
             </p>
             {/* <p className={styles.official}>Bounty</p> */}
-            <p className={styles.copyText}>Copyright © 2019 Conflux. All Rights Reserved</p>
+            <p className={styles.copyText}>Copyright © 2020 Conflux. All Rights Reserved</p>
           </div>
         </div>
       </>
