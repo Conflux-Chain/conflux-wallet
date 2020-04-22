@@ -7,20 +7,22 @@ import MenuList from '@material-ui/core/MenuList'
 import Grow from '@material-ui/core/Grow'
 import Paper from '@material-ui/core/Paper'
 import Popper from '@material-ui/core/Popper'
-const netList = ['Testnet']
-// const netList = ['Testnet', 'Local RPC']
+import { I18NHOC } from '@/utils/tools/react'
+import { I18NProps } from '@/i18n/context'
+
+type IProps = I18NProps & {
+  lockStatus?: boolean
+}
 interface IState {
   menuNet: null | HTMLElement
   menuNetSelected: string
 }
-interface IProps {
-  lockStatus?: boolean
-}
+
 class NetSelect extends Component<IProps, IState> {
   static defaultProps = { lockStatus: true }
   state = {
     menuNet: null,
-    menuNetSelected: 'Testnet',
+    menuNetSelected: 'testnet',
   }
   handleMenu(event: React.MouseEvent<HTMLElement>) {
     this.setState({
@@ -40,8 +42,9 @@ class NetSelect extends Component<IProps, IState> {
   }
   render() {
     const { menuNet, menuNetSelected } = this.state
-    const { lockStatus } = this.props
+    const { lockStatus, I18N } = this.props
     const menuNetOpen = Boolean(menuNet)
+    const netList = [{ value: 'testnet', text: I18N.Layout.MenuList.testnet }]
     return (
       <div className={classnames(styles.operateListItem, lockStatus ? styles.lockStatus : null)}>
         <span
@@ -54,7 +57,7 @@ class NetSelect extends Component<IProps, IState> {
             }
           }}
         >
-          {menuNetSelected}
+          {netList.find(item => (item.value = menuNetSelected)).text}
           <svg className={styles.triangleIcon} aria-hidden="true">
             <use xlinkHref="#icondown" />
           </svg>
@@ -75,16 +78,16 @@ class NetSelect extends Component<IProps, IState> {
                     }}
                   >
                     <MenuList className={styles.selectMenuList}>
-                      {netList.map((v, i) => {
+                      {netList.map((item, i) => {
                         return (
                           <MenuItem
                             key={i}
-                            selected={v === menuNetSelected}
+                            selected={item.value === menuNetSelected}
                             onClick={() => {
-                              this.selectMenu(v)
+                              this.selectMenu(item.value)
                             }}
                           >
-                            {v}
+                            {item.text}
                           </MenuItem>
                         )
                       })}
@@ -99,4 +102,4 @@ class NetSelect extends Component<IProps, IState> {
     )
   }
 }
-export default NetSelect
+export default I18NHOC(NetSelect) as any

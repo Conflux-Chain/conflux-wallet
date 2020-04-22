@@ -9,16 +9,16 @@ import Popper from '@material-ui/core/Popper'
 import IconButton from '@material-ui/core/IconButton'
 import Divider from '@material-ui/core/Divider'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-
-// import DeployBtn from '../deploy-btn/index'
 import RefreshBtn from '../refresh-btn/index'
-const netList = ['Testnet']
-// const netList = ['Testnet', 'Local RPC']
-interface IProps {
+import { I18NHOC } from '@/utils/tools/react'
+import { I18NProps } from '@/i18n/context'
+
+type IProps = I18NProps & {
   isLogin?: boolean
   lockStatus?: boolean
   refreshAction?: () => void
 }
+
 interface IState {
   menuM: null | HTMLElement
   menuNetSelected: string
@@ -26,7 +26,7 @@ interface IState {
 class NetSelect extends Component<IProps, IState> {
   state = {
     menuM: null,
-    menuNetSelected: 'Testnet',
+    menuNetSelected: 'testnet',
   }
   handleMenu(event: React.MouseEvent<HTMLElement>) {
     this.setState({
@@ -46,8 +46,9 @@ class NetSelect extends Component<IProps, IState> {
   }
   render() {
     const { menuM, menuNetSelected } = this.state
-    const { lockStatus, isLogin } = this.props
+    const { lockStatus, isLogin, I18N } = this.props
     const menuMOpen = Boolean(menuM)
+    const netList = [{ value: 'testnet', text: I18N.Layout.MenuList.testnet }]
     return (
       <div className={styles.operateListItem}>
         <IconButton
@@ -95,16 +96,16 @@ class NetSelect extends Component<IProps, IState> {
                         />
                       </MenuItem>
                       <Divider />
-                      {netList.map((v, i) => {
+                      {netList.map((item, i) => {
                         return (
                           <MenuItem
                             key={i}
-                            selected={v === menuNetSelected}
+                            selected={item.value === menuNetSelected}
                             onClick={() => {
-                              this.selectMenu(v)
+                              this.selectMenu(item.value)
                             }}
                           >
-                            {v}
+                            {item.text}
                           </MenuItem>
                         )
                       })}
@@ -119,4 +120,4 @@ class NetSelect extends Component<IProps, IState> {
     )
   }
 }
-export default NetSelect
+export default I18NHOC(NetSelect) as any
