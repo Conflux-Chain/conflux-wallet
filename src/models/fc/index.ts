@@ -3,6 +3,7 @@ import {
   getActualNoncePromise,
   // successedSendActionSetNonce,
   maxGasForSend,
+  maxStorage,
   nonceLocalStoragePrefix,
 } from '@/models/cfx'
 import { cfx } from '@/vendor/conflux-web'
@@ -100,6 +101,7 @@ export default {
           gas: maxGasForSend,
           value: 0,
           to: config.FCContractAddress,
+          storageLimit: maxStorage,
           data: FC.methods.transfer(toAddress, hexStr).encodeABI(), // get data from ABI
         }
         const hash = yield call(sendSignedTransactionPromise, txParams)

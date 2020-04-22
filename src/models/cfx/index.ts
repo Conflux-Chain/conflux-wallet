@@ -7,6 +7,7 @@ const namespace = 'cfx'
 const maxInterval = 1000 * 60 * 10
 /* Max gas for send transaction (not gas price) */
 export const maxGasForSend = 10000000
+export const maxStorage = 1000
 export const normalGasForSend = 21000
 export const nonceLocalStoragePrefix = 'cfx_address_'
 export { namespace }
@@ -78,6 +79,7 @@ export default {
           nonce,
           gasPrice: hexGasPrice,
           gas: normalGasForSend,
+          storageLimit: 0,
           value: hexStr,
           to: toAddress,
         }
