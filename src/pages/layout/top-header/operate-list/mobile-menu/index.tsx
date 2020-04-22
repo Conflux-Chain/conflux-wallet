@@ -26,7 +26,7 @@ interface IState {
 class NetSelect extends Component<IProps, IState> {
   state = {
     menuM: null,
-    menuNetSelected: 'mainnet',
+    menuNetSelected: 'testnet',
   }
   handleMenu(event: React.MouseEvent<HTMLElement>) {
     this.setState({

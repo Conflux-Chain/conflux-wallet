@@ -22,7 +22,7 @@ class NetSelect extends Component<IProps, IState> {
   static defaultProps = { lockStatus: true }
   state = {
     menuNet: null,
-    menuNetSelected: 'mainnet',
+    menuNetSelected: 'testnet',
   }
   handleMenu(event: React.MouseEvent<HTMLElement>) {
     this.setState({
