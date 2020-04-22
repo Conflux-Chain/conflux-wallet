@@ -48,7 +48,7 @@ class NetSelect extends Component<IProps, IState> {
     const { menuM, menuNetSelected } = this.state
     const { lockStatus, isLogin, I18N } = this.props
     const menuMOpen = Boolean(menuM)
-    const netList = [{ value: 'mainnet', text: I18N.Layout.MenuList.mainnet }]
+    const netList = [{ value: 'testnet', text: I18N.Layout.MenuList.testnet }]
     return (
       <div className={styles.operateListItem}>
         <IconButton
