@@ -7,6 +7,6 @@ export default {
   gdrip: 'Gdrip',
   send: '发送',
   palceHolder1: '可用余额',
-  palceHolder2: '地址',
+  palceHolder2: '务必使用2020.4.9后更新的钱包地址',
   formErrorText: '请输入正确的地址!',
 }

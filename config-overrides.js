@@ -8,11 +8,9 @@ const devServerConfig = () => config => {
     ...config,
     port: 3000,
     proxy: {
-      '/dev': {
-        target: 'https://wallet.confluxscan.io/faucet',
+      '/faucet': {
+        target: 'https://wallet.confluxscan.io',
         changeOrigin: true,
-        ws: false,
-        secure: false,
       },
     },
   }

@@ -134,9 +134,15 @@
 
   .addressWrap {
     margin-bottom: 36px;
+    input::-webkit-input-placeholder {
+      font-size: 14px;
+    }
 
     @include respond-to(sm) {
       margin-bottom: 14px;
+      input::-webkit-input-placeholder {
+        font-size: 16px;
+      }
     }
   }
 

@@ -3,9 +3,10 @@ import {
   getActualNoncePromise,
   // successedSendActionSetNonce,
   maxGasForSend,
+  maxStorage,
   nonceLocalStoragePrefix,
 } from '@/models/cfx'
-import confluxWeb from '@/vendor/conflux-web'
+import { cfx } from '@/vendor/conflux-web'
 import config from '@/config'
 // const nonceLocalStoragePrefix = 'fc_address_'
 const namespace = 'fc'
@@ -82,7 +83,9 @@ export default {
           },
         })
         const { toAddress, value, gasPrice } = payload
-        const { currentAccountAddress: fromAddress } = yield select(state => state[namespaceOfCfx])
+        const { currentAccountAddress: fromAddress, currentAccountPrivateKey } = yield select(
+          state => state[namespaceOfCfx]
+        )
         const { FC } = yield select(state => state[namespace])
         const params = {
           currentAccountAddress: fromAddress,
@@ -92,12 +95,13 @@ export default {
         const newValue = value * 10 ** 18
         const hexStr = `0x${newValue.toString(16)}`
         const txParams = {
-          from: 0,
+          from: cfx.Account(currentAccountPrivateKey),
           nonce,
           gasPrice,
           gas: maxGasForSend,
           value: 0,
           to: config.FCContractAddress,
+          storageLimit: maxStorage,
           data: FC.methods.transfer(toAddress, hexStr).encodeABI(), // get data from ABI
         }
         const hash = yield call(sendSignedTransactionPromise, txParams)
@@ -176,18 +180,10 @@ function getFCStateOfPromise({ address, FC }) {
 }
 export function sendSignedTransactionPromise(txParams) {
   return new Promise((resolve, reject) => {
-    confluxWeb.cfx
-      .signTransaction(txParams)
-      .then((encodedTransaction: any) => {
-        const { rawTransaction } = encodedTransaction
-        confluxWeb.cfx
-          .sendSignedTransaction(rawTransaction)
-          .then(transactionHash => {
-            return resolve(transactionHash)
-          })
-          .catch(err => {
-            return reject(err)
-          })
+    cfx
+      .sendTransaction(txParams)
+      .then(transactionHash => {
+        return resolve(transactionHash)
       })
       .catch(err => {
         return reject(err)
