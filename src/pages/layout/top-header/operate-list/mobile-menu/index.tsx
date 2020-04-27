@@ -26,7 +26,7 @@ interface IState {
 class NetSelect extends Component<IProps, IState> {
   state = {
     menuM: null,
-    menuNetSelected: 'testnet',
+    menuNetSelected: 'mainnet',
   }
   handleMenu(event: React.MouseEvent<HTMLElement>) {
     this.setState({
@@ -48,7 +48,7 @@ class NetSelect extends Component<IProps, IState> {
     const { menuM, menuNetSelected } = this.state
     const { lockStatus, isLogin, I18N } = this.props
     const menuMOpen = Boolean(menuM)
-    const netList = [{ value: 'testnet', text: I18N.Layout.MenuList.testnet }]
+    const netList = [{ value: 'mainnet', text: I18N.Layout.MenuList.mainnet }]
     return (
       <div className={styles.operateListItem}>
         <IconButton
