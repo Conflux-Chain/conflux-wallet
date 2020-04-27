@@ -53,7 +53,7 @@ class About extends Component<I18NProps> {
               <p className={styles.p}>{I18N.About.contain2}</p>
             </div>
           </div>
-          <div className={styles.line2}>
+          {/* <div className={styles.line2}>
             <div className={styles.leftBox}>
               <div className={styles.titleBox}>
                 <svg className={classnames(styles.iconSpe, styles.icon3)} aria-hidden="true">
@@ -72,8 +72,8 @@ class About extends Component<I18NProps> {
                 src={isEnglish ? imgs.about1EN : imgs.about1ZH}
               />
             </div>
-          </div>
-          <div className={classnames(styles.line2, styles.line3)}>
+          </div> */}
+          {/* <div className={classnames(styles.line2, styles.line3)}>
             <div className={styles.leftBox}>
               <div className={styles.item2}>
                 <p className={styles.p}>{I18N.About.contain4}</p>
@@ -86,7 +86,7 @@ class About extends Component<I18NProps> {
                 src={isEnglish ? imgs.about2EN : imgs.about2ZH}
               />
             </div>
-          </div>
+          </div> */}
         </div>
         <h2 className={styles.h2}>{I18N.About.secondH2}</h2>
         <div className={styles.container3}>
