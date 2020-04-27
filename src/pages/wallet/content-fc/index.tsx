@@ -6,7 +6,7 @@ import styles from './style.module.scss'
 import classnames from 'classnames'
 import Button from '@material-ui/core/Button'
 import SendFcModal from '../send-fc-modal/index'
-import BalanceDetails from '../balance-details/index'
+// import BalanceDetails from '../balance-details/index'
 import FcDetails from '../fc-details/index'
 import SendFail from '../send-fail/index'
 import SendSuccess from '../send-success/index'
@@ -26,14 +26,14 @@ interface IProps extends IFC, Partial<I18NProps> {
 }
 interface IState {
   showModal: boolean
-  balanceDetailsTips: null | HTMLElement
+  // balanceDetailsTips: null | HTMLElement
   fcDetailsTips: null | HTMLElement
 }
 class ContentFC extends Component<IProps, IState> {
   static defaultProps = { lockStatus: true }
   state = {
     showModal: false,
-    balanceDetailsTips: null,
+    // balanceDetailsTips: null,
     fcDetailsTips: null,
   }
   hideModal() {
@@ -42,9 +42,9 @@ class ContentFC extends Component<IProps, IState> {
     })
   }
   showBalanceDetailsTips(e) {
-    this.setState({
-      balanceDetailsTips: e.currentTarget,
-    })
+    // this.setState({
+    //   balanceDetailsTips: e.currentTarget,
+    // })
   }
   showFcDetailsTipsTips(e) {
     this.setState({
@@ -73,7 +73,7 @@ class ContentFC extends Component<IProps, IState> {
     })
   }
   render() {
-    const { showModal, balanceDetailsTips, fcDetailsTips } = this.state
+    const { showModal, fcDetailsTips } = this.state
     const { lockStatus, fcSendFailed, fcSendSuccessed, I18N } = this.props
     return (
       <div className={styles.cardContent}>
@@ -121,7 +121,7 @@ class ContentFC extends Component<IProps, IState> {
               <p className={styles.walletBalanceTotal}>{this.props.fcTotalBalance}</p>
             </div>
           </div>
-          <div className={styles.balanceBox}>
+          {/* <div className={styles.balanceBox}>
             <div className={styles.balanceTitle}>
               {I18N.Wallet.MyWallet.availableBalance}
               <BalanceDetails
@@ -144,7 +144,7 @@ class ContentFC extends Component<IProps, IState> {
               </BalanceDetails>
             </div>
             <div className={styles.balanceNum}>{this.props.fcAvailableBalance}</div>
-          </div>
+          </div> */}
         </div>
         <div>
           <div className={styles.btnBox}>
