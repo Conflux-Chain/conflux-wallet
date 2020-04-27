@@ -81,7 +81,7 @@ class ContentFC extends Component<IProps, IState> {
           <div className={styles.infoBoxTop}>
             <div className={styles.walletHeader}>
               <img src={imgs.fcLogo} className={styles.walletImg} alt="logo" />
-              <p className={styles.walletName}>Fans Coin</p>
+              <p className={styles.walletName}>FansCoin</p>
               <div className={styles.fcQuestionBtn}>
                 <FcDetails
                   I18N={I18N}

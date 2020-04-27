@@ -7,5 +7,5 @@ export default {
   viewContract: '查看合约账户',
   availableBalance: '可用余额',
   climeCfx: '申领测试币',
-  testCoin: '目前 CFX 是测试币，仅具有测试功能，并会在网络升级重启时清零',
+  testCoin: '目前 CFX 是测试通证，仅具有测试功能，随着 Conflux 网络重启、升级，CFX 将同步清零',
 }

@@ -1,5 +1,5 @@
 export default {
   detailText:
-    'Fans Coin, 简称FC，由 Conflux基金会主导 设计，与社区成员合作研发，并基于Conflux 测试网运行的社区贡献智能合约',
+    'FansCoin（简称 FC），是由 Conflux 基金会主导，社区成员基于 Conflux 网络共同协作研发的通证',
   viewMore: '查看更多',
 }

@@ -1,8 +1,8 @@
 export default {
   h1: 'About FC',
-  title: 'Introduction of Fans Coin (FC)',
+  title: 'Introduction of FansCoin (FC)',
   conFC:
-    'Fans Coin, here after refers as FC, is a smart contract built on Conflux testnet. The development of FC was initiated by Conflux Foundation, and the project is a joint effort among Conflux Community members. FC aims to fully incentivize and encourage the power of the community. Moreover, FC records every contribution of each member while conducting a wholesome testing on the exsting testnet.\nFor the purpose of acknowledging the contribution from the communtiy, Conflux Foundation committed a 1:1 swap between FC and CFX after the mainnet is launched. ',
+    'FansCoin (FC) is a smart contract designed and used on the Conflux network. The development of FC was initiated by Conflux Foundation, and the project is a joint effort among Conflux Community members. FC aims to fully incentivize and encourage the power of the community. Moreover, FC records every contribution of each member while conducting a wholesome testing on the exsting testnet.\nFor the purpose of acknowledging the contribution from the communtiy, Conflux Foundation committed a 1:1 swap between FC and CFX after the mainnet is launched.',
   firstH2: 'Community Conflux Foundation Commitment',
   secondH2: 'Special Thanks',
   firstH3: 'FC Distribution',
