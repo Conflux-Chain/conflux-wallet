@@ -40,23 +40,21 @@ export default {
       try {
         const { currentAccountAddress: address } = yield select(state => state[namespaceOfCfx])
         const { FC } = yield select(state => state[namespace])
-        const _ratio = yield call(getCirculationRatioPromise, { FC })
-        const { '0': _c2PBalance, '1': _p2PBalance, '2': _lockBalance } = yield call(
-          getFCStateOfPromise,
-          {
-            address,
-            FC,
-          }
-        )
+        // const _ratio = yield call(getCirculationRatioPromise, { FC })
+        // const { '0': _c2PBalance, '1': _p2PBalance, '2': _lockBalance } = yield call(
+        const { '0': _c2PBalance, '1': _p2PBalance } = yield call(getFCStateOfPromise, {
+          address,
+          FC,
+        })
         const c2PBalance = transformReturnBalanceToNumber(_c2PBalance)
         const p2PBalance = transformReturnBalanceToNumber(_p2PBalance)
-        const lockBalance = transformReturnBalanceToNumber(_lockBalance)
+        // const lockBalance = transformReturnBalanceToNumber(_lockBalance)
         // tslint:disable-next-line: radix
-        const ratio = parseInt(_ratio.toString())
-        const fcPersonalFreeBalance = c2PBalance
-        const fcPersonalUnLockBalance = (p2PBalance * ratio) / (100 + ratio)
+        // const ratio = parseInt(_ratio.toString())
+        const fcPersonalFreeBalance = c2PBalance + p2PBalance
+        const fcPersonalUnLockBalance = 0 // (p2PBalance * ratio) / (100 + ratio)
         // const fcPersonalUnLockBalance = p2PBalance.mul(ratio).div(100 + ratio)
-        const fcPersonalLockBalance = lockBalance + (p2PBalance * 100) / (100 + ratio)
+        const fcPersonalLockBalance = 0 // lockBalance + (p2PBalance * 100) / (100 + ratio)
         // const fcPersonalLockBalance = lockBalance.add(p2PBalance.mul(100).div(100 + ratio))
         const fcAvailableBalance = fcPersonalFreeBalance + fcPersonalUnLockBalance
         // const fcAvailableBalance = fcPersonalFreeBalance.add(fcPersonalUnLockBalance)
@@ -151,19 +149,19 @@ export default {
   },
 }
 
-function getCirculationRatioPromise({ FC }) {
-  return new Promise((resolve: (value: number) => void, reject) => {
-    FC.methods
-      .circulationRatio()
-      .call()
-      .then(result => {
-        return resolve(result)
-      })
-      .catch(err => {
-        return reject(new Error(err))
-      })
-  })
-}
+// function getCirculationRatioPromise({ FC }) {
+//   return new Promise((resolve: (value: number) => void, reject) => {
+//     FC.methods
+//       .circulationRatio()
+//       .call()
+//       .then(result => {
+//         return resolve(result)
+//       })
+//       .catch(err => {
+//         return reject(new Error(err))
+//       })
+//   })
+// }
 
 function getFCStateOfPromise({ address, FC }) {
   return new Promise((resolve: (value: []) => void, reject) => {
