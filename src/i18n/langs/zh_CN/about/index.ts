@@ -1,8 +1,8 @@
 export default {
   h1: '关于 FC',
-  title: '什么是 Fans Coin（FC）?',
+  title: '什么是 FansCoin（FC）?',
   conFC:
-    'Fans Coin（简称 FC），是由 Conflux 基金会主导，社区成员基于 Conflux 测试网共同协作研发的通证。Conflux 基金会希望充分调动社区力量，在对测试网进行全方位测试的同时，亦能记录每一位社区成员所做出的贡献。\nConflux 基金会承诺在网络上线后，FC 与 CFX 可进行 1:1 承兑，以此保障所有社区成员的劳动成果。',
+    'FansCoin（简称 FC），是由 Conflux 基金会主导，社区成员基于 Conflux 网络共同协作研发的通证。Conflux 基金会希望充分调动社区力量，在对 Conflux 产品进行全方位体验测试的同时，亦能记录每一位社区成员所做出的贡献。\nConflux 基金会承诺在网络上线后，FC 与 CFX 可进行 1:1 承兑，以此保障所有社区成员的劳动成果均能得到肯定。',
   firstH2: 'Conflux 基金会承诺',
   secondH2: '感谢',
   firstH3: 'FC 的分发原则',
