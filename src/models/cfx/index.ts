@@ -6,7 +6,7 @@ import JSBI from 'jsbi'
 const namespace = 'cfx'
 const maxInterval = 1000 * 60 * 10
 /* Max gas for send transaction (not gas price) */
-export const maxGasForSend = 10000000
+export const maxGasForSend = 100000
 export const maxStorage = 1000
 export const normalGasForSend = 21000
 export const nonceLocalStoragePrefix = 'cfx_address_'
