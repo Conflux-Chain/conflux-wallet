@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BigNumber from 'bignumber.js'
 import Slider from '@material-ui/core/Slider'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
@@ -12,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import Button from '@material-ui/core/Button'
 import styles from './style.module.scss'
 import { I18NProps } from '@/i18n/context'
+import { normalGasForSend } from '../../../models/cfx'
 interface ISubmitData {
   balanceVal: number
   addressVal: string
@@ -59,8 +61,22 @@ class SendBaseModal extends Component<IProps, IState> {
   }
   async transferAllAction() {
     await this.props.updateAction()
+    const { modalData, unit } = this.props
+    let totalBalance = new BigNumber(modalData.availableBalance)
+    // console.log('totalBalance=', totalBalance.toNumber())
+    if (unit === 'CFX') {
+      const gasPriceVal = new BigNumber(this.state.gasPriceVal)
+      // console.log('gasPriceVal=', gasPriceVal.toNumber())
+      const gasFee = gasPriceVal.dividedBy(10 ** 9).multipliedBy(normalGasForSend)
+      // console.log('gasFee=', gasFee.toNumber())
+      totalBalance = totalBalance.minus(gasFee)
+      // console.log('totalBalance=', totalBalance.toNumber())
+    }
+    const availableBalance = parseFloat(totalBalance.toFixed(5, 1))
+    // console.log('availableBalance=', availableBalance)
+
     this.setState({
-      balanceVal: this.props.modalData.availableBalance,
+      balanceVal: availableBalance,
     })
   }
   addressChange(event) {
