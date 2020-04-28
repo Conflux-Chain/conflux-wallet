@@ -8,6 +8,7 @@ import {
 } from '@/models/cfx'
 import { cfx } from '@/vendor/conflux-web'
 import config from '@/config'
+import BigNumber from 'bignumber.js'
 // const nonceLocalStoragePrefix = 'fc_address_'
 const namespace = 'fc'
 export { namespace }
@@ -90,12 +91,14 @@ export default {
           localStorageKey: `${nonceLocalStoragePrefix}${fromAddress}`,
         }
         const nonce = yield call(getActualNoncePromise, params)
-        const newValue = value * 10 ** 18
+        const newValue = new BigNumber(value).multipliedBy(10 ** 18)
         const hexStr = `0x${newValue.toString(16)}`
+        const newGasPrice = new BigNumber(gasPrice).multipliedBy(10 ** 9)
+        const hexGasPrice = `0x${newGasPrice.toString(16)}`
         const txParams = {
           from: cfx.Account(currentAccountPrivateKey),
           nonce,
-          gasPrice,
+          gasPrice: hexGasPrice,
           gas: maxGasForSend,
           value: 0,
           to: config.FCContractAddress,
