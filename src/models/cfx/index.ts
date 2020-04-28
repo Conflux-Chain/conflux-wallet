@@ -42,7 +42,7 @@ export default {
         yield put({
           type: 'setState',
           payload: {
-            cfxBalance: new BigNumber(cfxBalance).dividedBy(10 ** 18).toFixed(4), // toFixedForDisplay(cfxBalance / 10 ** 18),
+            cfxBalance: new BigNumber(cfxBalance).dividedBy(10 ** 18), // toFixedForDisplay(cfxBalance / 10 ** 18),
           },
         })
       } catch (e) {

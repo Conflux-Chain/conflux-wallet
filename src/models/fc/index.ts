@@ -63,11 +63,11 @@ export default {
         yield put({
           type: 'setState',
           payload: {
-            fcPersonalFreeBalance: toFixedForDisplay(fcPersonalFreeBalance),
-            fcPersonalUnLockBalance: toFixedForDisplay(fcPersonalUnLockBalance),
-            fcPersonalLockBalance: toFixedForDisplay(fcPersonalLockBalance),
-            fcAvailableBalance: toFixedForDisplay(fcAvailableBalance),
-            fcTotalBalance: toFixedForDisplay(fcTotalBalance),
+            fcPersonalFreeBalance,
+            fcPersonalUnLockBalance,
+            fcPersonalLockBalance,
+            fcAvailableBalance,
+            fcTotalBalance,
           },
         })
       } catch (e) {}
@@ -189,9 +189,9 @@ export function sendSignedTransactionPromise(txParams) {
   })
 }
 
-export function toFixedForDisplay(num) {
-  return num.toFixed(4)
-}
+// export function toFixedForDisplay(num) {
+//   return num.toFixed(4)
+// }
 function transformReturnBalanceToNumber(balance) {
   const str = balance.toHexString().split('0x')[1]
   const value = parseInt(str, 16)

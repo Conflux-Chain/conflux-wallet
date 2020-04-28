@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BigNumber from 'bignumber.js'
 import Slider from '@material-ui/core/Slider'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
@@ -12,6 +13,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import Button from '@material-ui/core/Button'
 import styles from './style.module.scss'
 import { I18NProps } from '@/i18n/context'
+import { normalGasForSend } from '../../../models/cfx'
 interface ISubmitData {
   balanceVal: number
   addressVal: string
@@ -59,9 +61,21 @@ class SendBaseModal extends Component<IProps, IState> {
   }
   async transferAllAction() {
     await this.props.updateAction()
+    const availableBalance = this.getTotalAvailableBalance(this.state.gasPriceVal)
+
     this.setState({
-      balanceVal: this.props.modalData.availableBalance,
+      balanceVal: availableBalance,
     })
+  }
+  getTotalAvailableBalance(gasPrice) {
+    const { modalData, unit } = this.props
+    let totalBalance = new BigNumber(modalData.availableBalance)
+    if (unit === 'CFX') {
+      const gasPriceVal = new BigNumber(gasPrice)
+      const gasFee = gasPriceVal.dividedBy(10 ** 9).multipliedBy(normalGasForSend)
+      totalBalance = totalBalance.minus(gasFee)
+    }
+    return totalBalance.toNumber()
   }
   addressChange(event) {
     this.setState({
@@ -69,12 +83,16 @@ class SendBaseModal extends Component<IProps, IState> {
     })
   }
   gasPriceChange(event) {
+    const availableBalance = this.getTotalAvailableBalance(event.target.value)
     this.setState({
+      balanceVal: availableBalance,
       gasPriceVal: event.target.value,
     })
   }
   gasPriceValChange(event, newValue) {
+    const availableBalance = this.getTotalAvailableBalance(newValue)
     this.setState({
+      balanceVal: availableBalance,
       gasPriceVal: newValue,
     })
   }
@@ -123,8 +141,10 @@ class SendBaseModal extends Component<IProps, IState> {
             <div className={styles.balanceInput}>
               <TextField
                 className={styles.inputText}
-                label={`${I18N.Wallet.SendModal.palceHolder1}${modalData.availableBalance}`}
-                value={balanceVal}
+                label={`${I18N.Wallet.SendModal.palceHolder1}${new BigNumber(
+                  modalData.availableBalance
+                ).toFixed(4, 1)}`}
+                value={new BigNumber(balanceVal).toFixed(4, 1)}
                 onChange={e => {
                   this.balanceChange(e)
                 }}

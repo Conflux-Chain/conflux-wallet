@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BigNumber from 'bignumber.js'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 import { Link } from 'react-router-dom'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
@@ -118,7 +119,9 @@ class ContentFC extends Component<IProps, IState> {
             </div>
             <div className={styles.walletBalance}>
               <p className={styles.walletBalanceTitle}>{I18N.Wallet.MyWallet.totalBalance}</p>
-              <p className={styles.walletBalanceTotal}>{this.props.fcTotalBalance}</p>
+              <p className={styles.walletBalanceTotal}>
+                {new BigNumber(this.props.fcTotalBalance).toFixed(4, 1)}
+              </p>
             </div>
           </div>
           {/* <div className={styles.balanceBox}>

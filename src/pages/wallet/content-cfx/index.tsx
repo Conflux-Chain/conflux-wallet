@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BigNumber from 'bignumber.js'
 import styles from './style.module.scss'
 import Button from '@material-ui/core/Button'
 import SendCfxModal from '../send-cfx-modal/index'
@@ -84,7 +85,7 @@ class ContentCfx extends Component<IProps, IState> {
             </div>
             <div className={styles.walletBalance}>
               <p className={styles.walletBalanceTitle}>{I18N.Wallet.MyWallet.totalBalance}</p>
-              <p className={styles.walletBalanceTotal}>{cfxBalance}</p>
+              <p className={styles.walletBalanceTotal}>{new BigNumber(cfxBalance).toFixed(4, 1)}</p>
             </div>
           </div>
         </div>
