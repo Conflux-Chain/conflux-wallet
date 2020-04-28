@@ -40,6 +40,7 @@ interface IState {
   gasPriceVal?: string
   hasError?: boolean
 }
+
 class SendBaseModal extends Component<IProps, IState> {
   state = {
     balanceVal: 0,
@@ -51,12 +52,13 @@ class SendBaseModal extends Component<IProps, IState> {
     this.props.onClose()
   }
   balanceChange(event) {
-    const val =
-      parseFloat(event.target.value) > this.props.modalData.availableBalance
-        ? this.props.modalData.availableBalance
-        : event.target.value
+    let value = event.target.value
+    const max = this.getTotalAvailableBalance(this.state.gasPriceVal)
+    if (value > max) {
+      value = max
+    }
     this.setState({
-      balanceVal: val,
+      balanceVal: value,
     })
   }
   async transferAllAction() {
@@ -77,6 +79,11 @@ class SendBaseModal extends Component<IProps, IState> {
     }
     return totalBalance.toNumber()
   }
+  isSendAll() {
+    const { balanceVal, gasPriceVal } = this.state
+    const availableBalance = this.getTotalAvailableBalance(gasPriceVal)
+    return availableBalance === balanceVal
+  }
   addressChange(event) {
     this.setState({
       addressVal: event.target.value.toLocaleLowerCase(),
@@ -84,15 +91,23 @@ class SendBaseModal extends Component<IProps, IState> {
   }
   gasPriceChange(event) {
     const availableBalance = this.getTotalAvailableBalance(event.target.value)
+    let balanceVal = this.state.balanceVal
+    if (this.isSendAll()) {
+      balanceVal = availableBalance
+    }
     this.setState({
-      balanceVal: availableBalance,
+      balanceVal,
       gasPriceVal: event.target.value,
     })
   }
   gasPriceValChange(event, newValue) {
     const availableBalance = this.getTotalAvailableBalance(newValue)
+    let balanceVal = this.state.balanceVal
+    if (this.isSendAll()) {
+      balanceVal = availableBalance
+    }
     this.setState({
-      balanceVal: availableBalance,
+      balanceVal,
       gasPriceVal: newValue,
     })
   }
@@ -144,7 +159,7 @@ class SendBaseModal extends Component<IProps, IState> {
                 label={`${I18N.Wallet.SendModal.palceHolder1}${new BigNumber(
                   modalData.availableBalance
                 ).toFixed(4, 1)}`}
-                value={new BigNumber(balanceVal).toFixed(4, 1)}
+                value={balanceVal}
                 onChange={e => {
                   this.balanceChange(e)
                 }}
