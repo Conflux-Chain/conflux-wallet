@@ -61,23 +61,21 @@ class SendBaseModal extends Component<IProps, IState> {
   }
   async transferAllAction() {
     await this.props.updateAction()
-    const { modalData, unit } = this.props
-    let totalBalance = new BigNumber(modalData.availableBalance)
-    // console.log('totalBalance=', totalBalance.toNumber())
-    if (unit === 'CFX') {
-      const gasPriceVal = new BigNumber(this.state.gasPriceVal)
-      // console.log('gasPriceVal=', gasPriceVal.toNumber())
-      const gasFee = gasPriceVal.dividedBy(10 ** 9).multipliedBy(normalGasForSend)
-      // console.log('gasFee=', gasFee.toNumber())
-      totalBalance = totalBalance.minus(gasFee)
-      // console.log('totalBalance=', totalBalance.toNumber())
-    }
-    const availableBalance = parseFloat(totalBalance.toFixed(5, 1))
-    // console.log('availableBalance=', availableBalance)
+    const availableBalance = this.getTotalAvailableBalance(this.state.gasPriceVal)
 
     this.setState({
       balanceVal: availableBalance,
     })
+  }
+  getTotalAvailableBalance(gasPrice) {
+    const { modalData, unit } = this.props
+    let totalBalance = new BigNumber(modalData.availableBalance)
+    if (unit === 'CFX') {
+      const gasPriceVal = new BigNumber(gasPrice)
+      const gasFee = gasPriceVal.dividedBy(10 ** 9).multipliedBy(normalGasForSend)
+      totalBalance = totalBalance.minus(gasFee)
+    }
+    return totalBalance.toNumber()
   }
   addressChange(event) {
     this.setState({
@@ -85,12 +83,16 @@ class SendBaseModal extends Component<IProps, IState> {
     })
   }
   gasPriceChange(event) {
+    const availableBalance = this.getTotalAvailableBalance(event.target.value)
     this.setState({
+      balanceVal: availableBalance,
       gasPriceVal: event.target.value,
     })
   }
   gasPriceValChange(event, newValue) {
+    const availableBalance = this.getTotalAvailableBalance(newValue)
     this.setState({
+      balanceVal: availableBalance,
       gasPriceVal: newValue,
     })
   }
@@ -139,8 +141,10 @@ class SendBaseModal extends Component<IProps, IState> {
             <div className={styles.balanceInput}>
               <TextField
                 className={styles.inputText}
-                label={`${I18N.Wallet.SendModal.palceHolder1}${modalData.availableBalance}`}
-                value={balanceVal}
+                label={`${I18N.Wallet.SendModal.palceHolder1}${new BigNumber(
+                  modalData.availableBalance
+                ).toFixed(4, 1)}`}
+                value={new BigNumber(balanceVal).toFixed(4, 1)}
                 onChange={e => {
                   this.balanceChange(e)
                 }}
