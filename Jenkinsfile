@@ -59,7 +59,7 @@ sudo cp -r build /www/wallet/conflux-wallet/
               branch 'master'
             }
           }
-          agent {label 'scan-wallet-prod-machine'}
+          agent {label 'bounty-frontend-production'}
           steps {
             script {
               sh (label: 'pre-build', script: "sudo yarn")
@@ -69,7 +69,7 @@ sudo cp -r build /www/wallet/conflux-wallet/
             }
             script {
               sh (label: 'move to nginx www', script: """
-sudo rm -rf /www/wallet/conflux-wallet
+sudo rm -rf /www/wallet/conflux-wallet || true
 sudo cp -r build  /www/wallet/conflux-wallet
 """)
             }
