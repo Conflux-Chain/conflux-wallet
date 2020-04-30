@@ -62,14 +62,15 @@ sudo cp -r build /www/wallet/conflux-wallet/
           agent {label 'bounty-frontend-production'}
           steps {
             script {
-              sh (label: 'pre-build', script: "sudo yarn")
+              sh (label: 'pre-build', script: "yarn")
             }
             script {
-              sh (label: 'build', script: "sudo yarn build")
+              sh (label: 'build', script: "yarn build")
             }
             script {
               sh (label: 'move to nginx www', script: """
 sudo rm -rf /www/wallet/conflux-wallet || true
+mkdir -p /www/wallet/
 sudo cp -r build  /www/wallet/conflux-wallet
 """)
             }
