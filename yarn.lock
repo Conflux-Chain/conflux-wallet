@@ -4760,11 +4760,6 @@ eslint@^6.6.0:
     text-table "^0.2.0"
     v8-compile-cache "^2.0.3"
 
-esm@^3.2.25:
-  version "3.2.25"
-  resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
-  integrity sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
-
 espree@^6.1.2:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/espree/-/espree-6.2.1.tgz#77fc72e1fd744a2052c20f38a5b575832e82734a"
@@ -7172,17 +7167,17 @@ js-base64@^2.1.8:
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.2.tgz#313b6274dda718f714d00b3330bbae6e38e90209"
   integrity sha512-Vg8czh0Q7sFBSUMWWArX/miJeBWYBPpdU/3M/DKSaekLMqrqVPaedp+5mZhie/r0lgrcaYBfwXatEew6gwgiQQ==
 
-js-conflux-sdk@^0.9.0-beta:
-  version "0.9.0-beta"
-  resolved "https://registry.yarnpkg.com/js-conflux-sdk/-/js-conflux-sdk-0.9.0-beta.tgz#f47ec157a7da405811fc0779107fea30362da0d2"
-  integrity sha512-x/+E1ADjfPJFeVtVyhXrkGecQndXK4QPZUEw7/8yilFfc8SALvJ8UF3KP8mu4VrQGWqitmpL1aNMkLbCSAh2Yg==
+js-conflux-sdk@^0.10.0-alpha:
+  version "0.10.0-alpha"
+  resolved "https://registry.yarnpkg.com/js-conflux-sdk/-/js-conflux-sdk-0.10.0-alpha.tgz#c917795c2e52ee6b82cbdbbc9da8a881a9b66cf6"
+  integrity sha512-425GZ7L53y8DgVwYcewDF+/YnpEwoSlUfn4O6UKV3k12vsRQXz9xsoDXQBEU8EfHB73Lipfb5/M4ZbT+5PqeMQ==
   dependencies:
     "@babel/runtime" "^7.8.4"
     big.js "^5.2.2"
-    esm "^3.2.25"
     jsbi "^3.1.1"
     keccak "^2.0.0"
     lodash "^4.17.15"
+    scrypt-js "^3.0.1"
     secp256k1 "^3.7.1"
     superagent "^5.1.0"
 
@@ -11184,6 +11179,11 @@ scrypt-js@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/scrypt-js/-/scrypt-js-2.0.4.tgz#32f8c5149f0797672e551c07e230f834b6af5f16"
   integrity sha512-4KsaGcPnuhtCZQCxFxN3GVYIhKFPTdLd8PLC552XwbMndtD0cjRFAhDuuydXQ0h08ZfPgzqe6EKHozpuH74iDw==
+
+scrypt-js@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/scrypt-js/-/scrypt-js-3.0.1.tgz#d314a57c2aef69d1ad98a138a21fe9eafa9ee312"
+  integrity sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==
 
 scrypt.js@0.3.0:
   version "0.3.0"
