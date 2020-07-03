@@ -178,3 +178,19 @@
     }
   }
 }
+
+.snackBar {
+  position: absolute;
+  right: -19px;
+  top: 40px;
+  width: 202px !important;
+  height: 96px;
+  padding: 12px;
+  min-width: 0;
+  background-color: #000;
+  z-index: 1;
+
+  @include respond-to(md) {
+    right: -140px;
+  }
+}
