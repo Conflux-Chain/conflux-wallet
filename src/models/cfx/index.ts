@@ -78,7 +78,7 @@ export default {
           from: cfx.Account(currentAccountPrivateKey),
           nonce,
           gasPrice: hexGasPrice,
-          gas: normalGasForSend,
+          // gas: normalGasForSend,
           storageLimit: 0,
           value: hexStr,
           to: toAddress,

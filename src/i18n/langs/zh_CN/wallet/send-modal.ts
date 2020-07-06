@@ -9,4 +9,5 @@ export default {
   palceHolder1: '可用余额',
   palceHolder2: '务必使用2020.4.9后更新的钱包地址',
   formErrorText: '请输入正确的地址!',
+  balanceErrorText: '余额不足！',
 }

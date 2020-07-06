@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { cfx, util } from '@/vendor/conflux-web'
 import BigNumber from 'bignumber.js'
 import Slider from '@material-ui/core/Slider'
+import Snackbar from '@material-ui/core/Snackbar'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
@@ -13,7 +15,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import Button from '@material-ui/core/Button'
 import styles from './style.module.scss'
 import { I18NProps } from '@/i18n/context'
-import { normalGasForSend } from '../../../models/cfx'
+// import { normalGasForSend } from '../../../models/cfx'
 interface ISubmitData {
   balanceVal: number
   addressVal: string
@@ -39,6 +41,7 @@ interface IState {
   addressVal?: string
   gasPriceVal?: string
   hasError?: boolean
+  valueError?: boolean
 }
 
 class SendBaseModal extends Component<IProps, IState> {
@@ -47,42 +50,49 @@ class SendBaseModal extends Component<IProps, IState> {
     addressVal: '',
     gasPriceVal: '10',
     hasError: false,
+    valueError: false,
   }
   handleClose() {
     this.props.onClose()
   }
   balanceChange(event) {
-    let value = event.target.value
-    const max = this.getTotalAvailableBalance(this.state.gasPriceVal)
-    if (value > max) {
-      value = max
-    }
+    const value = event.target.value
     this.setState({
       balanceVal: value,
     })
   }
   async transferAllAction() {
     await this.props.updateAction()
-    const availableBalance = this.getTotalAvailableBalance(this.state.gasPriceVal)
+    const availableBalance = await this.getTotalAvailableBalance(this.state.gasPriceVal)
 
     this.setState({
       balanceVal: availableBalance,
     })
   }
-  getTotalAvailableBalance(gasPrice) {
+  async getTotalAvailableBalance(gasPrice) {
     const { modalData, unit } = this.props
+    const gas = await this.getEstimateGas()
     let totalBalance = new BigNumber(modalData.availableBalance)
     if (unit === 'CFX') {
       const gasPriceVal = new BigNumber(gasPrice)
-      const gasFee = gasPriceVal.dividedBy(10 ** 9).multipliedBy(normalGasForSend)
+      const gasFee = gasPriceVal.dividedBy(10 ** 9).multipliedBy(gas)
       totalBalance = totalBalance.minus(gasFee)
     }
     return totalBalance.toNumber()
   }
-  isSendAll() {
-    const { balanceVal, gasPriceVal } = this.state
-    const availableBalance = this.getTotalAvailableBalance(gasPriceVal)
-    return availableBalance === balanceVal
+  async getEstimateGas() {
+    const { addressVal, balanceVal } = this.state
+    const { modalData } = this.props
+    const addr = modalData.currentAccountAddress
+    if (!addressVal || balanceVal === undefined || !addr) {
+      return 21000
+    }
+    const estimate = await cfx.estimateGasAndCollateral({
+      from: addr,
+      to: addressVal,
+      value: util.unit.fromGDripToDrip(balanceVal),
+    })
+    return estimate.gasUsed
   }
   addressChange(event) {
     this.setState({
@@ -90,32 +100,25 @@ class SendBaseModal extends Component<IProps, IState> {
     })
   }
   gasPriceChange(event) {
-    const availableBalance = this.getTotalAvailableBalance(event.target.value)
-    let balanceVal = this.state.balanceVal
-    if (this.isSendAll()) {
-      balanceVal = availableBalance
-    }
     this.setState({
-      balanceVal,
       gasPriceVal: event.target.value,
     })
   }
   gasPriceValChange(event, newValue) {
-    const availableBalance = this.getTotalAvailableBalance(newValue)
-    let balanceVal = this.state.balanceVal
-    if (this.isSendAll()) {
-      balanceVal = availableBalance
-    }
     this.setState({
-      balanceVal,
       gasPriceVal: newValue,
     })
   }
-  submitForm() {
+  async submitForm() {
     const { balanceVal, addressVal, gasPriceVal } = this.state
+    const availableBalance = await this.getTotalAvailableBalance(this.state.gasPriceVal)
     const reg = /^0x[0-9a-fA-F]{40}$/
     if (!reg.test(addressVal)) {
       this.setState({ hasError: true })
+      return false
+    }
+    if (balanceVal > availableBalance) {
+      this.setState({ valueError: true })
       return false
     }
     if (!this.props.sending) {
@@ -124,7 +127,7 @@ class SendBaseModal extends Component<IProps, IState> {
   }
   render() {
     const { isShow, unit, modalData, I18N, sending } = this.props
-    const { balanceVal, addressVal, gasPriceVal, hasError } = this.state
+    const { balanceVal, addressVal, gasPriceVal, hasError, valueError } = this.state
     return (
       <Dialog
         onClose={() => {
@@ -231,6 +234,23 @@ class SendBaseModal extends Component<IProps, IState> {
             {I18N.Wallet.SendModal.send}
           </Button>
         </div>
+        {valueError && (
+          <Snackbar
+            className={styles.snackbar}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            open
+            autoHideDuration={2000}
+            onClose={() => {
+              this.setState({
+                valueError: false,
+              })
+            }}
+            message={<span>{I18N.Wallet.SendModal.balanceErrorText}</span>}
+          />
+        )}
       </Dialog>
     )
   }
