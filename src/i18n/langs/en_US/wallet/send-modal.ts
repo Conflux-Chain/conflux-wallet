@@ -9,4 +9,5 @@ export default {
   palceHolder1: 'The available balance is ',
   palceHolder2: 'Enter the address updated after April 9, 2020',
   formErrorText: 'Please enter the right address!',
+  balanceErrorText: 'Balance not enough!',
 }
