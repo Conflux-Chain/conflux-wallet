@@ -64,9 +64,10 @@ export default {
         // view层传过来的数据
         const { toAddress, sendAmount, gasPrice } = payload
         // ========nonce参数获取========
+        const localStorageKey = `${nonceLocalStoragePrefix}${currentAccountAddress}`
         const params = {
           currentAccountAddress,
-          localStorageKey: `${nonceLocalStoragePrefix}${currentAccountAddress}`,
+          localStorageKey,
         }
         const nonce = yield call(getActualNoncePromise, params)
         const newValue = new BigNumber(sendAmount).multipliedBy(10 ** 18) // sendAmount * 10 ** 18
@@ -84,7 +85,7 @@ export default {
           to: toAddress,
         }
         // console.log('parmas:', txParams)
-        const hash = yield call(sendSignedTransactionPromise, txParams)
+        const hash = yield call(sendSignedTransactionPromise, txParams, localStorageKey)
         // tslint:disable-next-line: no-console
         // console.log('hash: ' + hash)
         // successedSendActionSetNonce(params.localStorageKey, nonce)
@@ -159,11 +160,11 @@ export async function getActualNoncePromise({ currentAccountAddress, localStorag
   try {
     // 这个 nonce 应该在第一次获取后缓存起来，以后每次交易 +1
     // 在发出一笔tx之后，从fullnode接受它到执行它会有延迟，大概一分钟左右。
-    // 这个期间内，如果用户又发出了一笔交易的话，使用getTransactionCount作为nonce是不对的。
+    // 这个期间内，如果用户又发出了一笔交易的话，使用getNextNonce作为nonce是不对的。
     let nonce = await cfx.getNextNonce(currentAccountAddress)
     nonce = JSBI.toNumber(nonce)
     const localNonce = JSON.parse(localStorage.getItem(localStorageKey) || null)
-    // getTransactionCount的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
+    // getNextNonce的nonce如果比 localStorage 里面的小，就用 localStorage 里面的，nonce用完一次就 +1
     // nonce 间隔，10分钟，判断两次获取交易的间隔时间，要是超过了十分钟，直接用远程的nonce
     if (
       localNonce &&
@@ -171,7 +172,7 @@ export async function getActualNoncePromise({ currentAccountAddress, localStorag
       localNonce.nonce >= nonce
     ) {
       // tslint:disable-next-line: no-console
-      console.log('local nonce: %s VS remote nonce: %s', +localNonce.nonce, nonce)
+      console.log('local nonce: %s VS remote nonce: %s', localNonce.nonce, nonce)
       nonce = localNonce.nonce
     }
     successedSendActionSetNonce(localStorageKey, nonce)
@@ -182,10 +183,7 @@ export async function getActualNoncePromise({ currentAccountAddress, localStorag
 }
 
 export function successedSendActionSetNonce(localStorageKey, nonce) {
-  localStorage.setItem(
-    localStorageKey,
-    JSON.stringify({ nonce: nonce + 1, updateTime: +new Date() })
-  )
+  localStorage.setItem(localStorageKey, JSON.stringify({ nonce, updateTime: +new Date() }))
 }
 function getCfx(address: string) {
   return Axios.request({

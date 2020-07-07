@@ -5,6 +5,7 @@ import {
   maxGasForSend,
   maxStorage,
   nonceLocalStoragePrefix,
+  successedSendActionSetNonce,
 } from '@/models/cfx'
 import { cfx } from '@/vendor/conflux-web'
 import config from '@/config'
@@ -86,9 +87,10 @@ export default {
           state => state[namespaceOfCfx]
         )
         const { FC } = yield select(state => state[namespace])
+        const localStorageKey = `${nonceLocalStoragePrefix}${fromAddress}`
         const params = {
           currentAccountAddress: fromAddress,
-          localStorageKey: `${nonceLocalStoragePrefix}${fromAddress}`,
+          localStorageKey,
         }
         const nonce = yield call(getActualNoncePromise, params)
         const newValue = new BigNumber(value).multipliedBy(10 ** 18)
@@ -105,7 +107,7 @@ export default {
           storageLimit: maxStorage,
           data: FC.methods.transfer(toAddress, hexStr).encodeABI(), // get data from ABI
         }
-        const hash = yield call(sendSignedTransactionPromise, txParams)
+        const hash = yield call(sendSignedTransactionPromise, txParams, localStorageKey)
         // tslint:disable-next-line: no-console
         console.log('fc send hash:' + hash)
         // successedSendActionSetNonce(params.localStorageKey, nonce)
@@ -179,11 +181,20 @@ function getFCStateOfPromise({ address, FC }) {
       })
   })
 }
-export function sendSignedTransactionPromise(txParams) {
+export function sendSignedTransactionPromise(txParams, localStorageKey) {
   return new Promise((resolve, reject) => {
+    const localNonce = JSON.parse(localStorage.getItem(localStorageKey) || null)
+    let nonce = null
+    if (localNonce && localNonce.nonce) {
+      nonce = localNonce.nonce + 1
+    }
     cfx
       .sendTransaction(txParams)
       .then(transactionHash => {
+        // jssdk return success will add nonce
+        if (nonce) {
+          successedSendActionSetNonce(localStorageKey, nonce)
+        }
         return resolve(transactionHash)
       })
       .catch(err => {
