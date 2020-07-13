@@ -1,4 +1,4 @@
-import confluxWeb, { abi, cfx } from '@/vendor/conflux-web'
+import { abi, cfx, Account } from '@/vendor/conflux-web'
 import { namespace as namespaceOfCfx } from '@/models/cfx'
 import { namespace as namespaceOfFc } from '@/models/fc'
 import { namespace as namespaceOfCommon } from '@/models/global/common'
@@ -35,11 +35,10 @@ export default {
     *create({ payload, callback, errCallback }, { put }) {
       try {
         const { password } = payload
-        const account = confluxWeb.cfx.accounts.create(password)
-        // console.log(confluxWeb.cfx.accounts.wallet.accounts)
-        const newAccount = cfx.Account(account.privateKey)
-        const { privateKey, address } = newAccount
-        const keystoreJson = confluxWeb.cfx.accounts.encrypt(privateKey, password)
+        // console.log(Account.random)
+        const account = Account.random()
+        const { privateKey, address } = account
+        const keystoreJson = account.encrypt(password)
         yield put({
           type: 'setState',
           payload: {
@@ -64,10 +63,8 @@ export default {
     *login({ payload, callback, errCallback }, { put }) {
       try {
         const { keystoreJson, password } = payload
-        const account = confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
-        const newAccount = cfx.Account(account.privateKey)
-        const { privateKey, address } = newAccount
-        // console.log(confluxWeb.cfx.accounts.wallet.accounts)
+        const account = Account.decrypt(keystoreJson, password)
+        const { privateKey, address } = account
         yield put({
           type: 'setState',
           payload: {
@@ -106,9 +103,7 @@ export default {
     },
     /**获取到用户信息后的action */
     *getAccountAfterHandleAction({ payload }, { put }) {
-      const FC = new confluxWeb.cfx.Contract(abi as any, config.FCContractAddress, {
-        defaultGasPrice: '10', // default gas price
-      })
+      const FC = cfx.Contract({ abi: abi as any, address: config.FCContractAddress })
       const { address, privateKey } = payload
       // 存储cfx address/privateKey
       yield put({
@@ -144,7 +139,7 @@ export default {
       try {
         const { password } = payload
         const { keystoreJson } = yield select(state => state[namespace])
-        confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
+        Account.decrypt(keystoreJson, password)
         yield put({
           type: 'setState',
           payload: {
@@ -183,7 +178,7 @@ export default {
       try {
         const { password } = payload
         const { keystoreJson } = yield select(state => state[namespace])
-        confluxWeb.cfx.accounts.decrypt(keystoreJson, password)
+        Account.decrypt(keystoreJson, password)
         yield put({
           type: 'setState',
           payload: {
