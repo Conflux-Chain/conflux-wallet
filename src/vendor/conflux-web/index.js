@@ -11,8 +11,8 @@ const abi = compiledContract.abi
 
 // 新的js-conflux-sdk，交易相关用这个
 const cfx = new Conflux({
-  url: 'http://39.97.232.99:12537',
-  // url: 'https://wallet.confluxscan.io/api/',
+  // url: 'http://39.97.232.99:12537',
+  url: 'https://wallet.confluxscan.io/api/',
   defaultGasPrice: 100,
   logger: console, // FIXME: add for debug
 })

@@ -7167,16 +7167,17 @@ js-base64@^2.1.8:
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.2.tgz#313b6274dda718f714d00b3330bbae6e38e90209"
   integrity sha512-Vg8czh0Q7sFBSUMWWArX/miJeBWYBPpdU/3M/DKSaekLMqrqVPaedp+5mZhie/r0lgrcaYBfwXatEew6gwgiQQ==
 
-js-conflux-sdk@^0.13.1:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/js-conflux-sdk/-/js-conflux-sdk-0.13.1.tgz#38e292e1cbf74f5ccf69dff51da9704cfc113bcc"
-  integrity sha512-hyq1iBCxOEO7gFjIbMUvUvyUlTkSxz9zurVQXcl2bI4xe3G2OLMK3pAkeCK6qwEuTEi3PxtCG6WJODvgRZGNEw==
+js-conflux-sdk@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/js-conflux-sdk/-/js-conflux-sdk-0.13.2.tgz#fc5eb67c1d3ba9a69b78031d6628dd585a8d9928"
+  integrity sha512-XLVlYy2vV1cKqOGep2f2oSyAXDPhU1rjp66mKsyjLP3R9cNYAhF7d5THWmcaTfRXrZCs+YiJUPuLjf7hsk4UKg==
   dependencies:
     "@babel/runtime" "^7.8.4"
     big.js "^5.2.2"
     jsbi "^3.1.1"
     keccak "^2.0.0"
     lodash "^4.17.15"
+    scrypt-js "^3.0.1"
     secp256k1 "^3.7.1"
     superagent "^5.1.0"
 
@@ -11178,6 +11179,11 @@ scrypt-js@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/scrypt-js/-/scrypt-js-2.0.4.tgz#32f8c5149f0797672e551c07e230f834b6af5f16"
   integrity sha512-4KsaGcPnuhtCZQCxFxN3GVYIhKFPTdLd8PLC552XwbMndtD0cjRFAhDuuydXQ0h08ZfPgzqe6EKHozpuH74iDw==
+
+scrypt-js@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/scrypt-js/-/scrypt-js-3.0.1.tgz#d314a57c2aef69d1ad98a138a21fe9eafa9ee312"
+  integrity sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==
 
 scrypt.js@0.3.0:
   version "0.3.0"
