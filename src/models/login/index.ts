@@ -63,7 +63,7 @@ export default {
     *login({ payload, callback, errCallback }, { put }) {
       try {
         const { keystoreJson, password } = payload
-        const account = Account.decrypt(keystoreJson, password)
+        const account = Account.decrypt(JSON.parse(keystoreJson), password)
         const { privateKey, address } = account
         yield put({
           type: 'setState',
@@ -139,7 +139,7 @@ export default {
       try {
         const { password } = payload
         const { keystoreJson } = yield select(state => state[namespace])
-        Account.decrypt(keystoreJson, password)
+        Account.decrypt(JSON.parse(keystoreJson), password)
         yield put({
           type: 'setState',
           payload: {
@@ -178,7 +178,7 @@ export default {
       try {
         const { password } = payload
         const { keystoreJson } = yield select(state => state[namespace])
-        Account.decrypt(keystoreJson, password)
+        Account.decrypt(JSON.parse(keystoreJson), password)
         yield put({
           type: 'setState',
           payload: {
