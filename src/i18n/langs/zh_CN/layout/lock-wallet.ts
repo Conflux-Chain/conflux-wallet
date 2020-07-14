@@ -10,7 +10,7 @@ export default {
   alertMsg1:
     '1. Conflux 基金会将在主网第三阶段上线后停止维护 Web Wallet. 停止维护后若继续使用，可能存在一定的安全风险！',
   alertMsg2: '2. 为了更好的用户体验，推荐使用浏览器插件钱包 ',
-  alertMsg3: '. 您可以选择将 Web Wallet 余额转出或者直接迁移至 ConfluxPortal（',
+  alertMsg3: '。您可以选择将 Web Wallet 余额转出或者直接迁移至 ConfluxPortal（',
   alertMsg4: '迁移帮助文档',
-  alertMsgEnd: ')。',
+  alertMsgEnd: '）。',
 }
