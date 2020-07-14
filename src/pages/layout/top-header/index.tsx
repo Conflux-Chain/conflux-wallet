@@ -39,7 +39,7 @@ class TopHeader extends Component<IProps> {
     const helpUrl =
       I18N.currentLang === LangEnum.zh_CN
         ? 'https://juejin.im/post/5e9d8133e51d4546b90d2ee9'
-        : 'http://portal.conflux-chain.org'
+        : 'https://medium.com/@ConfluxNetwork/confluxportal-installation-and-user-manual-9f50de62fee0?sk=8906d87fc102bb6d2688b1ee287ab458'
 
     return (
       <AppBar position="fixed" className={styles.walletHeaderWrap}>
