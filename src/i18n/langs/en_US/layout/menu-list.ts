@@ -1,6 +1,6 @@
 export default {
   wallet: 'Wallet',
   closeWallet: 'Close wallet',
-  mainnet: 'Conflux Pontus',
+  mainnet: 'Conflux Oceanus',
   testnet: 'Conflux Testnet',
 }
