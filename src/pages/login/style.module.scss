@@ -64,6 +64,11 @@
         cursor: pointer;
         transition: transform 0.3s;
 
+        @include respond-to(sm) {
+          width: 480px;
+          height: 157px;
+        }
+
         @include respond-to(md) {
           width: 302px;
           height: 389px;

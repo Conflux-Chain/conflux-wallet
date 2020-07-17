@@ -21,3 +21,28 @@
   @extend .walletHeader;
   height: 56px;
 }
+.alert {
+  position: fixed;
+  top: 72px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #f9aaaa;
+  padding: 18px 24px;
+  box-sizing: border-box;
+  a {
+    color: #1e3de4;
+    text-decoration: none;
+    font-weight: 700;
+  }
+}
+.alertM {
+  @extend .alert;
+  top: 56px;
+  padding: 32px 16px 16px;
+}
