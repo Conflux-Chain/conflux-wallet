@@ -78,7 +78,7 @@ class Login extends Component<IProps, IState> {
   // 粘贴密钥
   pasteKeystore = (keyStore: string) => {
     this.setState({
-      fileContent: JSON.parse(keyStore),
+      fileContent: keyStore,
       stepIndex: 1,
       restoreFileRight: true,
     })
