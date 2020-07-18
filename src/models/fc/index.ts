@@ -10,6 +10,7 @@ import {
 import { cfx } from '@/vendor/conflux-web'
 import config from '@/config'
 import BigNumber from 'bignumber.js'
+import JSBI from 'jsbi'
 // const nonceLocalStoragePrefix = 'fc_address_'
 const namespace = 'fc'
 export { namespace }
@@ -104,10 +105,12 @@ export default {
           gas: maxGasForSend,
           value: 0,
           to: config.FCContractAddress,
-          storageLimit: maxStorage,
-          data: FC.methods.transfer(toAddress, hexStr).encodeABI(), // get data from ABI
+          storageLimit: maxStorage, // get data from ABI
         }
-        const hash = yield call(sendSignedTransactionPromise, txParams, localStorageKey)
+        const hash = yield call(sendSignedTransactionPromise, txParams, localStorageKey, FC, {
+          toAddress,
+          value: hexStr,
+        })
         // tslint:disable-next-line: no-console
         console.log('fc send hash:' + hash)
         // successedSendActionSetNonce(params.localStorageKey, nonce)
@@ -170,9 +173,7 @@ export default {
 
 function getFCStateOfPromise({ address, FC }) {
   return new Promise((resolve: (value: []) => void, reject) => {
-    FC.methods
-      .stateOf(address)
-      .call()
+    FC.stateOf(address)
       .then(result => {
         return resolve(result)
       })
@@ -181,14 +182,14 @@ function getFCStateOfPromise({ address, FC }) {
       })
   })
 }
-export function sendSignedTransactionPromise(txParams, localStorageKey) {
+export function sendSignedTransactionPromise(txParams, localStorageKey, FC, data) {
   return new Promise((resolve, reject) => {
     const localNonce = JSON.parse(localStorage.getItem(localStorageKey) || null)
     let nonce = null
     if (localNonce && localNonce.nonce) {
       nonce = localNonce.nonce + 1
     }
-    cfx
+    FC.transfer(data.toAddress, data.value)
       .sendTransaction(txParams)
       .then(transactionHash => {
         // jssdk return success will add nonce
@@ -207,8 +208,7 @@ export function sendSignedTransactionPromise(txParams, localStorageKey) {
 //   return num.toFixed(4)
 // }
 function transformReturnBalanceToNumber(balance) {
-  const str = balance.toHexString().split('0x')[1]
-  const value = parseInt(str, 16)
+  const value = JSBI.toNumber(balance)
   const result = value / 10 ** 18
   return result || 0
 }
