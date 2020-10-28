@@ -1,5 +1,4 @@
 import { cfx } from '@/vendor/conflux-web'
-import { sendSignedTransactionPromise } from '../fc'
 import Axios from 'axios'
 import BigNumber from 'bignumber.js'
 import JSBI from 'jsbi'
@@ -198,6 +197,28 @@ export function getBalance(address) {
       .getBalance(address)
       .then(balance => {
         return resolve(balance)
+      })
+      .catch(err => {
+        return reject(err)
+      })
+  })
+}
+
+export function sendSignedTransactionPromise(txParams, localStorageKey) {
+  return new Promise((resolve, reject) => {
+    const localNonce = JSON.parse(localStorage.getItem(localStorageKey) || null)
+    let nonce = null
+    if (localNonce && localNonce.nonce) {
+      nonce = localNonce.nonce + 1
+    }
+    cfx
+      .sendTransaction(txParams)
+      .then(transactionHash => {
+        // jssdk return success will add nonce
+        if (nonce) {
+          successedSendActionSetNonce(localStorageKey, nonce)
+        }
+        return resolve(transactionHash)
       })
       .catch(err => {
         return reject(err)
