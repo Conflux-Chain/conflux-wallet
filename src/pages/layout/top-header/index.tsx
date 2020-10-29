@@ -48,12 +48,8 @@ class TopHeader extends Component<IProps> {
             <div>{I18N.Layout.LockWallet.alertMsg1}</div>
             <div>
               {I18N.Layout.LockWallet.alertMsg2}
-              <a href="http://portal.conflux-chain.org" target="_blank" rel="noopener noreferrer">
-                ConfluxPortal
-              </a>
-              {I18N.Layout.LockWallet.alertMsg3}
               <a href={helpUrl} target="_blank" rel="noopener noreferrer">
-                {I18N.Layout.LockWallet.alertMsg4}
+                {I18N.Layout.LockWallet.alertMsg3}
               </a>
               {I18N.Layout.LockWallet.alertMsgEnd}
               <CloseIcon
