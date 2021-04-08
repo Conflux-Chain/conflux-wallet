@@ -168,7 +168,7 @@ class Login extends Component<IProps, IState> {
             </Paper>
           </div>
           <div className={styles.paperBox}>
-            <Paper className={styles.paper} onClick={() => this.toogleModal('creat')}>
+            <Paper className={styles.paper} onClick={() => {}}>
               <Hidden only={['xs', 'sm']}>
                 <svg className={styles.cardIc} aria-hidden="true">
                   <use xlinkHref="#iconcreate--" />
