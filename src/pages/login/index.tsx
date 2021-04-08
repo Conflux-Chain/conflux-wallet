@@ -168,7 +168,7 @@ class Login extends Component<IProps, IState> {
             </Paper>
           </div>
           <div className={styles.paperBox}>
-            <Paper className={styles.paper} onClick={() => {}}>
+            <Paper className={styles.paper}>
               <Hidden only={['xs', 'sm']}>
                 <svg className={styles.cardIc} aria-hidden="true">
                   <use xlinkHref="#iconcreate--" />
